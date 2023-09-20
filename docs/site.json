@@ -1,7 +1,7 @@
 {
-  "baseUrl": "",
-  "titlePrefix": "HRMate",
-  "titleSuffix": "",
+  "baseUrl": "/tp",
+  "titlePrefix": "",
+  "titleSuffix": "HRMate",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
@@ -23,7 +23,9 @@
     }
   ],
   "deploy": {
-    "message": "Site Update."
+    "message": "Site Update.",
+    "repo": "https://github.com/AY2324S1-CS2103T-W11-1/tp.git",
+    "branch": "gh-pages"
   },
   "timeZone": "Asia/Singapore"
 }
