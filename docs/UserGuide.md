@@ -67,17 +67,20 @@ The description for each command will contain the following
 * **Warning:** <br>
 | describes any potential dangers of using a particular command that may lead to unexpected side effects. You should pay attention to the warnings to avoid performing a costly operation.
 
-* **Expected output on success** - describes what you should see if the command is accepted. Changes can be of one of two types - either through visual elements (stated as GUI changes) or via messages.
+* **Expected output on success:** <br>
+|  describes what you should see if the command is accepted. Changes can be of one of two types - either through visual elements (stated as GUI changes) or via messages.
 
-* **Expected output on failure** - describes what you should see if the command is rejected.
+* **Expected output on failure:** <br>
+| describes what you should see if the command is rejected.
 
-* **For advanced users** - describes actions that users familiar with the application can use to provide greater convenience. Be careful when performing these actions, especially if you are a new user!
+* **For advanced users:** <br>
+| describes actions that users familiar with the application can use to provide greater convenience. Be careful when performing these actions, especially if you are a new user!
 
 </box>
 
 <box type="info" seamless>
 
-#### **How to interpret command formats:**<br>
+#### **How to interpret command formats:**
 
 Example command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
@@ -113,8 +116,9 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **Examples:** 
 
-| 1 | **Command:** `help` <br> **Output:** Displays a message showing how to access the help page |
+| S/N | Command information |
 | --- | --- | 
+| 1 | **Command:** `help` <br> **Output:** Displays a message showing how to access the help page |
 
 * **Acceptable Values:** <br>
 | This command does not have any parameters
@@ -137,8 +141,9 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **Examples:** <br>
 
-| 1 | **Command:** `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01` <br> **Output:** Adds an employee with the following details into the address book: <br> - Name: John Doe <br> - Phone number: 98765432 <br> - Email address: johnd@example.com <br> - Home address: John Street, block 123 #01-01 |
+| S/N | Command information |
 | --- | --- |
+| 1 | **Command:** `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01` <br> **Output:** Adds an employee with the following details into the address book: <br> - Name: John Doe <br> - Phone number: 98765432 <br> - Email address: johnd@example.com <br> - Home address: John Street, block 123 #01-01 |
 | 2 | **Command:** `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/91234567 t/criminal t/friend` <br> **Output:** Adds an employee with the following details into the address book: <br> - Name: Betsy Crowe <br> - Phone number: 91234567 <br> - Email address: betsycrowe@example.com <br> - Home address: Newgate Prison <br> - Tags: criminal, friend (Note: we can add multiple tags to the same record) |
 
 * **Acceptable Values:** <br>
@@ -165,8 +170,9 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **Examples:** 
 
-| 1 | **Command:** `list` <br> **Output:** Shows a list of all employees in the address book |
+| S/N | Command information |
 | --- | --- |
+| 1 | **Command:** `list` <br> **Output:** Shows a list of all employees in the address book |
 
 * **Acceptable Values:** <br>
 | This command has no parameters
