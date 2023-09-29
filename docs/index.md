@@ -3,7 +3,7 @@
   title: ""
 ---
 
-# HRMate 
+# HRMate
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-W11-1/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2324S1-CS2103T-W11-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W11-1/tp/graph/badge.svg?token=CSDML30OIC)](https://codecov.io/gh/AY2324S1-CS2103T-W11-1/tp)
