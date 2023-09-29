@@ -195,6 +195,56 @@ This command is used to add an employee to the address book. Let's examine how w
 * **For advanced users:**
   * You can remove all the tags of an employee with `edit INDEX t/` (see example 2 above)
 
+### Finding employees with all tags in a group of tags: `find-all-tag`
+
+
+* **What It Does:**
+  * Filters and displays individuals from a dataset who match all the specified tags exactly. It helps users narrow their search to find records meeting all the specified criteria.
+    
+* **Format:**
+  * `find-all-tag [t/TAG]...`
+* **Examples:**
+
+  | S/N | Command information                                                                                                                                                                                                                   |
+  |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | 1   | **Command:** `find-all-tag t/remote t/full-time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely                                                                                              |
+
+* **Acceptable Values:**
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Only full words will be matched, e.g. “remote” will not match “remotely”
+* **Expected Output on Success:**
+  * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
+  * Message shown to the user: "[Number of matched employees] employees matched: "
+* **Expected Output on Failure:**
+  * `Tags do not exist` - Invalid tags
+  * `Missing tags` - Missing parameters
+  
+### Finding employees with at least one tag in a group of tags: `find-one-tag`
+
+
+* **What It Does:**
+  * Filters and displays individuals from a dataset who match at least one of the specified tags. It provides flexibility by showing records that meet any of the criteria provided.
+
+* **Format:**
+  * `find-one-tag [t/TAG]...`
+* **Examples:**
+
+  | S/N | Command information                                                                                                                                                                                                                   |
+    |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely                                                                                              |
+
+* **Acceptable Values:**
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Only full words will be matched, e.g. “remote” will not match “remotely”
+* **Expected Output on Success:**
+  * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
+  * Message shown to the user: "[Number of matched employees] employees matched: "
+* **Expected Output on Failure:**
+  * `Tags do not exist` - Invalid tags
+  * `Missing tags` - Missing parameters
+* **For advanced users:**
+  * GUI Changes: The displayed employees will be sorted in the order of the search terms, from one match to all matches.
+    ![find-one-tag UI for advanced users](images/find-one-tagUI.png)
 ### Locating an employee in HRMate by name: `find`
 
 * **What It Does:**
@@ -205,14 +255,14 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Examples:**
 
   | S/N | Command information                                                                                                                                                                                                                  |
-  |-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    |-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   | 1   | **Command:** `find martinez` <br><br> **Output:** Returns a list of employees whose names contain "*martinez*" e.g. "*Emiliano <u>Martinez</u>*" and "*Lisandro <u>Martinez</u>*"                                                    |
   | 2   | **Command:** `find harry redknapp` <br><br> **Output:** Returns a list of employees whose names contain either "*harry*" or "*redknapp*" e.g. "*<u>Harry</u> Kane*", "*Jamie <u>Redknapp</u>*", and "*<u>Harry</u> <u>Redknapp</u>*" |
   | 3   | **Command:** `find martin` <br><br> **Output:** Returns a list of employees whose names contain "*martin*" e.g. "*<u>Martin</u> Odegaard*" but not "*Gabriel Martinelli*" (only full word matches are displayed)                     |
 * **Acceptable Values:**
   * Search query: A non-empty input is required. Inputs can contain one or more words.
 * **Expected Output on Success:**
-  * GUI Changes: A list of employees whose names contain at least one of the words 
+  * GUI Changes: A list of employees whose names contain at least one of the words
   * Message shown to user: "[Number of matches] employees matched:"
 * **Expected Output on Failure:**
   * `Invalid Command Format` - if an empty input is provided

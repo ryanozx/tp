@@ -18,7 +18,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `find-all-tag` and `find-or-tag` [\#14]()
+    * Added documentation for the features `find-all-tag` and `find-one-tag` [\#14]()
 
 
 * **Community**:
