@@ -229,9 +229,9 @@ This command is used to add an employee to the address book. Let's examine how w
   * `find-one-tag [t/TAG]...`
 * **Examples:**
 
-  | S/N | Command information                                                                                                                                                                                                                   |
-    |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely                                                                                              |
+| S/N | Command information                                                                                                                                                                                                                   |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely                                                                                              |
 
 * **Acceptable Values:**
   * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
@@ -254,11 +254,11 @@ This command is used to add an employee to the address book. Let's examine how w
   * `find SEARCH_QUERY...`
 * **Examples:**
 
-  | S/N | Command information                                                                                                                                                                                                                  |
-    |-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | 1   | **Command:** `find martinez` <br><br> **Output:** Returns a list of employees whose names contain "*martinez*" e.g. "*Emiliano <u>Martinez</u>*" and "*Lisandro <u>Martinez</u>*"                                                    |
-  | 2   | **Command:** `find harry redknapp` <br><br> **Output:** Returns a list of employees whose names contain either "*harry*" or "*redknapp*" e.g. "*<u>Harry</u> Kane*", "*Jamie <u>Redknapp</u>*", and "*<u>Harry</u> <u>Redknapp</u>*" |
-  | 3   | **Command:** `find martin` <br><br> **Output:** Returns a list of employees whose names contain "*martin*" e.g. "*<u>Martin</u> Odegaard*" but not "*Gabriel Martinelli*" (only full word matches are displayed)                     |
+| S/N | Command information                                                                                                                                                                                                                  |
+|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find martinez` <br><br> **Output:** Returns a list of employees whose names contain "*martinez*" e.g. "*Emiliano <u>Martinez</u>*" and "*Lisandro <u>Martinez</u>*"                                                    |
+| 2   | **Command:** `find harry redknapp` <br><br> **Output:** Returns a list of employees whose names contain either "*harry*" or "*redknapp*" e.g. "*<u>Harry</u> Kane*", "*Jamie <u>Redknapp</u>*", and "*<u>Harry</u> <u>Redknapp</u>*" |
+| 3   | **Command:** `find martin` <br><br> **Output:** Returns a list of employees whose names contain "*martin*" e.g. "*<u>Martin</u> Odegaard*" but not "*Gabriel Martinelli*" (only full word matches are displayed)                     |
 * **Acceptable Values:**
   * Search query: A non-empty input is required. Inputs can contain one or more words.
 * **Expected Output on Success:**
@@ -277,10 +277,10 @@ This command is used to add an employee to the address book. Let's examine how w
   * `delete EMPLOYEE_LIST_INDEX`
 * **Examples:**
 
-  | S/N | Command information                                                                                                                                                                                                                         |
-  |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | 1   | **Command:** `delete 1` <br><br> **Output:** Deletes the record belonging to the employee whose index is 1. For instance, if the record belongs to “*David de Gea*”, then *de Gea*’s record is removed from HRMate and no longer available. |
-  | 2   | **Command:** `delete 5` <br><br> **Output:**: Deletes the record belonging to the employee whose index is 5. For instance, if the record belongs to “*Carlos Puyol*”, then *Puyol*’s record is removed from HRMate and no longer available. |
+| S/N | Command information                                                                                                                                                                                                                         |
+|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `delete 1` <br><br> **Output:** Deletes the record belonging to the employee whose index is 1. For instance, if the record belongs to “*David de Gea*”, then *de Gea*’s record is removed from HRMate and no longer available. |
+| 2   | **Command:** `delete 5` <br><br> **Output:**: Deletes the record belonging to the employee whose index is 5. For instance, if the record belongs to “*Carlos Puyol*”, then *Puyol*’s record is removed from HRMate and no longer available. |
 * **Acceptable Values:**
   * The specified `EMPLOYEE_LIST_INDEX` must correspond to an index number shown in the address book. It must be a valid number, larger than zero, and cannot exceed the number of entries in the address book.
 * **Expected Output on Success:**
