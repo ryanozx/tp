@@ -193,8 +193,9 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **Examples:**
 
-| 1 | **Command:** `edit 1 p/91234567 e/johndoe@example.com` <br> **Output:** Edits the employee with index 1 to have the below changes: <br> - Phone number: 91234567 <br> - Email: johndoe@example.com <br> - No changes to the other fields |
+| S/N | Command information |
 | --- | --- |
+| 1 | **Command:** `edit 1 p/91234567 e/johndoe@example.com` <br> **Output:** Edits the employee with index 1 to have the below changes: <br> - Phone number: 91234567 <br> - Email: johndoe@example.com <br> - No changes to the other fields |
 | 2 | **Command:** `edit 2 n/Betsy Crower t/` <br> **Output:**: Edits the employee with index 2 to have the below changes: <br> - Name: Betsy Crower <br> - Tags: (all removed) <br> - No changes to the other fields |
 | 3 | **Command:** `edit 3 t/friend` <br> **Output:** Edits the employee with index 3 to have the below changes: <br> - Tags: friend (all other existing tags removed) <br> - No changes to the other fields |
 
