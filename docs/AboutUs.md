@@ -7,18 +7,19 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `ryanozx[at]u.nus.edu.sg`
+You can reach us at the email `ryanozx[at]u.nus.edu.sg` `mary84060117[at]gmail.com`
 
 ## Project team
 
 ### Chen Qun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jean-cq.png" width="200px">
 
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jean-cq)]
+[[portfolio](team/jean-cq.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Code quality, Deliverables and Deadlines
 
 ### Ivan Tan
 
