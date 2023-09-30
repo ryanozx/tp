@@ -22,13 +22,13 @@ You can reach us at the email `ryanozx[at]u.nus.edu.sg`
 
 ### Ivan Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ivyy-poison.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ivyy-poison)]
+[[portfolio](team/ivyy-poison.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Integration
 
 ### Ong Wei Hong
 
