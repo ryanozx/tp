@@ -4,7 +4,6 @@
 
 ## HRMate
 
------
 HRMate is a **desktop address book application** that aims to streamline HR processes, by offering an intuitive, CLI-based contact management system with specialised functionalities for HR tasks.
 
 * Besides normal address book function, HRMate allows HR managers to:
