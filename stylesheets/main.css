@@ -9,6 +9,10 @@ mark {
   padding-left: 20px;
 }
 
+li {
+  padding: 0.5rem 0;
+}
+
 .theme-card img {
   width: 100%;
 }
@@ -83,6 +87,10 @@ mark {
 .site-nav-top {
   margin: 0.8rem 0;
   padding: 0 12px 12px 12px;
+}
+
+.site-nav-list > li {
+  padding: 0rem;
 }
 
 .nav-component {
