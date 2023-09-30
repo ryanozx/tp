@@ -27,10 +27,10 @@ You can reach us at the email
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
 ### Ivan Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ivyy-poison.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ivyy-poison)]
+[[portfolio](team/ivyy-poison.md)]
 
 * Role: Developer, Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
