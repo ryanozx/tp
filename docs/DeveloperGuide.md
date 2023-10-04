@@ -269,27 +269,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a sizeable number of employees' information 
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage HR information faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                  | So that I can…​                                                           |
+|----------|--------------------------------------------|------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions              | refer to instructions when I forget how to use the App                   |
+| `* * *`  | HR manager                                 | add a new employee                  |                                                                          |
+| `* * *`  | HR manager                                 | delete an employee                  | remove employees who no longer work here                                 |
+| `* * *`  | HR manager                                 | find an employee by name            | locate details of employees without having to go through the entire list |
+| `* * *`  | organised HR manager                       | add/delete a tag to an employee     | change the label of an employee                                          |
+| `* *`    | HR manager                                 | hide private contact details        | minimize chance of someone else seeing them by accident                  |
+| `*`      | HR manager of a large organisation         | sort employees by name              | locate an employee easily                                                |
 
 *{More to be added}*
 
@@ -297,14 +298,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: add/delete a tag from an employee**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to find employee by name
+2.  AddressBook shows a list of employees with the same name
+3.  User requests to add/delete a tag from a specific employee in the list
+4.  AddressBook adds/deletes tag from specified employee
+|
+|  | Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given tag is invalid. (already there for add, not there for delete)
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Delete an employee**
+
+**MSS**
+
+1.  User requests to list employees 
+2.  AddressBook shows a list of employees 
+3.  User requests to delete a specific employee in the list
+4.  AddressBook deletes the employee 
 
     Use case ends.
 
