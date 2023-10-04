@@ -183,7 +183,7 @@ This command is used to add an employee to the address book. Let's examine how w
     <box type="warning" seamless>
     If the tag prefix is specified, all existing tags currently associated with the employee will be removed and
     replaced with the new tags specified in the command, if any (see examples 2 and 3 above). Therefore, to avoid losing
-    any tags associated with the employee, we recommend using the [add-tag](#) and [remove-tag](#) commands instead for
+    any tags associated with the employee, we recommend using the [add-tag](#adding-tags-to-employees-add-tag) and [delete-tag](#removing-tags-from-employees-delete-tag) commands instead for
     greater control.
     </box>
 * **Expected output on failure:**
@@ -216,7 +216,8 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Expected Output on Failure:**
   * Error messages: N/A (since no parameters are involved, the command will not fail due to invalid input)
 
-### Adding a tag to an employee: `add-tag`
+### Adding tags to employees: `add-tag`
+
 
 * **What It Does:**
   * Adds a tag to an employee record, useful for classifying employees like 'remote', 'contract', etc.
@@ -241,7 +242,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * `Tag already exists on this employee.` - The specified tag already exists in the employee's record
   * `Missing employee list index or tag.` - There were missing parameters in command
 
-### Removing a tag from an employee: `delete-tag`
+### Removing tags from employees: `delete-tag`
 
 * **What It Does:**
   * Removes a tag from an employee record. This is used when an employee's category changes or the tag no longer applies.
