@@ -299,7 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `HRMate` and the **Actor** is the `HR Manager`, unless specified otherwise)
 
-**Use case: add/delete a tag from an employee**
+**Use case: Add/delete a tag from an employee**
 
 **MSS**
 
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: list employees with all specified tags**
+**Use case: List employees with all specified tags**
 
 **MSS**
 
@@ -358,18 +358,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The specified tags do not exist in the system.
 
-  Use case ends.
-
-* 2a. The specified tags do not exist in the system:
   * 2a1. HRMate notifies the user of invalid tags. 
+  
     Use case resumes at step 1.
-* 2b. User does not provide any tags:
+  
+* 2b. User does not provide any tags.
+
   * 2b1. HRMate notifies the user of missing parameters.
+  
     Use case resumes at step 1.
 
-**Use case: list employees with at least one specified tags**
+**Use case: List employees with at least one specified tags**
 
 **MSS**
 
@@ -381,15 +382,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The specified tags do not exist in the system.
 
-  Use case ends.
-
-* 2a. The specified tags do not exist in the system:
     * 2a1. HRMate notifies the user of invalid tags.
+  
       Use case resumes at step 1.
-* 2b. User does not provide any tags:
+* 2b. User does not provide any tags.
+
     * 2b1. HRMate notifies the user of missing parameters.
+  
       Use case resumes at step 1.
 
 *{More to be added}*
