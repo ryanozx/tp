@@ -441,15 +441,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                      |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**          | `clear`                                                                                                                                                               |
-| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| **Exit**           | `exit`                                                                                                                                                                |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
-| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
-| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
-| **Help**           | `help`                                                                                                                                                                |
-| **List**           | `list`                                                                                                                                                                |
+| Action             | Format, Examples                                                                                                                                                          |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`     |
+| **Clear**          | `clear`                                                                                                                                                                   |
+| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                         |
+| **Exit**           | `exit`                                                                                                                                                                    |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **View tag**       | `view-tag`                                                                                                                                                                |
+| **Add tag**        | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                            |
+| **Delete tag**     | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                      |
+| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                    |
+| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                                  |
+| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                       |
+| **Help**           | `help`                                                                                                                                                                    |
+| **List**           | `list`                                                                                                                                                                    |
