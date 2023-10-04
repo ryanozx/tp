@@ -293,19 +293,20 @@ This command is used to add an employee to the address book. Let's examine how w
   * `Tags do not exist` - Invalid tags
   * `Missing tags` - Missing parameters
   
-### Finding employees with at least one tag in a group of tags: `find-one-tag`
+### Finding employees with at least one tag in a group of tags: `find-some-tag`
 
 
 * **What It Does:**
   * Filters and displays individuals from a dataset who match at least one of the specified tags. It provides flexibility by showing records that meet any of the criteria provided.
 
 * **Format:**
-  * `find-one-tag [t/TAG]...`
+  * `find-some-tag [t/TAG]...`
 * **Examples:**
 
 | S/N | Command information                                                                                                                                                                |
 |-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely  |
+
 
 * **Acceptable Values:**
   * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
@@ -318,7 +319,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * `Missing tags` - Missing parameters
 * **For advanced users:**
   * GUI Changes: The displayed employees will be sorted in the order of the search terms, from one match to all matches.
-    ![find-one-tag UI for advanced users](images/find-one-tagUI.png)
+    ![find-some-tag UI for advanced users](images/find-some-tagUI.png)
 ### Locating an employee in HRMate by name: `find`
 
 * **What It Does:**
@@ -440,13 +441,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| **Exit**   | `exit`                                                                                                                                                                |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
-| **Help**   | `help`                                                                                                                                                                |
-| **List**   | `list`                                                                                                                                                                |
+| Action             | Format, Examples                                                                                                                                                      |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**          | `clear`                                                                                                                                                               |
+| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| **Exit**           | `exit`                                                                                                                                                                |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
+| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
+| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
+| **Help**           | `help`                                                                                                                                                                |
+| **List**           | `list`                                                                                                                                                                |
