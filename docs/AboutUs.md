@@ -46,7 +46,7 @@ You can reach us at the email
 
 ### Qin Nanxin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/infibeyond.png" width="200px">
 
 [[github](http://github.com/infibeyond)]
 [[portfolio](team/johndoe.md)]
