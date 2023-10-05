@@ -414,9 +414,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  A user with above average typing speed (60 or more words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 3.  Should have an intuitive and user-friendly interface, ensuring that HR managers can easily navigate and use its features without extensive training.
 4.  HRMate should be capable of handling a growing volume of employee records (up to 1000 persons) without a substantial decrease in performance. It should efficiently manage and store data as the number of employees and records increases over time.
+5.  HRMate should complete operations involving a single records within 500ms, and operations involving listing, searching, and filtering within 2s.
 
 
 *{More to be added}*
