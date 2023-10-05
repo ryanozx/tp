@@ -118,7 +118,7 @@
         "listing-all-employees-list": "Listing all employees: list",
         "editing-an-employee-s-personal-information-edit": "Editing an employee's personal information: edit",
         "finding-employees-with-all-tags-in-a-group-of-tags-find-all-tag": "Finding employees with all tags in a group of tags: find-all-tag",
-        "finding-employees-with-at-least-one-tag-in-a-group-of-tags-find-one-tag": "Finding employees with at least one tag in a group of tags: find-one-tag",
+        "finding-employees-with-at-least-one-tag-in-a-group-of-tags-find-some-tag": "Finding employees with at least one tag in a group of tags: find-some-tag",
         "locating-an-employee-in-hrmate-by-name-find": "Locating an employee in HRMate by name: find",
         "removing-an-employee-record-delete": "Removing an employee Record : delete",
         "restarting-hrmate-by-clearing-all-existing-records-clear": "Restarting HRMate by clearing all existing records : clear",
@@ -141,6 +141,14 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/ivyy-poison.md",
+      "title": "Ivan's Project Portfolio Page",
+      "headings": {
+        "project-hrmate": "Project: HRMate"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/jean-cq.md",
       "title": "Chen Qun's Portfolio Page",
       "headings": {
@@ -151,6 +159,14 @@
     {
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-hrmate": "Project: HRMate"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/ong-wei-hong.md",
+      "title": "Wei Hong's Portfolio Page",
       "headings": {
         "project-hrmate": "Project: HRMate"
       },
