@@ -11,7 +11,7 @@ You can reach us at the email
  - `mary84060117[at]gmail.com`
  - `Ivan's email`
  - `weihong.ong[at]u.nus.edu.sg`
- - `Nanxin's email`
+ - `nancyqinilm[at]gmail.com`
  - `ryanozx[at]u.nus.edu.sg` 
 
 ## Project team
@@ -48,7 +48,7 @@ You can reach us at the email
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/infibeyond)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer, Documentation
