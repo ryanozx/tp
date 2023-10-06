@@ -299,16 +299,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HRMate` and the **Actor** is the `HR Manager`, unless specified otherwise)
 
-**Use case: add/delete a tag from an employee**
+**Use case: Add/delete a tag from an employee**
 
 **MSS**
 
 1.  User requests to find employee by name
-2.  AddressBook shows a list of employees with the same name
+2.  HRMate shows a list of employees with the same name
 3.  User requests to add/delete a tag from a specific employee in the list
-4.  AddressBook adds/deletes tag from specified employee
+4.  HRMate adds/deletes tag from specified employee
 
     Use case ends.
 
@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given tag is invalid. (already there for add, not there for delete)
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HRMate shows an error message.
 
       Use case resumes at step 2.
 
@@ -330,9 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list employees 
-2.  AddressBook shows a list of employees 
+2.  HRMate shows a list of employees 
 3.  User requests to delete a specific employee in the list
-4.  AddressBook deletes the employee 
+4.  HRMate deletes the employee 
 
     Use case ends.
 
@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HRMate shows an error message.
 
       Use case resumes at step 2.
 
@@ -408,6 +408,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3a2. HRMate displays an error message.
 
     Use case ends.
+
+**Use case: List employees with all specified tags**
+
+**MSS**
+
+1.  User requests to find employees who match all specified tags
+2.  HRMate shows a list of employees who match all the specified tags exactly
+    
+      Use case ends.
+
+**Extensions**
+
+* 2a. The specified tags do not exist in the system.
+
+  * 2a1. HRMate notifies the user of invalid tags. 
+  
+    Use case resumes at step 1.
+  
+* 2b. User does not provide any tags.
+
+  * 2b1. HRMate notifies the user of missing parameters.
+  
+    Use case resumes at step 1.
+
+**Use case: List employees with at least one specified tags**
+
+**MSS**
+
+1.  User requests to find employees who match at least one of the specified tags
+2.  HRMate shows a list of employees who match at least one of the specified tags
+    
+      Use case ends.
+
+**Extensions**
+
+* 2a. The specified tags do not exist in the system.
+
+    * 2a1. HRMate notifies the user of invalid tags.
+  
+      Use case resumes at step 1.
+* 2b. User does not provide any tags.
+
+    * 2b1. HRMate notifies the user of missing parameters.
+  
+      Use case resumes at step 1.
 
 *{More to be added}*
 
