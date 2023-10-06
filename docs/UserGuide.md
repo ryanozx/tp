@@ -104,7 +104,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Examples:**
 
 | S/N | Command information                                                                              |
-|-----|--------------------------------------------------------------------------------------------------| 
+|-----|--------------------------------------------------------------------------------------------------|
 | 1   | **Command:** `help` <br><br> **Output:** Displays a message showing how to access the help page. |
 * **Acceptable Values:**
   * This command does not have any parameters
@@ -181,7 +181,7 @@ This command is used to add an employee to the address book. Let's examine how w
     <box type="warning" seamless>
     If the tag prefix is specified, all existing tags currently associated with the employee will be removed and
     replaced with the new tags specified in the command, if any (see examples 2 and 3 above). Therefore, to avoid losing
-    any tags associated with the employee, we recommend using the [add-tag](#) and [remove-tag](#) commands instead for
+    any tags associated with the employee, we recommend using the [add-tag](#adding-tags-to-employees-add-tag) and [delete-tag](#removing-tags-from-employees-delete-tag) commands instead for
     greater control.
     </box>
 * **Expected output on failure:**
@@ -193,6 +193,81 @@ This command is used to add an employee to the address book. Let's examine how w
 * **For advanced users:**
   * You can remove all the tags of an employee with `edit INDEX t/` (see example 2 above)
 
+### Viewing All Tags: `view-tag`
+
+* **What It Does:**
+  * Shows a list of all tags currently in use within the address book, which helps HR managers quickly identify different categories of employees.
+    
+* **Format:**
+  * `view-tag`
+* **Examples:**
+
+| S/N | Command information                                                                                                         |
+|-----|-----------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `view-tag` <br><br> **Output:** Shows a list of all tags assigned to at least one employee in the address book |
+
+* **Acceptable Values:**
+  * This command doesn't require any parameters.
+* **Expected Output on Success:**
+  * GUI Changes: A list of tags is displayed in a dedicated interface section.
+  * Message shown to the user: "Successfully fetched all tags."
+* **Expected Output on Failure:**
+  * Error messages: N/A (since no parameters are involved, the command will not fail due to invalid input)
+
+### Adding tags to employees: `add-tag`
+
+
+* **What It Does:**
+  * Adds a tag to an employee record, useful for classifying employees like 'remote', 'contract', etc.
+
+* **Format:**
+  * `add-tag EMPLOYEE_LIST_INDEX TAG`
+* **Examples:**
+
+| S/N | Command information                                                                                                                                                                                                                        |
+|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `add-tag 3 remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
+| 2   | **Command:** `add-tag 14 contract` <br><br> **Output:** Adds the tag “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tag “contract”  |
+
+* **Acceptable Values:**
+  * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
+  * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
+* **Expected Output on Success:**
+  * GUI Changes: The employee's record shows the new tag.
+  * Message shown to the user: "Tag [Tag] added to [Employee name]."
+* **Expected Output on Failure:**
+  * `Employee list index does not exist.` - An invalid index was specified
+  * `Tag already exists on this employee.` - The specified tag already exists in the employee's record
+  * `Missing employee list index or tag.` - There were missing parameters in command
+
+### Removing tags from employees: `delete-tag`
+
+* **What It Does:**
+  * Removes a tag from an employee record. This is used when an employee's category changes or the tag no longer applies.
+
+* **Format:**
+  * `delete-tag EMPLOYEE_LIST_INDEX TAG`
+* **Examples:**
+
+| S/N | Command information                                                                                                                                                                                                                                        |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `delete-tag 5 remote` <br><br> **Output:** Removes the tag “remote” from the employee whose index is 5. For instance, if “Rio Ferdinand” is the employee whose index is 5, the tag “remote” will be removed from Ferdinand’s record.          |
+| 2   | **Command:** `delete-tag 7 contract` <br><br> **Output:** Removes the tag “contract” from the employee whose index is 7. For instance, if “Cristiano Ronaldo” is the employee whose index is 7, the tag “contract” will be removed from Ronaldo’s record.  |
+
+* **Acceptable Values:**
+  * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
+  * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
+* **Expected Output on Success:**
+  * GUI Changes: The employee's record is updated to remove the deleted tag.
+  * Message shown to the user: "Tag [Tag] removed from [Employee name]."
+* **Expected Output on Failure:**
+  * `Employee list index does not exist.` - An invalid index was specified
+  * `Tag not found on this employee.` - The specified tag does not exist in the employee's record
+  * `Missing employee list index or tag.` - There were missing parameters in command
+
+
+
+
 ### Finding employees with all tags in a group of tags: `find-all-tag`
 
 
@@ -203,9 +278,10 @@ This command is used to add an employee to the address book. Let's examine how w
   * `find-all-tag [t/TAG]...`
 * **Examples:**
 
-| S/N | Command information                                                                                                                                                                |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-tag t/remote t/full-time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely     |
+
+| S/N | Command information                                                                                                                       |
+|-----|-------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-all-tag t/remote t/full-time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely  |
 
 * **Acceptable Values:**
   * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
@@ -228,8 +304,8 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Examples:**
 
 | S/N | Command information                                                                                                                                                                |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `tag find-some-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely  |
 
 * **Acceptable Values:**
   * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
@@ -364,15 +440,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                      |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**          | `clear`                                                                                                                                                               |
-| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| **Exit**           | `exit`                                                                                                                                                                |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
-| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
-| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
-| **Help**           | `help`                                                                                                                                                                |
-| **List**           | `list`                                                                                                                                                                |
+| Action             | Format, Examples                                                                                                                                                          |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`     |
+| **Clear**          | `clear`                                                                                                                                                                   |
+| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                         |
+| **Exit**           | `exit`                                                                                                                                                                    |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **View tag**       | `view-tag`                                                                                                                                                                |
+| **Add tag**        | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                            |
+| **Delete tag**     | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                      |
+| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                    |
+| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                                  |
+| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                       |
+| **Help**           | `help`                                                                                                                                                                    |
+| **List**           | `list`                                                                                                                                                                    |
