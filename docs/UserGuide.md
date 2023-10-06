@@ -19,7 +19,7 @@ tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `hrmate.jar` from [to be updated](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `hrmate.jar` from [to be updated]().
 
 3. Copy the file to the folder you want to use as the _home folder_ for your HRMate.
 
@@ -110,8 +110,6 @@ This command is used to add an employee to the address book. Let's examine how w
   * This command does not have any parameters
 * **Expected Output on Success:**
   * GUI Changes: A message appears showing how to access the help page
-  
-![help message](images/helpMessage.png)
 
 * **Expected Output on Failure:**
   * Error messages: N/A (no expected failure)
