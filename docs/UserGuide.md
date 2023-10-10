@@ -226,19 +226,19 @@ This command is used to add an employee to the address book. Let's examine how w
 
 | S/N | Command information                                                                                                                                                                                                                        |
 |-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `add-tag 3 remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
-| 2   | **Command:** `add-tag 14 contract` <br><br> **Output:** Adds the tag “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tag “contract”  |
+| 1   | **Command:** `add-tag 3 t/remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
+| 2   | **Command:** `add-tag 14 t/temp t/contract` <br><br> **Output:** Adds the tag “temp” “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tags “temp” and “contract”  |
 
 * **Acceptable Values:**
   * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
   * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
 * **Expected Output on Success:**
   * GUI Changes: The employee's record shows the new tag.
-  * Message shown to the user: "Tag [Tag] added to [Employee name]."
+  * Message shown to the user: "Edited Person: ..." followed by the person's updated information
 * **Expected Output on Failure:**
-  * `Employee list index does not exist.` - An invalid index was specified
-  * `Tag already exists on this employee.` - The specified tag already exists in the employee's record
-  * `Missing employee list index or tag.` - There were missing parameters in command
+  * `The employee index provided is invalid` - An invalid index was specified
+  * `This employee already has some of the tags.` - The specified tag already exists in the employee's record
+  * `Invalid command format!...` followed by command information - There were missing parameters in command
 
 ### Removing tags from employees: `delete-tag`
 

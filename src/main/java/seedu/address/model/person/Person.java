@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -37,6 +39,18 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constrctor to create a deep copy of another Person.
+     */
+    public Person(Person toCopy) {
+        requireNonNull(toCopy);
+        this.name = toCopy.name;
+        this.phone = toCopy.phone;
+        this.email = toCopy.email;
+        this.address = toCopy.address;
+        this.tags.addAll(toCopy.tags);
+    }
+
     public Name getName() {
         return name;
     }
@@ -59,6 +73,34 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Adds tags in toAdd to tags
+     */
+    public void addTags(Collection<Tag> toAdd) {
+        toAdd.forEach(tags::add);
+    }
+
+    /**
+     * Add tag to tags
+     */
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    /**
+     * Checks if tag is in tags
+     */
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
+     * Checks if any tag in tags is in this.tags
+     */
+    public boolean hasAnyTags(Collection<Tag> tags) {
+        return tags.stream().anyMatch((tag) -> this.tags.contains(tag));
     }
 
     /**
