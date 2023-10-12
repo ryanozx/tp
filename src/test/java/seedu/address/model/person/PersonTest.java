@@ -12,6 +12,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -96,4 +98,79 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hasAllTags_allTagsPresent_returnsTrue() {
+        assertTrue(ALICE.hasAllTags(ALICE.getTags()));
+    }
+
+    @Test
+    public void hasAllTags_notAllTagsPresent_returnsFalse() {
+        assertFalse(ALICE.hasAllTags(BOB.getTags()));
+    }
+
+    @Test
+    public void hasAllTags_emptyCollection_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.hasAllTags(new HashSet<>()));
+    }
+
+    @Test
+    public void hasAllTags_null_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.hasAllTags(null));
+    }
+
+    @Test
+    public void hasTag_tagPresent_returnsTrue() {
+        assertTrue(ALICE.hasTag(ALICE.getTags().iterator().next()));
+    }
+
+    @Test
+    public void hasTag_tagNotPresent_returnsFalse() {
+        assertFalse(ALICE.hasTag(BOB.getTags().iterator().next()));
+    }
+
+    @Test
+    public void hasTag_null_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.hasTag(null));
+    }
+
+    @Test
+    public void removeTags_allTagsPresent_returnsTrue() {
+        Person person = new PersonBuilder(ALICE).build();
+        person.removeTags(ALICE.getTags());
+        assertTrue(person.getTags().isEmpty());
+    }
+
+    @Test
+    public void removeTags_notAllTagsPresent_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.removeTags(BOB.getTags()));
+    }
+
+    @Test
+    public void removeTags_emptyCollection_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.removeTags(new HashSet<>()));
+    }
+
+    @Test
+    public void removeTags_null_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.removeTags(null));
+    }
+
+    @Test
+    public void removeTag_tagPresent_returnsTrue() {
+        Person person = new PersonBuilder(ALICE).build();
+        person.removeTag(ALICE.getTags().iterator().next());
+        assertTrue(person.getTags().isEmpty());
+    }
+
+    @Test
+    public void removeTag_tagNotPresent_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.removeTag(BOB.getTags().iterator().next()));
+    }
+
+    @Test
+    public void removeTag_null_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ALICE.removeTag(null));
+    }
+
 }
