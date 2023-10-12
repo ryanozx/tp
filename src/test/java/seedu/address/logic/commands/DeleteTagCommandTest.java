@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -85,6 +86,15 @@ public class DeleteTagCommandTest {
     }
 
     @Test
+    public void execute_personDoesNotHaveAllTags_failure() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON,
+                List.of(new Tag(VALID_TAG_FRIEND), new Tag("random")));
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_MISSING_TAGS);
+    }
+
+    @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         Collection<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(VALID_TAG_FRIEND)));
@@ -92,5 +102,33 @@ public class DeleteTagCommandTest {
         String expected = DeleteTagCommand.class.getCanonicalName() + "{index=" + index + ", tagsToAdd="
                 + tagsToAdd + "}";
         assertEquals(expected, deleteTagCommand.toString());
+    }
+
+    @Test
+    public void equalsMethod() {
+        final DeleteTagCommand standardCommand = new DeleteTagCommand(INDEX_FIRST_PERSON,
+                List.of(new Tag(VALID_TAG_FRIEND)));
+
+        // same values -> returns true
+        DeleteTagCommand commandWithSameValues = new DeleteTagCommand(INDEX_FIRST_PERSON,
+                List.of(new Tag(VALID_TAG_FRIEND)));
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new DeleteTagCommand(INDEX_SECOND_PERSON,
+                List.of(new Tag(VALID_TAG_FRIEND)))));
+
+        // different tags -> returns false
+        assertFalse(standardCommand.equals(new DeleteTagCommand(INDEX_FIRST_PERSON,
+                List.of(new Tag("different")))));
     }
 }

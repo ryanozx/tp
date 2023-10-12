@@ -30,7 +30,7 @@ public class DeleteTagCommand extends Command {
         + PREFIX_TAG + "remote";
 
     public static final String MESSAGE_NO_TAGS_REMOVED = "At least one tag must be provided.";
-    public static final String MESSAGE_DUPLICATE_TAG = "Some of the tags are not found on this employee.";
+    public static final String MESSAGE_MISSING_TAGS = "Some of the tags are not found on this employee.";
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Edited Employee : %1$s";
 
     private final Index index;
@@ -61,7 +61,7 @@ public class DeleteTagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         if (!personToEdit.hasAllTags(tagsToRemove)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+            throw new CommandException(MESSAGE_MISSING_TAGS);
         }
 
         Person editedPerson = new Person(personToEdit);
