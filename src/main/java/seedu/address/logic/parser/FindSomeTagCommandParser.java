@@ -3,12 +3,12 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new FindCommand object

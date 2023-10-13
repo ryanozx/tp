@@ -7,7 +7,6 @@ import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
