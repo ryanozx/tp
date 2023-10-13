@@ -1,22 +1,27 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.DAVID;
+import static seedu.address.testutil.TypicalPersons.MICHAEL;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.TagsContainSomeTagsPredicate;
-import seedu.address.model.tag.Tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.TagsContainSomeTagsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindSomeTagCommand }.
@@ -38,14 +43,14 @@ public class FindSomeTagCommandTest {
         TagsContainSomeTagsPredicate secondPredicate =
                 new TagsContainSomeTagsPredicate(tagList2);
 
-        FindSomeTagCommand findFirstCommand = new FindSomeTagCommand((firstPredicate));
+        FindSomeTagCommand findFirstCommand = new FindSomeTagCommand(firstPredicate);
         FindSomeTagCommand findSecondCommand = new FindSomeTagCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-         FindSomeTagCommand findFirstCommandCopy = new FindSomeTagCommand (firstPredicate);
+        FindSomeTagCommand findFirstCommandCopy = new FindSomeTagCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -62,7 +67,7 @@ public class FindSomeTagCommandTest {
     public void execute_noTagsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         TagsContainSomeTagsPredicate predicate = preparePredicate("tagForTest");
-        FindSomeTagCommand command = new FindSomeTagCommand (predicate);
+        FindSomeTagCommand command = new FindSomeTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
