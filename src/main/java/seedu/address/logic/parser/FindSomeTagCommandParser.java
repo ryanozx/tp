@@ -11,7 +11,7 @@ import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindSomeTagCommand object
  */
 public class FindSomeTagCommandParser implements Parser<FindSomeTagCommand> {
     public static final String MESSAGE_INVALID_TAG = "Tags names should be alphanumeric.";

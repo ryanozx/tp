@@ -1,32 +1,32 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagsContainSomeTagsPredicate;
+import seedu.address.model.person.TagsContainAllTagsPredicate;
+
+import static java.util.Objects.requireNonNull;
 
 /**
- * Find Persons with some specified tags
+ * Find Persons with the exact tags
  */
-public class FindSomeTagCommand extends Command {
+public class FindAllTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "find-some-tag";
+    public static final String COMMAND_WORD = "find-all-tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags match some "
-            + "specified tags (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags match all "
+            + "the specified tags exactly (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: TAG [MORE_TAGS]...\n"
             + "Example: " + COMMAND_WORD
             + " fullTime remote\n";
 
-    private final TagsContainSomeTagsPredicate predicate;
+    private final TagsContainAllTagsPredicate predicate;
 
     /**
      * @param predicate tags to match with employees
      */
-    public FindSomeTagCommand(TagsContainSomeTagsPredicate predicate) {
+    public FindAllTagCommand(TagsContainAllTagsPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
     }
@@ -49,12 +49,12 @@ public class FindSomeTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindSomeTagCommand)) {
+        if (!(other instanceof FindAllTagCommand)) {
             return false;
         }
 
-        FindSomeTagCommand otherFindSomeTagCommand = (FindSomeTagCommand) other;
-        return predicate.equals(otherFindSomeTagCommand.predicate);
+        FindAllTagCommand otherFindAllTagCommand = (FindAllTagCommand) other;
+        return predicate.equals(otherFindAllTagCommand.predicate);
     }
 
     @Override
