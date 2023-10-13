@@ -63,4 +63,5 @@ public class FindSomeTagCommand extends Command {
                 .add("predicate", predicate)
                 .toString();
     }
+
 }
