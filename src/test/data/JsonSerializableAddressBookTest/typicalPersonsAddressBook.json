@@ -42,5 +42,23 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
+  }, {
+    "name" : "Georgia Best",
+    "phone" : "9484442",
+    "email" : "georgia@example.com",
+    "address" : "4th street",
+    "tags" : [ "fullTime" ]
+  }, {
+    "name" : "Michael Miller",
+    "phone" : "9482242",
+    "email" : "michael@example.com",
+    "address" : "2th street",
+    "tags" : [ "fullTime", "remote" ]
+  }, {
+    "name" : "David Chan",
+    "phone" : "9484342",
+    "email" : "david@example.com",
+    "address" : "7th street",
+    "tags" : [ "partTime", "remote"]
   } ]
 }
