@@ -49,7 +49,7 @@ You can reach us at the email
 <img src="images/infibeyond.png" width="200px">
 
 [[github](http://github.com/infibeyond)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/infibeyond.md)]
 
 * Role: Developer, Documentation
 * Responsibilities: Responsible for the quality of various project documents.
