@@ -275,23 +275,23 @@ This command is used to add an employee to the address book. Let's examine how w
   * Filters and displays individuals from a dataset who match all the specified tags exactly. It helps users narrow their search to find records meeting all the specified criteria.
     
 * **Format:**
-  * `find-all-tag [t/TAG]...`
+  * `find-all-tag TAG [MORE_TAGS]...`
 * **Examples:**
 
 
-| S/N | Command information                                                                                                                       |
-|-----|-------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-tag t/remote t/full-time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely  |
+| S/N | Command information                                                                                                                 |
+|-----|-------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-all-tag remote fullTime` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely |
 
 * **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
   * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
-  * `Tags do not exist` - Invalid tags
-  * `Missing tags` - Missing parameters
+  * `Invalid command format!` - Missing parameters
+  * `Tags names should be alphanumeric.` - Invalid parameter inputs
   
 ### Finding employees with at least one tag in a group of tags: `find-some-tag`
 
@@ -300,22 +300,22 @@ This command is used to add an employee to the address book. Let's examine how w
   * Filters and displays individuals from a dataset who match at least one of the specified tags. It provides flexibility by showing records that meet any of the criteria provided.
 
 * **Format:**
-  * `find-some-tag [t/TAG]...`
+  * `find-some-tag TAG [MORE_TAGS]...`
 * **Examples:**
 
-| S/N | Command information                                                                                                                                                                |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely  |
+| S/N | Command information                                                                                                                                                           |
+|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `tag find-some-tag fullTime remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely |
 
 * **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
   * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
-  * `Tags do not exist` - Invalid tags
-  * `Missing tags` - Missing parameters
+  * `Invalid command format!` - Missing parameters
+  * `Tags names should be alphanumeric.` - Invalid parameter inputs
 * **For advanced users:**
   * GUI Changes: The displayed employees will be sorted in the order of the search terms, from one match to all matches.
     ![find-some-tag UI for advanced users](images/find-some-tagUI.png)
