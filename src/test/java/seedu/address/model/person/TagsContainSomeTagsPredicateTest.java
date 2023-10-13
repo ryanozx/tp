@@ -1,8 +1,9 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,23 +53,24 @@ public class TagsContainSomeTagsPredicateTest {
         tagList2.add(new Tag("partTime"));
         tagList2.add(new Tag("remote"));
         // One keyword
-        TagsContainSomeTagsPredicate predicate = new TagsContainSomeTagsPredicate(tagList1);
+        TagsContainSomeTagsPredicate predicate =
+                new TagsContainSomeTagsPredicate(tagList1);
         assertTrue(predicate.test(new PersonBuilder().withTags("fullTime").build()));
 
         // Multiple keywords
         predicate = new TagsContainSomeTagsPredicate(tagList2);
-        assertTrue(predicate.test(new PersonBuilder().withTags("partTime").
-                withTags("remote").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTags("partTime")
+                        .withTags("remote").build()));
 
         // Only one matching keyword
         predicate = new TagsContainSomeTagsPredicate(tagList2);
-        assertTrue(predicate.test(new PersonBuilder().withTags("fullTime").
-                withTags("remote").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTags("fullTime")
+                .withTags("remote").build()));
 
         // Mixed-case keywords
         predicate = new TagsContainSomeTagsPredicate(tagList2);
-        assertTrue(predicate.test(new PersonBuilder().withTags("parttime").
-                withTags("remote").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTags("parttime")
+                .withTags("remote").build()));
     }
 
     @Test
@@ -79,11 +81,13 @@ public class TagsContainSomeTagsPredicateTest {
         // Zero keywords
         TagsContainSomeTagsPredicate predicate =
                 new TagsContainSomeTagsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTags("parttime").build()));
+        assertFalse(predicate.test(new PersonBuilder()
+                .withTags("parttime").build()));
 
         // Non-matching keyword
         predicate = new TagsContainSomeTagsPredicate(tagList);
-        assertFalse(predicate.test(new PersonBuilder().withTags("parttime").withTags("remote").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTags("parttime")
+                .withTags("remote").build()));
 
     }
 
