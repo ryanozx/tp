@@ -18,7 +18,7 @@ public class ExportCommand extends Command {
 
     public static final String EXPORT_DEST = "export";
 
-    public static final String MESSAGE_USAGE = ": Exports records from CSV file. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports records from CSV file. "
             + "Parameters: "
             + "FILENAME";
 
