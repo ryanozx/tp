@@ -15,7 +15,7 @@ public class FindSomeTagCommand extends Command {
 
     public static final String COMMAND_WORD = "find-some-tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD +  ": Finds all persons whose tags match all "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags match all "
             + "the specified tags exactly (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: TAG [MORE_TAGS]...\n"
             + "Example: " + COMMAND_WORD
