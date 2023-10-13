@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindAllTagCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TagsContainAllTagsPredicate;
-import seedu.address.model.tag.Tag;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.FindAllTagCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.TagsContainAllTagsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindAllTagCommand object

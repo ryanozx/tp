@@ -272,7 +272,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 
 * **What It Does:**
-  * Filters and displays individuals from a dataset who match all the specified tags exactly. It helps users narrow their search to find records meeting all the specified criteria.
+  * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
     
 * **Format:**
   * `find-all-tag TAG [MORE_TAGS]...`
@@ -287,7 +287,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
-  * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
+  * GUI Changes: A list of employees who match some specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
   * `Invalid command format!` - Missing parameters
@@ -297,7 +297,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 
 * **What It Does:**
-  * Filters and displays individuals from a dataset who match at least one of the specified tags. It provides flexibility by showing records that meet any of the criteria provided.
+  * Filters and displays individuals from a dataset who match at least one of the specified tags (case-sensitive). It provides flexibility by showing records that meet any of the criteria provided.
 
 * **Format:**
   * `find-some-tag TAG [MORE_TAGS]...`

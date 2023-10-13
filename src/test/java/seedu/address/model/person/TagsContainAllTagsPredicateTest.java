@@ -4,16 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-
-public class TagsContainSomeTagsPredicateTest {
+public class TagsContainAllTagsPredicateTest {
 
     @Test
     public void equals() {
@@ -23,14 +22,14 @@ public class TagsContainSomeTagsPredicateTest {
         tagList2.add(new Tag("partTime"));
         tagList2.add(new Tag("remote"));
 
-        TagsContainSomeTagsPredicate firstPredicate = new TagsContainSomeTagsPredicate(tagList1);
-        TagsContainSomeTagsPredicate secondPredicate = new TagsContainSomeTagsPredicate(tagList2);
+        TagsContainAllTagsPredicate firstPredicate = new TagsContainAllTagsPredicate(tagList1);
+        TagsContainAllTagsPredicate secondPredicate = new TagsContainAllTagsPredicate(tagList2);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        TagsContainSomeTagsPredicate firstPredicateCopy = new TagsContainSomeTagsPredicate(tagList1);
+        TagsContainAllTagsPredicate firstPredicateCopy = new TagsContainAllTagsPredicate(tagList1);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -52,20 +51,15 @@ public class TagsContainSomeTagsPredicateTest {
         tagList2.add(new Tag("partTime"));
         tagList2.add(new Tag("remote"));
         // One keyword
-        TagsContainSomeTagsPredicate predicate =
-                new TagsContainSomeTagsPredicate(tagList1);
+        TagsContainAllTagsPredicate predicate =
+                new TagsContainAllTagsPredicate(tagList1);
         assertTrue(predicate.test(new PersonBuilder()
                 .withTags("fullTime").build()));
 
         // Multiple keywords
-        predicate = new TagsContainSomeTagsPredicate(tagList2);
+        predicate = new TagsContainAllTagsPredicate(tagList2);
         assertTrue(predicate.test(new PersonBuilder()
                 .withTags("partTime", "remote").build()));
-
-        // Only one matching keyword
-        predicate = new TagsContainSomeTagsPredicate(tagList2);
-        assertTrue(predicate.test(new PersonBuilder()
-                .withTags("fullTime", "remote").build()));
     }
 
     @Test
@@ -74,18 +68,23 @@ public class TagsContainSomeTagsPredicateTest {
         tagList.add(new Tag("fullTime"));
 
         // Zero keywords
-        TagsContainSomeTagsPredicate predicate =
-                new TagsContainSomeTagsPredicate(Collections.emptyList());
+        TagsContainAllTagsPredicate predicate =
+                new TagsContainAllTagsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder()
                 .withTags("parttime").build()));
 
-        // Non-matching keyword
-        predicate = new TagsContainSomeTagsPredicate(tagList);
+        // Only one matching keyword
+        predicate = new TagsContainAllTagsPredicate(tagList);
         assertFalse(predicate.test(new PersonBuilder()
-                .withTags("parttime", "remote").build()));
+                .withTags("fullTime", "remote").build()));
+
+        // Non-matching keyword
+        predicate = new TagsContainAllTagsPredicate(tagList);
+        assertFalse(predicate.test(new PersonBuilder()
+                .withTags("partTime", "remote").build()));
 
         // Mixed-case keywords
-        predicate = new TagsContainSomeTagsPredicate(tagList);
+        predicate = new TagsContainAllTagsPredicate(tagList);
         assertFalse(predicate.test(new PersonBuilder()
                 .withTags("FullTime").build()));
     }
@@ -95,9 +94,9 @@ public class TagsContainSomeTagsPredicateTest {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("fullTime"));
 
-        TagsContainSomeTagsPredicate predicate = new TagsContainSomeTagsPredicate(tagList);
+        TagsContainAllTagsPredicate predicate = new TagsContainAllTagsPredicate(tagList);
 
-        String expected = TagsContainSomeTagsPredicate.class.getCanonicalName() + "{tags=" + "[[fullTime]]" + "}";
+        String expected = TagsContainAllTagsPredicate.class.getCanonicalName() + "{tags=" + "[[fullTime]]" + "}";
         assertEquals(expected, predicate.toString());
     }
 }
