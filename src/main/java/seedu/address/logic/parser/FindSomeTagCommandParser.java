@@ -1,18 +1,14 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.TagsContainAllTagsPredicate;
+import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -42,7 +38,7 @@ public class FindSomeTagCommandParser implements Parser<FindSomeTagCommand> {
             }
         }
 
-        return new FindSomeTagCommand(new TagsContainAllTagsPredicate(tagList));
+        return new FindSomeTagCommand(new TagsContainSomeTagsPredicate(tagList));
     }
 
 }

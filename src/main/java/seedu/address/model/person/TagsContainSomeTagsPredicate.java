@@ -9,10 +9,10 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class TagsContainAllTagsPredicate implements Predicate<Person> {
+public class TagsContainSomeTagsPredicate implements Predicate<Person> {
     private final List<Tag> tags;
 
-    public TagsContainAllTagsPredicate(List<Tag> tags) {
+    public TagsContainSomeTagsPredicate(List<Tag> tags) {
         this.tags = tags;
     }
 
@@ -29,11 +29,11 @@ public class TagsContainAllTagsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagsContainAllTagsPredicate)) {
+        if (!(other instanceof TagsContainSomeTagsPredicate)) {
             return false;
         }
 
-        TagsContainAllTagsPredicate otherNameContainsKeywordsPredicate = (TagsContainAllTagsPredicate) other;
+        TagsContainSomeTagsPredicate otherNameContainsKeywordsPredicate = (TagsContainSomeTagsPredicate) other;
         return tags.equals(otherNameContainsKeywordsPredicate.tags);
     }
 

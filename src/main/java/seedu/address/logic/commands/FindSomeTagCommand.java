@@ -1,17 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Collection;
-import java.util.HashSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagsContainAllTagsPredicate;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TagsContainSomeTagsPredicate;
 
 /**
  * Adds a tag to a person in the address book
@@ -26,12 +21,12 @@ public class FindSomeTagCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " fullTime remote\n";
 
-    private final TagsContainAllTagsPredicate predicate;
+    private final TagsContainSomeTagsPredicate predicate;
 
     /**
      * @param predicate tags to match with employees
      */
-    public FindSomeTagCommand(TagsContainAllTagsPredicate predicate) {
+    public FindSomeTagCommand(TagsContainSomeTagsPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
     }
