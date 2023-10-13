@@ -97,7 +97,7 @@ public class TagsContainSomeTagsPredicateTest {
 
         TagsContainSomeTagsPredicate predicate = new TagsContainSomeTagsPredicate(tagList);
 
-        String expected = TagsContainSomeTagsPredicate.class.getCanonicalName() + "{tag=" + "fullTime" + "}";
+        String expected = TagsContainSomeTagsPredicate.class.getCanonicalName() + "{tags=" + "[[fullTime]]" + "}";
         assertEquals(expected, predicate.toString());
     }
 }
