@@ -73,17 +73,7 @@ public class FindSomeTagCommandTest {
     public void execute_oneKeywords_multiplePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         TagsContainSomeTagsPredicate predicate = preparePredicate("remote");
-        FindSomeTagCommand command = new FindSomeTagCommand (predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MICHAEL, DAVID), model.getFilteredPersonList());
-    }
-
-    @Test
-    public void execute_invalidInputTag() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        TagsContainSomeTagsPredicate predicate = preparePredicate("remote");
-        FindSomeTagCommand command = new FindSomeTagCommand (predicate);
+        FindSomeTagCommand command = new FindSomeTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MICHAEL, DAVID), model.getFilteredPersonList());
