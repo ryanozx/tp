@@ -85,8 +85,8 @@ public class DeleteTagCommand extends Command {
             return false;
         }
 
-        DeleteTagCommand otherAddTagCommand = (DeleteTagCommand) other;
-        return index.equals(otherAddTagCommand.index) && tagsToRemove.equals(otherAddTagCommand.tagsToRemove);
+        DeleteTagCommand otherDeleteTagCommand = (DeleteTagCommand) other;
+        return index.equals(otherDeleteTagCommand.index) && tagsToRemove.equals(otherDeleteTagCommand.tagsToRemove);
     }
 
     @Override
