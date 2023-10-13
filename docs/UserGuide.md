@@ -251,8 +251,8 @@ This command is used to add an employee to the address book. Let's examine how w
 
 | S/N | Command information                                                                                                                                                                                                                                        |
 |-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `delete-tag 5 remote` <br><br> **Output:** Removes the tag “remote” from the employee whose index is 5. For instance, if “Rio Ferdinand” is the employee whose index is 5, the tag “remote” will be removed from Ferdinand’s record.          |
-| 2   | **Command:** `delete-tag 7 contract` <br><br> **Output:** Removes the tag “contract” from the employee whose index is 7. For instance, if “Cristiano Ronaldo” is the employee whose index is 7, the tag “contract” will be removed from Ronaldo’s record.  |
+| 1   | **Command:** `delete-tag 5 t/remote` <br><br> **Output:** Removes the tag “remote” from the employee whose index is 5. For instance, if “Rio Ferdinand” is the employee whose index is 5, the tag “remote” will be removed from Ferdinand’s record.          |
+| 2   | **Command:** `delete-tag 7 t/contract t/temp` <br><br> **Output:** Removes the tag “contract” and "temp" from the employee whose index is 7. For instance, if “Cristiano Ronaldo” is the employee whose index is 7, the tag “contract” and "temp" will be removed from Ronaldo’s record.  |
 
 * **Acceptable Values:**
   * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
@@ -261,9 +261,9 @@ This command is used to add an employee to the address book. Let's examine how w
   * GUI Changes: The employee's record is updated to remove the deleted tag.
   * Message shown to the user: "Tag [Tag] removed from [Employee name]."
 * **Expected Output on Failure:**
-  * `Employee list index does not exist.` - An invalid index was specified
-  * `Tag not found on this employee.` - The specified tag does not exist in the employee's record
-  * `Missing employee list index or tag.` - There were missing parameters in command
+  * `The employee index provided is invalid` - An invalid index was specified
+  * `Some of the tags are not found on this employee.` - The specified tag does not exist in the employee's record
+  * `Invalid command format!...` followed by command information - There were missing parameters in command
 
 
 
