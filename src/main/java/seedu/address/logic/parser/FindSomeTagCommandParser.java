@@ -35,7 +35,7 @@ public class FindSomeTagCommandParser implements Parser<FindSomeTagCommand> {
 
         List<String> tagArguments = argMultimap.getAllValues(PREFIX_TAG);
         List<Tag> tagList = new ArrayList<>();
-        for (String keyword : tagArguments ) {
+        for (String keyword : tagArguments) {
             try {
                 Tag tag = new Tag(keyword);
                 tagList.add(tag);

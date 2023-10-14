@@ -74,7 +74,7 @@ public class FindAllTagCommandTest {
     @Test
     public void execute_twoKeywords_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        TagsContainAllTagsPredicate predicate =  preparePredicate(new String[]{"remote", "full time"});
+        TagsContainAllTagsPredicate predicate = preparePredicate(new String[]{"remote", "full time"});
         FindAllTagCommand command = new FindAllTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
