@@ -54,4 +54,5 @@ public class FindSomeTagCommandParser implements Parser<FindSomeTagCommand> {
     private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
 }
