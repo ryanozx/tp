@@ -28,20 +28,21 @@ public class FindSomeTagCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         List<Tag> tagList = new ArrayList<>();
-        tagList.add(new Tag("fullTime"));
+        tagList.add(new Tag("full time"));
         tagList.add(new Tag("remote"));
         // no leading and trailing whitespaces
         FindSomeTagCommand expectedFindCommand =
                 new FindSomeTagCommand(new TagsContainSomeTagsPredicate(tagList));
-        assertParseSuccess(parser, "fullTime remote", expectedFindCommand);
+        assertParseSuccess(parser, " t/full time t/remote", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n fullTime \n \t remote  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n t/full time \n \t t/remote  \t", expectedFindCommand);
     }
 
     @Test
     public void parse_invalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("full-time"));
+        assertThrows(ParseException.class, () -> parser.parse("full time"));
+        assertThrows(ParseException.class, () -> parser.parse("t/full time a/remote"));
     }
 
 

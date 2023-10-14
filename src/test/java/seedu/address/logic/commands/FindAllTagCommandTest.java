@@ -32,9 +32,9 @@ public class FindAllTagCommandTest {
     public void equals() {
         List<Tag> tagList1 = new ArrayList<>();
         List<Tag> tagList2 = new ArrayList<>();
-        tagList1.add(new Tag("fullTime"));
+        tagList1.add(new Tag("full time"));
         tagList1.add(new Tag("remote"));
-        tagList2.add(new Tag("partTime"));
+        tagList2.add(new Tag("part time"));
         tagList2.add(new Tag("remote"));
         TagsContainAllTagsPredicate firstPredicate =
                 new TagsContainAllTagsPredicate(tagList1);
@@ -64,7 +64,7 @@ public class FindAllTagCommandTest {
     @Test
     public void execute_noTagsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagsContainAllTagsPredicate predicate = preparePredicate("tagForTest");
+        TagsContainAllTagsPredicate predicate = preparePredicate(new String[]{"test for tag"});
         FindAllTagCommand command = new FindAllTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class FindAllTagCommandTest {
     @Test
     public void execute_twoKeywords_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        TagsContainAllTagsPredicate predicate = preparePredicate("remote fullTime");
+        TagsContainAllTagsPredicate predicate =  preparePredicate(new String[]{"remote", "full time"});
         FindAllTagCommand command = new FindAllTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -84,7 +84,7 @@ public class FindAllTagCommandTest {
     @Test
     public void toStringMethod() {
         List<Tag> tagList = new ArrayList<>();
-        tagList.add(new Tag("fullTime"));
+        tagList.add(new Tag("full time"));
         TagsContainAllTagsPredicate predicate = new TagsContainAllTagsPredicate(tagList);
         FindAllTagCommand findAllTagCommand = new FindAllTagCommand(predicate);
         String expected = FindAllTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
@@ -94,11 +94,9 @@ public class FindAllTagCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private TagsContainAllTagsPredicate preparePredicate(String args) {
-        String trimmedArgs = args.trim();
-        String[] tagKeywords = trimmedArgs.split("\\s+");
+    private TagsContainAllTagsPredicate preparePredicate(String[] args) {
         List<Tag> tagList = new ArrayList<>();
-        for (String keyword : tagKeywords) {
+        for (String keyword : args) {
             Tag tag = new Tag(keyword);
             tagList.add(tag);
         }

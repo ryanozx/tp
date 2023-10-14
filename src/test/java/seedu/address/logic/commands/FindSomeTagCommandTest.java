@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.TagsContainAllTagsPredicate;
 import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 
@@ -33,9 +34,9 @@ public class FindSomeTagCommandTest {
     public void equals() {
         List<Tag> tagList1 = new ArrayList<>();
         List<Tag> tagList2 = new ArrayList<>();
-        tagList1.add(new Tag("fullTime"));
+        tagList1.add(new Tag("full time"));
         tagList1.add(new Tag("remote"));
-        tagList2.add(new Tag("partTime"));
+        tagList2.add(new Tag("part time"));
         tagList2.add(new Tag("remote"));
         TagsContainSomeTagsPredicate firstPredicate =
                 new TagsContainSomeTagsPredicate(tagList1);
@@ -65,7 +66,7 @@ public class FindSomeTagCommandTest {
     @Test
     public void execute_noTagsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagsContainSomeTagsPredicate predicate = preparePredicate("tagForTest");
+        TagsContainSomeTagsPredicate predicate = preparePredicate(new String[]{"tagForTest"});
         FindSomeTagCommand command = new FindSomeTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -75,7 +76,7 @@ public class FindSomeTagCommandTest {
     @Test
     public void execute_oneKeywords_multiplePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        TagsContainSomeTagsPredicate predicate = preparePredicate("remote");
+        TagsContainSomeTagsPredicate predicate = preparePredicate(new String[]{"remote"});
         FindSomeTagCommand command = new FindSomeTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -85,7 +86,7 @@ public class FindSomeTagCommandTest {
     @Test
     public void toStringMethod() {
         List<Tag> tagList = new ArrayList<>();
-        tagList.add(new Tag("fullTime"));
+        tagList.add(new Tag("full time"));
         TagsContainSomeTagsPredicate predicate = new TagsContainSomeTagsPredicate(tagList);
         FindSomeTagCommand findSomeTagCommand = new FindSomeTagCommand(predicate);
         String expected = FindSomeTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
@@ -95,11 +96,9 @@ public class FindSomeTagCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private TagsContainSomeTagsPredicate preparePredicate(String args) {
-        String trimmedArgs = args.trim();
-        String[] tagKeywords = trimmedArgs.split("\\s+");
+    private TagsContainSomeTagsPredicate preparePredicate(String[] args) {
         List<Tag> tagList = new ArrayList<>();
-        for (String keyword : tagKeywords) {
+        for (String keyword : args) {
             Tag tag = new Tag(keyword);
             tagList.add(tag);
         }

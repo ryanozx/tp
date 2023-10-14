@@ -48,56 +48,56 @@ public class TagsContainSomeTagsPredicateTest {
 
         List<Tag> tagList1 = new ArrayList<>();
         List<Tag> tagList2 = new ArrayList<>();
-        tagList1.add(new Tag("fullTime"));
-        tagList2.add(new Tag("partTime"));
+        tagList1.add(new Tag("full time"));
+        tagList2.add(new Tag("part time"));
         tagList2.add(new Tag("remote"));
         // One keyword
         TagsContainSomeTagsPredicate predicate =
                 new TagsContainSomeTagsPredicate(tagList1);
         assertTrue(predicate.test(new PersonBuilder()
-                .withTags("fullTime").build()));
+                .withTags("full time").build()));
 
         // Multiple keywords
         predicate = new TagsContainSomeTagsPredicate(tagList2);
         assertTrue(predicate.test(new PersonBuilder()
-                .withTags("partTime", "remote").build()));
+                .withTags("part time", "remote").build()));
 
         // Only one matching keyword
         predicate = new TagsContainSomeTagsPredicate(tagList2);
         assertTrue(predicate.test(new PersonBuilder()
-                .withTags("fullTime", "remote").build()));
+                .withTags("full time", "remote").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         List<Tag> tagList = new ArrayList<>();
-        tagList.add(new Tag("fullTime"));
+        tagList.add(new Tag("full time"));
 
         // Zero keywords
         TagsContainSomeTagsPredicate predicate =
                 new TagsContainSomeTagsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder()
-                .withTags("parttime").build()));
+                .withTags("part time").build()));
 
         // Non-matching keyword
         predicate = new TagsContainSomeTagsPredicate(tagList);
         assertFalse(predicate.test(new PersonBuilder()
-                .withTags("parttime", "remote").build()));
+                .withTags("part time", "remote").build()));
 
         // Mixed-case keywords
         predicate = new TagsContainSomeTagsPredicate(tagList);
         assertFalse(predicate.test(new PersonBuilder()
-                .withTags("FullTime").build()));
+                .withTags("Full Time").build()));
     }
 
     @Test
     public void toStringMethod() {
         List<Tag> tagList = new ArrayList<>();
-        tagList.add(new Tag("fullTime"));
+        tagList.add(new Tag("full time"));
 
         TagsContainSomeTagsPredicate predicate = new TagsContainSomeTagsPredicate(tagList);
 
-        String expected = TagsContainSomeTagsPredicate.class.getCanonicalName() + "{tags=" + "[[fullTime]]" + "}";
+        String expected = TagsContainSomeTagsPredicate.class.getCanonicalName() + "{tags=" + "[[full time]]" + "}";
         assertEquals(expected, predicate.toString());
     }
 }

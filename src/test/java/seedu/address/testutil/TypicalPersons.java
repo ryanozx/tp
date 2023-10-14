@@ -48,11 +48,11 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
     public static final Person GEORGIA = new PersonBuilder().withName("Georgia Best").withPhone("9484442")
-            .withEmail("georgia@example.com").withAddress("4th street").withTags("fullTime").build();
+            .withEmail("georgia@example.com").withAddress("4th street").withTags("full time").build();
     public static final Person MICHAEL = new PersonBuilder().withName("Michael Miller").withPhone("9482242")
-            .withEmail("michael@example.com").withAddress("2th street").withTags("fullTime", "remote").build();
+            .withEmail("michael@example.com").withAddress("2th street").withTags("full time", "remote").build();
     public static final Person DAVID = new PersonBuilder().withName("David Chan").withPhone("9484342")
-            .withEmail("david@example.com").withAddress("7th street").withTags("partTime", "remote").build();
+            .withEmail("david@example.com").withAddress("7th street").withTags("part time", "remote").build();
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
