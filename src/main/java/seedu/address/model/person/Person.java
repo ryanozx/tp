@@ -40,7 +40,9 @@ public class Person {
     }
 
     /**
-     * Constrctor to create a deep copy of another Person.
+     * Constructor for Person object that is used to copy another Person object.
+     *
+     * @param toCopy Person object to copy.
      */
     public Person(Person toCopy) {
         requireNonNull(toCopy);
@@ -90,17 +92,53 @@ public class Person {
     }
 
     /**
-     * Checks if tag is in tags
-     */
-    public boolean hasTag(Tag tag) {
-        return tags.contains(tag);
-    }
-
-    /**
      * Checks if any tag in tags is in this.tags
      */
     public boolean hasAnyTags(Collection<Tag> tags) {
         return tags.stream().anyMatch((tag) -> this.tags.contains(tag));
+    }
+
+    /**
+     * Checks if this person has all the tags in the argument collection.
+     *
+     * @param tags Collection of tags to check.
+     * @return true if this person has all the tags in the argument collection, false otherwise.
+     */
+    public boolean hasAllTags(Collection<Tag> tags) {
+        assert tags != null;
+        assert !tags.isEmpty();
+        return this.tags.containsAll(tags);
+    }
+
+    /**
+     * Checks if this person has the argument tag.
+     *
+     * @param tag Tag to check.
+     * @return true if this person has the argument tag, false otherwise.
+     */
+    public boolean hasTag(Tag tag) {
+        assert tag != null;
+        return this.tags.contains(tag);
+    }
+
+    /**
+     * Removes the tags in the argument collection from this person.
+     *
+     * @param tags Collection of tags to remove.
+     */
+    public void removeTags(Collection<Tag> tags) {
+        assert hasAllTags(tags);
+        this.tags.removeAll(tags);
+    }
+
+    /**
+     * Removes a tag from this person.
+     *
+     * @param tag Tag to remove.
+     */
+    public void removeTag(Tag tag) {
+        assert hasTag(tag);
+        this.tags.remove(tag);
     }
 
     /**
