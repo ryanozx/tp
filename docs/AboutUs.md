@@ -52,7 +52,7 @@ You can reach us at the email
 [[portfolio](team/infibeyond.md)]
 
 * Role: Developer, Documentation
-* Responsibilities: Responsible for the quality of various project documents.
+* Responsibilities: Ensures the quality of various project documents.
 
 ### Ryan Ong
 
