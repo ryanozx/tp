@@ -78,6 +78,27 @@ public class Person {
     }
 
     /**
+     * Adds tags in toAdd to tags
+     */
+    public void addTags(Collection<Tag> toAdd) {
+        toAdd.forEach(tags::add);
+    }
+
+    /**
+     * Add tag to tags
+     */
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    /**
+     * Checks if any tag in tags is in this.tags
+     */
+    public boolean hasAnyTags(Collection<Tag> tags) {
+        return tags.stream().anyMatch((tag) -> this.tags.contains(tag));
+    }
+
+    /**
      * Checks if this person has all the tags in the argument collection.
      *
      * @param tags Collection of tags to check.
