@@ -226,19 +226,19 @@ This command is used to add an employee to the address book. Let's examine how w
 
 | S/N | Command information                                                                                                                                                                                                                        |
 |-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `add-tag 3 remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
-| 2   | **Command:** `add-tag 14 contract` <br><br> **Output:** Adds the tag “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tag “contract”  |
+| 1   | **Command:** `add-tag 3 t/remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
+| 2   | **Command:** `add-tag 14 t/temp t/contract` <br><br> **Output:** Adds the tag “temp” “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tags “temp” and “contract”  |
 
 * **Acceptable Values:**
   * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
-  * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
+  * Tag: A non-empty string used to categorise and label an employee. Tags names only allows alphanumeric characters, spaces, and dashes. (e.g., remote, contract-worker, full time). They are also case-sensitive, so “friend” and “Friend” are different tags.
 * **Expected Output on Success:**
   * GUI Changes: The employee's record shows the new tag.
-  * Message shown to the user: "Tag [Tag] added to [Employee name]."
+  * Message shown to the user: "Edited Person: ..." followed by the person's updated information
 * **Expected Output on Failure:**
-  * `Employee list index does not exist.` - An invalid index was specified
-  * `Tag already exists on this employee.` - The specified tag already exists in the employee's record
-  * `Missing employee list index or tag.` - There were missing parameters in command
+  * `The employee index provided is invalid` - An invalid index was specified
+  * `This employee already has some of the tags.` - The specified tag already exists in the employee's record
+  * `Invalid command format!...` followed by command information - There were missing parameters in command
 
 ### Removing tags from employees: `delete-tag`
 
@@ -256,7 +256,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **Acceptable Values:**
   * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
-  * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
+  * Tag: A non-empty string used to categorise and label an employee. Tags names only allows alphanumeric characters, spaces, and dashes. (e.g., remote, contract-worker, full time). They are also case-sensitive, so “friend” and “Friend” are different tags.
 * **Expected Output on Success:**
   * GUI Changes: The employee's record is updated to remove the deleted tag.
   * Message shown to the user: "Tag [Tag] removed from [Employee name]."
@@ -272,50 +272,50 @@ This command is used to add an employee to the address book. Let's examine how w
 
 
 * **What It Does:**
-  * Filters and displays individuals from a dataset who match all the specified tags exactly. It helps users narrow their search to find records meeting all the specified criteria.
+  * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
     
 * **Format:**
-  * `find-all-tag [t/TAG]...`
+  * `find-all-tag t/TAG [t/MORE_TAGS]...`
 * **Examples:**
 
 
-| S/N | Command information                                                                                                                       |
-|-----|-------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-tag t/remote t/full-time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely  |
+| S/N | Command information                                                                                                                      |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-all-tag t/remote t/full time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely |
 
 * **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
-  * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
+  * GUI Changes: A list of employees who match some specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
-  * `Tags do not exist` - Invalid tags
-  * `Missing tags` - Missing parameters
+  * `Invalid command format!` - Missing parameters
+  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
   
 ### Finding employees with at least one tag in a group of tags: `find-some-tag`
 
 
 * **What It Does:**
-  * Filters and displays individuals from a dataset who match at least one of the specified tags. It provides flexibility by showing records that meet any of the criteria provided.
+  * Filters and displays individuals from a dataset who match at least one of the specified tags (case-sensitive). It provides flexibility by showing records that meet any of the criteria provided.
 
 * **Format:**
-  * `find-some-tag [t/TAG]...`
+  * `find-some-tag t/TAG [t/MORE_TAGS]...`
 * **Examples:**
 
-| S/N | Command information                                                                                                                                                                |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely  |
+| S/N | Command information                                                                                                                                                           |
+|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-some-tag t/fullTime t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely |
 
 * **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
   * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
-  * `Tags do not exist` - Invalid tags
-  * `Missing tags` - Missing parameters
+  * `Invalid command format!` - Missing parameters
+  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
 * **For advanced users:**
   * GUI Changes: The displayed employees will be sorted in the order of the search terms, from one match to all matches.
     ![find-some-tag UI for advanced users](images/find-some-tagUI.png)
