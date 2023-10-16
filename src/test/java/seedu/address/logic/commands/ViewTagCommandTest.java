@@ -6,8 +6,6 @@ import static seedu.address.logic.commands.ViewTagCommand.MESSAGE_VIEW_TAG_NONE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
