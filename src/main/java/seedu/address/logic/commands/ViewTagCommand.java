@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes tags from an existing employee in the address book.
+ * View all tags available in alphabetically order.
  */
 public class ViewTagCommand extends Command {
     public static final String COMMAND_WORD = "view-tag";
@@ -22,7 +22,8 @@ public class ViewTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all tags available in alphabetically order.\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_VIEW_TAG_NONE = "There are currently no tags";
-    public static final String MESSAGE_VIEW_TAG_SUCCESS = "Available tag(s):" + "\n";
+    private static String tags = "Available tag(s):" + "\n";
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -30,7 +31,7 @@ public class ViewTagCommand extends Command {
         ArrayList<String> tagsAll = new ArrayList<>();
 
         if (people.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_VIEW_TAG_NONE));
+            return new CommandResult(MESSAGE_VIEW_TAG_NONE);
         }
 
         for (Person person : people) {
@@ -44,14 +45,13 @@ public class ViewTagCommand extends Command {
 
         Collections.sort(tagsAll);
 
-        String tags = MESSAGE_VIEW_TAG_SUCCESS;
         int len = tagsAll.size();
         for (String s : tagsAll) {
             tags = tags + s + "\n";
         }
-
         return new CommandResult(tags);
     }
+
 
     @Override
     public String toString() {
