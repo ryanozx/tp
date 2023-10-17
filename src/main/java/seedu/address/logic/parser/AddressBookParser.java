@@ -88,7 +88,7 @@ public class AddressBookParser {
             return new ListCommand();
 
         case ViewTagCommand.COMMAND_WORD:
-            return new ViewTagCommandParser().parse(arguments);
+            return new ViewTagCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
