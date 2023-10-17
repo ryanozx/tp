@@ -22,10 +22,9 @@ public class ViewTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all tags available in alphabetically order.\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_VIEW_TAG_NONE = "There are currently no tags";
-    private static String tags = "Available tag(s):" + "\n";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         List<Person> people = model.getFilteredPersonList();
         ArrayList<String> tagsAll = new ArrayList<>();
@@ -33,6 +32,8 @@ public class ViewTagCommand extends Command {
         if (people.isEmpty()) {
             return new CommandResult(MESSAGE_VIEW_TAG_NONE);
         }
+
+        String tags = "Available tag(s):" + "\n";
 
         for (Person person : people) {
             Set<Tag> temp = person.getTags();
