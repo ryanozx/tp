@@ -11,13 +11,15 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.testutil.FileAndPathUtil;
 
 public class FileUtilTest {
-
     private static final Path TEST_FOLDER_PATH = Paths.get(
             "src", "test", "data", "sandbox", "FileUtilTest");
+    @TempDir
+    public Path testFolder;
     @Test
     public void isValidPath() {
         // valid path
@@ -32,19 +34,18 @@ public class FileUtilTest {
 
     @Test
     public void writeAndReadToFile_stringInput_success() throws IOException {
-        Path filePath = addToTestDataPathIfNotNull("testFile.txt");
+        Path filePath = testFolder.resolve("testFile.txt");
         String input = "Hello\nworld!\n";
 
         FileUtil.writeToFile(filePath, input);
 
         String readString = FileUtil.readFromFile(filePath);
         assertEquals(input, readString);
-        FileAndPathUtil.cleanupCreatedFiles(filePath);
     }
 
     @Test
     public void writeAndReadToFile_streamInput_success() throws IOException {
-        Path filePath = addToTestDataPathIfNotNull("testFile.txt");
+        Path filePath = testFolder.resolve("testFile.txt");
         String firstLine = "Hello";
         String secondLine = "world!";
 
@@ -54,7 +55,6 @@ public class FileUtilTest {
         String expectedResult = "Hello\nworld!\n";
         String readString = FileUtil.readFromFile(filePath);
         assertEquals(expectedResult, readString);
-        FileAndPathUtil.cleanupCreatedFiles(filePath);
     }
 
     private Path addToTestDataPathIfNotNull(String fileName) {

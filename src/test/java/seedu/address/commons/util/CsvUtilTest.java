@@ -50,7 +50,7 @@ public class CsvUtilTest {
 
     @Test
     public void readCsvFile_columnCountMatchesHeader_returnsFile() throws Exception {
-        Path file = addToTestDataPathIfNotNull("csvFileMatchingColumns.csv");
+        Path file = addToTestDataPathIfNotNull("CsvFileMatchingColumns.csv");
         Optional<CsvFile> csvFile = CsvUtil.readCsvFile(file);
 
         List<String> lines = csvFile.get().getFileStream()
@@ -67,7 +67,7 @@ public class CsvUtilTest {
 
         // if no. of values provided for the row is more than the number of columns, the
         // entire row will be skipped
-        Path file = addToTestDataPathIfNotNull("csvFileMismatchColumns.csv");
+        Path file = addToTestDataPathIfNotNull("CsvFileMismatchColumns.csv");
         Optional<CsvFile> csvFile = CsvUtil.readCsvFile(file);
         List<String> secondRowVals = Arrays.asList("fourthVal", "fifthVal", "");
         String expectedSecondRow = String.join(DELIMITER, secondRowVals);
