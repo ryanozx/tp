@@ -44,8 +44,6 @@ public class ViewTagCommand extends Command {
         }
 
         Collections.sort(tagsAll);
-
-        int len = tagsAll.size();
         for (String s : tagsAll) {
             tags = tags + s + "\n";
         }

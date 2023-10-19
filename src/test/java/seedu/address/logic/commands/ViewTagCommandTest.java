@@ -16,8 +16,7 @@ public class ViewTagCommandTest {
     public void execute_viewTagNone_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_VIEW_TAG_NONE, false, false);
-        assertCommandSuccess(new ViewTagCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ViewTagCommand(), model, MESSAGE_VIEW_TAG_NONE, expectedModel);
     }
 
     @Test

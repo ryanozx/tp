@@ -30,6 +30,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewTagCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -137,5 +139,11 @@ public class AddressBookParserTest {
                 instanceof DeleteTagCommand);
         assertTrue(parser.parseCommand(DeleteTagCommand.COMMAND_WORD + " 1 t/friends t/colleagues t/family")
                 instanceof DeleteTagCommand);
+    }
+
+    @Test
+    public void parseCommand_viewTag() throws Exception {
+        assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD) instanceof ViewTagCommand);
+        assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD + " 3abc") instanceof ViewTagCommand);
     }
 }
