@@ -7,17 +7,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.testutil.FileAndPathUtil;
-
 public class FileUtilTest {
-    private static final Path TEST_FOLDER_PATH = Paths.get(
-            "src", "test", "data", "sandbox", "FileUtilTest");
+    private static final String newLine = System.lineSeparator();
     @TempDir
     public Path testFolder;
     @Test
@@ -35,7 +31,7 @@ public class FileUtilTest {
     @Test
     public void writeAndReadToFile_stringInput_success() throws IOException {
         Path filePath = testFolder.resolve("testFile.txt");
-        String input = "Hello\nworld!\n";
+        String input = "Hello" + newLine + "world!" + newLine;
 
         FileUtil.writeToFile(filePath, input);
 
@@ -52,13 +48,8 @@ public class FileUtilTest {
         Stream<String> lineStream = Stream.of(firstLine, secondLine);
         FileUtil.writeToFile(filePath, lineStream);
 
-        String expectedResult = "Hello\nworld!\n";
+        String expectedResult = "Hello" + newLine + "world!" + newLine;
         String readString = FileUtil.readFromFile(filePath);
         assertEquals(expectedResult, readString);
     }
-
-    private Path addToTestDataPathIfNotNull(String fileName) {
-        return FileAndPathUtil.addToTestDataPathIfNotNull(TEST_FOLDER_PATH, fileName);
-    }
-
 }
