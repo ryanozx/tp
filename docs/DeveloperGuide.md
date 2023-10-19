@@ -104,7 +104,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person). 
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -270,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a sizeable number of employees' information 
+* has a need to manage a sizeable number of employees' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -329,10 +329,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list employees 
-2.  HRMate shows a list of employees 
+1.  User requests to list employees
+2.  HRMate shows a list of employees
 3.  User requests to delete a specific employee in the list
-4.  HRMate deletes the employee 
+4.  HRMate deletes the employee
 
     Use case ends.
 
@@ -363,15 +363,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User cancels the file selection operation.
 
   * 2a1. HRMate closes the file selection window and aborts the operation.
-  
+
     Use case ends.
-  
+
 * 3a. File is not of CSV file type
 
   * 3a1. HRMate displays an error message.
-  
+
     Use case ends.
-  
+
 * 3b. File is corrupted, unable to read employee records
 
   * 3b1. HRMate discards all data read in.
@@ -394,13 +394,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User does not supply a name
   * 2a1. HRMate displays an error message
-  
+
     Use case ends.
 
 * 2b. User does not supply a path/supplies an invalid path
   * 2b1. HRMate creates the CSV file containing the employee records with the specified name at the default location
     (same folder where the save files are located)
-  
+
     Use case resumes at step 3.
 
 * 3a. HRMate is unable to create the file due to errors (e.g. permission errors)
@@ -415,21 +415,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to find employees who match all specified tags
 2.  HRMate shows a list of employees who match all the specified tags exactly
-    
+
       Use case ends.
 
 **Extensions**
 
 * 2a. The specified tags do not exist in the system.
 
-  * 2a1. HRMate notifies the user of invalid tags. 
-  
+  * 2a1. HRMate notifies the user of invalid tags.
+
     Use case resumes at step 1.
-  
+
 * 2b. User does not provide any tags.
 
   * 2b1. HRMate notifies the user of missing parameters.
-  
+
     Use case resumes at step 1.
 
 **Use case: List employees with at least one specified tags**
@@ -438,7 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to find employees who match at least one of the specified tags
 2.  HRMate shows a list of employees who match at least one of the specified tags
-    
+
       Use case ends.
 
 **Extensions**
@@ -446,12 +446,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The specified tags do not exist in the system.
 
     * 2a1. HRMate notifies the user of invalid tags.
-  
+
       Use case resumes at step 1.
 * 2b. User does not provide any tags.
 
     * 2b1. HRMate notifies the user of missing parameters.
-  
+
       Use case resumes at step 1.
 
 *{More to be added}*
@@ -491,8 +491,8 @@ testers are expected to do more exploratory testing.</box>
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window. 
-   
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 

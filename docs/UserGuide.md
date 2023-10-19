@@ -53,10 +53,10 @@ The description for each command will contain the following
     more details.
 * **Examples:**
   * Gives a few examples of how the command is used and describes the outcome of the command
-* **Acceptable Values:** 
+* **Acceptable Values:**
   * Describes any restrictions on the type of values used in a command field. Values for these fields must satisfy the
     restrictions for the command to be acceptable.
-* **Warning:** 
+* **Warning:**
   <box type="warning" seamless>
   Describes any potential dangers of using a particular command that may lead to unexpected side effects. You should
   pay attention to the warnings to avoid performing a costly operation.
@@ -89,7 +89,7 @@ This command is used to add an employee to the address book. Let's examine how w
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also
   acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored <br> 
+  ignored <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -132,7 +132,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * GUI Changes: the created user is shown in a dedicated interface section
   * Message shown to user: "Successfully created employee"
 * **Expected Output on Failure:**
-  * `Missing argument error` -  if a compulsory argument is missing (compulsory arguments are `NAME`, `EMAIL`, 
+  * `Missing argument error` -  if a compulsory argument is missing (compulsory arguments are `NAME`, `EMAIL`,
     `PHONE_NUMBER` and `HOME_ADDRESS`)
   * `FIELD must be of format...` - if at least one of the field inputs violates the field's format requirements. Follow
     the displayed error message to fix the format error.
@@ -145,7 +145,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * Shows a list of all employees in HRMate
 * **Format:**
   * `list`
-* **Examples:** 
+* **Examples:**
 
 | S/N | Command information                                                                        |
 |-----|--------------------------------------------------------------------------------------------|
@@ -197,7 +197,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **What It Does:**
   * Shows a list of all tags currently in use within the address book, which helps HR managers quickly identify different categories of employees.
-    
+
 * **Format:**
   * `view-tag`
 * **Examples:**
@@ -273,7 +273,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **What It Does:**
   * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
-    
+
 * **Format:**
   * `find-all-tag t/TAG [t/MORE_TAGS]...`
 * **Examples:**
@@ -292,7 +292,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Expected Output on Failure:**
   * `Invalid command format!` - Missing parameters
   * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
-  
+
 ### Finding employees with at least one tag in a group of tags: `find-some-tag`
 
 
@@ -358,7 +358,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Acceptable Values:**
   * The specified `EMPLOYEE_LIST_INDEX` must correspond to an index number shown in the address book. It must be a valid number, larger than zero, and cannot exceed the number of entries in the address book.
 * **Expected Output on Success:**
-  * GUI Changes: The record of the employee whose index is specified will no longer appear in the list of employees 
+  * GUI Changes: The record of the employee whose index is specified will no longer appear in the list of employees
   * Message shown to user: "[Employee name]'s record deleted"
 * **Expected Output on Failure:**
   * `Employee List Index does not exist` - An invalid index was specified
@@ -407,7 +407,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * N/A (no expected failure)
 
 ### Saving the data
- 
+
 HRMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
