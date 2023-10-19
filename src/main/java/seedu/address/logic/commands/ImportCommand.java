@@ -28,6 +28,9 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_FAILED = "Records in file %s could not be imported, "
             + "import cancelled.";
 
+    public static final String MESSAGE_EMPTY_ADDRESS_BOOK = "No valid records found in file %s, "
+            + "import cancelled.";
+
     private final FileDialogHandler fileHandler;
 
     /**
@@ -59,7 +62,8 @@ public class ImportCommand extends Command {
 
             try {
                 ReadOnlyAddressBook newAddressBook = tempAddressBook.readAddressBook()
-                        .orElseThrow(() -> new CommandException(String.format(MESSAGE_FAILED, filename)));
+                        .orElseThrow(() -> new CommandException(
+                                String.format(MESSAGE_EMPTY_ADDRESS_BOOK, filename)));
                 model.setAddressBook(newAddressBook);
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, filename));

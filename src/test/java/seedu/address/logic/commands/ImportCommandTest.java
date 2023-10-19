@@ -83,7 +83,7 @@ public class ImportCommandTest {
         ImportCommand command = new ImportCommand(
                 new MockSuccessfulFileDialogHandler(filePath.toString()));
         Model actualModel = new ModelManager();
-        String expectedMessage = String.format(ImportCommand.MESSAGE_FAILED,
+        String expectedMessage = String.format(ImportCommand.MESSAGE_EMPTY_ADDRESS_BOOK,
                 filePath.getFileName());
         assertCommandFailure(command, actualModel, expectedMessage);
     }
