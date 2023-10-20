@@ -1,10 +1,13 @@
 package seedu.address.commons.util;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 /**
  * Writes and reads files
@@ -18,7 +21,7 @@ public class FileUtil {
     }
 
     /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get},
      * otherwise returns false.
      * @param path A string representing the file path. Cannot be null.
      */
@@ -80,4 +83,26 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Writes given stream of string to a file.
+     * Will create the file if it does not exist yet.
+     * @param file Path of file to write to
+     * @param content Stream of strings to write
+     * @throws IOException if the file cannot be opened or created
+     */
+    public static void writeToFile(Path file, Stream<String> content) throws IOException {
+        String filename = file.toString();
+        try (FileWriter fileWriter = new FileWriter(filename)) {
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            content.forEach(line -> {
+                try {
+                    writer.write(line);
+                    writer.newLine();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            writer.close();
+        }
+    }
 }

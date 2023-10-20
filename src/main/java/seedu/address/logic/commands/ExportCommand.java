@@ -5,9 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyFilteredAddressBook;
+import seedu.address.storage.CsvAddressBookStorage;
 
 /**
  * Exports records to file
@@ -41,7 +42,9 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try {
-            FileUtil.createFile(this.filePath);
+            ReadOnlyFilteredAddressBook filteredAddressBook = new ReadOnlyFilteredAddressBook(model);
+            CsvAddressBookStorage abStorage = new CsvAddressBookStorage(filePath);
+            abStorage.saveAddressBook(filteredAddressBook);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILED);
         }

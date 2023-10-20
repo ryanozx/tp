@@ -7,9 +7,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Serializable-friendly version of {@link Tag}.
  */
-class JsonAdaptedTag {
+class AdaptedTag {
 
     private final String tagName;
 
@@ -17,14 +17,14 @@ class JsonAdaptedTag {
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
+    public AdaptedTag(String tagName) {
         this.tagName = tagName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
+    public AdaptedTag(Tag source) {
         tagName = source.tagName;
     }
 
@@ -44,5 +44,4 @@ class JsonAdaptedTag {
         }
         return new Tag(tagName);
     }
-
 }
