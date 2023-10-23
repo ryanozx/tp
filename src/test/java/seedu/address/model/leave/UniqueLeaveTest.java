@@ -3,15 +3,14 @@ package seedu.address.model.leave;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.BOB_LEAVE;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 
 import seedu.address.model.leave.exceptions.DuplicateLeaveException;
 import seedu.address.model.leave.exceptions.LeaveNotFoundException;

@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDate;
 
+import seedu.address.model.LeavesBook;
 import seedu.address.model.leave.Leave;
 /**
  * A utility class containing a list of {@code Leave} objects to be used in tests.
@@ -27,5 +28,13 @@ public class TypicalLeaves {
 
     public static Leave[] getTypicalLeaves() {
         return new Leave[] {ALICE_LEAVE, BOB_LEAVE, ALICE_LEAVE_2};
+    }
+
+    public static LeavesBook getTypicalLeavesBook() {
+        LeavesBook lb = new LeavesBook();
+        for (Leave leave : getTypicalLeaves()) {
+            lb.addLeave(leave);
+        }
+        return lb;
     }
 }
