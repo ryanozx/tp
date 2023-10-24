@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +19,22 @@ public class DateTest {
 
     @Test
     public void constructor_incorrectStringFormat_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> Date.of("2020-01-01-01"));
-        assertThrows(IllegalArgumentException.class, () -> Date.of("2020/01/01"));
+        assertThrows(DateTimeParseException.class, () -> Date.of("2020-01-01-01"));
+        assertThrows(DateTimeParseException.class, () -> Date.of("2020/01/01"));
+    }
+
+    @Test
+    public void constructor_leapYear_throwsDateTimeException() {
+        assertThrows(DateTimeException.class, () -> Date.of("2020-02-30"));
+    }
+
+    @Test
+    public void constructor_invalidDate_throwsDateTimeException() {
+        assertThrows(DateTimeException.class, () -> Date.of("2020-02-31"));
+        assertThrows(DateTimeException.class, () -> Date.of("2020-04-31"));
+        assertThrows(DateTimeException.class, () -> Date.of("2020-06-31"));
+        assertThrows(DateTimeException.class, () -> Date.of("2020-09-31"));
+        assertThrows(DateTimeException.class, () -> Date.of("2020-11-31"));
     }
 
     @Test

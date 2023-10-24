@@ -32,6 +32,15 @@ public class Status {
         return new Status(StatusType.valueOf(status));
     }
 
+    /**
+     * Returns a {@code Status} object with a default PENDING status
+     *
+     * @return Status object
+     */
+    public static Status getDefault() {
+        return new Status(StatusType.PENDING);
+    }
+
     public StatusType getStatus() {
         return status;
     }

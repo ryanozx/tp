@@ -55,11 +55,10 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
+        if (!contains(target)) {
             throw new PersonNotFoundException();
         }
+        int index = internalList.indexOf(target);
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();

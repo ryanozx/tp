@@ -3,6 +3,8 @@ package seedu.address.model.leave;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Date in the address book.
@@ -10,7 +12,8 @@ import java.time.LocalDate;
  */
 public class Date {
 
-    private static final String MESSAGE_CONSTRAINTS = "Date should be in the format YYYY-MM-DD";
+    private static final DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT);
     private final LocalDate date;
 
     private Date(LocalDate date) {
@@ -36,9 +39,6 @@ public class Date {
      */
     public static Date of(String date) throws IllegalArgumentException {
         requireAllNonNull(date);
-        if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
         return new Date(LocalDate.parse(date));
     }
 
