@@ -38,7 +38,7 @@ public class LeaveTest {
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
                 null, ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd(), null));
+                ALICE_LEAVE.getStart(), null));
     }
 
     @Test
@@ -47,6 +47,13 @@ public class LeaveTest {
                 ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart()));
         assertThrows(EndBeforeStartException.class, () -> new Leave(BOB, BOB_LEAVE.getTitle(),
                 BOB_LEAVE.getEnd(), BOB_LEAVE.getStart(), BOB_LEAVE.getDescription()));
+    }
+
+    @Test
+    public void constructor_startSameAsEnd_success() {
+        Leave leave = new Leave(ALICE, ALICE_LEAVE.getTitle(), ALICE_LEAVE.getStart(),
+                ALICE_LEAVE.getStart(), ALICE_LEAVE.getDescription());
+        assertEquals(leave.getStart(), leave.getEnd());
     }
 
     @Test
@@ -80,11 +87,13 @@ public class LeaveTest {
         assertFalse(ALICE_LEAVE.equals(editedAliceLeave));
 
         // different start date -> returns false
-        editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).withStart(ALICE_LEAVE.getStart().plusDays(1)).build();
+        editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).withStart(
+            Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build();
         assertFalse(ALICE_LEAVE.equals(editedAliceLeave));
 
         // different end date -> returns false
-        editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).withEnd(ALICE_LEAVE.getEnd().plusDays(1)).build();
+        editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).withEnd(
+            Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build();
         assertFalse(ALICE_LEAVE.equals(editedAliceLeave));
     }
 
@@ -103,12 +112,12 @@ public class LeaveTest {
         assertFalse(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withEmployee(BOB).build()));
 
         // different start date -> returns false
-        assertFalse(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withStart(ALICE_LEAVE.getStart().plusDays(1))
-                .build()));
+        assertFalse(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withStart(
+                Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build()));
 
         // different end date -> returns false
-        assertFalse(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withEnd(ALICE_LEAVE.getEnd().plusDays(1))
-                .build()));
+        assertFalse(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withEnd(
+                Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build()));
 
         // same employee, same start date, same end date -> returns true
         assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
@@ -157,10 +166,10 @@ public class LeaveTest {
 
         // different start date -> returns different hashcode
         assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withStart(
-                ALICE_LEAVE.getStart().plusDays(1)).build().hashCode());
+                Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build().hashCode());
 
         // different end date -> returns different hashcode
-        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withEnd(ALICE_LEAVE.getEnd().plusDays(1))
-                .build().hashCode());
+        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withEnd(
+                Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build().hashCode());
     }
 }
