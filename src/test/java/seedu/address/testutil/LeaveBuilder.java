@@ -2,8 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.time.LocalDate;
-
+import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
@@ -18,8 +17,9 @@ public class LeaveBuilder {
     private String title;
     private String description;
     private Person employee;
-    private LocalDate start;
-    private LocalDate end;
+    private Date start;
+    private Date end;
+
     /**
      * Creates a {@code LeaveBuilder} with the default details.
      */
@@ -27,8 +27,8 @@ public class LeaveBuilder {
         title = DEFAULT_TITLE;
         description = DEFAULT_DESCRIPTION;
         employee = DEFAULT_PERSON;
-        start = LocalDate.of(2020, 1, 1);
-        end = LocalDate.of(2020, 1, 2);
+        // start = LocalDate.of(2020, 1, 1);
+        // end = LocalDate.of(2020, 1, 2);
     }
 
     /**
@@ -45,7 +45,7 @@ public class LeaveBuilder {
     /**
      * Sets the {@code start} of the {@code Leave} that we are building.
      */
-    public LeaveBuilder withStart(LocalDate start) {
+    public LeaveBuilder withStart(Date start) {
         this.start = start;
         return this;
     }
@@ -53,7 +53,7 @@ public class LeaveBuilder {
     /**
      * Sets the {@code end} of the {@code Leave} that we are building.
      */
-    public LeaveBuilder withEnd(LocalDate end) {
+    public LeaveBuilder withEnd(Date end) {
         this.end = end;
         return this;
     }

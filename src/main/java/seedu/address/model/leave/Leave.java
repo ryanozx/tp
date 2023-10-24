@@ -1,8 +1,8 @@
 package seedu.address.model.leave;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.leave.Status.StatusType;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.model.leave.exceptions.EndBeforeStartException;
@@ -16,9 +16,9 @@ public class Leave {
     private final Person employee;
     private final String title;
     private final String description;
-    private final LocalDate start;
-    private final LocalDate end;
-    private final String status;
+    private final Date start;
+    private final Date end;
+    private final Status status;
 
     /**
      * Constructor for Leave object. Takes in a Person object, title and description, start and end date.
@@ -30,10 +30,11 @@ public class Leave {
      * @param start
      * @param end
      */
-    public Leave(Person employee, String title, LocalDate start, LocalDate end, String description)
+    public Leave(Person employee, String title, Date start, Date end, String description)
             throws EndBeforeStartException {
 
         requireAllNonNull(employee, title, description, start, end);
+
         if (end.isBefore(start)) {
             throw new EndBeforeStartException();
         }
@@ -42,7 +43,7 @@ public class Leave {
         this.description = description;
         this.start = start;
         this.end = end;
-        this.status = "Pending";
+        this.status = Status.of(StatusType.PENDING.toString());
     }
 
     /**
@@ -53,7 +54,7 @@ public class Leave {
      * @param start
      * @param end
      */
-    public Leave(Person employee, String title, LocalDate start, LocalDate end)
+    public Leave(Person employee, String title, Date start, Date end)
             throws EndBeforeStartException {
 
         requireAllNonNull(employee, title, start, end);
@@ -65,7 +66,7 @@ public class Leave {
         this.description = "";
         this.start = start;
         this.end = end;
-        this.status = "Pending";
+        this.status = Status.of(StatusType.PENDING.toString());
     }
 
     public Person getEmployee() {
@@ -80,16 +81,16 @@ public class Leave {
         return description;
     }
 
-    public LocalDate getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public LocalDate getEnd() {
+    public Date getEnd() {
         return end;
     }
 
     public String getStatus() {
-        return status;
+        return status.toString();
     }
 
     public boolean belongsTo(Person employee) {

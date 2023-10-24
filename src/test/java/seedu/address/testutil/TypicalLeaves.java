@@ -6,16 +6,17 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.time.LocalDate;
 
 import seedu.address.model.LeavesBook;
+import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
 /**
  * A utility class containing a list of {@code Leave} objects to be used in tests.
  */
 public class TypicalLeaves {
 
-    public static final LocalDate DEFAULT_START = LocalDate.of(2020, 1, 1);
-    public static final LocalDate DEFAULT_END = LocalDate.of(2020, 1, 2);
-    public static final LocalDate DEFAULT_START_2 = LocalDate.of(2020, 1, 3);
-    public static final LocalDate DEFAULT_END_2 = LocalDate.of(2020, 1, 4);
+    private static Date DEFAULT_START = Date.of("2020-01-01");
+    private static Date DEFAULT_END = Date.of("2020-01-02");
+    private static Date DEFAULT_START_2 = Date.of("2020-01-03");
+    private static Date DEFAULT_END_2 = Date.of("2020-01-04");
 
     public static final Leave ALICE_LEAVE = new Leave(ALICE, "Alice's Maternity Leave", DEFAULT_START, DEFAULT_END,
             "Alice's Maternity Leave Description");
