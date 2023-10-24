@@ -1,6 +1,7 @@
 package seedu.address.model.leave;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.leave.Status.StatusType;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,7 +19,7 @@ public class Leave {
     private final String description;
     private final LocalDate start;
     private final LocalDate end;
-    private final String status;
+    private final Status status;
 
     /**
      * Constructor for Leave object. Takes in a Person object, title and description, start and end date.
@@ -42,7 +43,7 @@ public class Leave {
         this.description = description;
         this.start = start;
         this.end = end;
-        this.status = "Pending";
+        this.status = Status.of(StatusType.PENDING.toString());
     }
 
     /**
@@ -65,7 +66,7 @@ public class Leave {
         this.description = "";
         this.start = start;
         this.end = end;
-        this.status = "Pending";
+        this.status = Status.of(StatusType.PENDING.toString());
     }
 
     public Person getEmployee() {
@@ -89,7 +90,7 @@ public class Leave {
     }
 
     public String getStatus() {
-        return status;
+        return status.toString();
     }
 
     public boolean belongsTo(Person employee) {

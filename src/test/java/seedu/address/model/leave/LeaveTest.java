@@ -19,15 +19,34 @@ public class LeaveTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Leave(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Leave(null, ALICE_LEAVE.getTitle(),
+                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, null,
+                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                ALICE_LEAVE.getStart(), null));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                null, ALICE_LEAVE.getEnd()));
+
         assertThrows(NullPointerException.class, () -> new Leave(null, null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Leave(null, ALICE_LEAVE.getTitle(),
+                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, null,
+                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                ALICE_LEAVE.getStart(), null, ALICE_LEAVE.getDescription()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                null, ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd(), null));
     }
 
     @Test
     public void constructor_invalidLeave_throwsEndBeforeStartException() {
-        assertThrows(EndBeforeStartException.class, () -> new Leave(ALICE, "Alice's Maternity Leave",
+        assertThrows(EndBeforeStartException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
                 ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart()));
-        assertThrows(EndBeforeStartException.class, () -> new Leave(BOB, "Bob's Paternity Leave",
-                BOB_LEAVE.getEnd(), BOB_LEAVE.getStart(), "Bob's Paternity Leave Description"));
+        assertThrows(EndBeforeStartException.class, () -> new Leave(BOB, BOB_LEAVE.getTitle(),
+                BOB_LEAVE.getEnd(), BOB_LEAVE.getStart(), BOB_LEAVE.getDescription()));
     }
 
     @Test
@@ -124,5 +143,24 @@ public class LeaveTest {
 
         // different leave -> returns different hashcode
         assertFalse(ALICE_LEAVE.hashCode() == BOB_LEAVE.hashCode());
+
+        // different employee -> returns different hashcode
+        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withEmployee(BOB).build().hashCode());
+
+        // different title -> returns different hashcode
+        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
+                .build().hashCode());
+
+        // different description -> returns different hashcode
+        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE)
+                .withDescription("Alice's Maternity Leave 2 Description").build().hashCode());
+
+        // different start date -> returns different hashcode
+        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withStart(
+                ALICE_LEAVE.getStart().plusDays(1)).build().hashCode());
+
+        // different end date -> returns different hashcode
+        assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withEnd(ALICE_LEAVE.getEnd().plusDays(1))
+                .build().hashCode());
     }
 }
