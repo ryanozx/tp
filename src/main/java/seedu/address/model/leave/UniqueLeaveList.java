@@ -1,15 +1,15 @@
 package seedu.address.model.leave;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.leave.exceptions.DuplicateLeaveException;
-import seedu.address.model.leave.exceptions.LeaveNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.leave.exceptions.DuplicateLeaveException;
+import seedu.address.model.leave.exceptions.LeaveNotFoundException;
 
 /**
  * A list of Leaves that enforces uniqueness between its elements and does not allow nulls.
@@ -87,13 +87,13 @@ public class UniqueLeaveList implements Iterable<Leave> {
      * Replaces the contents of this list with {@code Leaves}.
      * {@code Leaves} must not contain duplicate Leaves.
      */
-    public void setLeaves(List<Leave> Leaves) {
-        requireAllNonNull(Leaves);
-        if (!LeavesAreUnique(Leaves)) {
+    public void setLeaves(List<Leave> leaves) {
+        requireAllNonNull(leaves);
+        if (!leavesAreUnique(leaves)) {
             throw new DuplicateLeaveException();
         }
 
-        internalList.setAll(Leaves);
+        internalList.setAll(leaves);
     }
 
     /**
@@ -136,10 +136,10 @@ public class UniqueLeaveList implements Iterable<Leave> {
     /**
      * Returns true if {@code Leaves} contains only unique Leaves.
      */
-    private boolean LeavesAreUnique(List<Leave> Leaves) {
-        for (int i = 0; i < Leaves.size() - 1; i++) {
-            for (int j = i + 1; j < Leaves.size(); j++) {
-                if (Leaves.get(i).isSameLeave(Leaves.get(j))) {
+    private boolean leavesAreUnique(List<Leave> leaves) {
+        for (int i = 0; i < leaves.size() - 1; i++) {
+            for (int j = i + 1; j < leaves.size(); j++) {
+                if (leaves.get(i).isSameLeave(leaves.get(j))) {
                     return false;
                 }
             }

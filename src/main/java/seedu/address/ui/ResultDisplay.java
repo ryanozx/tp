@@ -16,6 +16,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Constructs ResultDisplay with starting welcome message.
+     */
     public ResultDisplay() {
         super(FXML);
         resultDisplay.setText("Welcome to HR Mate! Type 'help' to know more commands :D");

@@ -33,7 +33,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText( URL_MESSAGE);
+        helpMessage.setText(URL_MESSAGE);
     }
 
     /**

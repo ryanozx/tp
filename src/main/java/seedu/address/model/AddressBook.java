@@ -7,8 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.leave.Leave;
-import seedu.address.model.person.Person;
 import seedu.address.model.leave.UniqueLeaveList;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 
