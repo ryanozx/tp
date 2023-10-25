@@ -16,6 +16,7 @@ public class StatusTest {
     @Test
     public void constructor_validStatusType() {
         assertTrue(Status.of("PENDING").getStatus().equals(StatusType.PENDING));
+        assertTrue(Status.getDefault().getStatus().equals(StatusType.PENDING));
         assertTrue(Status.of("APPROVED").getStatus().equals(StatusType.APPROVED));
         assertTrue(Status.of("REJECTED").getStatus().equals(StatusType.REJECTED));
     }
@@ -30,7 +31,7 @@ public class StatusTest {
     @Test
     public void equalsMethod() {
         // Status status = new Status(StatusType.PENDING);
-        Status status = Status.of("PENDING");
+        Status status = Status.getDefault();
 
         // same values -> returns true
         assertTrue(status.equals(Status.of("PENDING")));
@@ -51,7 +52,7 @@ public class StatusTest {
 
     @Test
     public void hashcodeMethod() {
-        Status status = Status.of("PENDING");
+        Status status = Status.getDefault();
 
         // same values -> returns true
         assertTrue(status.hashCode() == Status.of("PENDING").hashCode());

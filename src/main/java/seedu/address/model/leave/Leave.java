@@ -1,7 +1,6 @@
 package seedu.address.model.leave;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.leave.Status.StatusType;
 
 import java.util.Objects;
 
@@ -43,7 +42,7 @@ public class Leave {
         this.description = description;
         this.start = start;
         this.end = end;
-        this.status = Status.of(StatusType.PENDING.toString());
+        this.status = Status.getDefault();
     }
 
     /**
@@ -66,7 +65,7 @@ public class Leave {
         this.description = "";
         this.start = start;
         this.end = end;
-        this.status = Status.of(StatusType.PENDING.toString());
+        this.status = Status.getDefault();
     }
 
     public Person getEmployee() {
