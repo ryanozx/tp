@@ -1,0 +1,9 @@
+.title_label {
+    -fx-font-size: 20px; /* Font size */
+    -fx-text-fill: #FFFFFF; /* Text color (red in this example) */
+}
+
+.separation_line {
+    -fx-stroke: #808080; /* Set the color you desire (black in this example) */
+    -fx-stroke-width: 2;
+}
