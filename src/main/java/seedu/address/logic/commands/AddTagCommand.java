@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a tag to a person in the address book
+ * Adds a tag to an employee in the address book
  */
 public class AddTagCommand extends Command {
 
@@ -28,7 +28,7 @@ public class AddTagCommand extends Command {
         + "Parameters: INDEX (must be a positive integer) "
         + PREFIX_TAG + "TAG...\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_TAG + "friend";
+        + PREFIX_TAG + "full time";
 
     public static final String MESSAGE_NO_TAGS_ADDED = "At least one tag must be provided.";
     public static final String MESSAGE_DUPLICATE_TAG = "This employee already has some of the tags.";

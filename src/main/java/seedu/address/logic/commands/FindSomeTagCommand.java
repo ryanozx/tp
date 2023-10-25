@@ -15,11 +15,11 @@ public class FindSomeTagCommand extends Command {
 
     public static final String COMMAND_WORD = "find-some-tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags match some "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees whose tags match some "
             + "specified tags (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: TAG [MORE_TAGS]...\n"
+            + "Parameters: t/TAG [t/MORE_TAGS]...\n"
             + "Example: " + COMMAND_WORD
-            + " fullTime remote\n";
+            + " t/full time t/remote\n";
 
     private final TagsContainSomeTagsPredicate predicate;
 
