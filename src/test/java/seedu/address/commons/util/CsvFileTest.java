@@ -25,25 +25,31 @@ public class CsvFileTest {
     public void constructor_stringHeader_returnsCsvFile() {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
         // Only way to retrieve header for now is to obtain the file stream and
-        // extract the first string from the stream
+        // extract the second string from the stream (since the first string contains the delimiter)
         List<String> lines = getLines(file);
 
-        assert(lines.size() == 1);
-        assertEquals(lines.get(0), TEST_HEADER);
+        assert(lines.size() == 2);
+        assertDelimiter(lines, TEST_DELIMITER);
+        assertEquals(lines.get(1), TEST_HEADER);
     }
 
     private List<String> getLines(CsvFile file) {
         return file.getFileStream().collect(Collectors.toList());
     }
 
+    private void assertDelimiter(List<String> lines, String delimiter) {
+        assert(!lines.isEmpty());
+        assertEquals(lines.get(0), String.format(CsvFile.DELIMITER_SPECIFIER, delimiter));
+    }
     @Test
     public void constructor_listHeader_returnsCsvFile() {
         CsvFile file = new CsvFile(TEST_HEADER_LIST, TEST_DELIMITER);
         List<String> lines = getLines(file);
 
-        assert(lines.size() == 1);
-        String expectedResult = String.join(TEST_DELIMITER, lines);
-        assertEquals(lines.get(0), expectedResult);
+        assert(lines.size() == 2);
+        assertDelimiter(lines, TEST_DELIMITER);
+        String expectedResult = String.join(TEST_DELIMITER, TEST_HEADER_LIST);
+        assertEquals(lines.get(1), expectedResult);
     }
 
     @Test
@@ -53,8 +59,8 @@ public class CsvFileTest {
         file.addRow(FIRST_ROW);
         List<String> lines = getLines(file);
         // 1 line for header, 1 line for row
-        assert(lines.size() == 2);
-        assertEquals(lines.get(1), FIRST_ROW);
+        assert(lines.size() == 3);
+        assertEquals(lines.get(2), FIRST_ROW);
     }
 
     @Test
@@ -63,8 +69,8 @@ public class CsvFileTest {
 
         file.addRow(new MockCsvParsable(FIRST_ROW_VALS));
         List<String> lines = getLines(file);
-        assert(lines.size() == 2);
-        assertEquals(lines.get(1), FIRST_ROW);
+        assert(lines.size() == 3);
+        assertEquals(lines.get(2), FIRST_ROW);
     }
 
     private static class MockCsvParsable implements CsvParsable {
@@ -88,10 +94,11 @@ public class CsvFileTest {
         file.addRow(secondRow);
         List<String> lines = getLines(file);
 
-        assert(lines.size() == 3);
-        assertEquals(lines.get(0), TEST_HEADER);
-        assertEquals(lines.get(1), FIRST_ROW);
-        assertEquals(lines.get(2), secondRow);
+        assert(lines.size() == 4);
+        assertDelimiter(lines, TEST_DELIMITER);
+        assertEquals(lines.get(1), TEST_HEADER);
+        assertEquals(lines.get(2), FIRST_ROW);
+        assertEquals(lines.get(3), secondRow);
     }
 
     @Test

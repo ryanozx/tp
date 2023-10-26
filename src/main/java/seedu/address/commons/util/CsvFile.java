@@ -16,6 +16,8 @@ import seedu.address.commons.exceptions.CsvMissingFieldException;
  * Representation of the contents of a CSV file as an object.
  */
 public class CsvFile {
+    public static final String DELIMITER_PREFIX = "sep=";
+    public static final String DELIMITER_SPECIFIER = DELIMITER_PREFIX + "%s";
     private final int numColumns;
 
     private final String delimiter;
@@ -185,7 +187,11 @@ public class CsvFile {
      * @return Stream of strings containing the headers and values
      */
     public Stream<String> getFileStream() {
-        Stream<String> headerStream = Stream.of(header);
+        // Since the semicolon/pipe is not a common delimiter, adding an extra line at the start of the CSV file
+        // to indicate the delimiter used will improve interchangeability between applications without having to
+        // perform further configurations
+        String delimiterIndicator = String.format(DELIMITER_SPECIFIER, delimiter);
+        Stream<String> headerStream = Stream.of(delimiterIndicator, header);
         Stream<String> valuesStream = rows.stream().map(CsvRow::printRow);
 
         return Stream.concat(headerStream, valuesStream);
