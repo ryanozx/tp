@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import seedu.address.model.LeavesBook;
 import seedu.address.model.leave.Date;

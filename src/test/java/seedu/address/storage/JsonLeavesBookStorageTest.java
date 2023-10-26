@@ -3,15 +3,15 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.BENSON_LEAVE_2;
+import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.time.format.DateTimeParseException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -35,7 +35,8 @@ public class JsonLeavesBookStorageTest {
 
     private java.util.Optional<ReadOnlyLeavesBook> readLeavesBook(String filePath) throws Exception {
         AddressBook addressBook = getTypicalAddressBook();
-        return new JsonLeavesBookStorage(Paths.get(filePath)).readLeavesBook(addToTestDataPathIfNotNull(filePath), addressBook);
+        return new JsonLeavesBookStorage(Paths.get(filePath)).readLeavesBook(
+                addToTestDataPathIfNotNull(filePath), addressBook);
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -84,7 +85,6 @@ public class JsonLeavesBookStorageTest {
         JsonLeavesBookStorage jsonLeavesBookStorage = new JsonLeavesBookStorage(filePath);
 
         // Save in new file and read back
-        
         jsonLeavesBookStorage.saveLeavesBook(original, filePath);
         ReadOnlyLeavesBook readBack = jsonLeavesBookStorage.readLeavesBook(addressBook).get();
         assertEquals(original, new LeavesBook(readBack));
@@ -95,7 +95,7 @@ public class JsonLeavesBookStorageTest {
         jsonLeavesBookStorage.saveLeavesBook(original, filePath);
         readBack = jsonLeavesBookStorage.readLeavesBook(addressBook).get();
         assertEquals(original, new LeavesBook(readBack));
-        
+
         // Save and read without specifying file path
         original.addLeave(ALICE_LEAVE);
         jsonLeavesBookStorage.saveLeavesBook(original); // file path not specified

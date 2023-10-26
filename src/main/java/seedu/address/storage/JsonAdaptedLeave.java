@@ -71,7 +71,6 @@ public class JsonAdaptedLeave {
     public String getEmployee() {
         return employee;
     }
-    
     /**
      * Converts this Jackson-friendly adapted leave object into the model's {@code Leave} object.
      *

@@ -42,7 +42,8 @@ public class JsonLeavesBookStorage implements LeavesBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if the file is not found.
      */
-    public Optional<ReadOnlyLeavesBook> readLeavesBook(Path filePath, AddressBook addressBook) throws DataLoadingException {
+    public Optional<ReadOnlyLeavesBook> readLeavesBook(Path filePath, AddressBook addressBook)
+            throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableLeavesBook> jsonLeavesBook = JsonUtil.readJsonFile(
