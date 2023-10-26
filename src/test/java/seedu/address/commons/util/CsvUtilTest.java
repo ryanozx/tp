@@ -55,9 +55,16 @@ public class CsvUtilTest {
 
         List<String> lines = csvFile.get().getFileStream()
                 .collect(Collectors.toList());
-        assert(lines.size() == 2);
-        assertEquals(lines.get(0), HEADER);
-        assertEquals(lines.get(1), FIRST_ROW);
+        assert(lines.size() == 3);
+        // first line in lines should be "sep=;"
+        assertDelimiter(lines);
+        assertEquals(lines.get(1), HEADER);
+        assertEquals(lines.get(2), FIRST_ROW);
+    }
+
+    private void assertDelimiter(List<String> lines) {
+        assert(!lines.isEmpty());
+        assertEquals(lines.get(0), String.format(CsvFile.DELIMITER_SPECIFIER, DELIMITER));
     }
 
     @Test
@@ -74,10 +81,11 @@ public class CsvUtilTest {
 
         List<String> lines = csvFile.get().getFileStream()
                 .collect(Collectors.toList());
-        assert(lines.size() == 3);
-        assertEquals(lines.get(0), HEADER);
-        assertEquals(lines.get(1), FIRST_ROW);
-        assertEquals(lines.get(2), expectedSecondRow);
+        assert(lines.size() == 4);
+        assertDelimiter(lines);
+        assertEquals(lines.get(1), HEADER);
+        assertEquals(lines.get(2), FIRST_ROW);
+        assertEquals(lines.get(3), expectedSecondRow);
     }
 
     @Test
@@ -104,9 +112,10 @@ public class CsvUtilTest {
         List<String> lines = readFile.get().getFileStream()
                 .collect(Collectors.toList());
 
-        assert(lines.size() == 2);
-        assertEquals(lines.get(0), HEADER);
-        assertEquals(lines.get(1), FIRST_ROW);
+        assert(lines.size() == 3);
+        assertDelimiter(lines);
+        assertEquals(lines.get(1), HEADER);
+        assertEquals(lines.get(2), FIRST_ROW);
         FileAndPathUtil.cleanupCreatedFiles(savePath);
     }
 }
