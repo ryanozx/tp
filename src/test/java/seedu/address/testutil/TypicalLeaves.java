@@ -2,8 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-
-import java.time.LocalDate;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import seedu.address.model.LeavesBook;
 import seedu.address.model.leave.Date;
@@ -24,11 +23,15 @@ public class TypicalLeaves {
             "Bob's Paternity Leave Description");
     public static final Leave ALICE_LEAVE_2 = new Leave(ALICE, "Alice's Maternity Leave 2", DEFAULT_START_2,
             DEFAULT_END_2);
+    public static final Leave BENSON_LEAVE = new Leave(BENSON, "Benson's Paternity Leave", DEFAULT_START, DEFAULT_END,
+            "Benson's Paternity Leave Description");
+    public static final Leave BENSON_LEAVE_2 = new Leave(BENSON, "Benson's Paternity Leave 2", DEFAULT_START_2,
+            DEFAULT_END_2);
 
     private TypicalLeaves() {} // prevents instantiation
 
     public static Leave[] getTypicalLeaves() {
-        return new Leave[] {ALICE_LEAVE, BOB_LEAVE, ALICE_LEAVE_2};
+        return new Leave[] {ALICE_LEAVE, BENSON_LEAVE, ALICE_LEAVE_2};
     }
 
     public static LeavesBook getTypicalLeavesBook() {

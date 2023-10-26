@@ -1,0 +1,12 @@
+{
+    "leaves": [
+        {
+            "employee": "Alice Tan",
+            "start": "2020-01-01",
+            "end": "2020-01-02",
+            "title": "Alice's Maternity Leave",
+            "description": "Alice's Maternity Leave Description",
+            "status": "PENDING"
+        }
+    ]
+}
