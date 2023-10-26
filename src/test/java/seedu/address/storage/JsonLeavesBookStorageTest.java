@@ -52,7 +52,7 @@ public class JsonLeavesBookStorageTest {
 
     @Test
     public void readLeavesBook_success() {
-        Path filePath = Paths.get("src", "test", "data", "JsonLeavesBookStorageTest", "validLeaves.json");
+        Path filePath = Paths.get("src", "test", "data", "JsonLeavesBookStorageTest", "ValidLeaves.json");
         try {
             AddressBook addressBook = getTypicalAddressBook();
             ReadOnlyLeavesBook leavesBook = new JsonLeavesBookStorage(filePath).readLeavesBook(addressBook).get();
