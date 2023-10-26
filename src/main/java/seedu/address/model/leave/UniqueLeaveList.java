@@ -31,9 +31,9 @@ public class UniqueLeaveList implements Iterable<Leave> {
     /**
      * Returns true if the list contains an equivalent leave as the given argument.
      */
-    public boolean contains(Leave toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameLeave);
+    public boolean contains(Leave leave) {
+        requireNonNull(leave);
+        return internalList.stream().anyMatch(leave::isSameLeave);
     }
 
     /**

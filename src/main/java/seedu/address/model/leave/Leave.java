@@ -68,6 +68,32 @@ public class Leave {
         this.status = Status.getDefault();
     }
 
+    /**
+     * Constructor for Leave object with status.
+     *
+     * @param employee
+     * @param title
+     * @param start
+     * @param end
+     * @param description
+     * @param status
+     */
+    public Leave(Person employee, String title, Date start, Date end, String description, Status status)
+            throws EndBeforeStartException {
+
+        requireAllNonNull(employee, title, description, start, end, status);
+
+        if (end.isBefore(start)) {
+            throw new EndBeforeStartException();
+        }
+        this.employee = employee;
+        this.title = title;
+        this.description = description;
+        this.start = start;
+        this.end = end;
+        this.status = status;
+    }
+
     public Person getEmployee() {
         return employee;
     }
