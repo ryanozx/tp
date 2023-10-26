@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -65,6 +66,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    public Person getPerson(String name) throws PersonNotFoundException {
+        requireNonNull(name);
+        for (Person p : persons) {
+            if (p.getName().toString().equals(name)) {
+                return p;
+            }
+        }
+        throw new PersonNotFoundException();
     }
 
     /**
