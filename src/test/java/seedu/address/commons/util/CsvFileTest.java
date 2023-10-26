@@ -17,8 +17,6 @@ public class CsvFileTest {
     private static final List<String> TEST_HEADER_LIST = Arrays.asList("first", "second", "third");
     private static final String TEST_HEADER = String.join(TEST_DELIMITER, TEST_HEADER_LIST);
     private static final String NON_EXISTENT_HEADER = "fourth";
-
-
     private static final List<String> FIRST_ROW_VALS = Arrays.asList("firstVal", "secondVal", "thirdVal");
 
     private static final String FIRST_ROW = String.join(TEST_DELIMITER, FIRST_ROW_VALS);
@@ -63,10 +61,21 @@ public class CsvFileTest {
     public void addRow_listRow() {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
 
-        file.addRow(FIRST_ROW_VALS);
+        file.addRow(new MockCsvParsable(FIRST_ROW_VALS));
         List<String> lines = getLines(file);
         assert(lines.size() == 2);
         assertEquals(lines.get(1), FIRST_ROW);
+    }
+
+    private static class MockCsvParsable implements CsvParsable {
+        private final List<String> values;
+
+        public MockCsvParsable(List<String> values) {
+            this.values = values;
+        }
+        public List<String> getCsvValues() {
+            return values;
+        }
     }
 
     @Test
@@ -104,6 +113,11 @@ public class CsvFileTest {
     }
 
     @Test
+    public void csvRowAddRow_nullRow_throwsException() {
+        CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
+        assertThrows(NullPointerException.class, () -> file.addRow((CsvParsable) null));
+    }
+    @Test
     public void csvRowStringConstructor_fewerColsThanHeader_success() {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
         List<String> vals = Arrays.asList("firstVal", "secondVal");
@@ -129,7 +143,7 @@ public class CsvFileTest {
     @Test
     public void csvRowListConstructor_sameColsAsHeader_success() {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
-        file.addRow(FIRST_ROW_VALS);
+        file.addRow(new MockCsvParsable(FIRST_ROW_VALS));
 
         List<CsvFile.CsvRow> rows = getRows(file);
         assert(rows.size() == 1);
@@ -141,7 +155,7 @@ public class CsvFileTest {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
         List<String> vals = Arrays.asList("firstVal", "secondVal");
 
-        file.addRow(vals);
+        file.addRow(new MockCsvParsable(vals));
         List<CsvFile.CsvRow> rows = getRows(file);
         assert(rows.size() == 1);
         List<String> expectedVals = Arrays.asList("firstVal", "secondVal", "");
@@ -154,13 +168,13 @@ public class CsvFileTest {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
         List<String> vals = Arrays.asList("firstVal", "secondVal", "thirdVal", "fourthVal");
 
-        assertThrows(CsvMismatchedColumnException.class, () -> file.addRow(vals));
+        assertThrows(CsvMismatchedColumnException.class, () -> file.addRow(new MockCsvParsable(vals)));
     }
 
     @Test
     public void csvRowGetValue_allValuesPresent_success() throws Exception {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
-        file.addRow(FIRST_ROW_VALS);
+        file.addRow(new MockCsvParsable(FIRST_ROW_VALS));
 
         List<CsvFile.CsvRow> rows = getRows(file);
         assert(rows.size() == 1);
@@ -175,7 +189,7 @@ public class CsvFileTest {
     @Test
     public void csvRowGetValue_missingField_throwsException() {
         CsvFile file = new CsvFile(TEST_HEADER, TEST_DELIMITER);
-        file.addRow(FIRST_ROW_VALS);
+        file.addRow(new MockCsvParsable(FIRST_ROW_VALS));
 
         List<CsvFile.CsvRow> rows = getRows(file);
         assert(rows.size() == 1);

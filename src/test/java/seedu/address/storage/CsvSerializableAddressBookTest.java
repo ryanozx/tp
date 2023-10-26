@@ -17,8 +17,8 @@ import seedu.address.model.AddressBook;
 
 public class CsvSerializableAddressBookTest {
 
-    private static CsvAdaptedPerson aliceAP = new CsvAdaptedPerson(ALICE);
-    private static CsvAdaptedPerson bensonAP = new CsvAdaptedPerson(BENSON);
+    private static final CsvAdaptedPerson aliceAP = new CsvAdaptedPerson(ALICE);
+    private static final CsvAdaptedPerson bensonAP = new CsvAdaptedPerson(BENSON);
     @Test
     public void constructor_containsPersons() throws Exception {
         List<CsvAdaptedPerson> persons = generatePersonsList();
@@ -48,7 +48,7 @@ public class CsvSerializableAddressBookTest {
                 .collect(Collectors.toList());
 
         List<String> expectedStrings = persons.stream().map(person ->
-                String.join(CsvUtil.DELIMITER, person.getValues())).collect(Collectors.toList());
+                String.join(CsvUtil.DELIMITER, person.getCsvValues())).collect(Collectors.toList());
 
         assertEquals(rowStrings, expectedStrings);
     }
