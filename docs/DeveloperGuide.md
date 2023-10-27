@@ -494,28 +494,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: List employees with all specified tags**
+**Use case: List all tags**
 
 **MSS**
 
-1.  User requests to find employees who match all specified tags
-2.  HRMate shows a list of employees who match all the specified tags exactly
+1.  User requests to view all tags
+2.  HRMate shows a list of all available tags
 
-      Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The specified tags do not exist in the system.
+* 2a. There is no existing tag in the system.
 
-  * 2a1. HRMate notifies the user of invalid tags.
+    * 2a1. HRMate notifies the user of no existing tag in the system.
 
-    Use case resumes at step 1.
-
-* 2b. User does not provide any tags.
-
-  * 2b1. HRMate notifies the user of missing parameters.
-
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 **Use case: List employees with at least one specified tags**
 
