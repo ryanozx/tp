@@ -8,7 +8,6 @@ import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.PersonEntry;
 import seedu.address.model.leave.Status;
-// import seedu.address.model.person.Name;
 import seedu.address.model.person.ComparablePerson;
 
 /**
@@ -39,10 +38,6 @@ public class JsonAdaptedLeave {
         public Name getName() {
             return name;
         }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
     }
 
     /**
@@ -59,10 +54,6 @@ public class JsonAdaptedLeave {
         // @JsonProperty("fullName")
         public String getFullName() {
             return fullName;
-        }
-
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
         }
     }
 

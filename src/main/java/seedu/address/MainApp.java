@@ -79,16 +79,19 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using addressbook data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialAddressData;
+        boolean addressBookIsPresent = false;
 
         try {
             addressBookOptional = storage.readAddressBook();
             if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
+            } else {
+                addressBookIsPresent = true;
             }
             initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
@@ -98,21 +101,24 @@ public class MainApp extends Application {
         }
 
         // Read from LeavesBook
-        logger.info("Using data file : " + storage.getLeavesBookFilePath());
+        logger.info("Using leavesbook data file : " + storage.getLeavesBookFilePath());
 
         Optional<ReadOnlyLeavesBook> leavesBookOptional;
         ReadOnlyLeavesBook initialLeavesData;
-
-        try {
-            leavesBookOptional = storage.readLeavesBook((AddressBook) initialAddressData);
-            if (leavesBookOptional.isEmpty()) {
-                logger.info("Creating a new data file " + storage.getLeavesBookFilePath()
-                        + " populated with an empty LeavesBook.");
+        if (addressBookIsPresent) {
+            try {
+                leavesBookOptional = storage.readLeavesBook((AddressBook) initialAddressData);
+                if (leavesBookOptional.isEmpty()) {
+                    logger.info("Creating a new data file " + storage.getLeavesBookFilePath()
+                            + " populated with an empty LeavesBook.");
+                }
+                initialLeavesData = leavesBookOptional.orElseGet(() -> new LeavesBook());
+            } catch (DataLoadingException e) {
+                logger.warning("Data file at " + storage.getLeavesBookFilePath() + " could not be loaded."
+                        + " Will be starting with an empty LeavesBook.");
+                initialLeavesData = new LeavesBook();
             }
-            initialLeavesData = leavesBookOptional.orElseGet(() -> new LeavesBook());
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getLeavesBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty LeavesBook.");
+        } else {
             initialLeavesData = new LeavesBook();
         }
         return new ModelManager(initialAddressData, initialLeavesData, userPrefs);
