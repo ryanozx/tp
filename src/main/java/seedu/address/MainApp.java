@@ -107,7 +107,7 @@ public class MainApp extends Application {
             leavesBookOptional = storage.readLeavesBook((AddressBook) initialAddressData);
             if (leavesBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getLeavesBookFilePath()
-                        + " populated with a sample LeavesBook.");
+                        + " populated with an empty LeavesBook.");
             }
             initialLeavesData = leavesBookOptional.orElseGet(() -> new LeavesBook());
         } catch (DataLoadingException e) {

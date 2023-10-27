@@ -1,18 +1,28 @@
 package seedu.address.storage;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static seedu.address.testutil.Assert.assertThrows;
-// import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
+// import static seedu.address.testutil.TypicalPersons.ALICE;
 
-// import java.time.format.DateTimeParseException;
+import org.junit.jupiter.api.Test;
 
-// import org.junit.jupiter.api.Test;
-
-// import seedu.address.commons.exceptions.IllegalValueException;
-// import seedu.address.model.leave.Leave;
-// import seedu.address.model.leave.Status;
+// import seedu.address.storage.JsonAdaptedLeave.Employee;
+// import seedu.address.storage.JsonAdaptedLeave.Name;
 
 public class JsonAdaptedLeaveTest {
+
+    @Test
+    public void toModelType_createsEqualLeaveObject_success() throws Exception {
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(ALICE_LEAVE);
+        assertEquals(ALICE_LEAVE, leave.toModelType());
+
+        // Name name = new Name(ALICE.getName().toString());
+        // Employee employee = new Employee(name);
+        // JsonAdaptedLeave leave2 = new JsonAdaptedLeave(ALICE_LEAVE.getStart().toString(),
+        //         ALICE_LEAVE.getEnd().toString(), ALICE_LEAVE.getTitle(), ALICE_LEAVE.getDescription(),
+        //         ALICE_LEAVE.getStatus(), employee);
+        // assertEquals(ALICE_LEAVE, leave2.toModelType());
+    }
 
     // @Test
     // public void toModelType_leaveParameterConstructor_returnsLeave() throws Exception {

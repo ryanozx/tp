@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.PersonEntry;
 import seedu.address.model.leave.Status;
+// import seedu.address.model.person.Name;
+import seedu.address.model.person.ComparablePerson;
 
 /**
  * Jackson-friendly version of {@link Leave}.
@@ -19,7 +22,49 @@ public class JsonAdaptedLeave {
     private final String title;
     private final String description;
     private final String status;
-    private final String employee;
+    private final ComparablePerson employee;
+
+    /**
+     * Helper class to access nested field in serialized JSON Leave object
+     */
+    private static class Employee {
+        private Name name;
+
+        @JsonCreator
+        public Employee(@JsonProperty("name") Name name) {
+            this.name = name;
+        }
+
+
+        public Name getName() {
+            return name;
+        }
+
+        public void setName(Name name) {
+            this.name = name;
+        }
+    }
+
+    /**
+     * Helper class to access nested field in serialized JSON Leave object
+     */
+    private static class Name {
+        private String fullName;
+
+        @JsonCreator
+        public Name(@JsonProperty("fullName") String fullName) {
+            this.fullName = fullName;
+        }
+
+        // @JsonProperty("fullName")
+        public String getFullName() {
+            return fullName;
+        }
+
+        public void setFullName(String fullName) {
+            this.fullName = fullName;
+        }
+    }
 
     /**
      * Constructs a {@code JsonAdaptedLeave} with the given leave details.
@@ -27,13 +72,13 @@ public class JsonAdaptedLeave {
     @JsonCreator
     public JsonAdaptedLeave(@JsonProperty("start") String start, @JsonProperty("end") String end,
             @JsonProperty("title") String title, @JsonProperty("description") String description,
-            @JsonProperty("status") String status, @JsonProperty("employee") String employee) {
+            @JsonProperty("status") String status, @JsonProperty("employee") Employee employee) {
         this.start = start;
         this.end = end;
         this.title = title;
         this.description = description;
         this.status = status;
-        this.employee = employee;
+        this.employee = new PersonEntry(employee.getName().getFullName());
     }
 
     /**
@@ -45,7 +90,7 @@ public class JsonAdaptedLeave {
         title = source.getTitle();
         description = source.getDescription();
         status = source.getStatus();
-        employee = source.getEmployee().getName().toString();
+        employee = source.getEmployee();
     }
 
     public String getStart() {
@@ -68,9 +113,10 @@ public class JsonAdaptedLeave {
         return status;
     }
 
-    public String getEmployee() {
+    public ComparablePerson getEmployee() {
         return employee;
     }
+
     /**
      * Converts this Jackson-friendly adapted leave object into the model's {@code Leave} object.
      *
@@ -98,8 +144,7 @@ public class JsonAdaptedLeave {
         final String modelTitle = title;
         final String modelDescription = description;
         final Status modelStatus = Status.of(status);
-        // final Person modelEmployee = employee.toModelType();
-        return null;
-        // return new Leave(modelEmployee, modelTitle, modelStart, modelEnd, modelDescription, modelStatus);
+        final ComparablePerson modelEmployee = employee;
+        return new Leave(modelEmployee, modelTitle, modelStart, modelEnd, modelDescription, modelStatus);
     }
 }

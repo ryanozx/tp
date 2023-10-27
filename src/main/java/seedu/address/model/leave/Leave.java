@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.leave.exceptions.EndBeforeStartException;
+import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Person;
 
 /**
@@ -12,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class Leave {
 
-    private final Person employee;
+    private final ComparablePerson employee;
     private final String title;
     private final String description;
     private final Date start;
@@ -29,7 +30,7 @@ public class Leave {
      * @param start
      * @param end
      */
-    public Leave(Person employee, String title, Date start, Date end, String description)
+    public Leave(ComparablePerson employee, String title, Date start, Date end, String description)
             throws EndBeforeStartException {
 
         requireAllNonNull(employee, title, description, start, end);
@@ -53,7 +54,7 @@ public class Leave {
      * @param start
      * @param end
      */
-    public Leave(Person employee, String title, Date start, Date end)
+    public Leave(ComparablePerson employee, String title, Date start, Date end)
             throws EndBeforeStartException {
 
         requireAllNonNull(employee, title, start, end);
@@ -78,7 +79,7 @@ public class Leave {
      * @param description
      * @param status
      */
-    public Leave(Person employee, String title, Date start, Date end, String description, Status status)
+    public Leave(ComparablePerson employee, String title, Date start, Date end, String description, Status status)
             throws EndBeforeStartException {
 
         requireAllNonNull(employee, title, description, start, end, status);
@@ -94,7 +95,7 @@ public class Leave {
         this.status = status;
     }
 
-    public Person getEmployee() {
+    public ComparablePerson getEmployee() {
         return employee;
     }
 
@@ -133,7 +134,7 @@ public class Leave {
         }
 
         Leave otherLeave = (Leave) o;
-        return otherLeave.getEmployee().equals(getEmployee())
+        return otherLeave.getEmployee().isSamePerson(getEmployee())
                 && otherLeave.getTitle().equals(getTitle())
                 && otherLeave.getDescription().equals(getDescription())
                 && otherLeave.getStart().equals(getStart())
@@ -150,7 +151,7 @@ public class Leave {
         }
 
         return otherLeave != null
-                && otherLeave.getEmployee().equals(getEmployee())
+                && otherLeave.getEmployee().isSamePerson(getEmployee())
                 && otherLeave.getStart().equals(getStart())
                 && otherLeave.getEnd().equals(getEnd());
     }
