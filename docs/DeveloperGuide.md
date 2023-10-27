@@ -158,6 +158,69 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Import file
+
+The import feature allows users to import employee records in CSV format, increasing portability of
+the user's data. The import feature can provide a means of mass adding employee records, without having to use the `add`
+command repeatedly. 
+
+Here is an example usage of the import feature:
+1. User executes the `import` command.
+2. User navigates to the file to import using the file dialog that opens.
+3. User selects the file and clicks on the Open button of the file dialog.
+4. All contacts in the address book will be overwritten by the contents of the imported file
+
+The CSV file is read into a CsvFile object, which is then converted into a CsvSerializableAddressBook object by reading each
+row and the corresponding values for each column. The CsvSerializableAddressBook is then converted into an AddressBook instance,
+which replaces the current AddressBook instance in the app.
+
+#### Design considerations
+The choice of using a file dialog for the user to select the file, as opposed to having the user type the file name in
+the command, is to minimise the likelihood of the user misspelling the file or accidentally typing the wrong path due to
+the inclusion/exclusion of parent directories.
+
+#### Proposed extensions
+1. Implement autosave ability when importing files
+- Due to the overwriting ability of the import command, all contacts that were in HRMate previously would be lost
+after executing the import command. As such, an autosave ability could be added, utilising the already implemented
+export feature, whereby the current contents of the address book is exported just prior to overwriting the address book.
+2. Implement non-overwriting option for importing files
+- This gives user more granular control over their files, since they can combine employee records stored in different files.
+- Flags can be added to the import command to determine import policy
+  - Overwrite existing address book
+  - If there is a record with the same name in the current address book and imported file, replace it with the one in the imported file
+  - If there is a record with the same name in the current address book and imported file, keep the one in the current address book
+3. Enable importing of leaves
+- A flag can be supplied to the import command to determine the type of file to be imported
+  - By default, it assumes that the imported file contains the address book
+  - One flag can be used to indicate that the imported file contains the leaves book
+  - Another flag can be used to indicate that the user would like to import both address book and leaves book. This will trigger
+  two file dialogs. The reason for providing this option is that the order of importation is specific - the leaves book cannot
+  be imported before the address book, as leaves require a valid reference to an existing employee in the address book.
+
+### Export feature
+
+The export feature enables users to export employee records into CSV format, which can then be opened in other spreadsheet
+applications. It allows users to select filtered data to export, providing greater granularity in control over file content.
+
+Here is an example usage of the `export` feature:
+1. The user uses the `find-some-tag` command to filter for employees with the `full time` tag
+2. The user enters the command `export fulltimers`
+3. A file will be created in `{home folder of HRMate}/exports`, with the name `fulltimers.csv`. This file contains employees
+with the `full time` tag.
+
+The export command works by retrieving the filtered person list in the address book, which contains a list of employee records
+that are currently visible in the address book panel. A CsvSerializableAddressBook is constructed from this filtered person list,
+which is then serialized into a CsvFile object. CsvUtil then writes the CsvFile instance into a CSV file.
+
+#### Design considerations
+Unlike the import command, the use of a file dialog in saving the file was not adopted as it was deemed unnecessary. Saving all
+records into the same `export` folder provides users with an easy-to-find folder to locate their files.
+
+#### Proposed extension
+1. The export command will export both address book and leave book together. The leave book can be saved under the name
+`{address book save name}_leaves.csv` to indicate its association with the address book save file. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -251,6 +314,27 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Adding tag feature
+
+#### Implementation
+
+`AddTagCommand` is implemented similar to `EditCommand`.
+A new `Person` is created with the information from the old `Person`.
+The tags are then added before replacing the old `Person` with the new `Person`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
+
+#### Design considerations:
+
+**Aspect: How AddTagCommand executes:**
+* **Alternative 1 (current choice):** Builts a new Person.
+  * Pros: Easy to implement (using `EditCommand` as reference), immutability allows for potential redo and undo commands.
+  * Cons: Memory intensive, costly in terms of time.
+* **Alternative 2:** Add tags to `Person`.
+  * Pros: Memory efficient
+  * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,6 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | HR manager                         | find an employee by name            | locate details of employees without having to go through the entire list |
 | `* * *`  | organised HR manager               | add/delete a tag to an employee     | change the label of an employee                                          |
 | `* * *`  | organised HR manager               | view all my tags                    | filter by them                                                           |
+| `* * *`  | organised HR manager               | find employees by tags              | find specific category of employees for higher level workflows           |
 | `* *`    | HR manager                         | hide private contact details        | minimize chance of someone else seeing them by accident                  |
 | `* *`    | HR manager                         | import/export records in CSV format | open the records in other apps                                           |
 | `*`      | HR manager of a large organisation | sort employees by name              | locate an employee easily                                                |
@@ -355,6 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to import employee records
 2. User selects CSV file from file dialog
 3. HRMate adds records in CSV file inside its list of employee records
+4. HRMate displays a message indicating successful importing of file
 
     Use case ends.
 
@@ -409,28 +495,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: List employees with all specified tags**
+**Use case: List all tags**
 
 **MSS**
 
-1.  User requests to find employees who match all specified tags
-2.  HRMate shows a list of employees who match all the specified tags exactly
+1.  User requests to view all tags
+2.  HRMate shows a list of all available tags
 
-      Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The specified tags do not exist in the system.
+* 2a. There is no existing tag in the system.
 
-  * 2a1. HRMate notifies the user of invalid tags.
+    * 2a1. HRMate notifies the user of no existing tag in the system.
 
-    Use case resumes at step 1.
-
-* 2b. User does not provide any tags.
-
-  * 2b1. HRMate notifies the user of missing parameters.
-
-    Use case resumes at step 1.
+      Use case ends.
 
 **Use case: List employees with at least one specified tags**
 
@@ -439,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to find employees who match at least one of the specified tags
 2.  HRMate shows a list of employees who match at least one of the specified tags
 
-      Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -453,6 +533,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. HRMate notifies the user of missing parameters.
 
       Use case resumes at step 1.
+
+**Use case: List employees with all specified tags**
+
+**MSS**
+
+1.  User requests to view all tags
+2.  HRMate shows a list of all available tags
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There is no existing tag in the system.
+
+    * 2a1. HRMate notifies the user of no existing tag in the system.
+
+      Use case resumes at step 1.
+
 
 *{More to be added}*
 

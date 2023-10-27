@@ -21,7 +21,7 @@ class CsvSerializableAddressBook extends SerializableAddressBook<CsvAdaptedPerso
      */
     public CsvFile saveAddressBook() {
         CsvFile addressBookFile = new CsvFile(CsvAdaptedPerson.getHeader(), CsvUtil.DELIMITER);
-        persons.forEach(person -> addressBookFile.addRow(person.getValues()));
+        persons.forEach(addressBookFile::addRow);
         return addressBookFile;
     }
 }

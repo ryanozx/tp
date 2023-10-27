@@ -6,13 +6,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.CsvMissingFieldException;
+import seedu.address.commons.util.CsvParsable;
 import seedu.address.commons.util.GetValuer;
 import seedu.address.model.person.Person;
 
 /**
  * CSV-friendly version of {@link Person}
  */
-class CsvAdaptedPerson extends AdaptedPerson {
+class CsvAdaptedPerson extends AdaptedPerson implements CsvParsable {
     /**
      * Initialises fields in the CsvAdaptedPerson base class
      */
@@ -39,7 +40,8 @@ class CsvAdaptedPerson extends AdaptedPerson {
      * Returns list of string values of the fields in Person
      * @return List of string values of fields
      */
-    public List<String> getValues() {
+    @Override
+    public List<String> getCsvValues() {
         String serialisedTags = serialiseTags();
         String[] fieldValues = {name, phone, email, address, serialisedTags};
         return Arrays.asList(fieldValues);
@@ -47,7 +49,7 @@ class CsvAdaptedPerson extends AdaptedPerson {
 
     /**
      * Serialises the tags into a single string - a different delimiter has to be used to avoid problems in
-     * deserialising the Person string
+     * deserializing the Person string
      * @return CSV string representation of tags
      */
     private String serialiseTags() {
@@ -81,7 +83,7 @@ class CsvAdaptedPerson extends AdaptedPerson {
     }
 
     /**
-     * Deserialises the CSV string representation of the tags
+     * Deserializes the CSV string representation of the tags
      * @param tags CSV string representation of tags
      * @return List of tags
      */

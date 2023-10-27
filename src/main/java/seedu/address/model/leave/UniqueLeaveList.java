@@ -12,11 +12,11 @@ import seedu.address.model.leave.exceptions.DuplicateLeaveException;
 import seedu.address.model.leave.exceptions.LeaveNotFoundException;
 
 /**
- * A list of Leaves that enforces uniqueness between its elements and does not allow nulls.
- * A Leave is considered unique by comparing using {@code Leave#isSameLeave(Leave)}. As such, adding and updating of
- * Leaves uses Leave#isSameLeave(Leave) for equality so as to ensure that the Leave being added or updated is
- * unique in terms of identity in the UniqueLeaveList. However, the removal of a Leave uses Leave#equals(Object) so
- * as to ensure that the Leave with exactly the same fields will be removed.
+ * A list of leaves that enforces uniqueness between its elements and does not allow nulls.
+ * A leave is considered unique by comparing using {@code Leave#isSameLeave(Leave)}. As such, adding and updating of
+ * leaves uses Leave#isSameLeave(Leave) for equality so as to ensure that the leave being added or updated is
+ * unique in terms of identity in the UniqueLeaveList. However, the removal of a leave uses Leave#equals(Object) so
+ * as to ensure that the leave with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -29,16 +29,16 @@ public class UniqueLeaveList implements Iterable<Leave> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent Leave as the given argument.
+     * Returns true if the list contains an equivalent leave as the given argument.
      */
-    public boolean contains(Leave toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameLeave);
+    public boolean contains(Leave leave) {
+        requireNonNull(leave);
+        return internalList.stream().anyMatch(leave::isSameLeave);
     }
 
     /**
-     * Adds a Leave to the list.
-     * The Leave must not already exist in the list.
+     * Adds a leave to the list.
+     * The leave must not already exist in the list.
      */
     public void add(Leave toAdd) {
         requireNonNull(toAdd);
@@ -49,16 +49,17 @@ public class UniqueLeaveList implements Iterable<Leave> {
     }
 
     /**
-     * Replaces the Leave {@code target} in the list with {@code editedLeave}.
+     * Replaces the leave {@code target} in the list with {@code editedLeave}.
      * {@code target} must exist in the list.
-     * The Leave identity of {@code editedLeave} must not be the same as another existing Leave in the list.
+     * The leave identity of {@code editedLeave} must not be the same as another existing leave in the list.
      */
     public void setLeave(Leave target, Leave editedLeave) {
         requireAllNonNull(target, editedLeave);
-        if (!contains(target)) {
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
             throw new LeaveNotFoundException();
         }
-        int index = internalList.indexOf(target);
 
         if (!target.isSameLeave(editedLeave) && contains(editedLeave)) {
             throw new DuplicateLeaveException();
@@ -68,24 +69,22 @@ public class UniqueLeaveList implements Iterable<Leave> {
     }
 
     /**
-     * Removes the equivalent Leave from the list.
-     * The Leave must exist in the list.
+     * Returns true if {@code leaves} contains only unique leaves.
      */
-    public void remove(Leave toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new LeaveNotFoundException();
+    private boolean leavesAreUnique(List<Leave> leaves) {
+        for (int i = 0; i < leaves.size() - 1; i++) {
+            for (int j = i + 1; j < leaves.size(); j++) {
+                if (leaves.get(i).isSameLeave(leaves.get(j))) {
+                    return false;
+                }
+            }
         }
-    }
-
-    public void setLeaves(UniqueLeaveList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        return true;
     }
 
     /**
-     * Replaces the contents of this list with {@code Leaves}.
-     * {@code Leaves} must not contain duplicate Leaves.
+     * Replaces the contents of this list with {@code leaves}.
+     * {@code leaves} must not contain duplicate leaves.
      */
     public void setLeaves(List<Leave> leaves) {
         requireAllNonNull(leaves);
@@ -94,6 +93,22 @@ public class UniqueLeaveList implements Iterable<Leave> {
         }
 
         internalList.setAll(leaves);
+    }
+
+    public void setLeaves(UniqueLeaveList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Removes the equivalent leave from the list.
+     * The leave must exist in the list.
+     */
+    public void remove(Leave toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new LeaveNotFoundException();
+        }
     }
 
     /**
@@ -131,19 +146,5 @@ public class UniqueLeaveList implements Iterable<Leave> {
     @Override
     public String toString() {
         return internalList.toString();
-    }
-
-    /**
-     * Returns true if {@code Leaves} contains only unique Leaves.
-     */
-    private boolean leavesAreUnique(List<Leave> leaves) {
-        for (int i = 0; i < leaves.size() - 1; i++) {
-            for (int j = i + 1; j < leaves.size(); j++) {
-                if (leaves.get(i).isSameLeave(leaves.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

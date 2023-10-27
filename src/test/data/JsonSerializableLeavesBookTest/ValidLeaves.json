@@ -1,0 +1,40 @@
+{
+    "leaves": [
+        {
+            "employee": {
+                "name": {
+                    "fullName": "Alice Pauline"
+                }
+            },
+            "start": "2020-01-01",
+            "end": "2020-01-02",
+            "title": "Alice's Maternity Leave",
+            "description": "Alice's Maternity Leave Description",
+            "status": "PENDING"
+        },
+        {
+            "employee": {
+                "name": {
+                    "fullName": "Benson Meier"
+                }
+            },
+            "start": "2020-01-01",
+            "end": "2020-01-02",
+            "title": "Benson's Paternity Leave",
+            "description": "Benson's Paternity Leave Description",
+            "status": "PENDING"
+        },
+        {
+            "employee": {
+                "name": {
+                    "fullName": "Alice Pauline"
+                }
+            },
+            "start": "2020-01-03",
+            "end": "2020-01-04",
+            "title": "Alice's Maternity Leave 2",
+            "description": "",
+            "status": "PENDING"
+        }
+    ]
+}

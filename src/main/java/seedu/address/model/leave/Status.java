@@ -14,6 +14,8 @@ public class Status {
         PENDING, APPROVED, REJECTED
     }
 
+    public static final String MESSAGE_CONSTRAINTS = "Status should be one of the following: "
+            + "PENDING, APPROVED, REJECTED";
     private StatusType status;
 
     private Status(StatusType status) {
@@ -29,6 +31,9 @@ public class Status {
      */
     public static Status of(String status) throws IllegalArgumentException {
         requireNonNull(status);
+        if (!status.matches("PENDING|APPROVED|REJECTED")) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         return new Status(StatusType.valueOf(status));
     }
 

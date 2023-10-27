@@ -23,12 +23,12 @@ public class LeavesBook implements ReadOnlyLeavesBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         leaves = new UniqueLeaveList();
     }
 
-    public LeavesBook() {}
+    public LeavesBook() {
+    }
 
     /**
      * Creates an LeavesBook using the Leaves in the {@code toBeCopied}

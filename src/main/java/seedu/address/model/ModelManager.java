@@ -23,10 +23,22 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
 
     private LeavesBook leavesBook;
-
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Leave> filteredLeaves;
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredLeaves = null;
+    }
 
     /**
      * Initializes a ModelManager with the given addressBook, leavesBook and userPrefs.
@@ -39,9 +51,9 @@ public class ModelManager implements Model {
                 + " and leaves book: " + leavesBook
                 + " and user prefs " + userPrefs);
         this.addressBook = new AddressBook(addressBook);
-        this.leavesBook = new LeavesBook(leavesBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.leavesBook = new LeavesBook(leavesBook);
         filteredLeaves = new FilteredList<>(this.leavesBook.getLeaveList());
     }
 
@@ -82,6 +94,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getLeavesBookFilePath() {
+        return userPrefs.getLeavesBookFilePath();
+    }
+
+    @Override
+    public void setLeavesBookFilePath(Path leavesBookFilePath) {
+        requireNonNull(leavesBookFilePath);
+        userPrefs.setAddressBookFilePath(leavesBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -142,7 +165,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-
     //=========== Filtered Leave List Accessors =============================================================
 
     /**
@@ -159,7 +181,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredLeaves.setPredicate(predicate);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -173,10 +194,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                &&leavesBook.equals(otherModelManager.leavesBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredLeaves.equals(otherModelManager.filteredLeaves);
+                && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
 }
