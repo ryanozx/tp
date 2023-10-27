@@ -310,6 +310,33 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] Data archiving
+
+_{Explain here how the data archiving feature will be implemented}_
+
+### Adding tag feature
+
+#### Implementation
+
+`AddTagCommand` is implemented similar to `EditCommand`.
+A new `Person` is created with the information from the old `Person`.
+The tags are then added before replacing the old `Person` with the new `Person`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
+
+#### Design considerations:
+
+**Aspect: How AddTagCommand executes:**
+* **Alternative 1 (current choice):** Builts a new Person.
+  * Pros: Easy to implement (using `EditCommand` as reference), immutability allows for potential redo and undo commands.
+  * Cons: Memory intensive, costly in terms of time.
+* **Alternative 2:** Add tags to `Person`.
+  * Pros: Memory efficient
+  * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
