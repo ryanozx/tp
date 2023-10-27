@@ -117,6 +117,9 @@
         "adding-a-new-employee-or-adding-employees-to-set-up-hrmate-initially-add": "Adding a new employee or adding employees to set up HRMate initially: add",
         "listing-all-employees-list": "Listing all employees: list",
         "editing-an-employee-s-personal-information-edit": "Editing an employee's personal information: edit",
+        "viewing-all-tags-view-tag": "Viewing All Tags: view-tag",
+        "adding-tags-to-employees-add-tag": "Adding tags to employees: add-tag",
+        "removing-tags-from-employees-delete-tag": "Removing tags from employees: delete-tag",
         "finding-employees-with-all-tags-in-a-group-of-tags-find-all-tag": "Finding employees with all tags in a group of tags: find-all-tag",
         "finding-employees-with-at-least-one-tag-in-a-group-of-tags-find-some-tag": "Finding employees with at least one tag in a group of tags: find-some-tag",
         "locating-an-employee-in-hrmate-by-name-find": "Locating an employee in HRMate by name: find",
@@ -137,6 +140,14 @@
       "title": "",
       "headings": {
         "hrmate": "HRMate"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/infibeyond.md",
+      "title": "Qin Nanxin's Portfolio Page",
+      "headings": {
+        "project-hrmate": "Project: HRMate"
       },
       "headingKeywords": {}
     },
