@@ -67,7 +67,7 @@ public class JsonSerializableLeavesBook {
             Status status = Status.of(jsonAdaptedLeave.getStatus());
             Date start = Date.of(jsonAdaptedLeave.getStart());
             Date end = Date.of(jsonAdaptedLeave.getEnd());
-            Person employee = addressBook.getPerson(jsonAdaptedLeave.getEmployee().getName().toString());
+            Person employee = addressBook.getPerson(jsonAdaptedLeave.getEmployee());
             Leave leave = new Leave(employee, title, start, end, description, status);
             if (leavesBook.hasLeave(leave)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LEAVE);
