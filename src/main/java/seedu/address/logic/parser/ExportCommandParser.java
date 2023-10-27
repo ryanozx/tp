@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import seedu.address.commons.controllers.FileDialogHandlerImpl;
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -64,6 +64,6 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             pathStrippedExtension = path;
         }
 
-        return pathStrippedExtension.concat(FileDialogHandlerImpl.CSV_SUFFIX);
+        return pathStrippedExtension.concat(CsvUtil.EXTENSION);
     }
 }

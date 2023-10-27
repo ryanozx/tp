@@ -5,14 +5,16 @@ import java.util.Optional;
 
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import seedu.address.commons.util.CsvUtil;
 
 /**
  * Handles file dialogs
  */
 public class FileDialogHandlerImpl implements FileDialogHandler {
 
-    public static final ExtensionFilter CSV_EXTENSION = new ExtensionFilter("CSV Files", "*.csv");
-    public static final String CSV_SUFFIX = ".csv";
+    private static final String EXTENSION_FORMAT = "*%s";
+    public static final ExtensionFilter CSV_EXTENSION = new ExtensionFilter("CSV Files",
+            String.format(EXTENSION_FORMAT, CsvUtil.EXTENSION));
 
     /**
      * Creates a file dialog for the user to select a file to open

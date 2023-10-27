@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
@@ -27,9 +30,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -109,6 +114,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addTag() throws Exception {
+        AddTagCommand command = (AddTagCommand) parser.parseCommand(
+                AddTagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + TAG_DESC_FRIEND);
+        assertEquals(new AddTagCommand(INDEX_FIRST_PERSON, List.of(new Tag(VALID_TAG_FRIEND))), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -126,5 +138,11 @@ public class AddressBookParserTest {
                 instanceof DeleteTagCommand);
         assertTrue(parser.parseCommand(DeleteTagCommand.COMMAND_WORD + " 1 t/friends t/colleagues t/family")
                 instanceof DeleteTagCommand);
+    }
+
+    @Test
+    public void parseCommand_viewTag() throws Exception {
+        assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD) instanceof ViewTagCommand);
+        assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD + " 3abc") instanceof ViewTagCommand);
     }
 }

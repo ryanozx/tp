@@ -53,10 +53,10 @@ The description for each command will contain the following
     more details.
 * **Examples:**
   * Gives a few examples of how the command is used and describes the outcome of the command
-* **Acceptable Values:** 
+* **Acceptable Values:**
   * Describes any restrictions on the type of values used in a command field. Values for these fields must satisfy the
     restrictions for the command to be acceptable.
-* **Warning:** 
+* **Warning:**
   <box type="warning" seamless>
   Describes any potential dangers of using a particular command that may lead to unexpected side effects. You should
   pay attention to the warnings to avoid performing a costly operation.
@@ -89,7 +89,7 @@ This command is used to add an employee to the address book. Let's examine how w
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also
   acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored <br> 
+  ignored <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -132,7 +132,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * GUI Changes: the created user is shown in a dedicated interface section
   * Message shown to user: "Successfully created employee"
 * **Expected Output on Failure:**
-  * `Missing argument error` -  if a compulsory argument is missing (compulsory arguments are `NAME`, `EMAIL`, 
+  * `Missing argument error` -  if a compulsory argument is missing (compulsory arguments are `NAME`, `EMAIL`,
     `PHONE_NUMBER` and `HOME_ADDRESS`)
   * `FIELD must be of format...` - if at least one of the field inputs violates the field's format requirements. Follow
     the displayed error message to fix the format error.
@@ -145,7 +145,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * Shows a list of all employees in HRMate
 * **Format:**
   * `list`
-* **Examples:** 
+* **Examples:**
 
 | S/N | Command information                                                                        |
 |-----|--------------------------------------------------------------------------------------------|
@@ -197,7 +197,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **What It Does:**
   * Shows a list of all tags currently in use within the address book, which helps HR managers quickly identify different categories of employees.
-    
+
 * **Format:**
   * `view-tag`
 * **Examples:**
@@ -226,19 +226,19 @@ This command is used to add an employee to the address book. Let's examine how w
 
 | S/N | Command information                                                                                                                                                                                                                        |
 |-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `add-tag 3 remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
-| 2   | **Command:** `add-tag 14 contract` <br><br> **Output:** Adds the tag “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tag “contract”  |
+| 1   | **Command:** `add-tag 3 t/remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
+| 2   | **Command:** `add-tag 14 t/temp t/contract` <br><br> **Output:** Adds the tag “temp” “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tags “temp” and “contract”  |
 
 * **Acceptable Values:**
   * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
-  * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
+  * Tag: A non-empty string used to categorise and label an employee. Tags names only allows alphanumeric characters, spaces, and dashes. (e.g., remote, contract-worker, full time). They are also case-sensitive, so “friend” and “Friend” are different tags.
 * **Expected Output on Success:**
   * GUI Changes: The employee's record shows the new tag.
-  * Message shown to the user: "Tag [Tag] added to [Employee name]."
+  * Message shown to the user: "Edited Person: ..." followed by the person's updated information
 * **Expected Output on Failure:**
-  * `Employee list index does not exist.` - An invalid index was specified
-  * `Tag already exists on this employee.` - The specified tag already exists in the employee's record
-  * `Missing employee list index or tag.` - There were missing parameters in command
+  * `The employee index provided is invalid` - An invalid index was specified
+  * `This employee already has some of the tags.` - The specified tag already exists in the employee's record
+  * `Invalid command format!...` followed by command information - There were missing parameters in command
 
 ### Removing tags from employees: `delete-tag`
 
@@ -256,7 +256,7 @@ This command is used to add an employee to the address book. Let's examine how w
 
 * **Acceptable Values:**
   * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
-  * Tag: A non-empty string used to categorise and label an employee. Tags must be single words and contain only alphanumeric characters (e.g., remote, contract, full-time). They are also case-sensitive, so “friend” and “Friend” are different tags.
+  * Tag: A non-empty string used to categorise and label an employee. Tags names only allows alphanumeric characters, spaces, and dashes. (e.g., remote, contract-worker, full time). They are also case-sensitive, so “friend” and “Friend” are different tags.
 * **Expected Output on Success:**
   * GUI Changes: The employee's record is updated to remove the deleted tag.
   * Message shown to the user: "Tag [Tag] removed from [Employee name]."
@@ -272,50 +272,50 @@ This command is used to add an employee to the address book. Let's examine how w
 
 
 * **What It Does:**
-  * Filters and displays individuals from a dataset who match all the specified tags exactly. It helps users narrow their search to find records meeting all the specified criteria.
-    
+  * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
+
 * **Format:**
-  * `find-all-tag [t/TAG]...`
+  * `find-all-tag t/TAG [t/MORE_TAGS]...`
 * **Examples:**
 
 
-| S/N | Command information                                                                                                                       |
-|-----|-------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-tag t/remote t/full-time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely  |
+| S/N | Command information                                                                                                                      |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-all-tag t/remote t/full time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely |
 
 * **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
-  * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
+  * GUI Changes: A list of employees who match some specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
-  * `Tags do not exist` - Invalid tags
-  * `Missing tags` - Missing parameters
-  
+  * `Invalid command format!` - Missing parameters
+  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
+
 ### Finding employees with at least one tag in a group of tags: `find-some-tag`
 
 
 * **What It Does:**
-  * Filters and displays individuals from a dataset who match at least one of the specified tags. It provides flexibility by showing records that meet any of the criteria provided.
+  * Filters and displays individuals from a dataset who match at least one of the specified tags (case-sensitive). It provides flexibility by showing records that meet any of the criteria provided.
 
 * **Format:**
-  * `find-some-tag [t/TAG]...`
+  * `find-some-tag t/TAG [t/MORE_TAGS]...`
 * **Examples:**
 
-| S/N | Command information                                                                                                                                                                |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `tag find-one-tag t/full-time t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely  |
+| S/N | Command information                                                                                                                                                           |
+|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-some-tag t/fullTime t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely |
 
 * **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, full-time)
+  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
   * Only full words will be matched, e.g. “remote” will not match “remotely”
 * **Expected Output on Success:**
   * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
-  * `Tags do not exist` - Invalid tags
-  * `Missing tags` - Missing parameters
+  * `Invalid command format!` - Missing parameters
+  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
 * **For advanced users:**
   * GUI Changes: The displayed employees will be sorted in the order of the search terms, from one match to all matches.
     ![find-some-tag UI for advanced users](images/find-some-tagUI.png)
@@ -358,7 +358,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Acceptable Values:**
   * The specified `EMPLOYEE_LIST_INDEX` must correspond to an index number shown in the address book. It must be a valid number, larger than zero, and cannot exceed the number of entries in the address book.
 * **Expected Output on Success:**
-  * GUI Changes: The record of the employee whose index is specified will no longer appear in the list of employees 
+  * GUI Changes: The record of the employee whose index is specified will no longer appear in the list of employees
   * Message shown to user: "[Employee name]'s record deleted"
 * **Expected Output on Failure:**
   * `Employee List Index does not exist` - An invalid index was specified
@@ -406,8 +406,64 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Expected Value on Failure:**
   * N/A (no expected failure)
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Importing/Exporting employee records
+It's painful having to add in each employee into HRMate manually. That's why HRMate provides import and export commands,
+so you can bring in all your records from Excel with just a single command!
+
+With the import and export commands, HRMate can read and save files in [CSV](#Glossary) format, which is supported
+by major spreadsheet applications such as Microsoft Excel. 
+
+
+#### Importing employee records : `import`
+
+Here's how you can bring over your records from Excel:
+
+1. Export your Excel save file in CSV format. Ensure that the separator is set to be a semicolon(;), and that you have
+the following fields: Name, Phone, Email, Address. You may also include a Tags column if you wish.
+   * You may skip this step if you already have a CSV file (e.g. you are importing a previously exported CSV file generated by
+   HRMate)
+2. In HRMate, type in the following command in the command box: `import`
+3. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
+4. You should see your employee records show up in HRMate, along with the message "Employee records have been imported from [your file name]!"
+
+Here are some possible error messages you might encounter and here's how you can fix them:
+
+| Error Message                                                       | Why it happens                                                               | Fix                                                                               |
+|---------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| Employee records were not imported                                  | You did not select a file in the file dialog                                 | Retype the command, and make sure to select a CSV file when the file dialog opens |
+| Records in file [file name] could not be imported, import cancelled | Your file likely contains illegal characters or is corrupted                 | Ensure that your data fulfils the following constraints (to be added)             |
+| No valid records found in file [file name], import cancelled        | Your file either is empty or does not contain a single valid employee record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
+
+
+#### Exporting employee records : `export`
+
+Not only can you bring your data into HRMate, you can also bring your data out of HRMate. HRMate's export feature allows you
+to export either the entire set of employee records, or employee records with a particular filter applied (e.g. only export
+all full-time employees, which are tagged with "Full time"). You can then either store your exported CSV file for future use,
+open it in a different application, or send it to another employee for them to import!
+
+Here's how you can export your data out of HRMate:
+
+1. In HRMate, type in the following command in the command box: `export [file name]`, replacing `[file name]` with the name
+you will like to give your file. Your files will be saved in CSV format automatically.
+   - For instance, if you would like to save your file as  `employees.csv`, type in the command `export employees`
+2. You should see the message "Employee records have been saved to [file name]!"
+3. To retrieve your exported file, go to the folder in which HRMate is stored in your File Explorer (if using Windows) or
+Finder (if using Mac OS). From there, click on the `export` folder.
+4. You should see your file in the `export` folder.
+
+Here are potential error messages that you may receive and here's how to fix them:
+
+| Error Message                                                       | Why it happens                                   | Fix                                                                                                                                                                                                                   |
+|---------------------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Employee records could not be saved!                                | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |      
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Saving the data
- 
+
 HRMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
@@ -418,10 +474,6 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
   <box type="warning" seamless>
     If your changes to the data file makes its format invalid, HRMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
   </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -440,18 +492,28 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                          |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`     |
-| **Clear**          | `clear`                                                                                                                                                                   |
-| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                         |
-| **Exit**           | `exit`                                                                                                                                                                    |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
-| **View tag**       | `view-tag`                                                                                                                                                                |
-| **Add tag**        | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                            |
-| **Delete tag**     | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                      |
-| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                    |
-| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                                  |
-| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                       |
-| **Help**           | `help`                                                                                                                                                                    |
-| **List**           | `list`                                                                                                                                                                    |
+| Action             | Format, Examples                                                                                                                                                      |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**          | `clear`                                                                                                                                                               |
+| **Delete**         | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| **Exit**           | `exit`                                                                                                                                                                |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **View tag**       | `view-tag`                                                                                                                                                            |
+| **Add tag**        | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                        |
+| **Delete tag**     | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                  |
+| **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
+| **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
+| **Find**           | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
+| **Help**           | `help`                                                                                                                                                                |
+| **List**           | `list`                                                                                                                                                                |
+| **Import**         | `import`                                                                                                                                                              |
+| **Export**         | `export FILE_NAME`                                                                                                                                                    |           
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+| Term | Meaning                                                                                                                         |
+|------|---------------------------------------------------------------------------------------------------------------------------------|
+| CSV  | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel. |
