@@ -1,0 +1,16 @@
+{
+    "leaves": [
+        {
+            "employee": {
+                "name": {
+                    "fullName": "Alice Pauline"
+                }
+            },
+            "start": "2015/10/02",
+            "end": "2015/10/02",
+            "title": "Sick Leave",
+            "description": "Dealing with a bug",
+            "status": "PENDING"
+        }
+    ]
+}

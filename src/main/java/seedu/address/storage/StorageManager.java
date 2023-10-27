@@ -7,7 +7,9 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -18,7 +20,19 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private LeavesBookStorage leavesBookStorage;
     private UserPrefsStorage userPrefsStorage;
+
+    /**
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage},
+     * {@code UserPrefStorage}, and {@code LeavesBookStorage}.
+     */
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+            LeavesBookStorage leavesBookStorage) {
+        this.addressBookStorage = addressBookStorage;
+        this.userPrefsStorage = userPrefsStorage;
+        this.leavesBookStorage = leavesBookStorage;
+    }
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -75,4 +89,32 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ LeavesBook methods ==============================
+    @Override
+    public Path getLeavesBookFilePath() {
+        return leavesBookStorage.getLeavesBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyLeavesBook> readLeavesBook(AddressBook addressBook) throws DataLoadingException {
+        return readLeavesBook(leavesBookStorage.getLeavesBookFilePath(), addressBook);
+    }
+
+    @Override
+    public Optional<ReadOnlyLeavesBook> readLeavesBook(Path filePath, AddressBook addressBook)
+            throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return leavesBookStorage.readLeavesBook(filePath, addressBook);
+    }
+
+    @Override
+    public void saveLeavesBook(ReadOnlyLeavesBook leavesBook) throws IOException {
+        saveLeavesBook(leavesBook, leavesBookStorage.getLeavesBookFilePath());
+    }
+
+    @Override
+    public void saveLeavesBook(ReadOnlyLeavesBook leavesBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        leavesBookStorage.saveLeavesBook(leavesBook, filePath);
+    }
 }

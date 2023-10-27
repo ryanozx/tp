@@ -336,7 +336,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Memory efficient
   * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
