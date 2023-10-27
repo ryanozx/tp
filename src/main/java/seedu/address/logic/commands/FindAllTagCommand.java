@@ -2,11 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagsContainAllTagsPredicate;
+
+import java.util.logging.Logger;
 
 /**
  * Find Persons with the exact tags
@@ -22,6 +26,7 @@ public class FindAllTagCommand extends Command {
             + " fullTime remote\n";
 
     private final TagsContainAllTagsPredicate predicate;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * @param predicate tags to match with employees
@@ -36,6 +41,7 @@ public class FindAllTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        logger.info("predicate: " + this.predicate); //dummy logger
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
