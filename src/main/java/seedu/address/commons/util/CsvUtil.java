@@ -35,23 +35,37 @@ public class CsvUtil {
         requireNonNull(filePath);
 
         boolean isCsvFileType = filePath.toString().endsWith(EXTENSION);
-
         if (!isCsvFileType) {
             throw new DataLoadingException(new Exception(
                     String.format(NOT_CSV_FILETYPE_ERROR_MESSAGE, filePath)));
         }
-
         if (!Files.exists(filePath)) {
             return Optional.empty();
         }
 
         logger.info("CSV file " + filePath + " found.");
+        return readRows(filePath);
+    }
 
+    /**
+     * Reads the CSV file at the provided file path into a CsvFile, which is then returned
+     * @param filePath Path containing the CSV file
+     * @return Optional containing the CsvFile if successfully read
+     * @throws DataLoadingException if file cannot be read
+     */
+    private static Optional<CsvFile> readRows(Path filePath) throws DataLoadingException {
         CsvFile readFile;
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath.toFile()))) {
-            String header = br.readLine();
-            readFile = new CsvFile(header, DELIMITER);
+            String firstLine = br.readLine();
+            char readFileDelimiter;
+            if (firstLine.startsWith(CsvFile.DELIMITER_PREFIX)) {
+                readFileDelimiter = firstLine.charAt(CsvFile.DELIMITER_PREFIX.length());
+                String header = br.readLine();
+                readFile = new CsvFile(header, String.valueOf(readFileDelimiter));
+            } else {
+                readFile = new CsvFile(firstLine, DELIMITER);
+            }
 
             String row;
             while ((row = br.readLine()) != null) {
