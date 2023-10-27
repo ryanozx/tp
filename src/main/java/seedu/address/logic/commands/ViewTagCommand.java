@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -21,12 +23,14 @@ public class ViewTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all tags available in alphabetically order.\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_VIEW_TAG_NONE = "There are currently no tags";
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         List<Person> people = model.getFilteredPersonList();
         ArrayList<String> tagsAll = new ArrayList<>();
+        logger.info(""); //dummy logger
 
         if (people.isEmpty()) {
             return new CommandResult(MESSAGE_VIEW_TAG_NONE);
