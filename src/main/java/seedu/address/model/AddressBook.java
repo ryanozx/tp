@@ -6,7 +6,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.UniqueLeaveList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -113,10 +112,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    @Override
-    public ObservableList<Leave> getLeaveList() {
-        return leaves.asUnmodifiableObservableList();
-    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

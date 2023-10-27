@@ -10,7 +10,6 @@ import seedu.address.model.person.Person;
  */
 public class ReadOnlyFilteredAddressBook implements ReadOnlyAddressBook {
     private final ObservableList<Person> persons;
-    private final ObservableList<Leave> leaves;
 
     /**
      * Constructs a ReadOnlyFilteredAddressBook object
@@ -18,16 +17,10 @@ public class ReadOnlyFilteredAddressBook implements ReadOnlyAddressBook {
      */
     public ReadOnlyFilteredAddressBook(Model model) {
         this.persons = model.getFilteredPersonList();
-        this.leaves = model.getFilteredLeaveList();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons;
-    }
-
-    @Override
-    public ObservableList<Leave> getLeaveList() {
-        return leaves;
     }
 }

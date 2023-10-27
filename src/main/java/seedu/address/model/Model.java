@@ -80,14 +80,27 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered leave list */
-    ObservableList<Leave> getFilteredLeaveList();
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' address book file path.
+     */
+    Path getLeavesBookFilePath();
+
+    /**
+     * Sets the user prefs' address book file path.
+     */
+    void setLeavesBookFilePath(Path leavesBookFilePath);
+
+    /** Returns the LeavesBook */
+    ReadOnlyLeavesBook getLeavesBook();
+
+    /** Returns an unmodifiable view of the filtered leave list */
+    ObservableList<Leave> getFilteredLeaveList();
 
     /**
      * Updates the filter of the filtered leave list to filter by the given {@code predicate}.
