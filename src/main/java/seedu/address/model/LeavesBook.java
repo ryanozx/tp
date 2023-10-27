@@ -23,7 +23,8 @@ public class LeavesBook implements ReadOnlyLeavesBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         leaves = new UniqueLeaveList();
     }
 
