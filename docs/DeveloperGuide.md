@@ -496,9 +496,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-<<<<<<< HEAD
 **Use case: List all tags**
-=======
+
+**MSS**
+
+1.  User requests to view all tags
+2.  HRMate shows a list of all available tags
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There is no existing tag in the system.
+
+    * 2a1. HRMate notifies the user of no existing tag in the system.
+
+      Use case ends.
+
 **Use case: List employees with at least one specified tags**
 
 **MSS**
@@ -522,7 +536,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 **Use case: List employees with all specified tags**
->>>>>>> b5b9dde244637804c5660e544a19f08ce96c53d8
 
 **MSS**
 
