@@ -143,11 +143,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== LeavesBook ================================================================================
-    public ReadOnlyLeavesBook getLeavesBook() {
-        return leavesBook;
-    }
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -164,8 +159,40 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+    //=========== LeavesBook ================================================================================
+    public ReadOnlyLeavesBook getLeavesBook() {
+        return leavesBook;
+    }
+    @Override
+    public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
+        this.leavesBook.resetData(leavesBook);
+    }
 
     //=========== Filtered Leave List Accessors =============================================================
+
+    @Override
+    public boolean hasLeave(Leave leave) {
+        requireNonNull(leave);
+        return leavesBook.hasLeave(leave);
+    }
+
+    @Override
+    public void deleteLeave(Leave target) {
+        leavesBook.removeLeave(target);
+    }
+
+    @Override
+    public void addLeave(Leave leave) {
+        leavesBook.addLeave(leave);
+        updateFilteredLeaveList(PREDICATE_SHOW_ALL_LEAVES);
+    }
+
+    @Override
+    public void setLeave(Leave target, Leave editedLeave) {
+        requireAllNonNull(target, editedLeave);
+
+        leavesBook.setLeave(target, editedLeave);
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of

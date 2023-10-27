@@ -14,6 +14,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Leave> PREDICATE_SHOW_ALL_LEAVES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,6 +87,35 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Replaces leave book data with the data in {@code leavesBook}.
+     */
+    void setLeavesBook(ReadOnlyLeavesBook leavesBook);
+
+    /**
+     * Returns true if a leave with the same identity as {@code leave} exists in the leave book.
+     */
+    boolean hasLeave(Leave leave);
+
+    /**
+     * Deletes the given leave.
+     * The leave must exist in the address book.
+     */
+    void deleteLeave(Leave target);
+
+    /**
+     * Adds the given leave.
+     * {@code leave} must not already exist in the leave book.
+     */
+    void addLeave(Leave leave);
+
+    /**
+     * Replaces the given leave {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the leave book.
+     * The leave identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
+     */
+    void setLeave(Leave target, Leave editedLeave);
 
     /**
      * Returns the user prefs' address book file path.

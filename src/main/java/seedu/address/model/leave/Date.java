@@ -14,6 +14,13 @@ public class Date {
 
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT);
+    private static final String VALIDATION_REGEX = "\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be in a format of `yyyy-MM-dd`";
+
+    public static final String MESSAGE_INVALID_END_DATE =
+            "The end date earlier than the start date!";
     private final LocalDate date;
 
     private Date(LocalDate date) {
@@ -40,6 +47,13 @@ public class Date {
     public static Date of(String date) throws IllegalArgumentException {
         requireAllNonNull(date);
         return new Date(LocalDate.parse(date));
+    }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidDate(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     public boolean isBefore(Date other) {

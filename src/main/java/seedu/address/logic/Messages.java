@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,6 +46,25 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code leave} for display to the user.
+     */
+    public static String format(Leave leave) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(leave.getEmployee().getName())
+                .append("; Title: ")
+                .append(leave.getTitle())
+                .append("; Start: ")
+                .append(leave.getStart())
+                .append("; End: ")
+                .append(leave.getEnd())
+                .append("; Status: ")
+                .append(leave.getStatus())
+                .append("; Description: ")
+                .append(leave.getDescription());
         return builder.toString();
     }
 
