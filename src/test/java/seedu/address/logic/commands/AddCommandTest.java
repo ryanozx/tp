@@ -21,7 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -85,7 +87,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -155,6 +157,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyLeavesBook getLeavesBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLeave(Leave target, Leave editedLeave) {
             throw new AssertionError("This method should not be called.");
         }
     }
