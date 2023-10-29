@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,5 +52,26 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the last index of the leave in the {@code model}'s leave list.
+     */
+    public static Index getLastLeaveIndex(Model model) {
+        return Index.fromOneBased(model.getLeavesBook().getLeaveList().size());
+    }
+
+    /**
+     * Returns an out of bound index of the {@code model}'s leave list.
+     */
+    public static Index getInvalidLeaveIndex(Model model) {
+        return Index.fromOneBased(model.getLeavesBook().getLeaveList().size() + 1);
+    }
+
+    /**
+     * Returns the leave in the {@code model}'s leave list at {@code index}.
+     */
+    public static Leave getLeave(Model model, Index index) {
+        return model.getLeavesBook().getLeaveList().get(index.getZeroBased());
     }
 }

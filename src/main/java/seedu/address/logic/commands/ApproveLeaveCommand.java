@@ -51,7 +51,7 @@ public class ApproveLeaveCommand extends Command {
         Leave leaveToApprove = leaveList.get(index.getZeroBased());
 
         if (leaveToApprove.getStatus().equals("APPROVED")) {
-            throw new CommandException(MESSAGE_DUPLICATE_LEAVE_APPROVE);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_LEAVE_APPROVE, Messages.format(leaveToApprove)));
         }
 
         Leave approvedLeave = createApprovedLeave(leaveToApprove);
