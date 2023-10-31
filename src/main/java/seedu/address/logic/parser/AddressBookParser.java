@@ -109,10 +109,6 @@ public class AddressBookParser {
         case AddLeaveCommand.COMMAND_WORD:
             return new AddLeaveCommandParser().parse(arguments);
 
-        // Sample codes to display the leave list when the command say so, no display of leave list by default
-        // if (commandText.equals("list-leaves")) {
-        //                logic.setFilterLeaves(true);
-        //            }
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

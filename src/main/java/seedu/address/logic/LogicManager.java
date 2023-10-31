@@ -35,7 +35,6 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private boolean isLeavesDisplay = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -99,11 +98,7 @@ public class LogicManager implements Logic {
     }
     @Override
     public ObservableList<Leave> getFilteredLeaveList() {
-        if (isLeavesDisplay) {
-            return model.getFilteredLeaveList();
-        } else {
-            return FXCollections.observableArrayList();
-        }
+        return model.getFilteredLeaveList();
     }
     @Override
     public Path getLeavesBookFilePath() {
