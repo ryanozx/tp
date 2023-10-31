@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RejectLeaveCommand;
 import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -102,6 +103,9 @@ public class AddressBookParser {
 
         case ApproveLeaveCommand.COMMAND_WORD:
             return new ApproveLeaveCommandParser().parse(arguments);
+
+        case RejectLeaveCommand.COMMAND_WORD:
+            return new RejectLeaveCommandParser().parse(arguments);
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommand();
