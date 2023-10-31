@@ -19,7 +19,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class JsonSerializableLeavesBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableLeavesBookTest");
-    private static final Path VALID_DATA_FILE = TEST_DATA_FOLDER.resolve("validLeaves.json");
+    private static final Path VALID_DATA_FILE = TEST_DATA_FOLDER.resolve("ValidLeaves.json");
     private static final Path INVALID_DATA_FILE = TEST_DATA_FOLDER.resolve("invalidLeaves.json");
     private static final Path DUPLICATE_DATA_FILE = TEST_DATA_FOLDER.resolve("duplicateLeaves.json");
 
