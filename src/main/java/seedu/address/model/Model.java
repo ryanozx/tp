@@ -95,4 +95,13 @@ public interface Model {
      * The person identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
      */
     void setLeave(Leave target, Leave editedLeave);
+
+    /** Returns an unmodifiable view of the filtered leave list */
+    ObservableList<Leave> getFilteredLeaveList();
+
+    /**
+     * Updates the filter of the filtered leave list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLeaveList(Predicate<Leave> predicate);
 }
