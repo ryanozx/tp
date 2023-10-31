@@ -20,6 +20,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
@@ -36,8 +37,24 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
+    /**
+     * Initializes a ModelManager with the given addressBook, leavesBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyLeavesBook leavesBook,
+            ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, leavesBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook
+                + " and leaves book: " + leavesBook
+                + " and user prefs " + userPrefs);
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.leavesBook = new LeavesBook(leavesBook);
+    }
+
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new LeavesBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -109,6 +126,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== LeavesBook ================================================================================
+    public ReadOnlyLeavesBook getLeavesBook() {
+        return leavesBook;
     }
 
     //=========== Filtered Person List Accessors =============================================================

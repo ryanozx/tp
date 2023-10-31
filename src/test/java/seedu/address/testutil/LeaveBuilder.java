@@ -4,6 +4,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,7 +17,7 @@ public class LeaveBuilder {
 
     private String title;
     private String description;
-    private Person employee;
+    private ComparablePerson employee;
     private Date start;
     private Date end;
 
@@ -61,7 +62,7 @@ public class LeaveBuilder {
     /**
      * Sets the {@code employee} of the {@code Leave} that we are building.
      */
-    public LeaveBuilder withEmployee(Person employee) {
+    public LeaveBuilder withEmployee(ComparablePerson employee) {
         this.employee = employee;
         return this;
     }

@@ -42,12 +42,12 @@ public class CsvAdaptedPersonTest {
     }
 
     @Test
-    public void getValues_validFields() {
+    public void getCsvValues_validFields() {
         String tagRep = String.join(CsvAdaptedPerson.TAG_DELIMITER, VALID_TAG_NAMES);
         String[] expectedValues = {VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, tagRep};
 
         CsvAdaptedPerson person = new CsvAdaptedPerson(BENSON);
-        assertEquals(person.getValues(), Arrays.asList(expectedValues));
+        assertEquals(person.getCsvValues(), Arrays.asList(expectedValues));
     }
 
     @Test

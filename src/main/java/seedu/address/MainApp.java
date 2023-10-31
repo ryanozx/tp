@@ -16,15 +16,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LeavesBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonLeavesBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.LeavesBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -58,7 +62,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LeavesBookStorage leavesBookStorage = new JsonLeavesBookStorage(userPrefs.getLeavesBookFilePath());
+
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, leavesBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -73,24 +79,49 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using addressbook data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressData;
+        boolean addressBookIsPresent = false;
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
+            } else {
+                addressBookIsPresent = true;
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            initialAddressData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        // Read from LeavesBook
+        logger.info("Using leavesbook data file : " + storage.getLeavesBookFilePath());
+
+        Optional<ReadOnlyLeavesBook> leavesBookOptional;
+        ReadOnlyLeavesBook initialLeavesData;
+        if (addressBookIsPresent) {
+            try {
+                leavesBookOptional = storage.readLeavesBook((AddressBook) initialAddressData);
+                if (leavesBookOptional.isEmpty()) {
+                    logger.info("Creating a new data file " + storage.getLeavesBookFilePath()
+                            + " populated with an empty LeavesBook.");
+                }
+                initialLeavesData = leavesBookOptional.orElseGet(() -> new LeavesBook());
+            } catch (DataLoadingException e) {
+                logger.warning("Data file at " + storage.getLeavesBookFilePath() + " could not be loaded."
+                        + " Will be starting with an empty LeavesBook.");
+                initialLeavesData = new LeavesBook();
+            }
+        } else {
+            initialLeavesData = new LeavesBook();
+        }
+        return new ModelManager(initialAddressData, initialLeavesData, userPrefs);
     }
 
     private void initLogging(Config config) {
