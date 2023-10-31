@@ -49,21 +49,27 @@
         </StackPane>
 
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <VBox HBox.hgrow="ALWAYS">
+            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <StackPane fx:id="addressStatusbarPlaceholder" VBox.vgrow="NEVER" />
           </VBox>
-          <VBox fx:id="leaveList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="leaveListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+
+          <VBox HBox.hgrow="ALWAYS">
+            <VBox fx:id="leaveList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+                <StackPane fx:id="leaveListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <StackPane fx:id="leaveStatusbarPlaceholder" VBox.vgrow="NEVER" />
           </VBox>
         </HBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>

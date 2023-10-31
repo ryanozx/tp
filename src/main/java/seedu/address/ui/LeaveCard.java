@@ -27,6 +27,8 @@ public class LeaveCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
     private Label title;
@@ -45,11 +47,33 @@ public class LeaveCard extends UiPart<Region> {
     public LeaveCard(Leave leave, int displayedIndex) {
         super(FXML);
         this.leave = leave;
-        name.setText(leave.getEmployee().getName().fullName);
+        if (leave == null) {
+            throw new IllegalArgumentException("Leave cannot be null.");
+        }
+
+        String statusType = leave.getStatus();
+
+        String styleClass;
+        switch (statusType) {
+        case "PENDING":
+            styleClass = "status-pending";
+            break;
+        case "APPROVED":
+            styleClass = "status-approved";
+            break;
+        case "REJECTED":
+            styleClass = "status-rejected";
+            break;
+        default:
+            styleClass = "";
+        }
+
+        id.setText(displayedIndex + ". ");
         title.setText(leave.getTitle());
-        description.setText(leave.getDescription());
-        dateStart.setText(leave.getStart().toString());
-        dateEnd.setText(leave.getEnd().toString());
+        description.setText("Description:\n" + leave.getDescription());
+        dateStart.setText("Date Start: " + leave.getStart().toString());
+        dateEnd.setText("Date End: " + leave.getEnd().toString());
+        status.getStyleClass().setAll(styleClass);
         status.getChildren().add(new Label(leave.getStatus().toString()));
     }
 }

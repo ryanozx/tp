@@ -6,22 +6,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.leave.Date;
-import seedu.address.model.leave.Leave;
-import seedu.address.model.leave.Status;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -132,7 +125,7 @@ public class ParserUtil {
         return tagSet;
     }
 
-//=========== LeavesBook ================================================================================
+    //=========== LeavesBook ================================================================================
 
     /**
      * Parses a {@code String title} into a {@code String}.
@@ -173,7 +166,7 @@ public class ParserUtil {
         requireNonNull(end);
         requireNonNull(start);
         String trimmedDateEnd = end.trim();
-        String trimmedDateStart= start.trim();
+        String trimmedDateStart = start.trim();
         if (!Date.isValidDate(trimmedDateStart) || !Date.isValidDate(trimmedDateEnd)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }

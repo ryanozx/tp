@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
@@ -161,6 +162,87 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Replaces leave book data with the data in {@code leavesBook}.
+         *
+         * @param leavesBook
+         */
+        @Override
+        public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
+
+        }
+
+        /**
+         * Returns true if a leave with the same identity as {@code leave} exists in the leave book.
+         *
+         * @param leave
+         */
+        @Override
+        public boolean hasLeave(Leave leave) {
+            return false;
+        }
+
+        /**
+         * Deletes the given leave.
+         * The leave must exist in the address book.
+         *
+         * @param target
+         */
+        @Override
+        public void deleteLeave(Leave target) {
+
+        }
+
+        /**
+         * Adds the given leave.
+         * {@code leave} must not already exist in the leave book.
+         *
+         * @param leave
+         */
+        @Override
+        public void addLeave(Leave leave) {
+
+        }
+
+        /**
+         * Replaces the given leave {@code target} with {@code editedPerson}.
+         * {@code target} must exist in the leave book.
+         * The leave identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
+         *
+         * @param target
+         * @param editedLeave
+         */
+        @Override
+        public void setLeave(Leave target, Leave editedLeave) {
+
+        }
+
+        /**
+         * Returns the user prefs' address book file path.
+         */
+        @Override
+        public Path getLeavesBookFilePath() {
+            return null;
+        }
+
+        /**
+         * Sets the user prefs' address book file path.
+         *
+         * @param leavesBookFilePath
+         */
+        @Override
+        public void setLeavesBookFilePath(Path leavesBookFilePath) {
+
+        }
+
+        /**
+         * Returns the LeavesBook
+         */
+        @Override
+        public ReadOnlyLeavesBook getLeavesBook() {
+            return null;
         }
 
         @Override

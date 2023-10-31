@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -34,6 +35,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private boolean isLeavesDisplay = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -54,6 +56,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveLeavesBook(model.getLeavesBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -96,7 +99,11 @@ public class LogicManager implements Logic {
     }
     @Override
     public ObservableList<Leave> getFilteredLeaveList() {
-        return model.getFilteredLeaveList();
+        if (isLeavesDisplay) {
+            return model.getFilteredLeaveList();
+        } else {
+            return FXCollections.observableArrayList();
+        }
     }
     @Override
     public Path getLeavesBookFilePath() {
