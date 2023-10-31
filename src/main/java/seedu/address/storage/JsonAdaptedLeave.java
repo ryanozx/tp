@@ -26,7 +26,7 @@ public class JsonAdaptedLeave {
     /**
      * Helper class to access nested field in serialized JSON Leave object
      */
-    private static class Employee {
+    public static class Employee {
         private Name name;
 
         @JsonCreator
@@ -43,7 +43,7 @@ public class JsonAdaptedLeave {
     /**
      * Helper class to access nested field in serialized JSON Leave object
      */
-    private static class Name {
+    public static class Name {
         private String fullName;
 
         @JsonCreator
@@ -51,7 +51,6 @@ public class JsonAdaptedLeave {
             this.fullName = fullName;
         }
 
-        // @JsonProperty("fullName")
         public String getFullName() {
             return fullName;
         }
