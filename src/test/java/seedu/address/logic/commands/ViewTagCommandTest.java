@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ViewTagCommand.MESSAGE_VIEW_TAG_NONE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +22,8 @@ public class ViewTagCommandTest {
 
     @Test
     public void execute_viewTag_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
         ViewTagCommand viewTagCommand = new ViewTagCommand();
         CommandResult expectedCommandResult = viewTagCommand.execute(model);
         assertCommandSuccess(viewTagCommand, model, expectedCommandResult, expectedModel);

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,22 +21,10 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private LeavesBook leavesBook;
+    private final LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-    }
+    private final FilteredList<Leave> filteredLeaves;
 
     /**
      * Initializes a ModelManager with the given addressBook, leavesBook and userPrefs.
@@ -51,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.leavesBook = new LeavesBook(leavesBook);
+        filteredLeaves = new FilteredList<>(this.leavesBook.getLeaveList());
     }
 
     public ModelManager() {
@@ -104,6 +94,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -133,6 +124,10 @@ public class ModelManager implements Model {
         return leavesBook;
     }
 
+    public void deleteLeave(Leave leaveToDelete) {
+        leavesBook.removeLeave(leaveToDelete);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -149,6 +144,14 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Filtered Leave List Accessors =============================================================
+
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return filteredLeaves;
+    }
+
 
     @Override
     public boolean equals(Object other) {
