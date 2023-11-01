@@ -1,13 +1,17 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.PersonEntry;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Title;
 import seedu.address.model.person.ComparablePerson;
 
 /**
@@ -26,7 +30,7 @@ public class JsonAdaptedLeave {
     /**
      * Helper class to access nested field in serialized JSON Leave object
      */
-    private static class Employee {
+    public static class Employee {
         private Name name;
 
         @JsonCreator
@@ -43,7 +47,7 @@ public class JsonAdaptedLeave {
     /**
      * Helper class to access nested field in serialized JSON Leave object
      */
-    private static class Name {
+    public static class Name {
         private String fullName;
 
         @JsonCreator
@@ -51,7 +55,6 @@ public class JsonAdaptedLeave {
             this.fullName = fullName;
         }
 
-        // @JsonProperty("fullName")
         public String getFullName() {
             return fullName;
         }
@@ -64,6 +67,7 @@ public class JsonAdaptedLeave {
     public JsonAdaptedLeave(@JsonProperty("start") String start, @JsonProperty("end") String end,
             @JsonProperty("title") String title, @JsonProperty("description") String description,
             @JsonProperty("status") String status, @JsonProperty("employee") Employee employee) {
+        requireNonNull(employee);
         this.start = start;
         this.end = end;
         this.title = title;
@@ -123,8 +127,14 @@ public class JsonAdaptedLeave {
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "title"));
         }
-        if (employee == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "employee"));
+        if (!Title.isValidTitle(title)) {
+            throw new IllegalValueException(Title.MESSAGE_CONSTRAINTS);
+        }
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "status"));
