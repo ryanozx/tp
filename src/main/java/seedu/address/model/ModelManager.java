@@ -26,7 +26,8 @@ public class ModelManager implements Model {
     private LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Leave> filteredLeaves;
+    private FilteredList<Leave> filteredLeaves;
+  
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -229,4 +230,20 @@ public class ModelManager implements Model {
                 && filteredLeaves.equals(otherModelManager.filteredLeaves);
     }
 
+    //=========== Filtered Leave List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
+     * {@code versionedLeavesBook}
+     */
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return filteredLeaves;
+    }
+
+    @Override
+    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
+        requireNonNull(predicate);
+        filteredLeaves.setPredicate(predicate);
+    }
 }

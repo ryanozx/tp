@@ -87,7 +87,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -218,6 +218,7 @@ public class AddCommandTest {
         public void setLeave(Leave target, Leave editedLeave) {
             throw new AssertionError("This method should not be called.");
         }
+
 
         /**
          * Returns the user prefs' address book file path.

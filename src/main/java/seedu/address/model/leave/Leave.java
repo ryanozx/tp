@@ -14,8 +14,8 @@ import seedu.address.model.person.Person;
 public class Leave {
 
     private final ComparablePerson employee;
-    private final String title;
-    private final String description;
+    private final Title title;
+    private final Description description;
     private final Date start;
     private final Date end;
     private final Status status;
@@ -39,8 +39,8 @@ public class Leave {
             throw new EndBeforeStartException();
         }
         this.employee = employee;
-        this.title = title;
-        this.description = description;
+        this.title = new Title(title);
+        this.description = new Description(description);
         this.start = start;
         this.end = end;
         this.status = Status.getDefault();
@@ -62,8 +62,8 @@ public class Leave {
             throw new EndBeforeStartException();
         }
         this.employee = employee;
-        this.title = title;
-        this.description = "";
+        this.title = new Title(title);
+        this.description = Description.getDefault();
         this.start = start;
         this.end = end;
         this.status = Status.getDefault();
@@ -88,8 +88,8 @@ public class Leave {
             throw new EndBeforeStartException();
         }
         this.employee = employee;
-        this.title = title;
-        this.description = description;
+        this.title = new Title(title);
+        this.description = new Description(description);
         this.start = start;
         this.end = end;
         this.status = status;
@@ -100,11 +100,11 @@ public class Leave {
     }
 
     public String getTitle() {
-        return title;
+        return title.toString();
     }
 
     public String getDescription() {
-        return description;
+        return description.toString();
     }
 
     public Date getStart() {

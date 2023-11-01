@@ -1,0 +1,28 @@
+{
+    "leaves": [
+        {
+            "employee": {
+                "name": {
+                    "fullName": "Alice Pauline"
+                }
+            },
+            "start": "2020-01-01",
+            "end": "2020-01-02",
+            "title": "Alice's Maternity Leave",
+            "description": "Alice's Maternity Leave Description",
+            "status": "PENDING"
+        },
+        {
+            "employee": {
+                "name": {
+                    "fullName": "Alice Pauline"
+                }
+            },
+            "start": "2020-01-01",
+            "end": "2020-01-02",
+            "title": "Alice's Maternity Leave",
+            "description": "Alice's Maternity Leave Description",
+            "status": "APPROVED"
+        }
+    ]
+}
