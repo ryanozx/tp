@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.time.format.DateTimeParseException;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -22,8 +20,8 @@ public class JsonAdaptedLeaveTest {
 
     private static final String VALID_START = ALICE_LEAVE.getStart().toString();
     private static final String VALID_END = ALICE_LEAVE.getEnd().toString();
-    private static final String VALID_TITLE = ALICE_LEAVE.getTitle();
-    private static final String VALID_DESCRIPTION = ALICE_LEAVE.getDescription();
+    private static final String VALID_TITLE = ALICE_LEAVE.getTitle().toString();
+    private static final String VALID_DESCRIPTION = ALICE_LEAVE.getDescription().toString();
     private static final String EMPTY_DESCRIPTION = "";
     private static final String VALID_STATUS = ALICE_LEAVE.getStatus();
     private static final Employee VALID_EMPLOYEE = new Employee(new Name(ALICE.getName().toString()));
@@ -59,7 +57,7 @@ public class JsonAdaptedLeaveTest {
     public void toModelType_invalidStart_throwsIllegalValueException() {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(INVALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
-        assertThrows(DateTimeParseException.class, leave::toModelType);
+        assertThrows(IllegalValueException.class, leave::toModelType);
     }
 
     @Test
@@ -74,7 +72,7 @@ public class JsonAdaptedLeaveTest {
     public void toModelType_invalidEnd_throwsIllegalValueException() {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, INVALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
-        assertThrows(DateTimeParseException.class, leave::toModelType);
+        assertThrows(IllegalValueException.class, leave::toModelType);
     }
 
     @Test

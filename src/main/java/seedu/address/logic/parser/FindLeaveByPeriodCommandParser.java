@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.leave.Date;
 import seedu.address.model.leave.LeaveInPeriodPredicate;
+import seedu.address.model.leave.Range;
 
 /**
  * Parses input arguments and creates a FindLeaveByPeriodCommand object
@@ -25,14 +25,12 @@ public class FindLeaveByPeriodCommandParser implements Parser<FindLeaveByPeriodC
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_DATE_START, PREFIX_LEAVE_DATE_END);
 
-        Date startDate = argMultimap.getValue(PREFIX_LEAVE_DATE_START)
-                .map(Date::of)
-                .orElse(null);
-        Date endDate = argMultimap.getValue(PREFIX_LEAVE_DATE_END)
-                .map(Date::of)
-                .orElse(null);
+        String startDate = argMultimap.getValue(PREFIX_LEAVE_DATE_START).orElse(null);
+        String endDate = argMultimap.getValue(PREFIX_LEAVE_DATE_END).orElse(null);
 
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(startDate, endDate);
+        Range dateRange = ParserUtil.parseNullableRange(startDate, endDate);
+
+        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(dateRange);
         return new FindLeaveByPeriodCommand(predicate);
     }
 }

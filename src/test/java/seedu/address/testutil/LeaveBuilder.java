@@ -3,8 +3,12 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Title;
+import seedu.address.model.leave.exceptions.EndBeforeStartException;
 import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Person;
 
@@ -12,13 +16,15 @@ import seedu.address.model.person.Person;
  * A utility class to help with building Leave objects.
  */
 public class LeaveBuilder {
-    public static final String DEFAULT_TITLE = "Alice's Maternity Leave";
-    public static final String DEFAULT_DESCRIPTION = "Alice's Maternity Leave Description";
+    public static final Title DEFAULT_TITLE = new Title("Alice's Maternity Leave");
+    public static final Description DEFAULT_DESCRIPTION = new Description("Alice's Maternity Leave Description");
     public static final Person DEFAULT_PERSON = ALICE;
     public static final Status DEFAULT_STATUS = Status.getDefault();
+    public static final Date DEFAULT_START = Date.of("2020-01-01");
+    public static final Date DEFAULT_END = Date.of("2020-01-02");
 
-    private String title;
-    private String description;
+    private Title title;
+    private Description description;
     private ComparablePerson employee;
     private Date start;
     private Date end;
@@ -31,8 +37,8 @@ public class LeaveBuilder {
         description = DEFAULT_DESCRIPTION;
         employee = DEFAULT_PERSON;
         status = DEFAULT_STATUS;
-        // start = LocalDate.of(2020, 1, 1);
-        // end = LocalDate.of(2020, 1, 2);
+        start = DEFAULT_START;
+        end = DEFAULT_END;
     }
 
     /**
@@ -75,7 +81,7 @@ public class LeaveBuilder {
      * Sets the {@code title} of the {@code Leave} that we are building.
      */
     public LeaveBuilder withTitle(String title) {
-        this.title = title;
+        this.title = new Title(title);
         return this;
     }
 
@@ -83,7 +89,7 @@ public class LeaveBuilder {
      * Sets the {@code description} of the {@code Leave} that we are building.
      */
     public LeaveBuilder withDescription(String description) {
-        this.description = description;
+        this.description = new Description(description);
         return this;
     }
 
@@ -95,7 +101,14 @@ public class LeaveBuilder {
         return this;
     }
 
-    public Leave build() {
-        return new Leave(employee, title, start, end, description, status);
+    /**
+     * Builds Leave object based on attributes set previously
+     * @return Leave object with given attributes
+     * @throws EndBeforeStartException if end date is before start date
+     * @throws NullPointerException if start or end date is null
+     */
+    public Leave build() throws EndBeforeStartException, NullPointerException {
+        Range dateRange = Range.createNonNullRange(start, end);
+        return new Leave(employee, title, dateRange, description, status);
     }
 }

@@ -2,11 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_LEAVES_LISTED_OVERVIEW;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 
-import seedu.address.model.leave.LeaveInPeriodPredicate;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
+import seedu.address.model.leave.LeaveInPeriodPredicate;
 
 /**
  * Returns a list of leaves that coincide with one or more days of a given period.
@@ -19,11 +20,11 @@ public class FindLeaveByPeriodCommand extends Command {
             + " returned (if the start date is supplied) or all leaves that start before and on the queried"
             + " end date are returned (if the end date is supplied).\n"
             + "Parameters: "
-            + "[" + PREFIX_LEAVE_START + "START_DATE] "
-            + "[" + PREFIX_LEAVE_END + "END_DATE]\n"
+            + "[" + PREFIX_LEAVE_DATE_START + "START_DATE] "
+            + "[" + PREFIX_LEAVE_DATE_END + "END_DATE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_LEAVE_START + "2023-10-30 "
-            + PREFIX_LEAVE_END + "2023-10-31";
+            + PREFIX_LEAVE_DATE_START + "2023-10-30" + " "
+            + PREFIX_LEAVE_DATE_END + "2023-10-31";
 
     private final LeaveInPeriodPredicate predicate;
 
@@ -55,8 +56,14 @@ public class FindLeaveByPeriodCommand extends Command {
         if (!(other instanceof FindLeaveByPeriodCommand)) {
             return false;
         }
-        
         FindLeaveByPeriodCommand otherCommand = (FindLeaveByPeriodCommand) other;
         return this.predicate.equals(otherCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }

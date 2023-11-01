@@ -24,9 +24,9 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void equals_startAndEndDateNonNull() {
-        LeaveInPeriodPredicate firstPredicate = new LeaveInPeriodPredicate(FIRST_DATE, SECOND_DATE);
-        LeaveInPeriodPredicate secondPredicate = new LeaveInPeriodPredicate(FIRST_DATE, THIRD_DATE);
-        LeaveInPeriodPredicate thirdPredicate = new LeaveInPeriodPredicate(SECOND_DATE, THIRD_DATE);
+        LeaveInPeriodPredicate firstPredicate = generatePredicate(FIRST_DATE, SECOND_DATE);
+        LeaveInPeriodPredicate secondPredicate = generatePredicate(FIRST_DATE, THIRD_DATE);
+        LeaveInPeriodPredicate thirdPredicate = generatePredicate(SECOND_DATE, THIRD_DATE);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
@@ -35,7 +35,7 @@ public class LeaveInPeriodPredicateTest {
         assertFalse(firstPredicate.equals("1"));
 
         // same start and end date -> returns true
-        LeaveInPeriodPredicate firstPredicateCopy = new LeaveInPeriodPredicate(FIRST_DATE, SECOND_DATE);
+        LeaveInPeriodPredicate firstPredicateCopy = generatePredicate(FIRST_DATE, SECOND_DATE);
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // same start, different end -> returns false
@@ -45,14 +45,25 @@ public class LeaveInPeriodPredicateTest {
         assertNotEquals(thirdPredicate, secondPredicate);
     }
 
+    /**
+     * Generates a LeaveInPeriodPredicate that can take in null start and end dates
+     * @param startDate Start date of period / null
+     * @param endDate End date of period / null
+     * @return LeaveInPeriodPredicate containing specified date range
+     */
+    public static LeaveInPeriodPredicate generatePredicate(Date startDate, Date endDate) {
+        Range dateRange = Range.createNullableRange(startDate, endDate);
+        return new LeaveInPeriodPredicate(dateRange);
+    }
+
     @Test
     public void equals_startNull() {
-        LeaveInPeriodPredicate defaultPredicate = new LeaveInPeriodPredicate(null, SECOND_DATE);
-        LeaveInPeriodPredicate nonNullStartPredicate = new LeaveInPeriodPredicate(FIRST_DATE, SECOND_DATE);
-        LeaveInPeriodPredicate diffEndPredicate = new LeaveInPeriodPredicate(null, FIRST_DATE);
+        LeaveInPeriodPredicate defaultPredicate = generatePredicate(null, SECOND_DATE);
+        LeaveInPeriodPredicate nonNullStartPredicate = generatePredicate(FIRST_DATE, SECOND_DATE);
+        LeaveInPeriodPredicate diffEndPredicate = generatePredicate(null, FIRST_DATE);
 
         // same end date -> returns true
-        LeaveInPeriodPredicate defaultPredicateCopy = new LeaveInPeriodPredicate(null, SECOND_DATE);
+        LeaveInPeriodPredicate defaultPredicateCopy = generatePredicate(null, SECOND_DATE);
         assertEquals(defaultPredicate, defaultPredicateCopy);
 
         // compare with non-null start date -> returns false
@@ -64,12 +75,12 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void equals_endNull() {
-        LeaveInPeriodPredicate defaultPredicate = new LeaveInPeriodPredicate(FIRST_DATE, null);
-        LeaveInPeriodPredicate nonNullEndPredicate = new LeaveInPeriodPredicate(FIRST_DATE, SECOND_DATE);
-        LeaveInPeriodPredicate diffStartPredicate = new LeaveInPeriodPredicate(SECOND_DATE, null);
+        LeaveInPeriodPredicate defaultPredicate = generatePredicate(FIRST_DATE, null);
+        LeaveInPeriodPredicate nonNullEndPredicate = generatePredicate(FIRST_DATE, SECOND_DATE);
+        LeaveInPeriodPredicate diffStartPredicate = generatePredicate(SECOND_DATE, null);
 
         // same start date -> returns true
-        LeaveInPeriodPredicate defaultPredicateCopy = new LeaveInPeriodPredicate(FIRST_DATE, null);
+        LeaveInPeriodPredicate defaultPredicateCopy = generatePredicate(FIRST_DATE, null);
         assertEquals(defaultPredicate, defaultPredicateCopy);
 
         // compare with non-null end date -> returns false
@@ -81,12 +92,12 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void equals_startAndEndNull() {
-        LeaveInPeriodPredicate defaultPredicate = new LeaveInPeriodPredicate(null, null);
-        LeaveInPeriodPredicate nonNullStartPredicate = new LeaveInPeriodPredicate(FIRST_DATE, null);
-        LeaveInPeriodPredicate nonNullEndPredicate = new LeaveInPeriodPredicate(null, SECOND_DATE);
+        LeaveInPeriodPredicate defaultPredicate = generatePredicate(null, null);
+        LeaveInPeriodPredicate nonNullStartPredicate = generatePredicate(FIRST_DATE, null);
+        LeaveInPeriodPredicate nonNullEndPredicate = generatePredicate(null, SECOND_DATE);
 
         // start and end both null -> returns true
-        LeaveInPeriodPredicate defaultPredicateCopy = new LeaveInPeriodPredicate(null, null);
+        LeaveInPeriodPredicate defaultPredicateCopy = generatePredicate(null, null);
         assertEquals(defaultPredicate, defaultPredicateCopy);
 
         // compare with non-null start date -> returns false
@@ -99,26 +110,26 @@ public class LeaveInPeriodPredicateTest {
     @Test
     public void constructor_validInputs_doesNotThrow() {
         // no dates supplied
-        assertDoesNotThrow(() -> new LeaveInPeriodPredicate(null, null));
+        assertDoesNotThrow(() -> generatePredicate(null, null));
         // only start date supplied
-        assertDoesNotThrow(() -> new LeaveInPeriodPredicate(FIRST_DATE, null));
+        assertDoesNotThrow(() -> generatePredicate(FIRST_DATE, null));
         // only end date supplied
-        assertDoesNotThrow(() -> new LeaveInPeriodPredicate(null, SIXTH_DATE));
+        assertDoesNotThrow(() -> generatePredicate(null, SIXTH_DATE));
         // start and end date supplied, start before end
-        assertDoesNotThrow(() -> new LeaveInPeriodPredicate(FIRST_DATE, SIXTH_DATE));
+        assertDoesNotThrow(() -> generatePredicate(FIRST_DATE, SIXTH_DATE));
         // start and end date supplied, start equals end
-        assertDoesNotThrow(() -> new LeaveInPeriodPredicate(FIRST_DATE, FIRST_DATE));
+        assertDoesNotThrow(() -> generatePredicate(FIRST_DATE, FIRST_DATE));
     }
 
     @Test
     public void constructor_endBeforeStart_throwsException() {
-        assertThrows(EndBeforeStartException.class,
-                () -> new LeaveInPeriodPredicate(SECOND_DATE, FIRST_DATE));
+        assertThrows(EndBeforeStartException.class, () ->
+                generatePredicate(SECOND_DATE, FIRST_DATE));
     }
 
     @Test
     public void test_noStartAndEndDate_returnsTrue() {
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(null, null);
+        LeaveInPeriodPredicate predicate = generatePredicate(null, null);
         assertTrue(predicate.test(new LeaveBuilder()
                 .withStart(FIRST_DATE).withEnd(SECOND_DATE)
                 .build()));
@@ -126,7 +137,7 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void test_hasStartAndEndDate_returnsTrue() {
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(
+        LeaveInPeriodPredicate predicate = generatePredicate(
                 SECOND_DATE, FIFTH_DATE);
 
         // start before period, end within period -> returns true
@@ -189,13 +200,13 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void test_hasStartAndEndDate_returnsFalse() {
-        LeaveInPeriodPredicate latePredicate = new LeaveInPeriodPredicate(THIRD_DATE, SIXTH_DATE);
+        LeaveInPeriodPredicate latePredicate = generatePredicate(THIRD_DATE, SIXTH_DATE);
         // end date before query start date -> return false
         assertFalse(latePredicate.test(new LeaveBuilder()
                 .withStart(FIRST_DATE).withEnd(SECOND_DATE)
                 .build()));
 
-        LeaveInPeriodPredicate earlyPredicate = new LeaveInPeriodPredicate(FIRST_DATE, FOURTH_DATE);
+        LeaveInPeriodPredicate earlyPredicate = generatePredicate(FIRST_DATE, FOURTH_DATE);
         // start date after query end date -> returns false
         assertFalse(earlyPredicate.test(new LeaveBuilder()
                 .withStart(FIFTH_DATE).withEnd(SIXTH_DATE)
@@ -204,7 +215,7 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void test_hasStartDate_returnsTrue() {
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(THIRD_DATE, null);
+        LeaveInPeriodPredicate predicate = generatePredicate(THIRD_DATE, null);
 
         // start date before query start, end date on query start -> returns true
         assertTrue(predicate.test(new LeaveBuilder()
@@ -232,7 +243,7 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void test_hasStartDate_returnsFalse() {
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(THIRD_DATE, null);
+        LeaveInPeriodPredicate predicate = generatePredicate(THIRD_DATE, null);
 
         // end date is before query start -> returns false
         assertFalse(predicate.test(new LeaveBuilder()
@@ -242,7 +253,7 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void test_hasEndDate_returnsTrue() {
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(null, FOURTH_DATE);
+        LeaveInPeriodPredicate predicate = generatePredicate(null, FOURTH_DATE);
 
         // end date before query end -> returns true
         assertTrue(predicate.test(new LeaveBuilder()
@@ -270,7 +281,7 @@ public class LeaveInPeriodPredicateTest {
 
     @Test
     public void test_hasEndDate_returnsFalse() {
-        LeaveInPeriodPredicate predicate = new LeaveInPeriodPredicate(null, FOURTH_DATE);
+        LeaveInPeriodPredicate predicate = generatePredicate(null, FOURTH_DATE);
 
         // start date after query end -> returns false
         assertFalse(predicate.test(new LeaveBuilder()

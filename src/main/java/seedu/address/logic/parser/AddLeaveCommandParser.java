@@ -6,13 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Title;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -20,8 +21,6 @@ import seedu.address.model.leave.Date;
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
     private static final String NO_DESCRIPTION_PLACEHOLDER = "NONE";
-    private static final int START_DATE_INDEX = 0;
-    private static final int END_DATE_INDEX = 1;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -49,19 +48,14 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LEAVE_TITLE).get());
-        ArrayList<Date> dates = ParserUtil.parseRange(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get(),
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LEAVE_TITLE).get());
+        Range dateRange = ParserUtil.parseNonNullRange(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get(),
                 argMultimap.getValue(PREFIX_LEAVE_DATE_END).get());
-        Date dateStart = dates.get(START_DATE_INDEX);
-        Date dateEnd = dates.get(END_DATE_INDEX);
 
-        String description;
-        if (argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).get());
-        } else {
-            description = NO_DESCRIPTION_PLACEHOLDER;
-        }
-        return new AddLeaveCommand(index, title, dateStart, dateEnd, description);
+        Description description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
+                .map(ParserUtil::parseDescription)
+                .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
+        return new AddLeaveCommand(index, title, dateRange, description);
     }
 
     /**

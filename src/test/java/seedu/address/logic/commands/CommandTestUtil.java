@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_NAME;
@@ -61,6 +63,9 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final String VALID_START_DATE = " " + PREFIX_LEAVE_DATE_START + "2023-10-30";
+    public static final String VALID_END_DATE = " " + PREFIX_LEAVE_DATE_END + "2023-10-31";
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

@@ -11,8 +11,6 @@ import java.time.format.ResolverStyle;
  * Represents a Date in the address book.
  */
 public class Date {
-    public static final String MESSAGE_INVALID_END_DATE =
-            "The end date is earlier than the start date!";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be valid and in a format of `yyyy-MM-dd`";

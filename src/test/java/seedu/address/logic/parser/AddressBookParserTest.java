@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -27,11 +29,15 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.LeaveInPeriodPredicate;
+import seedu.address.model.leave.Range;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -144,5 +150,42 @@ public class AddressBookParserTest {
     public void parseCommand_viewTag() throws Exception {
         assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD) instanceof ViewTagCommand);
         assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD + " 3abc") instanceof ViewTagCommand);
+    }
+
+    @Test
+    public void parseCommand_findLeaveByPeriod() throws Exception {
+        String startDate = "2023-10-30";
+        String endDate = "2023-10-31";
+
+        LeaveInPeriodPredicate expectedPredicate;
+        String userInput;
+
+        // start and end dates present
+        expectedPredicate = new LeaveInPeriodPredicate(
+                Range.createNonNullRange(Date.of(startDate), Date.of(endDate)));
+        userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_START_DATE + VALID_END_DATE;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
+
+        // start date present
+        expectedPredicate = new LeaveInPeriodPredicate(
+                Range.createNullableRange(Date.of(startDate), null));
+        userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_START_DATE;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
+
+        // end date present
+        expectedPredicate = new LeaveInPeriodPredicate(
+                Range.createNullableRange(null, Date.of(endDate)));
+        userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_END_DATE;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
+
+        // no start and end date
+        expectedPredicate = new LeaveInPeriodPredicate(
+                Range.createNullableRange(null, null));
+        userInput = FindLeaveByPeriodCommand.COMMAND_WORD;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
     }
 }
