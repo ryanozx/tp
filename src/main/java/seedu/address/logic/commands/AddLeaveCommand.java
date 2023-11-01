@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
 import java.util.List;
 
@@ -27,16 +27,16 @@ public class AddLeaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a leave of an employee to the leave book. "
             + "Parameters: "
             + "INDEX "
-            + PREFIX_TITLE + "TITLE "
-            + PREFIX_DATE_START + "DATE START "
-            + PREFIX_DATE_END + "DATE END "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_LEAVE_TITLE + "TITLE "
+            + PREFIX_LEAVE_DATE_START + "DATE START "
+            + PREFIX_LEAVE_DATE_END + "DATE END "
+            + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION "
             + "Example: " + COMMAND_WORD + " "
             + "1 "
-            + PREFIX_TITLE + "John's Paternity Leave "
-            + PREFIX_DATE_START + "2023-10-28 "
-            + PREFIX_DATE_END + "2023-10-29 "
-            + PREFIX_DESCRIPTION + "John's Paternity Leave Description ";
+            + PREFIX_LEAVE_TITLE + "John's Paternity Leave "
+            + PREFIX_LEAVE_DATE_START + "2023-10-28 "
+            + PREFIX_LEAVE_DATE_END + "2023-10-29 "
+            + PREFIX_LEAVE_DESCRIPTION + "John's Paternity Leave Description ";
 
     public static final String MESSAGE_SUCCESS = "New leave is added : %1$s";
     public static final String MESSAGE_DUPLICATE_LEAVE = "This leave has already exists for the employee";

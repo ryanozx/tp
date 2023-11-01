@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
 import java.util.stream.Stream;
 
@@ -29,16 +29,16 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         Index index;
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_DATE_START,
-                        PREFIX_DATE_END, PREFIX_DESCRIPTION);
+                ArgumentTokenizer.tokenize(args, PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
+                        PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_DATE_START,
-                PREFIX_DATE_END)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
+                PREFIX_LEAVE_DATE_END)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_DATE_START,
-                PREFIX_DATE_END, PREFIX_DESCRIPTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
+                PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_DESCRIPTION);
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -46,14 +46,14 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
-        Date dateStart = ParserUtil.parseDateStart(argMultimap.getValue(PREFIX_DATE_START).get());
-        Date dateEnd = ParserUtil.parseDateEnd(argMultimap.getValue(PREFIX_DATE_END).get(),
-                argMultimap.getValue(PREFIX_DATE_START).get());
+        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LEAVE_TITLE).get());
+        Date dateStart = ParserUtil.parseDateStart(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get());
+        Date dateEnd = ParserUtil.parseDateEnd(argMultimap.getValue(PREFIX_LEAVE_DATE_END).get(),
+                argMultimap.getValue(PREFIX_LEAVE_DATE_START).get());
 
         String description = "";
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        if (argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).isPresent()) {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).get());
         } else {
             description = NO_DESCRIPTION_PLACEHOLDER;
         }
