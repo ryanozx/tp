@@ -1,5 +1,7 @@
 package seedu.address.model.leave;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 /**
@@ -22,6 +24,7 @@ public class LeaveInPeriodPredicate implements Predicate<Leave> {
      * @param dateRange Range object representing query range
      */
     public LeaveInPeriodPredicate(Range dateRange) {
+        requireNonNull(dateRange);
         this.start = dateRange.getStartDate();
         this.end = dateRange.getEndDate();
     }

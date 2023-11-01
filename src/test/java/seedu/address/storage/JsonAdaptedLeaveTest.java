@@ -23,7 +23,7 @@ public class JsonAdaptedLeaveTest {
     private static final String VALID_TITLE = ALICE_LEAVE.getTitle().toString();
     private static final String VALID_DESCRIPTION = ALICE_LEAVE.getDescription().toString();
     private static final String EMPTY_DESCRIPTION = "";
-    private static final String VALID_STATUS = ALICE_LEAVE.getStatus();
+    private static final String VALID_STATUS = ALICE_LEAVE.getStatus().toString();
     private static final Employee VALID_EMPLOYEE = new Employee(new Name(ALICE.getName().toString()));
     private static final Leave VALID_LEAVE = ALICE_LEAVE;
 

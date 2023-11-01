@@ -12,6 +12,7 @@ import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.leave.Title;
 import seedu.address.model.person.ComparablePerson;
 
@@ -52,7 +53,7 @@ public class ApproveLeaveCommand extends Command {
 
         Leave leaveToApprove = leaveList.get(index.getZeroBased());
 
-        if (leaveToApprove.getStatus().equals("APPROVED")) {
+        if (leaveToApprove.getStatus().getStatusType().equals(StatusType.APPROVED)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_LEAVE_APPROVE, Messages.format(leaveToApprove)));
         }
 
@@ -69,7 +70,7 @@ public class ApproveLeaveCommand extends Command {
         Title title = leaveToApprove.getTitle();
         Description description = leaveToApprove.getDescription();
         Range dateRange = Range.createNonNullRange(leaveToApprove.getStart(), leaveToApprove.getEnd());
-        Status approvedStatus = Status.of("APPROVED");
+        Status approvedStatus = Status.of(StatusType.APPROVED);
 
         return new Leave(employee, title, dateRange, description, approvedStatus);
     }

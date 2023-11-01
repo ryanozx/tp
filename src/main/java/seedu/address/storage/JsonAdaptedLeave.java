@@ -88,7 +88,7 @@ public class JsonAdaptedLeave {
         end = source.getEnd().toString();
         title = source.getTitle().toString();
         description = source.getDescription().toString();
-        status = source.getStatus();
+        status = source.getStatus().toString();
         employee = source.getEmployee();
     }
 

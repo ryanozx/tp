@@ -31,7 +31,7 @@ public class FindLeaveByPeriodCommand extends Command {
 
     /**
      * Constructs a FindLeaveByPeriodCommand for query for all leaves that occur in a given period
-     * @param predicate Period that leaves should coincide with
+     * @param predicate Predicate containing period that leaves should coincide with
      */
     public FindLeaveByPeriodCommand(LeaveInPeriodPredicate predicate) {
         this.predicate = predicate;

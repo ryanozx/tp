@@ -51,7 +51,7 @@ public class LeaveCard extends UiPart<Region> {
             throw new IllegalArgumentException("Leave cannot be null.");
         }
 
-        String statusType = leave.getStatus();
+        String statusType = leave.getStatus().toString();
 
         String styleClass;
         switch (statusType) {

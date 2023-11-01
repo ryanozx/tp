@@ -104,8 +104,8 @@ public class Leave {
         return end;
     }
 
-    public String getStatus() {
-        return status.toString();
+    public Status getStatus() {
+        return status;
     }
 
     public boolean belongsTo(Person employee) {
