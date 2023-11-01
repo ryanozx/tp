@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,14 +21,14 @@ public class FindLeaveByPeriodCommandParser implements Parser<FindLeaveByPeriodC
     @Override
     public FindLeaveByPeriodCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_LEAVE_START, PREFIX_LEAVE_END);
+                ArgumentTokenizer.tokenize(userInput, PREFIX_LEAVE_DATE_START, PREFIX_LEAVE_DATE_END);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_START, PREFIX_LEAVE_END);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_DATE_START, PREFIX_LEAVE_DATE_END);
 
-        Date startDate = argMultimap.getValue(PREFIX_LEAVE_START)
+        Date startDate = argMultimap.getValue(PREFIX_LEAVE_DATE_START)
                 .map(Date::of)
                 .orElse(null);
-        Date endDate = argMultimap.getValue(PREFIX_LEAVE_END)
+        Date endDate = argMultimap.getValue(PREFIX_LEAVE_DATE_END)
                 .map(Date::of)
                 .orElse(null);
 

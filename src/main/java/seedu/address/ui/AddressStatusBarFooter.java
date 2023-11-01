@@ -7,22 +7,24 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
+
+
 /**
  * A ui for the status bar that is displayed at the footer of the application.
  */
-public class StatusBarFooter extends UiPart<Region> {
+public class AddressStatusBarFooter extends UiPart<Region> {
 
-    private static final String FXML = "StatusBarFooter.fxml";
+    private static final String FXML = "AddressStatusBarFooter.fxml";
 
     @FXML
-    private Label saveLocationStatus;
+    private Label saveAddressBookLocationStatus;
 
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public AddressStatusBarFooter(Path saveLocation) {
         super(FXML);
-        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        saveAddressBookLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
 }

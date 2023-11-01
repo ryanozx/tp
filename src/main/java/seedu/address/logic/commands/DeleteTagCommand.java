@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collection;
@@ -25,9 +25,9 @@ public class DeleteTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags from the employee identified "
         + "by the index number used in the displayed employee list.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_TAG + "TAG...\n"
+        + PREFIX_PERSON_TAG + "TAG...\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_TAG + "remote";
+        + PREFIX_PERSON_TAG + "remote";
 
     public static final String MESSAGE_NO_TAGS_REMOVED = "At least one tag must be provided.";
     public static final String MESSAGE_MISSING_TAGS = "Some of the tags are not found on this employee.";

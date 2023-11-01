@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +11,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-//import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Date;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -124,19 +125,52 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //=========== LeavesBook ================================================================================
+
     /**
-     * Parses a {@code String date} into a {@code date}.
+     * Parses a {@code String title} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseTitle(String title) {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        return trimmedTitle;
+    }
+
+    /**
+     * Parses a {@code String start} {@code String end} into an {@code ArrayList<Date>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code date} is invalid.
-    //     */
-    public static Date parseDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
+     * @throws ParseException if the given {@code start} and {@code end} is invalid.
+     */
+    public static ArrayList<Date> parseDate(String start, String end) throws ParseException {
+        requireNonNull(end);
+        requireNonNull(start);
+        String trimmedDateEnd = end.trim();
+        String trimmedDateStart = start.trim();
+        ArrayList<Date> validDate = new ArrayList<>();
+
         try {
-            return Date.of(trimmedDate);
-        } catch (IllegalArgumentException e) {
+            Date dateEnd = Date.of(trimmedDateEnd);
+            Date dateStart = Date.of(trimmedDateStart);
+            if (dateEnd.isBefore(dateStart)) {
+                throw new ParseException(Date.MESSAGE_INVALID_END_DATE);
+            }
+            validDate.add(dateStart);
+            validDate.add(dateEnd);
+            return validDate;
+        } catch (DateTimeParseException e) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDescription(String description) {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        return trimmedDescription;
     }
 }

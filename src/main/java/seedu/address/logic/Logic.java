@@ -8,6 +8,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,6 +35,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -47,4 +50,20 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the LeavesBook.
+     *
+     * @see seedu.address.model.Model#getLeavesBook()
+     */
+    ReadOnlyLeavesBook getLeavesBook();
+
+    /**
+     * Returns the user prefs' leaves book file path.
+     */
+    Path getLeavesBookFilePath();
+
+    /** Returns an unmodifiable view of the filtered list of leaves */
+    ObservableList<Leave> getFilteredLeaveList();
+
 }

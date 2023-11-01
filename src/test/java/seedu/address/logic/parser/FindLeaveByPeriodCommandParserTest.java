@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -47,31 +47,31 @@ public class FindLeaveByPeriodCommandParserTest {
         assertParseSuccess(parser, noDateInput, expectedNoDateCommand);
 
         // multiple whitespaces between characters
-        String whitespaceInput = " \n " + PREFIX_LEAVE_START + START_DATE_INPUT + " \n "
-                + " \t " + PREFIX_LEAVE_END + END_DATE_INPUT + " \t ";
+        String whitespaceInput = " \n " + PREFIX_LEAVE_DATE_START + START_DATE_INPUT + " \n "
+                + " \t " + PREFIX_LEAVE_DATE_END + END_DATE_INPUT + " \t ";
         FindLeaveByPeriodCommand expectedWhitespaceCommand = new FindLeaveByPeriodCommand(
                 new LeaveInPeriodPredicate(START_DATE, END_DATE));
         assertParseSuccess(parser, whitespaceInput, expectedWhitespaceCommand);
     }
 
     private String generateUserInput(boolean hasStartDate, boolean hasEndDate) {
-        String startDateStr = hasStartDate ? " " + PREFIX_LEAVE_START + START_DATE_INPUT
+        String startDateStr = hasStartDate ? " " + PREFIX_LEAVE_DATE_START + START_DATE_INPUT
                 : "";
-        String endDateStr = hasEndDate ? " " + PREFIX_LEAVE_END + END_DATE_INPUT
+        String endDateStr = hasEndDate ? " " + PREFIX_LEAVE_DATE_END + END_DATE_INPUT
                 : "";
         return startDateStr + endDateStr;
     }
 
     @Test
     public void parse_duplicateArgs_throwsParseException() {
-        String startDateStr = " " + PREFIX_LEAVE_START + START_DATE_INPUT;
+        String startDateStr = " " + PREFIX_LEAVE_DATE_START + START_DATE_INPUT;
         String duplicateStartInput = startDateStr + startDateStr;
         assertParseFailure(parser, duplicateStartInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_START));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DATE_START));
 
-        String endDateStr = " " + PREFIX_LEAVE_END + END_DATE_INPUT;
+        String endDateStr = " " + PREFIX_LEAVE_DATE_END + END_DATE_INPUT;
         String duplicateEndInput = endDateStr + endDateStr;
         assertParseFailure(parser, duplicateEndInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_END));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DATE_END));
     }
 }

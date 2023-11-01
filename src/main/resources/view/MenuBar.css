@@ -1,0 +1,7 @@
+
+/* Custom style for the submenu */
+.menu-item .label {
+    -fx-text-fill: #FFFFFF; /* Text color */
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+}
