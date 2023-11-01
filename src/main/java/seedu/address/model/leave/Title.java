@@ -11,7 +11,7 @@ public class Title {
     public static final String MESSAGE_CONSTRAINTS = "Leave titles should only contain"
             + " alphanumeric characters, spaces, and dashes."
             + "It should not be blank";
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum} -]+$";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum} \\-']+$";
 
     public final String title;
 

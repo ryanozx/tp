@@ -26,7 +26,8 @@ public class JsonAdaptedLeaveTest {
 
     private static final String INVALID_START = "2020/01/01";
     private static final String INVALID_END = "2020/01/01";
-    private static final String INVALID_TITLE = "";
+    private static final String EMPTY_TITLE = "";
+    private static final String INVALID_TITLE = "title*#";
     private static final String INVALID_STATUS = "invalid";
 
 
@@ -78,13 +79,28 @@ public class JsonAdaptedLeaveTest {
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
     }
 
-    // @Test
-    // public void toModelType_emptyTitle_throwsIllegalValueException() {
-    //     JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, INVALID_TITLE, VALID_DESCRIPTION,
-    //             VALID_STATUS, VALID_EMPLOYEE);
-    //     String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "title");
-    //     assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
-    // }
+    @Test
+    public void toModelType_emptyTitle_throwsIllegalValueException() {
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, EMPTY_TITLE, VALID_DESCRIPTION,
+                VALID_STATUS, VALID_EMPLOYEE);
+        String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "title");
+        assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTitle_throwsIllegalValueException() {
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, INVALID_TITLE, VALID_DESCRIPTION,
+                VALID_STATUS, VALID_EMPLOYEE);
+        String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "title");
+        assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyDescription_success() throws Exception {
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, EMPTY_DESCRIPTION,
+                VALID_STATUS, VALID_EMPLOYEE);
+        assertEquals(ALICE_LEAVE, leave.toModelType());
+    }
 
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {

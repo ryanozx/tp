@@ -1,6 +1,8 @@
 package seedu.address.model.leave;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -37,7 +39,18 @@ public class TitleTest {
 
     @Test
     public void equalsMethod() {
-        String validTitle = "title";
-        assertEquals(new Title(validTitle), new Title(validTitle));
+        Title title = new Title("title");
+        Title titleCopy = new Title("title");
+        assertTrue(title.equals(titleCopy));
+
+        // different title
+        Title differentTitle = new Title("title123");
+        assertFalse(title.equals(differentTitle));
+
+        // different object
+        assertFalse(title.equals(new Object()));
+
+        // null
+        assertFalse(title.equals(null));
     }
 }

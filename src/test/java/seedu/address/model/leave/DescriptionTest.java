@@ -1,6 +1,8 @@
 package seedu.address.model.leave;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,11 @@ public class DescriptionTest {
     }
 
     @Test
+    public void factoryConstructor_getDefault() {
+        assertEquals(Description.getDefault().toString(), "");
+    }
+
+    @Test
     public void constructor_validDescription_success() {
         String validDescription = "testing";
         assertEquals(new Description(validDescription).toString(), validDescription);
@@ -35,7 +42,18 @@ public class DescriptionTest {
 
     @Test
     public void equalsMethod() {
-        String validDescription = "testing";
-        assertEquals(new Description(validDescription), new Description("testing"));
+        Description description = new Description("testing");
+        Description descriptionCopy = new Description("testing");
+        assertTrue(description.equals(descriptionCopy));
+
+        // different description
+        Description differentDescription = new Description("testing123");
+        assertFalse(description.equals(differentDescription));
+
+        // different object
+        assertFalse(description.equals(new Object()));
+
+        // null
+        assertFalse(description.equals(null));
     }
 }

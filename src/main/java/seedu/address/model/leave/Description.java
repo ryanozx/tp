@@ -26,6 +26,15 @@ public class Description {
     }
 
     /**
+     * Returns a default description that is empty.
+     *
+     * @return A default description that is empty.
+     */
+    public static Description getDefault() {
+        return new Description("");
+    }
+
+    /**
      * Returns true if a given string is a valid description.
      */
     private static boolean isValidDescription(String test) {
