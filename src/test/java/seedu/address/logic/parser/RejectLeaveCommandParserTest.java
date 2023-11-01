@@ -5,13 +5,13 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ApproveLeaveCommand;
+import seedu.address.logic.commands.RejectLeaveCommand;
 
 public class RejectLeaveCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ApproveLeaveCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RejectLeaveCommand.MESSAGE_USAGE);
 
-    private ApproveLeaveCommandParser parser = new ApproveLeaveCommandParser();
+    private RejectLeaveCommandParser parser = new RejectLeaveCommandParser();
 
     @Test
     public void parse_missingIndex_failure() {
