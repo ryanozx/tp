@@ -48,7 +48,7 @@ public class LeaveTest {
         assertThrows(EndBeforeStartException.class, () -> new Leave(BOB, BOB_LEAVE.getTitle(),
                 BOB_LEAVE.getEnd(), BOB_LEAVE.getStart(), BOB_LEAVE.getDescription()));
         assertThrows(EndBeforeStartException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart(), ALICE_LEAVE.getDescription(), 
+                ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart(), ALICE_LEAVE.getDescription(),
                 Status.of(ALICE_LEAVE.getStatus())));
     }
 
