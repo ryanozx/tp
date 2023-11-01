@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Leave> filteredLeaves;
+    private FilteredList<Leave> filteredLeaves;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -229,5 +229,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredLeaves.equals(otherModelManager.filteredLeaves);
     }
-
 }

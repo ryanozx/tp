@@ -65,7 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
+    public boolean hasPerson(ComparablePerson person) {
         requireNonNull(person);
         return persons.contains(person);
     }

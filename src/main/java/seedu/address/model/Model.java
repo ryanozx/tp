@@ -127,7 +127,7 @@ public interface Model {
      */
     void setLeavesBookFilePath(Path leavesBookFilePath);
 
-    /** Returns the LeavesBook */
+    /** Returns an unmodifiable view of the leave book */
     ReadOnlyLeavesBook getLeavesBook();
 
     /** Returns an unmodifiable view of the filtered leave list */

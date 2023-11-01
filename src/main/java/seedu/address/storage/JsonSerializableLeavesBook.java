@@ -12,10 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.LeavesBook;
 import seedu.address.model.ReadOnlyLeavesBook;
-import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
-import seedu.address.model.leave.Status;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * An Immutable LeavesBook that is serializable to JSON format.
@@ -48,29 +46,15 @@ public class JsonSerializableLeavesBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    // public LeavesBook toModelType(AddressBook addressBook) throws IllegalValueException {
-    //     LeavesBook leavesBook = new LeavesBook();
-    //     for (JsonAdaptedLeave jsonAdaptedLeave : leaves) {
-    //         Leave leave = jsonAdaptedLeave.toModelType();
-    //         if (leavesBook.hasLeave(leave)) {
-    //             throw new IllegalValueException(MESSAGE_DUPLICATE_LEAVE);
-    //         }
-    //         leavesBook.addLeave(leave);
-    //     }
-    //     return leavesBook;
-    // }
     public LeavesBook toModelType(AddressBook addressBook) throws IllegalValueException {
         LeavesBook leavesBook = new LeavesBook();
         for (JsonAdaptedLeave jsonAdaptedLeave : leaves) {
-            String title = jsonAdaptedLeave.getTitle();
-            String description = jsonAdaptedLeave.getDescription();
-            Status status = Status.of(jsonAdaptedLeave.getStatus());
-            Date start = Date.of(jsonAdaptedLeave.getStart());
-            Date end = Date.of(jsonAdaptedLeave.getEnd());
-            Person employee = addressBook.getPerson(jsonAdaptedLeave.getEmployee());
-            Leave leave = new Leave(employee, title, start, end, description, status);
+            Leave leave = jsonAdaptedLeave.toModelType();
             if (leavesBook.hasLeave(leave)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LEAVE);
+            }
+            if (!addressBook.hasPerson(leave.getEmployee())) {
+                throw new PersonNotFoundException();
             }
             leavesBook.addLeave(leave);
         }
