@@ -12,10 +12,10 @@ import java.time.format.ResolverStyle;
  */
 public class Date {
     public static final String MESSAGE_INVALID_END_DATE =
-            "The end date earlier than the start date!";
+            "The end date is earlier than the start date!";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be in a format of `yyyy-MM-dd`";
+            "Date should be valid and in a format of `yyyy-MM-dd`";
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT);
     private static final String VALIDATION_REGEX = "\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";

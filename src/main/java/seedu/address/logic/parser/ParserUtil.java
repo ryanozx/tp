@@ -2,8 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -141,41 +140,42 @@ public class ParserUtil {
      * Parses a {@code String dateStart} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code start} is invalid.
      */
     public static Date parseDateStart(String start) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         requireNonNull(start);
         String trimmedDateStart = start.trim();
-        if (!Date.isValidDate(trimmedDateStart)) {
+
+        try {
+            return Date.of(trimmedDateStart);
+        } catch (DateTimeParseException e) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        LocalDate dateStart = LocalDate.parse(trimmedDateStart, formatter);
-        return Date.of(dateStart);
     }
 
     /**
      * Parses a {@code String dateStart} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code end} and {@code start} is invalid.
      */
     public static Date parseDateEnd(String end, String start) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         requireNonNull(end);
         requireNonNull(start);
         String trimmedDateEnd = end.trim();
         String trimmedDateStart = start.trim();
-        if (!Date.isValidDate(trimmedDateStart) || !Date.isValidDate(trimmedDateEnd)) {
+
+        try {
+            Date dateEnd = Date.of(trimmedDateEnd);
+            Date dateStart = Date.of(trimmedDateStart);
+            if (dateEnd.isBefore(dateStart)) {
+                throw new ParseException(Date.MESSAGE_INVALID_END_DATE);
+            }
+            return Date.of(trimmedDateEnd);
+        } catch (DateTimeParseException e) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        LocalDate dateEnd = LocalDate.parse(trimmedDateEnd, formatter);
-        LocalDate dateStart = LocalDate.parse(trimmedDateStart, formatter);
-        if (dateEnd.isBefore(dateStart)) {
-            throw new ParseException(Date.MESSAGE_INVALID_END_DATE);
-        }
-        return Date.of(dateEnd);
     }
 
     /**

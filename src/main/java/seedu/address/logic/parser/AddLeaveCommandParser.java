@@ -18,6 +18,8 @@ import seedu.address.model.leave.Date;
  */
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
+    private static final String NO_DESCRIPTION_PLACEHOLDER = "NONE";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -49,9 +51,11 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         Date dateEnd = ParserUtil.parseDateEnd(argMultimap.getValue(PREFIX_DATE_END).get(),
                 argMultimap.getValue(PREFIX_DATE_START).get());
 
-        String description = "none";
+        String description = "";
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            description = NO_DESCRIPTION_PLACEHOLDER;
         }
         return new AddLeaveCommand(index, title, dateStart, dateEnd, description);
     }

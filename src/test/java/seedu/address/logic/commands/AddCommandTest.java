@@ -171,7 +171,7 @@ public class AddCommandTest {
          */
         @Override
         public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -192,7 +192,7 @@ public class AddCommandTest {
          */
         @Override
         public void deleteLeave(Leave target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -203,7 +203,7 @@ public class AddCommandTest {
          */
         @Override
         public void addLeave(Leave leave) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -216,7 +216,7 @@ public class AddCommandTest {
          */
         @Override
         public void setLeave(Leave target, Leave editedLeave) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -224,7 +224,7 @@ public class AddCommandTest {
          */
         @Override
         public Path getLeavesBookFilePath() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -234,7 +234,7 @@ public class AddCommandTest {
          */
         @Override
         public void setLeavesBookFilePath(Path leavesBookFilePath) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -242,7 +242,7 @@ public class AddCommandTest {
          */
         @Override
         public ReadOnlyLeavesBook getLeavesBook() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
