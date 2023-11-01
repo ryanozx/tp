@@ -92,4 +92,19 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void deleteLeave(Leave leaveToDelete);
+
+
+    /**
+     * Replaces the given leave {@code target} with {@code editedLeave}.
+     * {@code target} must exist in the leave book.
+     * The person identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
+     */
+    void setLeave(Leave target, Leave editedLeave);
+
+
+    /**
+     * Updates the filter of the filtered leave list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLeaveList(Predicate<Leave> predicate);
 }

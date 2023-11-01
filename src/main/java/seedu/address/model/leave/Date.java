@@ -49,7 +49,6 @@ public class Date {
     public LocalDate getDate() {
         return date;
     }
-
     @Override
     public String toString() {
         return date.toString();

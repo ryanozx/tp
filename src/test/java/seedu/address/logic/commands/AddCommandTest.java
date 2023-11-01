@@ -87,7 +87,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -166,12 +166,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyLeavesBook getLeavesBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLeave(Leave target, Leave editedLeave) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Leave> getFilteredLeaveList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyLeavesBook getLeavesBook() {
+        public void updateFilteredLeaveList(Predicate<Leave> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

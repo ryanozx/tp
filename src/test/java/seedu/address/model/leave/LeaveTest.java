@@ -47,6 +47,9 @@ public class LeaveTest {
                 ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart()));
         assertThrows(EndBeforeStartException.class, () -> new Leave(BOB, BOB_LEAVE.getTitle(),
                 BOB_LEAVE.getEnd(), BOB_LEAVE.getStart(), BOB_LEAVE.getDescription()));
+        assertThrows(EndBeforeStartException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart(), ALICE_LEAVE.getDescription(),
+                Status.of(ALICE_LEAVE.getStatus())));
     }
 
     @Test
@@ -124,7 +127,7 @@ public class LeaveTest {
                 .withDescription("Alice's Maternity Leave 2 Description").build()));
 
         // different status -> return true
-        assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withStatus("Approved").build()));
+        assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withStatus("APPROVED").build()));
     }
 
     @Test

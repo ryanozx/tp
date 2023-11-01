@@ -124,10 +124,19 @@ public class ModelManager implements Model {
         return leavesBook;
     }
 
+<<<<<<< HEAD
     public void deleteLeave(Leave leaveToDelete) {
         leavesBook.removeLeave(leaveToDelete);
     }
 
+=======
+    @Override
+    public void setLeave(Leave target, Leave editedLeave) {
+        requireAllNonNull(target, editedLeave);
+
+        leavesBook.setLeave(target, editedLeave);
+    }
+>>>>>>> master
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -170,4 +179,20 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Filtered Leave List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
+     * {@code versionedLeavesBook}
+     */
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return filteredLeaves;
+    }
+
+    @Override
+    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
+        requireNonNull(predicate);
+        filteredLeaves.setPredicate(predicate);
+    }
 }

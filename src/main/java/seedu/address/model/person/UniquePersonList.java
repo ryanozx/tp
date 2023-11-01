@@ -31,7 +31,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person person) {
+    public boolean contains(ComparablePerson person) {
         requireNonNull(person);
         return internalList.stream().anyMatch(person::isSamePerson);
     }
