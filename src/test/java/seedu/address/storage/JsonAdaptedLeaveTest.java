@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -10,7 +11,9 @@ import java.time.format.DateTimeParseException;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Title;
 import seedu.address.storage.JsonAdaptedLeave.Employee;
 import seedu.address.storage.JsonAdaptedLeave.Name;
 
@@ -23,6 +26,7 @@ public class JsonAdaptedLeaveTest {
     private static final String EMPTY_DESCRIPTION = "";
     private static final String VALID_STATUS = ALICE_LEAVE.getStatus();
     private static final Employee VALID_EMPLOYEE = new Employee(new Name(ALICE.getName().toString()));
+    private static final Leave VALID_LEAVE = ALICE_LEAVE;
 
     private static final String INVALID_START = "2020/01/01";
     private static final String INVALID_END = "2020/01/01";
@@ -33,12 +37,12 @@ public class JsonAdaptedLeaveTest {
 
     @Test
     public void toModelType_createsEqualLeaveObject_success() throws Exception {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(ALICE_LEAVE);
-        assertEquals(ALICE_LEAVE, leave.toModelType());
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_LEAVE);
+        assertEquals(VALID_LEAVE, leave.toModelType());
 
         JsonAdaptedLeave leave2 = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
-        assertEquals(ALICE_LEAVE, leave2.toModelType());
+        assertEquals(VALID_LEAVE, leave2.toModelType());
     }
 
     @Test
@@ -83,23 +87,21 @@ public class JsonAdaptedLeaveTest {
     public void toModelType_emptyTitle_throwsIllegalValueException() {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, EMPTY_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
-        String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "title");
-        assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
+        assertThrows(IllegalValueException.class, Title.MESSAGE_CONSTRAINTS, leave::toModelType);
     }
 
     @Test
     public void toModelType_invalidTitle_throwsIllegalValueException() {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, INVALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
-        String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "title");
-        assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
+        assertThrows(IllegalValueException.class, Title.MESSAGE_CONSTRAINTS, leave::toModelType);
     }
 
     @Test
     public void toModelType_emptyDescription_success() throws Exception {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, EMPTY_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
-        assertEquals(ALICE_LEAVE, leave.toModelType());
+        assertTrue(VALID_LEAVE.isSameLeave(leave.toModelType()));
     }
 
     @Test
