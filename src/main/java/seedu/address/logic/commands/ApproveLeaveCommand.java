@@ -42,7 +42,7 @@ public class ApproveLeaveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Leave> leaveList = model.getLeavesBook().getLeaveList();
+        ObservableList<Leave> leaveList = model.getFilteredLeaveList();
 
         if (index.getZeroBased() >= leaveList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LEAVE_INDEX);
