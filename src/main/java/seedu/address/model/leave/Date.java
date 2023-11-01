@@ -8,7 +8,6 @@ import java.time.format.ResolverStyle;
 
 /**
  * Represents a Date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
     public static final String MESSAGE_INVALID_END_DATE =
@@ -17,9 +16,7 @@ public class Date {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be valid and in a format of `yyyy-MM-dd`";
     private static final DateTimeFormatter formatter =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT);
-    private static final String VALIDATION_REGEX = "\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
-
+            DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
     private final LocalDate date;
 
     private Date(LocalDate date) {
@@ -45,14 +42,7 @@ public class Date {
      */
     public static Date of(String date) throws IllegalArgumentException {
         requireAllNonNull(date);
-        return new Date(LocalDate.parse(date));
-    }
-
-    /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return new Date(LocalDate.parse(date, formatter));
     }
 
     public boolean isBefore(Date other) {

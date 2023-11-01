@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -137,34 +138,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dateStart} into an {@code Date}.
+     * Parses a {@code String start} {@code String end} into an {@code ArrayList<Date>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code start} is invalid.
+     * @throws ParseException if the given {@code start} and {@code end} is invalid.
      */
-    public static Date parseDateStart(String start) throws ParseException {
-
-        requireNonNull(start);
-        String trimmedDateStart = start.trim();
-
-        try {
-            return Date.of(trimmedDateStart);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
-    }
-
-    /**
-     * Parses a {@code String dateStart} into an {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code end} and {@code start} is invalid.
-     */
-    public static Date parseDateEnd(String end, String start) throws ParseException {
+    public static ArrayList<Date> parseDate(String start, String end) throws ParseException {
         requireNonNull(end);
         requireNonNull(start);
         String trimmedDateEnd = end.trim();
         String trimmedDateStart = start.trim();
+        ArrayList<Date> validDate = new ArrayList<>();
 
         try {
             Date dateEnd = Date.of(trimmedDateEnd);
@@ -172,7 +156,9 @@ public class ParserUtil {
             if (dateEnd.isBefore(dateStart)) {
                 throw new ParseException(Date.MESSAGE_INVALID_END_DATE);
             }
-            return Date.of(trimmedDateEnd);
+            validDate.add(dateStart);
+            validDate.add(dateEnd);
+            return validDate;
         } catch (DateTimeParseException e) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }

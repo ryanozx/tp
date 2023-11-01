@@ -25,8 +25,9 @@ public class FindAllTagCommand extends Command {
             + "the specified tags exactly (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_PERSON_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD
-            + " t/full time t/remote\n";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PERSON_TAG + "full time"
+            + PREFIX_PERSON_TAG + "remote";
 
     private final TagsContainAllTagsPredicate predicate;
     private final Logger logger = LogsCenter.getLogger(getClass());
