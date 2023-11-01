@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -65,6 +67,7 @@ public class JsonAdaptedLeave {
     public JsonAdaptedLeave(@JsonProperty("start") String start, @JsonProperty("end") String end,
             @JsonProperty("title") String title, @JsonProperty("description") String description,
             @JsonProperty("status") String status, @JsonProperty("employee") Employee employee) {
+        requireNonNull(employee);
         this.start = start;
         this.end = end;
         this.title = title;
@@ -132,9 +135,6 @@ public class JsonAdaptedLeave {
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
-        }
-        if (employee == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "employee"));
         }
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "status"));

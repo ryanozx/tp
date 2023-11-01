@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.Status;
 import seedu.address.model.leave.Title;
@@ -33,6 +34,7 @@ public class JsonAdaptedLeaveTest {
     private static final String EMPTY_TITLE = "";
     private static final String INVALID_TITLE = "title*#";
     private static final String INVALID_STATUS = "invalid";
+    private static final String INVALID_DESCRIPTION = "description*#";
 
 
     @Test
@@ -98,10 +100,31 @@ public class JsonAdaptedLeaveTest {
     }
 
     @Test
+    public void toModelType_nullDescription_throwsIllegalValueException() {
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, null,
+                VALID_STATUS, VALID_EMPLOYEE);
+        String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "description");
+        assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
+    }
+
+    @Test
     public void toModelType_emptyDescription_success() throws Exception {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, EMPTY_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertTrue(VALID_LEAVE.isSameLeave(leave.toModelType()));
+    }
+
+    @Test
+    public void toModelType_invalidDescription_throwsIllegalValueException() {
+        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, INVALID_DESCRIPTION,
+                VALID_STATUS, VALID_EMPLOYEE);
+        assertThrows(IllegalValueException.class, Description.MESSAGE_CONSTRAINTS, leave::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEmployee_throwsIllegalValueException() {
+        assertThrows(NullPointerException.class, () -> new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE,
+                VALID_DESCRIPTION, VALID_STATUS, null));
     }
 
     @Test

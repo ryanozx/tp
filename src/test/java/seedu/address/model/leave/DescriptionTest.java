@@ -55,5 +55,8 @@ public class DescriptionTest {
 
         // null
         assertFalse(description.equals(null));
+
+        // same object
+        assertTrue(description.equals(description));
     }
 }

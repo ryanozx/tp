@@ -52,5 +52,8 @@ public class TitleTest {
 
         // null
         assertFalse(title.equals(null));
+
+        // same object
+        assertTrue(title.equals(title));
     }
 }
