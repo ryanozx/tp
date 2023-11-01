@@ -4,6 +4,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Status;
 import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Person;
 
@@ -14,13 +15,14 @@ public class LeaveBuilder {
     public static final String DEFAULT_TITLE = "Alice's Maternity Leave";
     public static final String DEFAULT_DESCRIPTION = "Alice's Maternity Leave Description";
     public static final Person DEFAULT_PERSON = ALICE;
+    public static final Status DEFAULT_STATUS = Status.getDefault();
 
     private String title;
     private String description;
     private ComparablePerson employee;
     private Date start;
     private Date end;
-
+    private Status status;
     /**
      * Creates a {@code LeaveBuilder} with the default details.
      */
@@ -28,6 +30,7 @@ public class LeaveBuilder {
         title = DEFAULT_TITLE;
         description = DEFAULT_DESCRIPTION;
         employee = DEFAULT_PERSON;
+        status = DEFAULT_STATUS;
         // start = LocalDate.of(2020, 1, 1);
         // end = LocalDate.of(2020, 1, 2);
     }
@@ -41,6 +44,7 @@ public class LeaveBuilder {
         description = leaveToCopy.getDescription();
         start = leaveToCopy.getStart();
         end = leaveToCopy.getEnd();
+        status = Status.of(leaveToCopy.getStatus());
     }
 
     /**
@@ -87,11 +91,11 @@ public class LeaveBuilder {
      * Sets the {@code status} of the {@code Leave} that we are building.
      */
     public LeaveBuilder withStatus(String status) {
-        this.description = status;
+        this.status = Status.of(status);
         return this;
     }
 
     public Leave build() {
-        return new Leave(employee, title, start, end, description);
+        return new Leave(employee, title, start, end, description, status);
     }
 }

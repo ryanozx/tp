@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,23 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the leave book */
+    ReadOnlyLeavesBook getLeavesBook();
+
+    /**
+     * Replaces the given leave {@code target} with {@code editedLeave}.
+     * {@code target} must exist in the leave book.
+     * The person identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
+     */
+    void setLeave(Leave target, Leave editedLeave);
+
+    /** Returns an unmodifiable view of the filtered leave list */
+    ObservableList<Leave> getFilteredLeaveList();
+
+    /**
+     * Updates the filter of the filtered leave list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLeaveList(Predicate<Leave> predicate);
 }

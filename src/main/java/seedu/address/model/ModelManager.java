@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private FilteredList<Leave> filteredLeaves;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -51,6 +53,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.leavesBook = new LeavesBook(leavesBook);
+        filteredLeaves = new FilteredList<>(this.leavesBook.getLeaveList());
     }
 
     public ModelManager() {
@@ -133,6 +136,12 @@ public class ModelManager implements Model {
         return leavesBook;
     }
 
+    @Override
+    public void setLeave(Leave target, Leave editedLeave) {
+        requireAllNonNull(target, editedLeave);
+
+        leavesBook.setLeave(target, editedLeave);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -167,4 +176,20 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Filtered Leave List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
+     * {@code versionedLeavesBook}
+     */
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return filteredLeaves;
+    }
+
+    @Override
+    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
+        requireNonNull(predicate);
+        filteredLeaves.setPredicate(predicate);
+    }
 }
