@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -21,6 +22,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+
     private LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -35,15 +37,17 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.leavesBook = new LeavesBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredLeaves = new FilteredList<>(FXCollections.observableArrayList());
     }
 
     /**
      * Initializes a ModelManager with the given addressBook, leavesBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyLeavesBook leavesBook,
-            ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, leavesBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
@@ -95,6 +99,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getLeavesBookFilePath() {
+        return userPrefs.getLeavesBookFilePath();
+    }
+
+    @Override
+    public void setLeavesBookFilePath(Path leavesBookFilePath) {
+        requireNonNull(leavesBookFilePath);
+        userPrefs.setAddressBookFilePath(leavesBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -131,17 +146,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== LeavesBook ================================================================================
-    public ReadOnlyLeavesBook getLeavesBook() {
-        return leavesBook;
-    }
-
-    @Override
-    public void setLeave(Leave target, Leave editedLeave) {
-        requireAllNonNull(target, editedLeave);
-
-        leavesBook.setLeave(target, editedLeave);
-    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -158,7 +162,55 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+    //=========== LeavesBook ================================================================================
+    public ReadOnlyLeavesBook getLeavesBook() {
+        return leavesBook;
+    }
+    @Override
+    public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
+        this.leavesBook.resetData(leavesBook);
+    }
 
+    //=========== Filtered Leave List Accessors =============================================================
+
+    @Override
+    public boolean hasLeave(Leave leave) {
+        requireNonNull(leave);
+        return leavesBook.hasLeave(leave);
+    }
+
+    @Override
+    public void deleteLeave(Leave target) {
+        leavesBook.removeLeave(target);
+    }
+
+    @Override
+    public void addLeave(Leave leave) {
+        leavesBook.addLeave(leave);
+        updateFilteredLeaveList(PREDICATE_SHOW_ALL_LEAVES);
+    }
+
+    @Override
+    public void setLeave(Leave target, Leave editedLeave) {
+        requireAllNonNull(target, editedLeave);
+
+        leavesBook.setLeave(target, editedLeave);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return filteredLeaves;
+    }
+
+    @Override
+    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
+        requireNonNull(predicate);
+        filteredLeaves.setPredicate(predicate);
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -172,24 +224,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && leavesBook.equals(otherModelManager.leavesBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
-    }
-
-    //=========== Filtered Leave List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
-     * {@code versionedLeavesBook}
-     */
-    @Override
-    public ObservableList<Leave> getFilteredLeaveList() {
-        return filteredLeaves;
-    }
-
-    @Override
-    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
-        requireNonNull(predicate);
-        filteredLeaves.setPredicate(predicate);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredLeaves.equals(otherModelManager.filteredLeaves);
     }
 }

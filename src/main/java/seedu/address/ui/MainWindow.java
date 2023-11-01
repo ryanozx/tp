@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private LeaveListPanel leaveListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,10 +46,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane leaveListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane addressStatusbarPlaceholder;
+
+    @FXML
+    private StackPane leaveStatusbarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -113,11 +120,17 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        leaveListPanel = new LeaveListPanel(logic.getFilteredLeaveList());
+        leaveListPanelPlaceholder.getChildren().add(leaveListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        AddressStatusBarFooter addressStatusBarFooter = new AddressStatusBarFooter(logic.getAddressBookFilePath());
+        LeaveStatusBarFooter leaveStatusBarFooter = new LeaveStatusBarFooter(logic.getLeavesBookFilePath());
+
+        addressStatusbarPlaceholder.getChildren().add(addressStatusBarFooter.getRoot());
+        leaveStatusbarPlaceholder.getChildren().add(leaveStatusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

@@ -15,6 +15,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -52,6 +54,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveLeavesBook(model.getLeavesBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -65,6 +68,8 @@ public class LogicManager implements Logic {
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
     }
+
+
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -84,5 +89,18 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ReadOnlyLeavesBook getLeavesBook() {
+        return model.getLeavesBook();
+    }
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return model.getFilteredLeaveList();
+    }
+    @Override
+    public Path getLeavesBookFilePath() {
+        return model.getLeavesBookFilePath();
     }
 }
