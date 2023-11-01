@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.logging.Logger;
 
@@ -22,7 +23,8 @@ public class FindAllTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees whose tags match all "
             + "the specified tags exactly (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: t/TAG [t/MORE_TAGS]...\n"
+            + "Parameters: "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " t/full time t/remote\n";
 
