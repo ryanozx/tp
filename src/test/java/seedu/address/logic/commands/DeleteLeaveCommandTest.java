@@ -1,17 +1,15 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE; 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE;
+import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
-import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -28,7 +26,8 @@ public class DeleteLeaveCommandTest {
         Leave leaveToDelete = model.getFilteredLeaveList().get(INDEX_FIRST_LEAVE.getZeroBased());
         DeleteLeaveCommand deleteLeaveCommand = new DeleteLeaveCommand(INDEX_FIRST_LEAVE);
 
-        String expectedMessage = String.format(DeleteLeaveCommand.MESSAGE_DELETE_LEAVE_SUCCESS, Messages.format(leaveToDelete));
+        String expectedMessage = String.format(DeleteLeaveCommand.MESSAGE_DELETE_LEAVE_SUCCESS,
+                Messages.format(leaveToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getLeavesBook(), new UserPrefs());
         expectedModel.deleteLeave(leaveToDelete);

@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -47,7 +47,8 @@ public class AddTagCommandTest {
 
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new LeavesBook(model.getLeavesBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new LeavesBook(model.getLeavesBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
@@ -67,7 +68,8 @@ public class AddTagCommandTest {
 
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new LeavesBook(model.getLeavesBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new LeavesBook(model.getLeavesBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
@@ -80,7 +82,8 @@ public class AddTagCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new LeavesBook(model.getLeavesBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new LeavesBook(model.getLeavesBook()), new UserPrefs());
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
     }
@@ -96,9 +99,11 @@ public class AddTagCommandTest {
         Person editedPerson = new Person(personInFilteredList);
         editedPerson.addTag(new Tag(VALID_TAG_HUSBAND));
 
-        String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS,
+                Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new LeavesBook(model.getLeavesBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new LeavesBook(model.getLeavesBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
