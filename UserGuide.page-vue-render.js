@@ -284,6 +284,6 @@ with(this){return _c('h2',{attrs:{"id":"glossary"}},[_v("Glossary"),_c('a',{stat
 with(this){return _c('div',{staticClass:"table-responsive"},[_c('table',{staticClass:"markbind-table table table-bordered table-striped"},[_c('thead',[_c('tr',[_c('th',[_v("Term")]),_v(" "),_c('th',[_v("Meaning")])])]),_v(" "),_c('tbody',[_c('tr',[_c('td',[_v("CSV")]),_v(" "),_c('td',[_v("A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.")])])])])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Thu, 2 Nov 2023, 2:47:57 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Thu, 2 Nov 2023, 10:21:47 GMT+8]")])])])}
 }];
   

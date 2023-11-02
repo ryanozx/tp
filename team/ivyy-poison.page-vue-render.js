@@ -8,6 +8,6 @@ with(this){return _c('div',{attrs:{"id":"app"}},[_c('header',{attrs:{"sticky":""
 with(this){return _c('div',{attrs:{"id":"content-wrapper"}},[_c('h3',{attrs:{"id":"project-hrmate"}},[_v("Project: HRMate"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#project-hrmate","onclick":"event.stopPropagation()"}})]),_v(" "),_c('p',[_v("HRMate is a desktop address book application that aims to streamline HR processes, by offering an intuitive, CLI-based\ncontact management system with specialised functionalities for HR tasks. It has a GUI created with JavaFX, and is\nwritten in Java with about 10 kLoC.")]),_v(" "),_c('p',[_v("Given below are my contributions to the project.")]),_v(" "),_c('ul',[_c('li',[_v("To be added")])])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Thu, 2 Nov 2023, 2:47:57 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Thu, 2 Nov 2023, 10:21:47 GMT+8]")])])])}
 }];
   
