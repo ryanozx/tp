@@ -2,34 +2,39 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.format.DateTimeParseException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.leave.Date;
-import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
-import seedu.address.model.leave.PersonEntry;
-import seedu.address.model.leave.Range;
-import seedu.address.model.leave.Status;
-import seedu.address.model.leave.Title;
-import seedu.address.model.leave.exceptions.EndBeforeStartException;
-import seedu.address.model.person.ComparablePerson;
 
 /**
  * Jackson-friendly version of {@link Leave}.
  */
-public class JsonAdaptedLeave {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Leave's %s field is missing!";
-
-    private final String start;
-    private final String end;
-    private final String title;
-    private final String description;
-    private final String status;
-    private final ComparablePerson employee;
+public class JsonAdaptedLeave extends AdaptedLeave {
+    /**
+     * Converts a given {@code Leave} into this class for Jackson use.
+     */
+    public JsonAdaptedLeave(Leave source) {
+        super(source);
+    }
+    private JsonAdaptedLeave(String start, String end, String title, String description,
+                             String status, String employee) {
+        super(start, end, title, description, status, employee);
+    }
+    /**
+     * Constructs a {@code JsonAdaptedLeave} with the given leave details. The purpose of this static method
+     * is to enable checking of the Employee instance to ensure it is non-null before initialising the base
+     * AdaptedLeave instance.
+     */
+    @JsonCreator
+    public static JsonAdaptedLeave of(@JsonProperty("start") String start, @JsonProperty("end") String end,
+                                      @JsonProperty("title") String title,
+                                      @JsonProperty("description") String description,
+                                      @JsonProperty("status") String status,
+                                      @JsonProperty("employee") Employee employee) {
+        requireNonNull(employee);
+        return new JsonAdaptedLeave(start, end, title, description, status, employee.getName().getFullName());
+    }
 
     /**
      * Helper class to access nested field in serialized JSON Leave object
@@ -37,12 +42,15 @@ public class JsonAdaptedLeave {
     public static class Employee {
         private final Name name;
 
+        /**
+         * Constructs an Employee instance
+         * @param name Name of employee
+         */
         @JsonCreator
         public Employee(@JsonProperty("name") Name name) {
+            requireNonNull(name);
             this.name = name;
         }
-
-
         public Name getName() {
             return name;
         }
@@ -53,7 +61,6 @@ public class JsonAdaptedLeave {
      */
     public static class Name {
         private final String fullName;
-
         @JsonCreator
         public Name(@JsonProperty("fullName") String fullName) {
             this.fullName = fullName;
@@ -61,114 +68,6 @@ public class JsonAdaptedLeave {
 
         public String getFullName() {
             return fullName;
-        }
-    }
-
-    /**
-     * Constructs a {@code JsonAdaptedLeave} with the given leave details.
-     */
-    @JsonCreator
-    public JsonAdaptedLeave(@JsonProperty("start") String start, @JsonProperty("end") String end,
-            @JsonProperty("title") String title, @JsonProperty("description") String description,
-            @JsonProperty("status") String status, @JsonProperty("employee") Employee employee) {
-        requireNonNull(employee);
-        this.start = start;
-        this.end = end;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.employee = new PersonEntry(employee.getName().getFullName());
-    }
-
-    /**
-     * Converts a given {@code Leave} into this class for Jackson use.
-     */
-    public JsonAdaptedLeave(Leave source) {
-        start = source.getStart().toString();
-        end = source.getEnd().toString();
-        title = source.getTitle().toString();
-        description = source.getDescription().toString();
-        status = source.getStatus().toString();
-        employee = source.getEmployee();
-    }
-
-    public String getStart() {
-        return start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public ComparablePerson getEmployee() {
-        return employee;
-    }
-
-    /**
-     * Converts this Jackson-friendly adapted leave object into the model's {@code Leave} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted leave.
-     */
-    public Leave toModelType() throws IllegalValueException {
-        if (title == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "title"));
-        }
-        if (!Title.isValidTitle(title)) {
-            throw new IllegalValueException(Title.MESSAGE_CONSTRAINTS);
-        }
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
-        }
-        if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
-        }
-        if (status == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "status"));
-        }
-
-
-        final Title modelTitle = new Title(title);
-        final Description modelDescription = new Description(description);
-        final Range dateRange = constructRange();
-        final Status modelStatus = Status.of(status);
-        final ComparablePerson modelEmployee = employee;
-        return new Leave(modelEmployee, modelTitle, dateRange, modelDescription, modelStatus);
-    }
-
-    /**
-     * Constructs a Range object from the start and end fields
-     * @return Range representing the range of dates from start to end
-     * @throws IllegalValueException if the start and end dates are not in the correct format or the
-     *      end date is before the start date
-     */
-    private Range constructRange() throws IllegalValueException {
-        if (start == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start"));
-        }
-        if (end == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end"));
-        }
-
-        try {
-            final Date modelStart = Date.of(start);
-            final Date modelEnd = Date.of(end);
-            return Range.createNonNullRange(modelStart, modelEnd);
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
-        } catch (EndBeforeStartException e) {
-            throw new IllegalValueException(Range.MESSAGE_INVALID_END_DATE);
         }
     }
 }

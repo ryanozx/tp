@@ -44,7 +44,7 @@ public class JsonSerializableLeavesBookTest {
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         JsonSerializableLeavesBook dataFromFile = JsonUtil.readJsonFile(
                 DUPLICATE_DATA_FILE, JsonSerializableLeavesBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableLeavesBook.MESSAGE_DUPLICATE_LEAVE, () ->
+        assertThrows(IllegalValueException.class, SerializableLeavesBook.MESSAGE_DUPLICATE_LEAVE, () ->
                 dataFromFile.toModelType(getTypicalAddressBook()));
     }
 

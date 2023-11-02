@@ -1,5 +1,6 @@
 package seedu.address.model.leave;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -32,6 +33,7 @@ public class Leave {
     public Leave(ComparablePerson employee, Title title, Range dateRange, Description description)
             throws EndBeforeStartException {
         requireAllNonNull(employee, title, description, dateRange);
+        requireNonNull(employee.getName());
         assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
         this.employee = employee;
@@ -52,6 +54,7 @@ public class Leave {
     public Leave(ComparablePerson employee, Title title, Range dateRange)
             throws EndBeforeStartException {
         requireAllNonNull(employee, title, dateRange);
+        requireNonNull(employee.getName());
         assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
         this.employee = employee;
@@ -74,6 +77,7 @@ public class Leave {
     public Leave(ComparablePerson employee, Title title, Range dateRange, Description description, Status status)
             throws EndBeforeStartException {
         requireAllNonNull(employee, title, description, dateRange, status);
+        requireNonNull(employee.getName());
         assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
         this.employee = employee;

@@ -55,6 +55,18 @@ public class StatusTest {
     }
 
     @Test
+    public void isValidStatus() {
+        assertTrue(Status.isValidStatus("APPROVED"));
+        assertTrue(Status.isValidStatus("PENDING"));
+        assertTrue(Status.isValidStatus("REJECTED"));
+
+        assertFalse(Status.isValidStatus(""));
+        assertFalse(Status.isValidStatus(" "));
+        assertFalse(Status.isValidStatus("INVALID"));
+        assertFalse(Status.isValidStatus("approved"));
+    }
+
+    @Test
     public void hashcodeMethod() {
         Status status = Status.getDefault();
 
