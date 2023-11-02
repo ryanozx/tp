@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Collection;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LeavesBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,21 +42,22 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new Person(firstPerson);
         editedPerson.removeTags(firstPerson.getTags());
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, firstPerson.getTags());
         String expectedMessage = String.format(
                 DeleteTagCommand.MESSAGE_REMOVE_TAG_SUCCESS, Messages.format(editedPerson));
-        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new LeavesBook(model.getLeavesBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(outOfBoundIndex, List.of(new Tag(VALID_TAG_FRIEND)));
         assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -62,7 +65,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new Person(personInFilteredList);
@@ -70,14 +73,15 @@ public class DeleteTagCommandTest {
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, personInFilteredList.getTags());
         String expectedMessage = String.format(
                 DeleteTagCommand.MESSAGE_REMOVE_TAG_SUCCESS, Messages.format(editedPerson));
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new LeavesBook(model.getLeavesBook()), new UserPrefs());
         expectedModel.setPerson(personInFilteredList, editedPerson);
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
@@ -87,7 +91,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_personDoesNotHaveAllTags_failure() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON,
                 List.of(new Tag(VALID_TAG_FRIEND), new Tag("random")));

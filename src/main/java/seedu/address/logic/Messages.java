@@ -21,6 +21,7 @@ public class Messages {
     public static final String MESSAGE_LEAVES_LISTED_OVERVIEW = "%1$d leaves listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX = "The leave index provided is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
