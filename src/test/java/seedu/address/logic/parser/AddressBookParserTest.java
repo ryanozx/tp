@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.nio.file.Path;
@@ -21,17 +24,26 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindLeaveByPeriodCommand;
+import seedu.address.logic.commands.FindLeaveByStatusCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.LeaveHasStatusPredicate;
+import seedu.address.model.leave.LeaveInPeriodPredicate;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -83,7 +95,7 @@ public class AddressBookParserTest {
         String testFileName = "testExportFile";
         Path testFilePath = Paths.get(ExportCommand.EXPORT_DEST, "testExportFile.csv");
         ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD + " "
-            + testFileName);
+                + testFileName);
         assertEquals(new ExportCommand(testFilePath), command);
     }
 
@@ -123,7 +135,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -144,5 +156,34 @@ public class AddressBookParserTest {
     public void parseCommand_viewTag() throws Exception {
         assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD) instanceof ViewTagCommand);
         assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD + " 3abc") instanceof ViewTagCommand);
+    }
+
+    @Test
+    public void parseCommand_findLeaveByPeriod() throws Exception {
+        String startDate = "2023-10-30";
+        String endDate = "2023-10-31";
+
+        LeaveInPeriodPredicate expectedPredicate = new LeaveInPeriodPredicate(
+                Range.createNonNullRange(Date.of(startDate), Date.of(endDate)));
+        String userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_START_DATE + VALID_END_DATE;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
+    }
+
+    @Test
+    public void parseCommand_findLeaveByStatus() throws Exception {
+        LeaveHasStatusPredicate expectedPredicate = new LeaveHasStatusPredicate(
+                Status.of(StatusType.APPROVED));
+        String userInput = FindLeaveByStatusCommand.COMMAND_WORD + " "
+                + StatusType.APPROVED;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByStatusCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByStatusCommand(expectedPredicate));
+    }
+
+    @Test
+    public void parseCommand_deleteLeave() throws Exception {
+        DeleteLeaveCommand deleteLeaveCommand = (DeleteLeaveCommand) parser.parseCommand(
+                DeleteLeaveCommand.COMMAND_WORD + " 1");
+        assertEquals(deleteLeaveCommand, new DeleteLeaveCommand(INDEX_FIRST_LEAVE));
     }
 }

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +26,13 @@ public class FindAllTagCommandParser implements Parser<FindAllTagCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindAllTagCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
-        if (args.isEmpty() || !isPrefixPresent(argMultimap, PREFIX_TAG)) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON_TAG);
+        if (args.isEmpty() || !isPrefixPresent(argMultimap, PREFIX_PERSON_TAG)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAllTagCommand.MESSAGE_USAGE));
         }
 
-        List<String> tagArguments = argMultimap.getAllValues(PREFIX_TAG);
+        List<String> tagArguments = argMultimap.getAllValues(PREFIX_PERSON_TAG);
         List<Tag> tagList = new ArrayList<>();
         for (String keyword : tagArguments) {
             try {

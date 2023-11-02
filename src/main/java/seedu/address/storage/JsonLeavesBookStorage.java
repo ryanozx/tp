@@ -38,7 +38,7 @@ public class JsonLeavesBookStorage implements LeavesBookStorage {
     }
 
     /**
-     * Similar to {@link #readLeavesBook()} ()}
+     * Similar to {@link #readLeavesBook(AddressBook addressBook)} ()}
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if the file is not found.
      */
@@ -48,7 +48,7 @@ public class JsonLeavesBookStorage implements LeavesBookStorage {
 
         Optional<JsonSerializableLeavesBook> jsonLeavesBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableLeavesBook.class);
-        if (!jsonLeavesBook.isPresent()) {
+        if (jsonLeavesBook.isEmpty()) {
             return Optional.empty();
         }
 

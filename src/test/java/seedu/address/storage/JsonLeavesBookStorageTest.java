@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -68,8 +67,8 @@ public class JsonLeavesBookStorageTest {
     }
 
     @Test
-    public void readLeavesBook_invalidDateFields_throwsDateTimeParseException() {
-        assertThrows(DateTimeParseException.class, () -> readLeavesBook("InvalidDateFields.json"));
+    public void readLeavesBook_invalidDateFields_throwsDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readLeavesBook("InvalidDateFields.json"));
     }
 
     @Test

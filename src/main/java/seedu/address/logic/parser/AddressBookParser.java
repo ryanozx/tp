@@ -9,17 +9,21 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ApproveLeaveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindAllTagCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindLeaveByPeriodCommand;
+import seedu.address.logic.commands.FindLeaveByStatusCommand;
 import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
@@ -112,6 +116,18 @@ public class AddressBookParser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
+
+        case DeleteLeaveCommand.COMMAND_WORD:
+            return new DeleteLeaveCommandParser().parse(arguments);
+
+        case AddLeaveCommand.COMMAND_WORD:
+            return new AddLeaveCommandParser().parse(arguments);
+
+        case FindLeaveByPeriodCommand.COMMAND_WORD:
+            return new FindLeaveByPeriodCommandParser().parse(arguments);
+
+        case FindLeaveByStatusCommand.COMMAND_WORD:
+            return new FindLeaveByStatusCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

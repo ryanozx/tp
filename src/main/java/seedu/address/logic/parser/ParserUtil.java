@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-//import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Title;
+import seedu.address.model.leave.exceptions.EndBeforeStartException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -123,18 +128,77 @@ public class ParserUtil {
         return tagSet;
     }
 
-    //    /**
-    //     * Parses a {@code String date} into a {@code date}.
-    //     * Leading and trailing whitespaces will be trimmed.
-    //     *
-    //     * @throws ParseException if the given {@code date} is invalid.
-    //     */
-    //    public static Date parseDate(String date) throws ParseException {
-    //        requireNonNull(date);
-    //        String trimmedDate = date.trim();
-    //        if (!Date.isValidDate(trimmedDate)) {
-    //            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-    //        }
-    //        return new Date(trimmedDate);
-    //    }
+    //=========== LeavesBook ================================================================================
+
+    /**
+     * Parses a {@code String title} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Title parseTitle(String title) {
+        requireNonNull(title);
+        return new Title(title.trim());
+    }
+
+    /**
+     * Parses a {@code String start} {@code String end} into an {@code Range}. Both start and
+     * end must be non-null.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param start Non-null string containing the start date
+     * @param end Non-null string containing the end date
+     * @throws ParseException if the given {@code start} and {@code end} is invalid, or if
+     *      the end date is before the start date
+     */
+    public static Range parseNonNullRange(String start, String end) throws ParseException {
+        requireNonNull(end);
+        requireNonNull(start);
+
+        try {
+            String trimmedStart = start.trim();
+            String trimmedEnd = end.trim();
+
+            Date startDate = Date.of(trimmedStart);
+            Date endDate = Date.of(trimmedEnd);
+
+            return Range.createNonNullRange(startDate, endDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        } catch (EndBeforeStartException e) {
+            throw new ParseException(Range.MESSAGE_INVALID_END_DATE);
+        }
+    }
+
+    /**
+     * Parses a {@code String start} {@code String end} into an {@code Range}.
+     * Start and end can be null.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param start String containing the start date / null
+     * @param end String containing the end date / null
+     * @throws ParseException if the given {@code start} and {@code end} is invalid, or if
+     *      the end date is before the start date
+     */
+    public static Range parseNullableRange(String start, String end) throws ParseException {
+        try {
+            boolean hasStart = start != null;
+            boolean hasEnd = end != null;
+            Date startDate = hasStart ? Date.of(start.trim()) : null;
+            Date endDate = hasEnd ? Date.of(end.trim()) : null;
+
+            return Range.createNullableRange(startDate, endDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        } catch (EndBeforeStartException e) {
+            throw new ParseException(Range.MESSAGE_INVALID_END_DATE);
+        }
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Description parseDescription(String description) {
+        requireNonNull(description);
+        return new Description(description.trim());
+    }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <stylesheets>
+    <URL value="@PanelStyle.css" /> <!-- Adjust the path to your CSS file relative to your resources directory -->
+  </stylesheets>
+
+  <VBox spacing="5" alignment="CENTER_LEFT">
+    <padding>
+      <Insets bottom="5" />
+    </padding>
+    <Label fx:id="leavesList" styleClass="title_label" text="Leave List"/>
+    <Line startX="0.0" startY="0.0" endX="88.0" endY="0.0" styleClass="separation_line">
+    </Line>
+  </VBox>
+  <ListView fx:id="leaveListView" VBox.vgrow="ALWAYS" />
+</VBox>

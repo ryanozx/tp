@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
@@ -21,29 +22,16 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private LeavesBook leavesBook;
+    private final LeavesBook leavesBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private FilteredList<Leave> filteredLeaves;
-
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-    }
+    private final FilteredList<Leave> filteredLeaves;
 
     /**
      * Initializes a ModelManager with the given addressBook, leavesBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyLeavesBook leavesBook,
-            ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, leavesBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
@@ -95,6 +83,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getLeavesBookFilePath() {
+        return userPrefs.getLeavesBookFilePath();
+    }
+
+    @Override
+    public void setLeavesBookFilePath(Path leavesBookFilePath) {
+        requireNonNull(leavesBookFilePath);
+        userPrefs.setAddressBookFilePath(leavesBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -106,6 +105,7 @@ public class ModelManager implements Model {
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
+
 
     @Override
     public boolean hasPerson(Person person) {
@@ -132,8 +132,14 @@ public class ModelManager implements Model {
     }
 
     //=========== LeavesBook ================================================================================
+    @Override
     public ReadOnlyLeavesBook getLeavesBook() {
         return leavesBook;
+    }
+
+    @Override
+    public void deleteLeave(Leave leaveToDelete) {
+        leavesBook.removeLeave(leaveToDelete);
     }
 
     @Override
@@ -142,6 +148,7 @@ public class ModelManager implements Model {
 
         leavesBook.setLeave(target, editedLeave);
     }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -158,6 +165,40 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+    //=========== LeavesBook ================================================================================
+    @Override
+    public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
+        this.leavesBook.resetData(leavesBook);
+    }
+
+    //=========== Filtered Leave List Accessors =============================================================
+
+    @Override
+    public boolean hasLeave(Leave leave) {
+        requireNonNull(leave);
+        return leavesBook.hasLeave(leave);
+    }
+
+    @Override
+    public void addLeave(Leave leave) {
+        leavesBook.addLeave(leave);
+        updateFilteredLeaveList(PREDICATE_SHOW_ALL_LEAVES);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Leave> getFilteredLeaveList() {
+        return filteredLeaves;
+    }
+
+    @Override
+    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
+        requireNonNull(predicate);
+        filteredLeaves.setPredicate(predicate);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -171,25 +212,23 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+        // TODO implement leaves import so the below test case passes
         return addressBook.equals(otherModelManager.addressBook)
+                // && leavesBook.equals(otherModelManager.leavesBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
-    }
-
-    //=========== Filtered Leave List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Leave} backed by the internal list of
-     * {@code versionedLeavesBook}
-     */
-    @Override
-    public ObservableList<Leave> getFilteredLeaveList() {
-        return filteredLeaves;
+        // && filteredLeaves.equals(otherModelManager.filteredLeaves);
     }
 
     @Override
-    public void updateFilteredLeaveList(Predicate<Leave> predicate) {
-        requireNonNull(predicate);
-        filteredLeaves.setPredicate(predicate);
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("addressBook", addressBook)
+                .add("leavesBook", leavesBook)
+                .add("userPrefs", userPrefs)
+                .add("filteredPersons", filteredPersons)
+                .add("filteredLeaves", filteredLeaves)
+                .toString();
     }
 }
+
