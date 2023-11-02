@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,11 +16,13 @@ public class FindSomeTagCommand extends Command {
 
     public static final String COMMAND_WORD = "find-some-tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags match some "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees whose tags match some "
             + "specified tags (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: TAG [MORE_TAGS]...\n"
-            + "Example: " + COMMAND_WORD
-            + " fullTime remote\n";
+            + "Parameters: "
+            + "[" + PREFIX_PERSON_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PERSON_TAG + "full time"
+            + PREFIX_PERSON_TAG + "remote";
 
     private final TagsContainSomeTagsPredicate predicate;
 

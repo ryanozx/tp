@@ -14,6 +14,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Leave> PREDICATE_SHOW_ALL_LEAVES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -93,14 +95,39 @@ public interface Model {
 
     void deleteLeave(Leave leaveToDelete);
 
+    /**
+     * Replaces leave book data with the data in {@code leavesBook}.
+     */
+    void setLeavesBook(ReadOnlyLeavesBook leavesBook);
 
     /**
-     * Replaces the given leave {@code target} with {@code editedLeave}.
+     * Returns true if a leave with the same identity as {@code leave} exists in the leave book.
+     */
+    boolean hasLeave(Leave leave);
+
+
+    /**
+     * Adds the given leave.
+     * {@code leave} must not already exist in the leave book.
+     */
+    void addLeave(Leave leave);
+
+    /**
+     * Replaces the given leave {@code target} with {@code editedPerson}.
      * {@code target} must exist in the leave book.
-     * The person identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
+     * The leave identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
      */
     void setLeave(Leave target, Leave editedLeave);
 
+    /**
+     * Returns the user prefs' address book file path.
+     */
+    Path getLeavesBookFilePath();
+
+    /**
+     * Sets the user prefs' address book file path.
+     */
+    void setLeavesBookFilePath(Path leavesBookFilePath);
 
     /**
      * Updates the filter of the filtered leave list to filter by the given {@code predicate}.

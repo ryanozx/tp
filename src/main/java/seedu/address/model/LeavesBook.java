@@ -28,7 +28,8 @@ public class LeavesBook implements ReadOnlyLeavesBook {
         leaves = new UniqueLeaveList();
     }
 
-    public LeavesBook() {}
+    public LeavesBook() {
+    }
 
     /**
      * Creates an LeavesBook using the Leaves in the {@code toBeCopied}

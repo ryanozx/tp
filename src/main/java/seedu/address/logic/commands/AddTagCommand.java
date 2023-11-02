@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collection;
@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a tag to a person in the address book
+ * Adds a tag to an employee in the address book
  */
 public class AddTagCommand extends Command {
 
@@ -26,9 +26,9 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tags to the employee identified "
         + "by the index number used in the displayed employee list.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_TAG + "TAG...\n"
+        + PREFIX_PERSON_TAG + "TAG...\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_TAG + "friend";
+        + PREFIX_PERSON_TAG + "full time";
 
     public static final String MESSAGE_NO_TAGS_ADDED = "At least one tag must be provided.";
     public static final String MESSAGE_DUPLICATE_TAG = "This employee already has some of the tags.";

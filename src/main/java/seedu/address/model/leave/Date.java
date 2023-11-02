@@ -8,12 +8,15 @@ import java.time.format.ResolverStyle;
 
 /**
  * Represents a Date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
+    public static final String MESSAGE_INVALID_END_DATE =
+            "The end date is earlier than the start date!";
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be valid and in a format of `yyyy-MM-dd`";
     private static final DateTimeFormatter formatter =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.STRICT);
+            DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
     private final LocalDate date;
 
     private Date(LocalDate date) {
@@ -39,7 +42,7 @@ public class Date {
      */
     public static Date of(String date) throws IllegalArgumentException {
         requireAllNonNull(date);
-        return new Date(LocalDate.parse(date));
+        return new Date(LocalDate.parse(date, formatter));
     }
 
     public boolean isBefore(Date other) {
