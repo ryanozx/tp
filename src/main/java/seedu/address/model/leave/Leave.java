@@ -119,6 +119,10 @@ public class Leave {
         return status.toString();
     }
 
+    public Status getStatusEnum() {
+        return status;
+    }
+
     public boolean belongsTo(Person employee) {
         return this.employee.equals(employee);
     }

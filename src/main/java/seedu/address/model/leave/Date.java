@@ -1,9 +1,11 @@
 package seedu.address.model.leave;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 /**
@@ -15,6 +17,7 @@ public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be valid and in a format of `yyyy-MM-dd`";
+
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
     private final LocalDate date;
@@ -67,5 +70,15 @@ public class Date {
     @Override
     public int hashCode() {
         return date.hashCode();
+    }
+
+    public static boolean isValidDate(String date) {
+        requireNonNull(date);
+        try {
+            formatter.parse(date);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 }
