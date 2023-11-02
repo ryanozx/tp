@@ -53,7 +53,7 @@ public class RejectLeaveCommand extends Command {
 
         Leave leaveToReject = leaveList.get(index.getZeroBased());
 
-        if (leaveToReject.getStatus().equals("REJECTED")) {
+        if (leaveToReject.getStatus().getStatusType().equals(Status.StatusType.REJECTED)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_LEAVE_REJECT, Messages.format(leaveToReject)));
         }
 
@@ -72,7 +72,7 @@ public class RejectLeaveCommand extends Command {
         Date start = leaveToReject.getStart();
         Date end = leaveToReject.getEnd();
         Range dateRange = Range.createNonNullRange(start, end);
-        Status rejectedStatus = Status.of("REJECTED");
+        Status rejectedStatus = Status.of(Status.StatusType.REJECTED);
 
         return new Leave(employee, title, dateRange, description, rejectedStatus);
     }
