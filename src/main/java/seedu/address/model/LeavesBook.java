@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.UniqueLeaveList;
+import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the leaves-book level
@@ -93,6 +94,14 @@ public class LeavesBook implements ReadOnlyLeavesBook {
      */
     public void removeLeave(Leave key) {
         leaves.remove(key);
+    }
+
+    public void removePerson(Person p) {
+        leaves.removePerson(p);
+    }
+
+    public void setPerson(Person target, Person editedPerson) {
+        leaves.setPerson(target, editedPerson);
     }
 
     //// util methods
