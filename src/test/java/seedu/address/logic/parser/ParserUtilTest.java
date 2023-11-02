@@ -14,6 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Title;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,6 +37,14 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String VALID_TITLE = "Leave Title";
+    private static final String VALID_DESCRIPTION = "Leave Description";
+    private static final String VALID_START_DATE = "2020-01-01";
+    private static final String VALID_END_DATE = "2020-01-02";
+
+    private static final String INVALID_START_DATE = "2020/01/01";
+    private static final String INVALID_END_DATE = "2020/01/02";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -127,7 +139,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -189,8 +201,92 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTitle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTitle(null));
+    }
+
+    @Test
+    public void parseTitle_validTitle_returnsTitle() {
+        Title expectedTitle = new Title(VALID_TITLE);
+        assertEquals(expectedTitle, ParserUtil.parseTitle(VALID_TITLE));
+    }
+
+    @Test
+    public void parseNonNullRange_nullDate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNonNullRange(null, "2020-01-01"));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNonNullRange("2020-01-01", null));
+    }
+
+    @Test
+    public void parseNonNullRange_invalidDate_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNonNullRange("2020/01/01", "2020-01-02"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNonNullRange("2020-01-01", "2020/01/02"));
+    }
+
+    @Test
+    public void parseNonNullRange_endBeforeStart_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNonNullRange("2020-01-02", "2020-01-01"));
+    }
+
+    @Test
+    public void parseNonNullRange_validDates_returnRange() throws Exception {
+        String startDate = "2020-01-01";
+        String endDate = "2020-01-02";
+
+        Range expected = Range.createNonNullRange(Date.of(startDate), Date.of(endDate));
+        assertEquals(ParserUtil.parseNonNullRange(startDate, endDate), expected);
+    }
+
+    @Test
+    public void parseNullableRange_invalidDate_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNullableRange("2020/01/01", "2020-01-02"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNullableRange("2020-01-01", "2020/01/02"));
+    }
+
+    @Test
+    public void parseNullableRange_endBeforeStart_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNullableRange("2020-01-02", "2020-01-01"));
+    }
+
+    @Test
+    public void parseNullableRange_validDates_returnRange() throws Exception {
+        String startDate = "2020-01-01";
+        String endDate = "2020-01-02";
+
+        Range expected;
+
+        // start and end date present
+        expected = Range.createNullableRange(Date.of(startDate), Date.of(endDate));
+        assertEquals(ParserUtil.parseNullableRange(startDate, endDate), expected);
+
+        // start date present
+        expected = Range.createNullableRange(Date.of(startDate), null);
+        assertEquals(ParserUtil.parseNullableRange(startDate, null), expected);
+
+        // end date present
+        expected = Range.createNullableRange(null, Date.of(endDate));
+        assertEquals(ParserUtil.parseNullableRange(null, endDate), expected);
+
+        // start and end date not present
+        expected = Range.createNullableRange(null, null);
+        assertEquals(ParserUtil.parseNullableRange(null, null), expected);
+    }
+
+    @Test
+    public void parseDescription_nullDescription_throwsException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
+    }
+
+    @Test
+    public void parseDescription_validDescription() {
+        String descText = "test description";
+        Description expected = new Description(descText);
+        assertEquals(ParserUtil.parseDescription(descText), expected);
     }
 }

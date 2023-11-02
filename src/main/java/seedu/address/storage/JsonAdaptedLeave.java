@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,8 +12,10 @@ import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.PersonEntry;
+import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
 import seedu.address.model.leave.Title;
+import seedu.address.model.leave.exceptions.EndBeforeStartException;
 import seedu.address.model.person.ComparablePerson;
 
 /**
@@ -31,7 +35,7 @@ public class JsonAdaptedLeave {
      * Helper class to access nested field in serialized JSON Leave object
      */
     public static class Employee {
-        private Name name;
+        private final Name name;
 
         @JsonCreator
         public Employee(@JsonProperty("name") Name name) {
@@ -48,7 +52,7 @@ public class JsonAdaptedLeave {
      * Helper class to access nested field in serialized JSON Leave object
      */
     public static class Name {
-        private String fullName;
+        private final String fullName;
 
         @JsonCreator
         public Name(@JsonProperty("fullName") String fullName) {
@@ -82,8 +86,8 @@ public class JsonAdaptedLeave {
     public JsonAdaptedLeave(Leave source) {
         start = source.getStart().toString();
         end = source.getEnd().toString();
-        title = source.getTitle();
-        description = source.getDescription();
+        title = source.getTitle().toString();
+        description = source.getDescription().toString();
         status = source.getStatus();
         employee = source.getEmployee();
     }
@@ -118,12 +122,6 @@ public class JsonAdaptedLeave {
      * @throws IllegalValueException if there were any data constraints violated in the adapted leave.
      */
     public Leave toModelType() throws IllegalValueException {
-        if (start == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start"));
-        }
-        if (end == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end"));
-        }
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "title"));
         }
@@ -140,12 +138,37 @@ public class JsonAdaptedLeave {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "status"));
         }
 
-        final Date modelStart = Date.of(start);
-        final Date modelEnd = Date.of(end);
-        final String modelTitle = title;
-        final String modelDescription = description;
+
+        final Title modelTitle = new Title(title);
+        final Description modelDescription = new Description(description);
+        final Range dateRange = constructRange();
         final Status modelStatus = Status.of(status);
         final ComparablePerson modelEmployee = employee;
-        return new Leave(modelEmployee, modelTitle, modelStart, modelEnd, modelDescription, modelStatus);
+        return new Leave(modelEmployee, modelTitle, dateRange, modelDescription, modelStatus);
+    }
+
+    /**
+     * Constructs a Range object from the start and end fields
+     * @return Range representing the range of dates from start to end
+     * @throws IllegalValueException if the start and end dates are not in the correct format or the
+     *      end date is before the start date
+     */
+    private Range constructRange() throws IllegalValueException {
+        if (start == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start"));
+        }
+        if (end == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end"));
+        }
+
+        try {
+            final Date modelStart = Date.of(start);
+            final Date modelEnd = Date.of(end);
+            return Range.createNonNullRange(modelStart, modelEnd);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        } catch (EndBeforeStartException e) {
+            throw new IllegalValueException(Range.MESSAGE_INVALID_END_DATE);
+        }
     }
 }

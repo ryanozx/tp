@@ -13,8 +13,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Title;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,18 +46,17 @@ public class AddLeaveCommand extends Command {
     private Leave toAdd;
 
     private final Index index;
-    private final String title;
-    private final Date dateStart;
-    private final Date dateEnd;
-    private final String description;
+    private final Title title;
+    private final Range dateRange;
+    private final Description description;
+
     /**
      * Creates an AddLeaveCommand to add the specified {@code Leave}
      */
-    public AddLeaveCommand(Index index, String title, Date dateStart, Date dateEnd, String description) {
+    public AddLeaveCommand(Index index, Title title, Range dates, Description description) {
         this.index = index;
         this.title = title;
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
+        this.dateRange = dates;
         this.description = description;
     }
 
@@ -69,7 +70,7 @@ public class AddLeaveCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        toAdd = new Leave(personToEdit, title, dateStart, dateEnd, description);
+        toAdd = new Leave(personToEdit, title, dateRange, description);
 
         if (model.hasLeave(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LEAVE);
