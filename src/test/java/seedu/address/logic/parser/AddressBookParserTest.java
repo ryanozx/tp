@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.nio.file.Path;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -176,5 +178,12 @@ public class AddressBookParserTest {
                 + StatusType.APPROVED;
         assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByStatusCommand);
         assertEquals(parser.parseCommand(userInput), new FindLeaveByStatusCommand(expectedPredicate));
+
+    @Test
+    public void parseCommand_deleteLeave() throws Exception {
+        DeleteLeaveCommand deleteLeaveCommand = (DeleteLeaveCommand) parser.parseCommand(
+                DeleteLeaveCommand.COMMAND_WORD + " 1");
+        assertEquals(deleteLeaveCommand, new DeleteLeaveCommand(INDEX_FIRST_LEAVE));
+
     }
 }

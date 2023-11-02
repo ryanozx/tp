@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Files;
@@ -22,7 +23,7 @@ public class ExportCommandTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox", "ExportCommandTest");
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
 
     private Path addToTestDataPathIfNotNull(String filename) {
         return FileAndPathUtil.addToTestDataPathIfNotNull(TEST_DATA_FOLDER, filename);

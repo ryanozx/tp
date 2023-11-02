@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LEAVES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -66,6 +67,7 @@ public class ImportCommand extends Command {
                                 String.format(MESSAGE_EMPTY_ADDRESS_BOOK, filename)));
                 model.setAddressBook(newAddressBook);
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                model.updateFilteredLeaveList(PREDICATE_SHOW_ALL_LEAVES);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, filename));
             } catch (DataLoadingException e) {
                 throw new CommandException(String.format(MESSAGE_FAILED, filename));
