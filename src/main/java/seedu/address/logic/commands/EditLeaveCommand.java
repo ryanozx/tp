@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +18,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.exceptions.EndBeforeStartException;
 
+/**
+ * Edits the details of an existing leave in the leave book.
+ */
 public class EditLeaveCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-leave";
@@ -27,13 +31,13 @@ public class EditLeaveCommand extends Command {
             + "by the index number used in the displayed leave list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameter: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TITLE + "TITLE] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_START + "START] "
-            + "[" + PREFIX_END + "END]\n"
+            + "[" + PREFIX_LEAVE_TITLE + "TITLE] "
+            + "[" + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_LEAVE_DATE_START + "START] "
+            + "[" + PREFIX_LEAVE_DATE_END + "END]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TITLE + "medical leave"
-            + PREFIX_START + "2023-10-23";
+            + PREFIX_LEAVE_TITLE + "medical leave"
+            + PREFIX_LEAVE_DATE_START + "2023-10-23";
 
     public static final String MESSAGE_EDIT_LEAVE_SUCCESS = "Edited Leave: %1$s";
 
@@ -42,6 +46,10 @@ public class EditLeaveCommand extends Command {
     private final Index index;
     private final EditLeaveDescriptor editLeaveDescriptor;
 
+    /**
+     * @param index of the leave in the filtered leave list to edit
+     * @param editLeaveDescriptor details to edit the leave with
+     */
     public EditLeaveCommand(Index index, EditLeaveDescriptor editLeaveDescriptor) {
         requireNonNull(index);
         requireNonNull(editLeaveDescriptor);
@@ -60,11 +68,13 @@ public class EditLeaveCommand extends Command {
         }
 
         Leave leaveToEdit = lastShownList.get(index.getZeroBased());
-        Leave editedLeave = createEditedLeave(leaveToEdit, editLeaveDescriptor);
-
-        model.setLeave(leaveToEdit, editedLeave);
-
-        return new CommandResult(String.format(MESSAGE_EDIT_LEAVE_SUCCESS, Messages.format(editedLeave)));
+        try {
+            Leave editedLeave = createEditedLeave(leaveToEdit, editLeaveDescriptor);
+            model.setLeave(leaveToEdit, editedLeave);
+            return new CommandResult(String.format(MESSAGE_EDIT_LEAVE_SUCCESS, Messages.format(editedLeave)));
+        } catch (EndBeforeStartException e) {
+            throw new CommandException(Date.MESSAGE_INVALID_END_DATE);
+        }
     }
 
     private static Leave createEditedLeave(Leave leaveToEdit, EditLeaveDescriptor editLeaveDescriptor) {
@@ -75,9 +85,14 @@ public class EditLeaveCommand extends Command {
         Date updatedStart = editLeaveDescriptor.getStart().orElse(leaveToEdit.getStart());
         Date updatedEnd = editLeaveDescriptor.getEnd().orElse(leaveToEdit.getEnd());
 
-        return new Leave(leaveToEdit.getEmployee(), updatedTitle, updatedStart, updatedEnd, updatedDescription, leaveToEdit.getStatusEnum());
+        return new Leave(leaveToEdit.getEmployee(), updatedTitle, updatedStart,
+                updatedEnd, updatedDescription, leaveToEdit.getStatusEnum());
     }
 
+    /**
+     * Stores the deatils to edit the leave with. Each non-empty field value will replace the
+     * corresponsing field value of the leave.
+     */
     public static class EditLeaveDescriptor {
 
         private String title;
@@ -87,6 +102,9 @@ public class EditLeaveCommand extends Command {
 
         public EditLeaveDescriptor() {}
 
+        /**
+         * Copy constructor.
+         */
         public EditLeaveDescriptor(EditLeaveDescriptor toCopy) {
             setTitle(toCopy.title);
             setDescription(toCopy.description);
@@ -136,12 +154,12 @@ public class EditLeaveCommand extends Command {
                 return true;
             }
 
-            if(!(other instanceof EditLeaveDescriptor)) {
+            if (!(other instanceof EditLeaveDescriptor)) {
                 return false;
             }
 
             EditLeaveDescriptor otherEditleaveDescriptor = (EditLeaveDescriptor) other;
-            return Objects.equals(title, otherEditleaveDescriptor.title) 
+            return Objects.equals(title, otherEditleaveDescriptor.title)
                 && Objects.equals(description, otherEditleaveDescriptor.description)
                 && Objects.equals(start, otherEditleaveDescriptor.start)
                 && Objects.equals(end, otherEditleaveDescriptor.end);

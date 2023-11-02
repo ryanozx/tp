@@ -165,6 +165,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into an {@code Date}.
+     * Leading and trailing whitespaces will be trimmed
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseSingleDate(String date) throws ParseException {
+        requireNonNull(date);
+        date = date.trim();
+
+        try {
+            return Date.of(date);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
      * Parses a {@code String description} into a {@code String}.
      * Leading and trailing whitespaces will be trimmed.
      */
