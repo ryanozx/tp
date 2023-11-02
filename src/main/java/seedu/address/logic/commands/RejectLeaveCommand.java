@@ -25,7 +25,7 @@ public class RejectLeaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reject leave request identified "
             + "by the index number used in the leave book. "
             + "The specified leave request will be rejected.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer within in the range of the Leave List)\n) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_REJECT_LEAVE_SUCCESS = "Rejected Leave: %1$s";

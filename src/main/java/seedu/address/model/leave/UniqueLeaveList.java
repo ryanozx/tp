@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.leave.exceptions.DuplicateLeaveException;
 import seedu.address.model.leave.exceptions.LeaveNotFoundException;
+import seedu.address.model.person.Person;
 
 /**
  * A list of leaves that enforces uniqueness between its elements and does not allow nulls.
@@ -109,6 +111,24 @@ public class UniqueLeaveList implements Iterable<Leave> {
         if (!internalList.remove(toRemove)) {
             throw new LeaveNotFoundException();
         }
+    }
+
+    /**
+     * Removes the leaves which belongs to Person p.
+     * @see Leave#belongsTo(Person)
+     */
+    public void removePerson(Person p) {
+        List<Leave> toRemove = internalList.stream().filter((l) -> l.belongsTo(p)).collect(Collectors.toList());
+        toRemove.forEach(this::remove);
+    }
+
+    /**
+     * Replaces leaves belonging to {@code target} with {@code editedPerson}
+     * @see Leave#belongsTo(Person)
+     */
+    public void setPerson(Person target, Person editedPerson) {
+        List<Leave> toEdit = internalList.stream().filter((l) -> l.belongsTo(target)).collect(Collectors.toList());
+        toEdit.forEach((l) -> setLeave(l, l.copyWithNewPerson(editedPerson)));
     }
 
     /**

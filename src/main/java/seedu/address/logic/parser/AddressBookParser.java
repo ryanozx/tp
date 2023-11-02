@@ -25,6 +25,7 @@ import seedu.address.logic.commands.FindAllTagCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.commands.FindLeaveByStatusCommand;
+import seedu.address.logic.commands.FindLeaveCommand;
 import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
@@ -106,12 +107,6 @@ public class AddressBookParser {
         case ViewTagCommand.COMMAND_WORD:
             return new ViewTagCommand();
 
-        case ApproveLeaveCommand.COMMAND_WORD:
-            return new ApproveLeaveCommandParser().parse(arguments);
-
-        case RejectLeaveCommand.COMMAND_WORD:
-            return new RejectLeaveCommandParser().parse(arguments);
-
         case ImportCommand.COMMAND_WORD:
             return new ImportCommand();
 
@@ -124,14 +119,23 @@ public class AddressBookParser {
         case AddLeaveCommand.COMMAND_WORD:
             return new AddLeaveCommandParser().parse(arguments);
 
+        case ApproveLeaveCommand.COMMAND_WORD:
+            return new ApproveLeaveCommandParser().parse(arguments);
+
         case EditLeaveCommand.COMMAND_WORD:
             return new EditLeaveCommandParser().parse(arguments);
+
+        case FindLeaveCommand.COMMAND_WORD:
+            return new FindLeaveCommandParser().parse(arguments);
 
         case FindLeaveByPeriodCommand.COMMAND_WORD:
             return new FindLeaveByPeriodCommandParser().parse(arguments);
 
         case FindLeaveByStatusCommand.COMMAND_WORD:
             return new FindLeaveByStatusCommandParser().parse(arguments);
+
+        case RejectLeaveCommand.COMMAND_WORD:
+            return new RejectLeaveCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

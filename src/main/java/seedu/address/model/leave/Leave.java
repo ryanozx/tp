@@ -116,6 +116,10 @@ public class Leave {
         return this.employee.equals(employee);
     }
 
+    public Leave copyWithNewPerson(Person p) {
+        return new Leave(p, title, Range.createNonNullRange(start, end), description, status);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {

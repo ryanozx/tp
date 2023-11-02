@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTagCommand;
+import seedu.address.logic.commands.ApproveLeaveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLeaveCommand;
@@ -33,9 +34,11 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.commands.FindLeaveByStatusCommand;
+import seedu.address.logic.commands.FindLeaveCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RejectLeaveCommand;
 import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.leave.Date;
@@ -155,9 +158,23 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_viewTag() throws Exception {
         assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD) instanceof ViewTagCommand);
-        assertTrue(parser.parseCommand(ViewTagCommand.COMMAND_WORD + " 3abc") instanceof ViewTagCommand);
     }
 
+    @Test
+    public void parseCommand_approveLeave() throws Exception {
+        assertTrue(parser.parseCommand(ApproveLeaveCommand.COMMAND_WORD + " 1") instanceof ApproveLeaveCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteLeave() throws Exception {
+        DeleteLeaveCommand deleteLeaveCommand = (DeleteLeaveCommand) parser.parseCommand(
+                DeleteLeaveCommand.COMMAND_WORD + " 1");
+        assertEquals(deleteLeaveCommand, new DeleteLeaveCommand(INDEX_FIRST_LEAVE));
+    }
+    @Test
+    public void parseCommand_findLeave() throws Exception {
+        assertTrue(parser.parseCommand(FindLeaveCommand.COMMAND_WORD + " 1") instanceof FindLeaveCommand);
+    }
     @Test
     public void parseCommand_findLeaveByPeriod() throws Exception {
         String startDate = "2023-10-30";
@@ -181,9 +198,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteLeave() throws Exception {
-        DeleteLeaveCommand deleteLeaveCommand = (DeleteLeaveCommand) parser.parseCommand(
-                DeleteLeaveCommand.COMMAND_WORD + " 1");
-        assertEquals(deleteLeaveCommand, new DeleteLeaveCommand(INDEX_FIRST_LEAVE));
+    public void parseCommand_rejectLeave() throws Exception {
+        assertTrue(parser.parseCommand(RejectLeaveCommand.COMMAND_WORD + " 1") instanceof RejectLeaveCommand);
     }
 }

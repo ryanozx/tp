@@ -70,6 +70,7 @@ public class LeaveCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         title.setText(leave.getTitle().toString());
+        name.setText("Employee: " + leave.getEmployee().getName().toString());
         description.setText("Description:\n" + leave.getDescription());
         dateStart.setText("Date Start: " + leave.getStart().toString());
         dateEnd.setText("Date End: " + leave.getEnd().toString());
