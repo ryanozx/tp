@@ -116,6 +116,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        leavesBook.removePerson(target);
     }
 
     @Override
@@ -129,6 +130,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        leavesBook.setPerson(target, editedPerson);
     }
 
     //=========== LeavesBook ================================================================================
