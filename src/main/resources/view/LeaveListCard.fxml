@@ -28,6 +28,7 @@
         <Label fx:id="title" styleClass="cell_big_label" text="\$title" />
       </HBox>
       <FlowPane fx:id="status" />
+      <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
       <Label fx:id="dateStart" styleClass="cell_small_label" text="\$dateStart" />
       <Label fx:id="dateEnd" styleClass="cell_small_label" text="\$dateEnd" />
 
