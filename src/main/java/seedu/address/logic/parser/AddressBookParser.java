@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.FindAllLeaveCommand;
 import seedu.address.logic.commands.FindAllTagCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
@@ -124,6 +125,9 @@ public class AddressBookParser {
 
         case EditLeaveCommand.COMMAND_WORD:
             return new EditLeaveCommandParser().parse(arguments);
+
+        case FindAllLeaveCommand.COMMAND_WORD:
+            return new FindAllLeaveCommand();
 
         case FindLeaveCommand.COMMAND_WORD:
             return new FindLeaveCommandParser().parse(arguments);

@@ -31,6 +31,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.FindAllLeaveCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.commands.FindLeaveByStatusCommand;
@@ -170,6 +171,12 @@ public class AddressBookParserTest {
         DeleteLeaveCommand deleteLeaveCommand = (DeleteLeaveCommand) parser.parseCommand(
                 DeleteLeaveCommand.COMMAND_WORD + " 1");
         assertEquals(deleteLeaveCommand, new DeleteLeaveCommand(INDEX_FIRST_LEAVE));
+    }
+
+    @Test
+    public void parseCommand_findAllLeaveCommand() throws Exception {
+        assertTrue(parser.parseCommand(FindAllLeaveCommand.COMMAND_WORD) instanceof FindAllLeaveCommand);
+        assertTrue(parser.parseCommand(FindAllLeaveCommand.COMMAND_WORD + " 3") instanceof FindAllLeaveCommand);
     }
     @Test
     public void parseCommand_findLeave() throws Exception {

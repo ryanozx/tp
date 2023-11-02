@@ -45,6 +45,8 @@ public class RejectLeaveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        model.updateFilteredLeaveList(Model.PREDICATE_SHOW_ALL_LEAVES);
         ObservableList<Leave> leaveList = model.getFilteredLeaveList();
 
         if (index.getZeroBased() >= leaveList.size()) {
