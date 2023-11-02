@@ -32,13 +32,13 @@ public class Leave {
     public Leave(ComparablePerson employee, Title title, Range dateRange, Description description)
             throws EndBeforeStartException {
         requireAllNonNull(employee, title, description, dateRange);
-        requireAllNonNull(dateRange.getStartDate(), dateRange.getEndDate());
+        assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
         this.employee = employee;
         this.title = title;
         this.description = description;
-        this.start = dateRange.getStartDate();
-        this.end = dateRange.getEndDate();
+        this.start = dateRange.getStartDate().get();
+        this.end = dateRange.getEndDate().get();
         this.status = Status.getDefault();
     }
 
@@ -52,13 +52,13 @@ public class Leave {
     public Leave(ComparablePerson employee, Title title, Range dateRange)
             throws EndBeforeStartException {
         requireAllNonNull(employee, title, dateRange);
-        requireAllNonNull(dateRange.getStartDate(), dateRange.getEndDate());
+        assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
         this.employee = employee;
         this.title = title;
         this.description = Description.getDefault();
-        this.start = dateRange.getStartDate();
-        this.end = dateRange.getEndDate();
+        this.start = dateRange.getStartDate().get();
+        this.end = dateRange.getEndDate().get();
         this.status = Status.getDefault();
     }
 
@@ -74,13 +74,13 @@ public class Leave {
     public Leave(ComparablePerson employee, Title title, Range dateRange, Description description, Status status)
             throws EndBeforeStartException {
         requireAllNonNull(employee, title, description, dateRange, status);
-        requireAllNonNull(dateRange.getStartDate(), dateRange.getEndDate());
+        assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
         this.employee = employee;
         this.title = title;
         this.description = description;
-        this.start = dateRange.getStartDate();
-        this.end = dateRange.getEndDate();
+        this.start = dateRange.getStartDate().get();
+        this.end = dateRange.getEndDate().get();
         this.status = status;
     }
 

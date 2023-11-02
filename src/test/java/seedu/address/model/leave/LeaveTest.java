@@ -43,7 +43,7 @@ public class LeaveTest {
     }
 
     private Range constructRange(Date start, Date end) {
-        return Range.createNullableRange(start, end);
+        return Range.createNonNullRange(start, end);
     }
 
     @Test
