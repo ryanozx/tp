@@ -27,7 +27,7 @@ public class DeleteLeaveCommand extends Command {
     private Index targetIndex;
 
     /**
-     * @param index of the leave in the filtered leave list to delete
+     * @param targetIndex of the leave in the filtered leave list to delete
      */
     public DeleteLeaveCommand(Index targetIndex) {
         requireNonNull(targetIndex);
