@@ -1,0 +1,201 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.leave.Description;
+import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Title;
+import seedu.address.model.leave.exceptions.EndBeforeStartException;
+
+/**
+ * Edits the details of an existing leave in the leave book.
+ */
+public class EditLeaveCommand extends Command {
+
+    public static final String COMMAND_WORD = "edit-leave";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the leave identified "
+            + "by the index number used in the displayed leave list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameter: INDEX (must be a positive integer) "
+            + "[" + PREFIX_LEAVE_TITLE + "TITLE] "
+            + "[" + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_LEAVE_DATE_START + "START] "
+            + "[" + PREFIX_LEAVE_DATE_END + "END]"
+            + "[" + PREFIX_LEAVE_STATUS + "STATUS]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_LEAVE_TITLE + "medical leave "
+            + PREFIX_LEAVE_DATE_START + "2023-10-23";
+
+    public static final String MESSAGE_EDIT_LEAVE_SUCCESS = "Edited Leave: %1$s";
+
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
+    private final Index index;
+    private final EditLeaveDescriptor editLeaveDescriptor;
+
+    /**
+     * @param index of the leave in the filtered leave list to edit
+     * @param editLeaveDescriptor details to edit the leave with
+     */
+    public EditLeaveCommand(Index index, EditLeaveDescriptor editLeaveDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editLeaveDescriptor);
+
+        this.index = index;
+        this.editLeaveDescriptor = editLeaveDescriptor;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Leave> lastShownList = model.getFilteredLeaveList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LEAVE_INDEX);
+        }
+
+        Leave leaveToEdit = lastShownList.get(index.getZeroBased());
+        try {
+            Leave editedLeave = createEditedLeave(leaveToEdit, editLeaveDescriptor);
+            model.setLeave(leaveToEdit, editedLeave);
+            return new CommandResult(String.format(MESSAGE_EDIT_LEAVE_SUCCESS, Messages.format(editedLeave)));
+        } catch (EndBeforeStartException e) {
+            throw new CommandException(Range.MESSAGE_INVALID_END_DATE);
+        }
+    }
+
+    private static Leave createEditedLeave(Leave leaveToEdit, EditLeaveDescriptor editLeaveDescriptor)
+            throws CommandException {
+        assert leaveToEdit != null;
+
+        Title updatedTitle = editLeaveDescriptor.getTitle().orElse(leaveToEdit.getTitle());
+        Description updatedDescription = editLeaveDescriptor.getDescription().orElse(leaveToEdit.getDescription());
+
+        String startDate = editLeaveDescriptor.getStart().orElse(leaveToEdit.getStart().toFormattedString());
+        String endDate = editLeaveDescriptor.getEnd().orElse(leaveToEdit.getEnd().toFormattedString());
+
+        try {
+            Range updatedRange = ParserUtil.parseNonNullRange(startDate, endDate);
+
+            Status updatedStatus = editLeaveDescriptor.getStatus().orElse(leaveToEdit.getStatus());
+
+            return new Leave(leaveToEdit.getEmployee(), updatedTitle, updatedRange, updatedDescription, updatedStatus);
+        } catch (ParseException e) {
+            throw new CommandException(Range.MESSAGE_INVALID_END_DATE);
+        }
+    }
+
+    /**
+     * Stores the deatils to edit the leave with. Each non-empty field value will replace the
+     * corresponsing field value of the leave.
+     */
+    public static class EditLeaveDescriptor {
+
+        private Title title;
+        private Description description;
+        private String start;
+        private String end;
+        private Status status;
+
+        public EditLeaveDescriptor() {}
+
+        /**
+         * Copy constructor.
+         */
+        public EditLeaveDescriptor(EditLeaveDescriptor toCopy) {
+            setTitle(toCopy.title);
+            setDescription(toCopy.description);
+        }
+
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(title, description, start, end, status);
+        }
+
+        public void setTitle(Title title) {
+            this.title = title;
+        }
+
+        public Optional<Title> getTitle() {
+            return Optional.ofNullable(title);
+        }
+
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
+        }
+
+        public void setStart(String start) {
+            this.start = start;
+        }
+
+        public Optional<String> getStart() {
+            return Optional.ofNullable(start);
+        }
+
+        public void setEnd(String end) {
+            this.end = end;
+        }
+
+        public Optional<String> getEnd() {
+            return Optional.ofNullable(end);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            if (!(other instanceof EditLeaveDescriptor)) {
+                return false;
+            }
+
+            EditLeaveDescriptor otherEditLeaveDescriptor = (EditLeaveDescriptor) other;
+            return Objects.equals(title, otherEditLeaveDescriptor.title)
+                && Objects.equals(description, otherEditLeaveDescriptor.description)
+                && Objects.equals(start, otherEditLeaveDescriptor.start)
+                && Objects.equals(end, otherEditLeaveDescriptor.end);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("title", title)
+                    .add("description", description)
+                    .add("start", start)
+                    .add("end", end)
+                    .toString();
+        }
+    }
+}
