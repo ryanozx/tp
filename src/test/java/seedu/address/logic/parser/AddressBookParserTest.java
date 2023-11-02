@@ -30,13 +30,15 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ExportContactCommand;
+import seedu.address.logic.commands.ExportLeaveCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.commands.FindLeaveByStatusCommand;
 import seedu.address.logic.commands.FindLeaveCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ImportCommand;
+import seedu.address.logic.commands.ImportContactCommand;
+import seedu.address.logic.commands.ImportLeaveCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RejectLeaveCommand;
 import seedu.address.logic.commands.ViewTagCommand;
@@ -94,12 +96,21 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_export() throws Exception {
+    public void parseCommand_exportContact() throws Exception {
         String testFileName = "testExportFile";
-        Path testFilePath = Paths.get(ExportCommand.EXPORT_DEST, "testExportFile.csv");
-        ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD + " "
-                + testFileName);
-        assertEquals(new ExportCommand(testFilePath), command);
+        Path testFilePath = Paths.get(ExportContactCommand.EXPORT_DEST, "testExportFile.csv");
+        ExportContactCommand command = (ExportContactCommand) parser.parseCommand(
+                ExportContactCommand.COMMAND_WORD + " " + testFileName);
+        assertEquals(new ExportContactCommand(testFilePath), command);
+    }
+
+    @Test
+    public void parseCommand_exportLeave() throws Exception {
+        String testFileName = "testExportFile";
+        Path testFilePath = Paths.get(ExportLeaveCommand.EXPORT_DEST, "testExportFile.csv");
+        ExportLeaveCommand command = (ExportLeaveCommand) parser.parseCommand(
+                ExportLeaveCommand.COMMAND_WORD + " " + testFileName);
+        assertEquals(new ExportLeaveCommand(testFilePath), command);
     }
 
     @Test
@@ -118,8 +129,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD) instanceof ImportCommand);
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " 3") instanceof ImportCommand);
+        assertTrue(parser.parseCommand(ImportContactCommand.COMMAND_WORD) instanceof ImportContactCommand);
+        assertTrue(parser.parseCommand(ImportContactCommand.COMMAND_WORD + " 3") instanceof ImportContactCommand);
+    }
+
+    @Test
+    public void parseCommand_importLeave() throws Exception {
+        assertTrue(parser.parseCommand(ImportLeaveCommand.COMMAND_WORD) instanceof ImportLeaveCommand);
+        assertTrue(parser.parseCommand(ImportLeaveCommand.COMMAND_WORD + " 3") instanceof ImportLeaveCommand);
     }
 
     @Test

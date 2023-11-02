@@ -12,7 +12,7 @@ public class Description {
                 + " alphanumeric characters, spaces, dashes, commas, apostrophes and full stops.";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum} \\-',.]*$";
 
-    public final String description;
+    private final String description;
 
     /**
      * Constructs a {@code Description}.

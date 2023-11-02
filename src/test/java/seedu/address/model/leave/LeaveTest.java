@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.ComparablePerson;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.LeaveBuilder;
 
 public class LeaveTest {
@@ -18,6 +20,8 @@ public class LeaveTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Leave(null, ALICE_LEAVE.getTitle(),
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd())));
+        assertThrows(NullPointerException.class, () -> new Leave(new MockPersonWithNullName(), ALICE_LEAVE.getTitle(),
                 constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd())));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, null,
                 constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd())));
@@ -30,6 +34,8 @@ public class LeaveTest {
 
         assertThrows(NullPointerException.class, () -> new Leave(null, ALICE_LEAVE.getTitle(),
                 constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
+        assertThrows(NullPointerException.class, () -> new Leave(new MockPersonWithNullName(), ALICE_LEAVE.getTitle(),
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, null,
                 constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
@@ -40,6 +46,21 @@ public class LeaveTest {
                 constructRange(null, ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
                 constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), null));
+    }
+
+    /**
+     * A class implementing ComparablePerson but with null as its name field
+     */
+    private class MockPersonWithNullName implements ComparablePerson {
+        @Override
+        public boolean isSamePerson(ComparablePerson otherPerson) {
+            return false;
+        }
+
+        @Override
+        public Name getName() {
+            return null;
+        }
     }
 
     private Range constructRange(Date start, Date end) {

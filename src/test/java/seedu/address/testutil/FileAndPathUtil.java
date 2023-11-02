@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
+
+import javafx.stage.FileChooser;
+import seedu.address.commons.controllers.FileDialogHandler;
 
 /**
  * Contains methods for handling data files in tests.
@@ -33,6 +37,25 @@ public class FileAndPathUtil {
             if (!fileToDelete.delete()) {
                 fail(String.format("Could not clean up test file: %s", filePath));
             }
+        }
+    }
+
+    /**
+     * Provides a mock implementation of a FileDialogHandler so that user input is not required
+     * during testing
+     */
+    public static class MockSuccessfulFileDialogHandler implements FileDialogHandler {
+
+        private final String pathname;
+
+        public MockSuccessfulFileDialogHandler(String filename) {
+            this.pathname = filename;
+        }
+
+        @Override
+        public Optional<File> openFile(String title, FileChooser.ExtensionFilter...extensions) {
+            File outputFile = new File(pathname);
+            return Optional.of(outputFile);
         }
     }
 }

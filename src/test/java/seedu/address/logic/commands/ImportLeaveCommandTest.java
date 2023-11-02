@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.FileAndPathUtil.MockSuccessfulFileDialogHandler;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -12,18 +13,18 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.FileChooser;
 import seedu.address.commons.controllers.FileDialogHandler;
+import seedu.address.model.LeavesBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.FileAndPathUtil;
 
-public class ImportCommandTest {
-
+public class ImportLeaveCommandTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CsvFiles");
     private static final Path INVALID_ADDRESS_BOOK_PATH = Paths.get("src", "test", "data",
-            "CsvAddressBookStorageTest", "validAndInvalidPersonAddressBook.csv");
+            "CsvLeavesBookStorageTest", "validAndInvalidLeavesBook.csv");
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
 
     private Path addToTestDataPathIfNotNull(String filename) {
@@ -31,60 +32,45 @@ public class ImportCommandTest {
     }
     @Test
     public void execute_fileChosen_success() {
-        Path filepath = addToTestDataPathIfNotNull("typicalPersonsAddressBook.csv");
-        ImportCommand command = new ImportCommand(
+        Path filepath = addToTestDataPathIfNotNull("typicalLeavesBook.csv");
+        ImportLeaveCommand command = new ImportLeaveCommand(
                 new MockSuccessfulFileDialogHandler(filepath.toString()));
-        Model actualModel = new ModelManager();
-        String expectedMessage = String.format(ImportCommand.MESSAGE_SUCCESS, filepath.getFileName());
+        Model actualModel = new ModelManager(getTypicalAddressBook(), new LeavesBook(), new UserPrefs());
+        String expectedMessage = String.format(ImportLeaveCommand.MESSAGE_SUCCESS, filepath.getFileName());
         assertCommandSuccess(command, actualModel, expectedMessage, model);
-    }
-
-    private static class MockSuccessfulFileDialogHandler implements FileDialogHandler {
-
-        private final String pathname;
-
-        public MockSuccessfulFileDialogHandler(String filename) {
-            this.pathname = filename;
-        }
-
-        @Override
-        public Optional<File> openFile(String title, ExtensionFilter ...extensions) {
-            File outputFile = new File(pathname);
-            return Optional.of(outputFile);
-        }
     }
 
     @Test
     public void execute_fileNotChosen_failed() {
-        ImportCommand command = new ImportCommand(new MockUnsuccessfulFileDialogHandler());
-        String expectedMessage = ImportCommand.MESSAGE_NO_FILE_SELECTED;
+        ImportContactCommand command = new ImportContactCommand(new MockUnsuccessfulFileDialogHandler());
+        String expectedMessage = ImportContactCommand.MESSAGE_NO_FILE_SELECTED;
         assertCommandSuccess(command, model, expectedMessage, model);
     }
 
     private static class MockUnsuccessfulFileDialogHandler implements FileDialogHandler {
         @Override
-        public Optional<File> openFile(String title, ExtensionFilter... extensions) {
+        public Optional<File> openFile(String title, FileChooser.ExtensionFilter... extensions) {
             return Optional.empty();
         }
     }
 
     @Test
-    public void execute_invalidAddressBook_throwsException() {
-        ImportCommand command = new ImportCommand(
+    public void execute_invalidLeavesBook_throwsException() {
+        ImportLeaveCommand command = new ImportLeaveCommand(
                 new MockSuccessfulFileDialogHandler(INVALID_ADDRESS_BOOK_PATH.toString()));
-        Model actualModel = new ModelManager();
-        String expectedMessage = String.format(ImportCommand.MESSAGE_FAILED,
+        Model actualModel = new ModelManager(getTypicalAddressBook(), new LeavesBook(), new UserPrefs());
+        String expectedMessage = String.format(ImportLeaveCommand.MESSAGE_FAILED,
                 INVALID_ADDRESS_BOOK_PATH.getFileName());
         assertCommandFailure(command, actualModel, expectedMessage);
     }
 
     @Test
     public void execute_emptyAddressBook_throwsException() {
-        Path filePath = addToTestDataPathIfNotNull("emptyAddressBook.csv");
-        ImportCommand command = new ImportCommand(
+        Path filePath = addToTestDataPathIfNotNull("emptyLeavesBook.csv");
+        ImportLeaveCommand command = new ImportLeaveCommand(
                 new MockSuccessfulFileDialogHandler(filePath.toString()));
-        Model actualModel = new ModelManager();
-        String expectedMessage = String.format(ImportCommand.MESSAGE_EMPTY_ADDRESS_BOOK,
+        Model actualModel = new ModelManager(getTypicalAddressBook(), new LeavesBook(), new UserPrefs());
+        String expectedMessage = String.format(ImportLeaveCommand.MESSAGE_EMPTY_LEAVES_BOOK,
                 filePath.getFileName());
         assertCommandFailure(command, actualModel, expectedMessage);
     }

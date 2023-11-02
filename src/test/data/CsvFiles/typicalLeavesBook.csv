@@ -1,0 +1,5 @@
+sep=;
+Title;Employee;Start;End;Description;Status
+Alice's Maternity Leave;Alice Pauline;2020-01-01;2020-01-02;Alice's Maternity Leave Description;PENDING
+Benson's Paternity Leave;Benson Meier;2020-01-01;2020-01-02;Benson's Paternity Leave Description;PENDING
+Alice's Maternity Leave 2;Alice Pauline;2020-01-03;2020-01-04;;PENDING

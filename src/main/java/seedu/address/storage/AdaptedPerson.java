@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Base class of AdaptedPerson used to serialise and deserialise the Person class into different formats
  */
-abstract class AdaptedPerson {
+abstract class AdaptedPerson implements ToModelTyper<Person> {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     protected final String name;
@@ -43,7 +43,7 @@ abstract class AdaptedPerson {
      * Converts a given {@code Person} into this class
      */
     public AdaptedPerson(Person source) {
-        name = source.getName().fullName;
+        name = source.getName().toString();
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;

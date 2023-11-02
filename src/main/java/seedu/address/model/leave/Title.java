@@ -13,7 +13,7 @@ public class Title {
             + "It should not be blank";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum} \\-']+$";
 
-    public final String title;
+    private final String title;
 
     /**
      * Constructs a {@code Title}.

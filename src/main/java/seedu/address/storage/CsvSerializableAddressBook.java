@@ -16,7 +16,7 @@ class CsvSerializableAddressBook extends SerializableAddressBook<CsvAdaptedPerso
     }
 
     /**
-     * Creates a CsvFile from the list of AdaptedPersons in the serialisableAddressBook
+     * Creates a CsvFile from the list of AdaptedPersons in the serializableAddressBook
      * @return CsvFile containing records of all persons in this address book
      */
     public CsvFile saveAddressBook() {

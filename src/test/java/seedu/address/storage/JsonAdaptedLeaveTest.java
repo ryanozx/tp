@@ -40,14 +40,14 @@ public class JsonAdaptedLeaveTest {
         JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_LEAVE);
         assertEquals(VALID_LEAVE, leave.toModelType());
 
-        JsonAdaptedLeave leave2 = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave2 = JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertEquals(VALID_LEAVE, leave2.toModelType());
     }
 
     @Test
     public void toModelType_nullStart_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(null, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(null, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "start");
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
@@ -55,14 +55,14 @@ public class JsonAdaptedLeaveTest {
 
     @Test
     public void toModelType_invalidStart_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(INVALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(INVALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertThrows(IllegalValueException.class, leave::toModelType);
     }
 
     @Test
     public void toModelType_nullEnd_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, null, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, null, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "end");
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
@@ -70,14 +70,14 @@ public class JsonAdaptedLeaveTest {
 
     @Test
     public void toModelType_invalidEnd_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, INVALID_END, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, INVALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertThrows(IllegalValueException.class, leave::toModelType);
     }
 
     @Test
     public void toModelType_nullTitle_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, null, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, null, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "title");
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
@@ -85,21 +85,21 @@ public class JsonAdaptedLeaveTest {
 
     @Test
     public void toModelType_emptyTitle_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, EMPTY_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, EMPTY_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertThrows(IllegalValueException.class, Title.MESSAGE_CONSTRAINTS, leave::toModelType);
     }
 
     @Test
     public void toModelType_invalidTitle_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, INVALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, INVALID_TITLE, VALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertThrows(IllegalValueException.class, Title.MESSAGE_CONSTRAINTS, leave::toModelType);
     }
 
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, null,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE, null,
                 VALID_STATUS, VALID_EMPLOYEE);
         String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "description");
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
@@ -107,27 +107,27 @@ public class JsonAdaptedLeaveTest {
 
     @Test
     public void toModelType_emptyDescription_success() throws Exception {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, EMPTY_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE, EMPTY_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertTrue(VALID_LEAVE.isSameLeave(leave.toModelType()));
     }
 
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, INVALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE, INVALID_DESCRIPTION,
                 VALID_STATUS, VALID_EMPLOYEE);
         assertThrows(IllegalValueException.class, Description.MESSAGE_CONSTRAINTS, leave::toModelType);
     }
 
     @Test
     public void toModelType_nullEmployee_throwsIllegalValueException() {
-        assertThrows(NullPointerException.class, () -> new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE,
+        assertThrows(NullPointerException.class, () -> JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE,
                 VALID_DESCRIPTION, VALID_STATUS, null));
     }
 
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 null, VALID_EMPLOYEE);
         String expectedMessage = String.format(JsonAdaptedLeave.MISSING_FIELD_MESSAGE_FORMAT, "status");
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
@@ -135,9 +135,9 @@ public class JsonAdaptedLeaveTest {
 
     @Test
     public void toModelType_invalidStatus_throwsIllegalValueException() {
-        JsonAdaptedLeave leave = new JsonAdaptedLeave(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
+        JsonAdaptedLeave leave = JsonAdaptedLeave.of(VALID_START, VALID_END, VALID_TITLE, VALID_DESCRIPTION,
                 INVALID_STATUS, VALID_EMPLOYEE);
         String expectedMessage = Status.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalArgumentException.class, expectedMessage, leave::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
     }
 }

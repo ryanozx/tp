@@ -19,9 +19,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.FileAndPathUtil;
 
-public class ExportCommandTest {
+public class ExportContactCommandTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox", "ExportCommandTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get(
+            "src", "test", "data", "sandbox", "ExportContactCommandTest");
 
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
 
@@ -32,26 +33,25 @@ public class ExportCommandTest {
     @Test
     public void execute_missingModel_throwsException() {
         Path testFilePath = addToTestDataPathIfNotNull("testFile.csv");
-        ExportCommand command = new ExportCommand(testFilePath);
+        ExportContactCommand command = new ExportContactCommand(testFilePath);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
     @Test
     public void execute_validFilePath_success() {
         Path testFilePath = addToTestDataPathIfNotNull("testFile.csv");
-        ExportCommand command = new ExportCommand(testFilePath);
-        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS, testFilePath);
+        ExportContactCommand command = new ExportContactCommand(testFilePath);
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS, "Employee", testFilePath);
         assertCommandSuccess(command, model, expectedMessage, model);
         assertTrue(Files.exists(testFilePath));
-        FileAndPathUtil.cleanupCreatedFiles(testFilePath);
     }
 
     @Test
     public void equals() {
         Path sameFilePath = addToTestDataPathIfNotNull("sameFile.csv");
         Path diffFilePath = addToTestDataPathIfNotNull("diffFile.csv");
-        ExportCommand exportFirstCommand = new ExportCommand(sameFilePath);
-        ExportCommand exportSecondCommand = new ExportCommand(sameFilePath);
-        ExportCommand exportDiffCommand = new ExportCommand(diffFilePath);
+        ExportContactCommand exportFirstCommand = new ExportContactCommand(sameFilePath);
+        ExportContactCommand exportSecondCommand = new ExportContactCommand(sameFilePath);
+        ExportContactCommand exportDiffCommand = new ExportContactCommand(diffFilePath);
 
 
         // An export command is equal to itself
