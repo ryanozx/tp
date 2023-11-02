@@ -25,7 +25,7 @@ public class ApproveLeaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Approves leave request identified "
             + "by the index number used in the leave book. "
             + "The specified leave request will be approved.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer within in the range of the Leave List)\n) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_APPROVE_LEAVE_SUCCESS = "Approved Leave: %1$s";
