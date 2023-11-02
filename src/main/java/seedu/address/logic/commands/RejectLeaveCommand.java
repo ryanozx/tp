@@ -9,8 +9,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Title;
 import seedu.address.model.person.ComparablePerson;
 
 /**
@@ -64,13 +67,14 @@ public class RejectLeaveCommand extends Command {
         assert leaveToReject != null;
 
         ComparablePerson employee = leaveToReject.getEmployee();
-        String title = leaveToReject.getTitle();
-        String description = leaveToReject.getDescription();
+        Title title = leaveToReject.getTitle();
+        Description description = leaveToReject.getDescription();
         Date start = leaveToReject.getStart();
         Date end = leaveToReject.getEnd();
+        Range dateRange = Range.createNonNullRange(start, end);
         Status rejectedStatus = Status.of("REJECTED");
 
-        return new Leave(employee, title, start, end, description, rejectedStatus);
+        return new Leave(employee, title, dateRange, description, rejectedStatus);
     }
 
     @Override

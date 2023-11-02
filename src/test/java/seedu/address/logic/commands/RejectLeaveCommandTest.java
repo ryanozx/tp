@@ -12,25 +12,25 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LeavesBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Status.StatusType;
 import seedu.address.testutil.LeaveBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class RejectLeaveCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
-
+    private final StatusType rejectedStatus = StatusType.REJECTED;
     @Test
-    public void execute_rejectLeave_success() throws CommandException {
+    public void execute_rejectLeave_success() {
         Index indexLastLeave = TestUtil.getLastLeaveIndex(model);
         Leave originalLeave = TestUtil.getLeave(model, indexLastLeave);
         LeaveBuilder leaveInList = new LeaveBuilder(originalLeave);
-        Leave rejectedLeave = leaveInList.withStatus("REJECTED").build();
+        Leave rejectedLeave = leaveInList.withStatus(rejectedStatus).build();
         RejectLeaveCommand rejectLeaveCommand = new RejectLeaveCommand(indexLastLeave);
         String expectedMessage = String.format(
                 RejectLeaveCommand.MESSAGE_REJECT_LEAVE_SUCCESS,
@@ -47,7 +47,7 @@ public class RejectLeaveCommandTest {
         Index indexLastLeave = TestUtil.getLastLeaveIndex(model);
         Leave originalLeave = TestUtil.getLeave(model, indexLastLeave);
         LeaveBuilder leaveInList = new LeaveBuilder(originalLeave);
-        Leave rejectedLeave = leaveInList.withStatus("REJECTED").build();
+        Leave rejectedLeave = leaveInList.withStatus(rejectedStatus).build();
         model.setLeave(originalLeave, rejectedLeave);
         RejectLeaveCommand rejectLeaveCommand = new RejectLeaveCommand(indexLastLeave);
         String expectedMessage = String.format(
