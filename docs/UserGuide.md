@@ -440,7 +440,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * `FIELD must be of format...` - if at least one of the field inputs violates the field's format requirements. Follow the displayed error message to fix the format error.
   * `end date cannot be before start date` - the end date provided is before the current or provided start date
 
-**Removing a leave record: `delete-leave`**
+### Removing a leave record: `delete-leave`
 
 * **What It Does:**
   * Removes an existing leave record form HRMate, so that the leave's record is no longer available in HRMate.
@@ -580,12 +580,13 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 | **Find all tags**  | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                              |
 | **Find some tags** | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                            |
 | **Add leave**      | `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`<br> e.g., `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`                                                                                                      |
-| **Edit leave**     | `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`<br> e.g., `edit-leave 1 title/medical leave start/2023-11-01`                                                                                                      |
-| **Delete leave**   | `delete-leave LEAVE_LIST_INDEX`<br> e.g., `delete-leave 1 `                                                                                                        |
+| **Edit leave**     | `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`<br> e.g., `edit-leave 1 title/medical leave start/2023-11-01`            |
+| **Delete leave**   | `delete-leave LEAVE_LIST_INDEX`<br> e.g., `delete-leave 1`                                                                                                   |
 | **Help**           | `help`                                                                                                                                                              |
 | **List**           | `list`                                                                                                                                                              |
 | **Import**         | `import`                                                                                                                                                            |
 | **Export**         | `export FILE_NAME`                                                                                                                                                  |           
+
 
 --------------------------------------------------------------------------------------------------------------------
 
