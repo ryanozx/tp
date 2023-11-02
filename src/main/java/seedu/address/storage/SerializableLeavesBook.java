@@ -21,7 +21,7 @@ abstract class SerializableLeavesBook<T extends AdaptedLeave> {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public LeavesBook toModelType(AddressBook addressBook) throws IllegalValueException {
+    public LeavesBook toModelType(AddressBook addressBook) throws IllegalValueException, PersonNotFoundException {
         LeavesBook leavesBook = new LeavesBook();
         for (T adaptedLeave : leaves) {
             Leave leave = adaptedLeave.toModelType();
@@ -29,7 +29,7 @@ abstract class SerializableLeavesBook<T extends AdaptedLeave> {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LEAVE);
             }
             if (!addressBook.hasPerson(leave.getEmployee())) {
-                throw new PersonNotFoundException();
+                continue;
             }
             leavesBook.addLeave(leave);
         }

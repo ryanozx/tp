@@ -11,35 +11,36 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates an ExportCommand
+ * Parses input arguments for child Export parsers
  */
-public class ExportCommandParser implements Parser<ExportCommand> {
+public abstract class ExportCommandParser {
 
     private final Path exportFolder = Path.of(ExportCommand.EXPORT_DEST);
 
     /**
      * Parses the given {@code String} of arguments in the context of the ExportCommand
-     * and returns an ExportCommand object for execution.
+     * and returns a file name for the child Export commands to save to.
+     * @param args String containing file name to parse
+     * @param messageUsage Message to display if file name is not of the expected format
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public ExportCommand parse(String args) throws ParseException {
+    public Path parseFileName(String args, String messageUsage) throws ParseException {
         String trimmedArgs = args.trim();
 
         boolean inputPathIsDirectory = trimmedArgs.endsWith("/");
 
         if (!FileUtil.isValidPath(trimmedArgs) || inputPathIsDirectory) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
         }
 
         Path fileName = getFileName(trimmedArgs);
 
         if (fileName.toString().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
         }
 
         String fileWithExtension = appendExtension(fileName.toString());
-        Path fixedFilePath = exportFolder.resolve(fileWithExtension);
-        return new ExportCommand(fixedFilePath);
+        return exportFolder.resolve(fileWithExtension);
     }
 
     private Path getFileName(String path) {
