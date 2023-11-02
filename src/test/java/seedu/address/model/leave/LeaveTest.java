@@ -121,7 +121,8 @@ public class LeaveTest {
                 .withDescription("Alice's Maternity Leave 2 Description").build()));
 
         // different status -> return true
-        assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withStatus("APPROVED").build()));
+        assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE)
+                .withStatus(Status.StatusType.APPROVED).build()));
     }
 
     @Test

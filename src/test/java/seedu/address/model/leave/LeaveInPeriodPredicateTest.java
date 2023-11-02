@@ -23,6 +23,10 @@ public class LeaveInPeriodPredicateTest {
     private static final Date SIXTH_DATE = Date.of("2023-11-24");
 
     @Test
+    public void constructor_nullRange_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new LeaveInPeriodPredicate(null));
+    }
+    @Test
     public void equals_startAndEndDateNonNull() {
         LeaveInPeriodPredicate firstPredicate = generatePredicate(FIRST_DATE, SECOND_DATE);
         LeaveInPeriodPredicate secondPredicate = generatePredicate(FIRST_DATE, THIRD_DATE);

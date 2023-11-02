@@ -1,5 +1,6 @@
 package seedu.address.model.leave;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.leave.Status.StatusType;
@@ -10,22 +11,25 @@ import org.junit.jupiter.api.Test;
 public class StatusTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> Status.of(null));
+        assertThrows(NullPointerException.class, () -> Status.of((StatusType) null));
     }
 
     @Test
     public void constructor_validStatusType() {
-        assertTrue(Status.of("PENDING").getStatus().equals(StatusType.PENDING));
-        assertTrue(Status.getDefault().getStatus().equals(StatusType.PENDING));
-        assertTrue(Status.of("APPROVED").getStatus().equals(StatusType.APPROVED));
-        assertTrue(Status.of("REJECTED").getStatus().equals(StatusType.REJECTED));
+        assertEquals(Status.of("PENDING").getStatusType(), StatusType.PENDING);
+        assertEquals(Status.getDefault().getStatusType(), StatusType.PENDING);
+        assertEquals(Status.of("APPROVED").getStatusType(), StatusType.APPROVED);
+        assertEquals(Status.of("REJECTED").getStatusType(), StatusType.REJECTED);
+        assertEquals(Status.of(StatusType.APPROVED).getStatusType(), StatusType.APPROVED);
+        assertEquals(Status.of(StatusType.PENDING).getStatusType(), StatusType.PENDING);
+        assertEquals(Status.of(StatusType.REJECTED).getStatusType(), StatusType.REJECTED);
     }
 
     @Test
     public void toStringMethod() {
-        assertTrue(Status.of("PENDING").toString().equals("PENDING"));
-        assertTrue(Status.of("APPROVED").toString().equals("APPROVED"));
-        assertTrue(Status.of("REJECTED").toString().equals("REJECTED"));
+        assertEquals("PENDING", Status.of("PENDING").toString());
+        assertEquals("APPROVED", Status.of("APPROVED").toString());
+        assertEquals("REJECTED", Status.of("REJECTED").toString());
     }
 
     @Test

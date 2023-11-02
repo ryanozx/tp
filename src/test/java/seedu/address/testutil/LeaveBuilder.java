@@ -7,6 +7,7 @@ import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.leave.Title;
 import seedu.address.model.leave.exceptions.EndBeforeStartException;
 import seedu.address.model.person.ComparablePerson;
@@ -50,7 +51,7 @@ public class LeaveBuilder {
         description = leaveToCopy.getDescription();
         start = leaveToCopy.getStart();
         end = leaveToCopy.getEnd();
-        status = Status.of(leaveToCopy.getStatus());
+        status = leaveToCopy.getStatus();
     }
 
     /**
@@ -96,7 +97,7 @@ public class LeaveBuilder {
     /**
      * Sets the {@code status} of the {@code Leave} that we are building.
      */
-    public LeaveBuilder withStatus(String status) {
+    public LeaveBuilder withStatus(StatusType status) {
         this.status = Status.of(status);
         return this;
     }

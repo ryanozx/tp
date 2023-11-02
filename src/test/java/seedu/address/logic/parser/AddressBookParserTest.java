@@ -32,14 +32,18 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
+import seedu.address.logic.commands.FindLeaveByStatusCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.leave.Date;
+import seedu.address.model.leave.LeaveHasStatusPredicate;
 import seedu.address.model.leave.LeaveInPeriodPredicate;
 import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -91,7 +95,7 @@ public class AddressBookParserTest {
         String testFileName = "testExportFile";
         Path testFilePath = Paths.get(ExportCommand.EXPORT_DEST, "testExportFile.csv");
         ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD + " "
-            + testFileName);
+                + testFileName);
         assertEquals(new ExportCommand(testFilePath), command);
     }
 
@@ -131,7 +135,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -164,6 +168,16 @@ public class AddressBookParserTest {
         String userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_START_DATE + VALID_END_DATE;
         assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
         assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
+    }
+
+    @Test
+    public void parseCommand_findLeaveByStatus() throws Exception {
+        LeaveHasStatusPredicate expectedPredicate = new LeaveHasStatusPredicate(
+                Status.of(StatusType.APPROVED));
+        String userInput = FindLeaveByStatusCommand.COMMAND_WORD + " "
+                + StatusType.APPROVED;
+        assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByStatusCommand);
+        assertEquals(parser.parseCommand(userInput), new FindLeaveByStatusCommand(expectedPredicate));
     }
 
     @Test
