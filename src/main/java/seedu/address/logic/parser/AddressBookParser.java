@@ -23,6 +23,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindAllTagCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindLeaveByPeriodCommand;
+import seedu.address.logic.commands.FindLeaveByStatusCommand;
 import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
@@ -120,6 +122,12 @@ public class AddressBookParser {
 
         case EditLeaveCommand.COMMAND_WORD:
             return new EditLeaveCommandParser().parse(arguments);
+
+        case FindLeaveByPeriodCommand.COMMAND_WORD:
+            return new FindLeaveByPeriodCommandParser().parse(arguments);
+
+        case FindLeaveByStatusCommand.COMMAND_WORD:
+            return new FindLeaveByStatusCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

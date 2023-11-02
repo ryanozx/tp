@@ -82,7 +82,7 @@ public class Person implements ComparablePerson {
      * Adds tags in toAdd to tags
      */
     public void addTags(Collection<Tag> toAdd) {
-        toAdd.forEach(tags::add);
+        tags.addAll(toAdd);
     }
 
     /**
@@ -96,7 +96,7 @@ public class Person implements ComparablePerson {
      * Checks if any tag in tags is in this.tags
      */
     public boolean hasAnyTags(Collection<Tag> tags) {
-        return tags.stream().anyMatch((tag) -> this.tags.contains(tag));
+        return tags.stream().anyMatch(this.tags::contains);
     }
 
     /**

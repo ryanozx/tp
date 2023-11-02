@@ -21,77 +21,66 @@ public class Leave {
     private final Status status;
 
     /**
-     * Constructor for Leave object. Takes in a Person object, title and description, start and end date.
+     * Constructs a Leave object. Takes in a Person object, title and description, date range.
      * Requires all fields to be non-null.
      *
-     * @param employee
-     * @param title
-     * @param description
-     * @param start
-     * @param end
+     * @param employee Employee that implements ComparablePerson
+     * @param title Leave title
+     * @param dateRange Range representing start and end dates of leaves, both start and end cannot be null
+     * @param description Leave description
      */
-    public Leave(ComparablePerson employee, String title, Date start, Date end, String description)
+    public Leave(ComparablePerson employee, Title title, Range dateRange, Description description)
             throws EndBeforeStartException {
+        requireAllNonNull(employee, title, description, dateRange);
+        assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
-        requireAllNonNull(employee, title, description, start, end);
-
-        if (end.isBefore(start)) {
-            throw new EndBeforeStartException();
-        }
         this.employee = employee;
-        this.title = new Title(title);
-        this.description = new Description(description);
-        this.start = start;
-        this.end = end;
+        this.title = title;
+        this.description = description;
+        this.start = dateRange.getStartDate().get();
+        this.end = dateRange.getEndDate().get();
         this.status = Status.getDefault();
     }
 
     /**
-     * Constructor for Leave object without the optional description field.
+     * Constructs a Leave object without the optional description field.
      *
-     * @param employee
-     * @param title
-     * @param start
-     * @param end
+     * @param employee Employee that implements ComparablePerson
+     * @param title Leave title
+     * @param dateRange Range representing start and end dates of leaves, both start and end cannot be null
      */
-    public Leave(ComparablePerson employee, String title, Date start, Date end)
+    public Leave(ComparablePerson employee, Title title, Range dateRange)
             throws EndBeforeStartException {
+        requireAllNonNull(employee, title, dateRange);
+        assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
-        requireAllNonNull(employee, title, start, end);
-        if (end.isBefore(start)) {
-            throw new EndBeforeStartException();
-        }
         this.employee = employee;
-        this.title = new Title(title);
+        this.title = title;
         this.description = Description.getDefault();
-        this.start = start;
-        this.end = end;
+        this.start = dateRange.getStartDate().get();
+        this.end = dateRange.getEndDate().get();
         this.status = Status.getDefault();
     }
 
     /**
-     * Constructor for Leave object with status.
+     * Constructs a Leave object with status.
      *
-     * @param employee
-     * @param title
-     * @param start
-     * @param end
-     * @param description
-     * @param status
+     * @param employee Employee that implements ComparablePerson
+     * @param title Leave title
+     * @param dateRange Range representing start and end dates of leaves, both start and end cannot be null
+     * @param description Leave description
+     * @param status Leave status
      */
-    public Leave(ComparablePerson employee, String title, Date start, Date end, String description, Status status)
+    public Leave(ComparablePerson employee, Title title, Range dateRange, Description description, Status status)
             throws EndBeforeStartException {
+        requireAllNonNull(employee, title, description, dateRange, status);
+        assert(dateRange.getStartDate().isPresent() && dateRange.getEndDate().isPresent());
 
-        requireAllNonNull(employee, title, description, start, end, status);
-
-        if (end.isBefore(start)) {
-            throw new EndBeforeStartException();
-        }
         this.employee = employee;
-        this.title = new Title(title);
-        this.description = new Description(description);
-        this.start = start;
-        this.end = end;
+        this.title = title;
+        this.description = description;
+        this.start = dateRange.getStartDate().get();
+        this.end = dateRange.getEndDate().get();
         this.status = status;
     }
 
@@ -99,12 +88,12 @@ public class Leave {
         return employee;
     }
 
-    public String getTitle() {
-        return title.toString();
+    public Title getTitle() {
+        return title;
     }
 
-    public String getDescription() {
-        return description.toString();
+    public Description getDescription() {
+        return description;
     }
 
     public Date getStart() {
@@ -115,11 +104,7 @@ public class Leave {
         return end;
     }
 
-    public String getStatus() {
-        return status.toString();
-    }
-
-    public Status getStatusEnum() {
+    public Status getStatus() {
         return status;
     }
 

@@ -10,24 +10,29 @@ public class Status {
     /**
      * Represents all possible status types of a leave request.
      */
-    public static enum StatusType {
+    public enum StatusType {
         PENDING, APPROVED, REJECTED
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Status should be one of the following: "
             + "PENDING, APPROVED, REJECTED";
-    private StatusType status;
+    private final StatusType status;
 
+    /**
+     * Constructs a Status object from a StatusType enum
+     * @param status One of PENDING, APPROVED, or REJECTED
+     */
     private Status(StatusType status) {
+        requireNonNull(status);
         this.status = status;
     }
 
     /**
      * Returns a {@code Status} object given a {@code String} status.
      *
-     * @param status
+     * @param status String containing status
      * @return Status object
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if string does not match known status types
      */
     public static Status of(String status) throws IllegalArgumentException {
         requireNonNull(status);
@@ -35,6 +40,18 @@ public class Status {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return new Status(StatusType.valueOf(status));
+    }
+
+    /**
+     * Returns a {@code Status} object given a {@code StatusType} status.
+     *
+     * @param status StatusType value
+     * @return Status object
+     * @throws NullPointerException if no status supplied
+     */
+    public static Status of(StatusType status) throws NullPointerException {
+        requireNonNull(status);
+        return new Status(status);
     }
 
     /**
@@ -46,7 +63,7 @@ public class Status {
         return new Status(StatusType.PENDING);
     }
 
-    public StatusType getStatus() {
+    public StatusType getStatusType() {
         return status;
     }
 

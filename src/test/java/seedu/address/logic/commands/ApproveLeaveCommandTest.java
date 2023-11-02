@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Status.StatusType;
 import seedu.address.testutil.LeaveBuilder;
 import seedu.address.testutil.TestUtil;
 
@@ -29,7 +30,7 @@ public class ApproveLeaveCommandTest {
         Index indexLastLeave = TestUtil.getLastLeaveIndex(model);
         Leave originalLeave = TestUtil.getLeave(model, indexLastLeave);
         LeaveBuilder leaveInList = new LeaveBuilder(originalLeave);
-        Leave approvedLeave = leaveInList.withStatus("APPROVED").build();
+        Leave approvedLeave = leaveInList.withStatus(StatusType.APPROVED).build();
         ApproveLeaveCommand approveLeaveCommand = new ApproveLeaveCommand(indexLastLeave);
         String expectedMessage = String.format(
                 ApproveLeaveCommand.MESSAGE_APPROVE_LEAVE_SUCCESS,
@@ -46,7 +47,7 @@ public class ApproveLeaveCommandTest {
         Index indexLastLeave = TestUtil.getLastLeaveIndex(model);
         Leave originalLeave = TestUtil.getLeave(model, indexLastLeave);
         LeaveBuilder leaveInList = new LeaveBuilder(originalLeave);
-        Leave approvedLeave = leaveInList.withStatus("APPROVED").build();
+        Leave approvedLeave = leaveInList.withStatus(StatusType.APPROVED).build();
         model.setLeave(originalLeave, approvedLeave);
         ApproveLeaveCommand approveLeaveCommand = new ApproveLeaveCommand(indexLastLeave);
         String expectedMessage = String.format(

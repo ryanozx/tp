@@ -167,7 +167,7 @@ public class AddCommandTest {
         /**
          * Replaces leave book data with the data in {@code leavesBook}.
          *
-         * @param leavesBook
+         * @param leave
          */
         @Override
         public void deleteLeave(Leave leave) {

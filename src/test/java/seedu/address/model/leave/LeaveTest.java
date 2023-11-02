@@ -11,51 +11,45 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.leave.exceptions.EndBeforeStartException;
 import seedu.address.testutil.LeaveBuilder;
 
 public class LeaveTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Leave(null, null, null, null));
         assertThrows(NullPointerException.class, () -> new Leave(null, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()));
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd())));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, null,
-                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()));
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd())));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getStart(), null));
+                null));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                null, ALICE_LEAVE.getEnd()));
+                constructRange(ALICE_LEAVE.getStart(), null)));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                constructRange(null, ALICE_LEAVE.getEnd())));
 
-        assertThrows(NullPointerException.class, () -> new Leave(null, null, null, null, null));
         assertThrows(NullPointerException.class, () -> new Leave(null, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, null,
-                ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getStart(), null, ALICE_LEAVE.getDescription()));
+                null, ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                null, ALICE_LEAVE.getEnd(), ALICE_LEAVE.getDescription()));
+                constructRange(ALICE_LEAVE.getStart(), null), ALICE_LEAVE.getDescription()));
         assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getStart(), null));
+                constructRange(null, ALICE_LEAVE.getEnd()), ALICE_LEAVE.getDescription()));
+        assertThrows(NullPointerException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getEnd()), null));
     }
 
-    @Test
-    public void constructor_invalidLeave_throwsEndBeforeStartException() {
-        assertThrows(EndBeforeStartException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart()));
-        assertThrows(EndBeforeStartException.class, () -> new Leave(BOB, BOB_LEAVE.getTitle(),
-                BOB_LEAVE.getEnd(), BOB_LEAVE.getStart(), BOB_LEAVE.getDescription()));
-        assertThrows(EndBeforeStartException.class, () -> new Leave(ALICE, ALICE_LEAVE.getTitle(),
-                ALICE_LEAVE.getEnd(), ALICE_LEAVE.getStart(), ALICE_LEAVE.getDescription(),
-                Status.of(ALICE_LEAVE.getStatus())));
+    private Range constructRange(Date start, Date end) {
+        return Range.createNonNullRange(start, end);
     }
 
     @Test
     public void constructor_startSameAsEnd_success() {
-        Leave leave = new Leave(ALICE, ALICE_LEAVE.getTitle(), ALICE_LEAVE.getStart(),
-                ALICE_LEAVE.getStart(), ALICE_LEAVE.getDescription());
+        Leave leave = new Leave(ALICE, ALICE_LEAVE.getTitle(),
+                constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getStart()), ALICE_LEAVE.getDescription());
         assertEquals(leave.getStart(), leave.getEnd());
     }
 
@@ -127,7 +121,8 @@ public class LeaveTest {
                 .withDescription("Alice's Maternity Leave 2 Description").build()));
 
         // different status -> return true
-        assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE).withStatus("APPROVED").build()));
+        assertTrue(ALICE_LEAVE.isSameLeave(new LeaveBuilder(ALICE_LEAVE)
+                .withStatus(Status.StatusType.APPROVED).build()));
     }
 
     @Test

@@ -51,6 +51,13 @@ public class DateTest {
     }
 
     @Test
+    public void isAfterMethod() {
+        assertTrue(Date.of("2020-01-02").isAfter(Date.of("2020-01-01")));
+        assertFalse(Date.of("2020-01-01").isAfter(Date.of("2020-01-02")));
+        assertFalse(Date.of("2020-01-01").isAfter(Date.of("2020-01-01")));
+    }
+
+    @Test
     public void toStringMethod() {
         assertTrue(Date.of("2020-01-01").toString().equals("2020-01-01"));
     }
