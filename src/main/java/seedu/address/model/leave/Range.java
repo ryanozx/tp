@@ -2,7 +2,10 @@ package seedu.address.model.leave;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.model.leave.exceptions.EndBeforeStartException;
+
 
 /**
  * Represents a range of dates
@@ -65,19 +68,19 @@ public class Range {
     }
 
     /**
-     * Returns the start date of the range
-     * @return Start date of range. Can be null if no start date was provided.
+     * Returns the start date of the range as an Optional
+     * @return Start date of range. Can be an empty Optional if no start date was provided.
      */
-    public Date getStartDate() {
-        return startDate;
+    public Optional<Date> getStartDate() {
+        return Optional.ofNullable(startDate);
     }
 
     /**
-     * Returns the end date of the range
-     * @return End date of range. Can be null if no end date was provided.
+     * Returns the end date of the range as an Optional
+     * @return End date of range. Can be an empty Optional if no end date was provided.
      */
-    public Date getEndDate() {
-        return endDate;
+    public Optional<Date> getEndDate() {
+        return Optional.ofNullable(endDate);
     }
 
     @Override

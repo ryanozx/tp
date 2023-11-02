@@ -167,8 +167,13 @@ public class AddCommandTest {
         /**
          * Replaces leave book data with the data in {@code leavesBook}.
          *
-         * @param leavesBook
+         * @param leave
          */
+        @Override
+        public void deleteLeave(Leave leave) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
             throw new AssertionError("This method should not be called.");
@@ -182,17 +187,6 @@ public class AddCommandTest {
         @Override
         public boolean hasLeave(Leave leave) {
             return false;
-        }
-
-        /**
-         * Deletes the given leave.
-         * The leave must exist in the address book.
-         *
-         * @param target
-         */
-        @Override
-        public void deleteLeave(Leave target) {
-            throw new AssertionError("This method should not be called.");
         }
 
         /**

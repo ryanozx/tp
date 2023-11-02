@@ -25,9 +25,10 @@ public class LeaveInPeriodPredicate implements Predicate<Leave> {
      */
     public LeaveInPeriodPredicate(Range dateRange) {
         requireNonNull(dateRange);
-        this.start = dateRange.getStartDate();
-        this.end = dateRange.getEndDate();
+        this.start = dateRange.getStartDate().orElse(null);
+        this.end = dateRange.getEndDate().orElse(null);
     }
+
     @Override
     public boolean test(Leave leave) {
         boolean hasStartDate = start != null;

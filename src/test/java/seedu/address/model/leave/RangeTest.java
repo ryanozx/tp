@@ -3,7 +3,6 @@ package seedu.address.model.leave;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -31,13 +30,13 @@ public class RangeTest {
     public void createNonNullRange_validLeave_returnsRange() {
         // start date before end date
         Range expectedDiffRange = Range.createNonNullRange(FIRST_DATE, SECOND_DATE);
-        assertEquals(expectedDiffRange.getStartDate(), FIRST_DATE);
-        assertEquals(expectedDiffRange.getEndDate(), SECOND_DATE);
+        assertEquals(expectedDiffRange.getStartDate().get(), FIRST_DATE);
+        assertEquals(expectedDiffRange.getEndDate().get(), SECOND_DATE);
 
         // start date same as end date
         Range expectedSameRange = Range.createNonNullRange(FIRST_DATE, FIRST_DATE);
-        assertEquals(expectedSameRange.getStartDate(), FIRST_DATE);
-        assertEquals(expectedSameRange.getEndDate(), FIRST_DATE);
+        assertEquals(expectedSameRange.getStartDate().get(), FIRST_DATE);
+        assertEquals(expectedSameRange.getEndDate().get(), FIRST_DATE);
     }
 
     @Test
@@ -50,28 +49,28 @@ public class RangeTest {
     public void createNullableRange_validLeave_returnsRange() {
         // start date before end date
         Range expectedDiffRange = Range.createNullableRange(FIRST_DATE, SECOND_DATE);
-        assertEquals(expectedDiffRange.getStartDate(), FIRST_DATE);
-        assertEquals(expectedDiffRange.getEndDate(), SECOND_DATE);
+        assertEquals(expectedDiffRange.getStartDate().get(), FIRST_DATE);
+        assertEquals(expectedDiffRange.getEndDate().get(), SECOND_DATE);
 
         // start date same as end date
         Range expectedSameRange = Range.createNullableRange(FIRST_DATE, FIRST_DATE);
-        assertEquals(expectedSameRange.getStartDate(), FIRST_DATE);
-        assertEquals(expectedSameRange.getEndDate(), FIRST_DATE);
+        assertEquals(expectedSameRange.getStartDate().get(), FIRST_DATE);
+        assertEquals(expectedSameRange.getEndDate().get(), FIRST_DATE);
 
         // start date provided, null end date
         Range expectedStartRange = Range.createNullableRange(FIRST_DATE, null);
-        assertEquals(expectedStartRange.getStartDate(), FIRST_DATE);
-        assertNull(expectedStartRange.getEndDate());
+        assertEquals(expectedStartRange.getStartDate().get(), FIRST_DATE);
+        assertFalse(expectedStartRange.getEndDate().isPresent());
 
         // end date provided, start date null
         Range expectedEndRange = Range.createNullableRange(null, SECOND_DATE);
-        assertNull(expectedEndRange.getStartDate());
-        assertEquals(expectedEndRange.getEndDate(), SECOND_DATE);
+        assertFalse(expectedEndRange.getStartDate().isPresent());
+        assertEquals(expectedEndRange.getEndDate().get(), SECOND_DATE);
 
         // no start and end date provided
         Range expectedNullRange = Range.createNullableRange(null, null);
-        assertNull(expectedNullRange.getStartDate());
-        assertNull(expectedNullRange.getEndDate());
+        assertFalse(expectedNullRange.getStartDate().isPresent());
+        assertFalse(expectedNullRange.getEndDate().isPresent());
     }
 
     @Test
