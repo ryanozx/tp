@@ -402,7 +402,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Acceptable value:**
   * The specified `INDEX` must match with a employee record shown in the displayed employee list.
   * Description field is optional, the rest of field cannot be left empty.
-  * For start and end: they must be in the format yyyy-mm-dd (like 2023-11-01 for 2023 November 1st). Additionally, the start date must be before or equals to the end date.
+  * For start and end: they must be in the format `yyyy-mm-dd` (like 2023-11-01 for 2023 November 1st). Additionally, the start date must be before or equals to the end date.
   * For status: it is PENDING status in default when a leave is first added.
 
 * **Expected output on failure:**
