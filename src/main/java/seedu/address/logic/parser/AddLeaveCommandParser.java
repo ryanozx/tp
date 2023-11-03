@@ -48,13 +48,21 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LEAVE_TITLE).get());
+        Title title;
+
+        try {
+            title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LEAVE_TITLE).get());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
+
         Range dateRange = ParserUtil.parseNonNullRange(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get(),
                 argMultimap.getValue(PREFIX_LEAVE_DATE_END).get());
 
+
         Description description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
-                .map(ParserUtil::parseDescription)
-                .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
+                    .map(ParserUtil::parseDescription)
+                    .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
         return new AddLeaveCommand(index, title, dateRange, description);
     }
 
