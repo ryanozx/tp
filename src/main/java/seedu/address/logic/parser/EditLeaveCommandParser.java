@@ -13,6 +13,7 @@ import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.EditLeaveCommand.EditLeaveDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.leave.Status;
+import seedu.address.model.leave.Title;
 
 /**
  * Parses input arguments and creates a new EditLeaveCommand object
@@ -42,8 +43,13 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
 
         EditLeaveDescriptor editLeaveDescriptor = new EditLeaveDescriptor();
 
-        argMultimap.getValue(PREFIX_LEAVE_TITLE).ifPresent((s) ->
+        try {
+            argMultimap.getValue(PREFIX_LEAVE_TITLE).ifPresent((s) ->
                 editLeaveDescriptor.setTitle(ParserUtil.parseTitle(s)));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
+
         argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).ifPresent((s) ->
                 editLeaveDescriptor.setDescription(ParserUtil.parseDescription(s)));
 
