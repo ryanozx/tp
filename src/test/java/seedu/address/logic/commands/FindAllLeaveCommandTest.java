@@ -35,7 +35,8 @@ public class FindAllLeaveCommandTest {
 
         // test for empty leaves book
         Model emptyModel = new ModelManager(getTypicalAddressBook(), new LeavesBook(), new UserPrefs());
-        Model expectedEmptyModel = new ModelManager(emptyModel.getAddressBook(), emptyModel.getLeavesBook(), new UserPrefs());
+        Model expectedEmptyModel = new ModelManager(
+                emptyModel.getAddressBook(), emptyModel.getLeavesBook(), new UserPrefs());
         CommandResult expectedEmptyCommandResult = new CommandResult(FindAllLeaveCommand.MESSAGE_FIND_LEAVE_NONE);
         assertCommandSuccess(findAllLeaveCommand, emptyModel, expectedEmptyCommandResult, expectedEmptyModel);
     }
