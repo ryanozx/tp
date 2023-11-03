@@ -35,13 +35,6 @@ public class CsvAdaptedPersonTest {
             CsvAdaptedPerson.TAG_DELIMITER, VALID_TAG_NAMES);
 
     @Test
-    public void constructor_stringFields_returnsPerson() throws Exception {
-        CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS);
-        assertEquals(BENSON, person.toModelType());
-    }
-
-    @Test
     public void getCsvValues_validFields() {
         String tagRep = String.join(CsvAdaptedPerson.TAG_DELIMITER, VALID_TAG_NAMES);
         String[] expectedValues = {VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, tagRep};

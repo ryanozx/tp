@@ -1,31 +1,21 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.io.IOException;
 import java.nio.file.Path;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyFilteredAddressBook;
-import seedu.address.storage.CsvAddressBookStorage;
-
 /**
- * Exports records to file
+ * Base ExportCommand class that contains fields shared by commands that export files,
+ * such as file paths, destination paths, and messages
  */
-public class ExportCommand extends Command {
-
-    public static final String COMMAND_WORD = "export";
-
+public abstract class ExportCommand extends Command {
     public static final String EXPORT_DEST = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports records to CSV file. "
+    public static final String MESSAGE_USAGE = "%s: Exports %s records to CSV file. "
             + "Parameters: "
             + "FILENAME";
 
-    public static final String MESSAGE_SUCCESS = "Employee records have been saved to %s!";
+    public static final String MESSAGE_SUCCESS = "%s records have been saved to %s!";
 
-    public static final String MESSAGE_FAILED = "Employee records could not be saved!";
+    public static final String MESSAGE_FAILED = "%s records could not be saved!";
 
     public final Path filePath;
 
@@ -35,35 +25,5 @@ public class ExportCommand extends Command {
      */
     public ExportCommand(Path filePath) {
         this.filePath = filePath;
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        try {
-            ReadOnlyFilteredAddressBook filteredAddressBook = new ReadOnlyFilteredAddressBook(model);
-            CsvAddressBookStorage abStorage = new CsvAddressBookStorage(filePath);
-            abStorage.saveAddressBook(filteredAddressBook);
-        } catch (IOException e) {
-            throw new CommandException(MESSAGE_FAILED);
-        }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ExportCommand)) {
-            return false;
-        }
-
-        ExportCommand otherExportCommand = (ExportCommand) other;
-        return filePath.equals(otherExportCommand.filePath);
     }
 }

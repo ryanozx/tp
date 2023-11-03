@@ -16,6 +16,7 @@ public class Status {
 
     public static final String MESSAGE_CONSTRAINTS = "Status should be one of the following: "
             + "PENDING, APPROVED, REJECTED";
+    private static final String REGEX = "PENDING|APPROVED|REJECTED";
     private final StatusType status;
 
     /**
@@ -36,7 +37,7 @@ public class Status {
      */
     public static Status of(String status) throws IllegalArgumentException {
         requireNonNull(status);
-        if (!status.matches("PENDING|APPROVED|REJECTED")) {
+        if (!isValidStatus(status)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return new Status(StatusType.valueOf(status));
@@ -52,6 +53,15 @@ public class Status {
     public static Status of(StatusType status) throws NullPointerException {
         requireNonNull(status);
         return new Status(status);
+    }
+
+    /**
+     * Returns whether the string matches the value of a valid StatusType
+     * @param status String to check
+     * @return True if string matches a StatusType value, False otherwise
+     */
+    public static boolean isValidStatus(String status) {
+        return status.matches(REGEX);
     }
 
     /**

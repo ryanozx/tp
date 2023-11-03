@@ -25,7 +25,15 @@ class CsvAdaptedPerson extends AdaptedPerson implements CsvParsable {
     public static final String ADDRESS_HEADER = "Address";
     public static final String TAGS_HEADER = "Tags";
 
-    public CsvAdaptedPerson(String name, String phone, String email, String address, List<AdaptedTag> tags) {
+    /**
+     * Constructs a CsvAdaptedPerson
+     * @param name Name of person
+     * @param phone Phone number of person
+     * @param email Email address of person
+     * @param address Address of person
+     * @param tags Tags associated with person
+     */
+    private CsvAdaptedPerson(String name, String phone, String email, String address, List<AdaptedTag> tags) {
         super(name, phone, email, address, tags);
     }
 
