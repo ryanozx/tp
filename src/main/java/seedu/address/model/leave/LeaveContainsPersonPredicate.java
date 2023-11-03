@@ -16,7 +16,7 @@ public class LeaveContainsPersonPredicate implements Predicate<Leave> {
 
     @Override
     public boolean test(Leave leave) {
-        return employee.equals(leave.getEmployee());
+        return employee.isSamePerson(leave.getEmployee());
     }
 
     @Override
