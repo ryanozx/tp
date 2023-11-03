@@ -136,7 +136,8 @@ public class ParserUtil {
      */
     public static Title parseTitle(String title) {
         requireNonNull(title);
-        return new Title(title.trim());
+        String trimmedTitle = title.trim();
+        return new Title(trimmedTitle);
     }
 
     /**
@@ -199,6 +200,7 @@ public class ParserUtil {
      */
     public static Description parseDescription(String description) {
         requireNonNull(description);
-        return new Description(description.trim());
+        String trimmedDescription = description.trim();
+        return new Description(trimmedDescription);
     }
 }

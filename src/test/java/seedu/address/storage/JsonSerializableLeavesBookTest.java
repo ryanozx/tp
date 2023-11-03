@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -14,7 +15,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyLeavesBook;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class JsonSerializableLeavesBookTest {
 
@@ -37,14 +37,14 @@ public class JsonSerializableLeavesBookTest {
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
         JsonSerializableLeavesBook dataFromFile = JsonUtil.readJsonFile(
                 INVALID_PERSON_DATA_FILE, JsonSerializableLeavesBook.class).get();
-        assertThrows(PersonNotFoundException.class, () -> dataFromFile.toModelType(getTypicalAddressBook()));
+        assertTrue(dataFromFile.toModelType(getTypicalAddressBook()).getLeaveList().isEmpty());
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         JsonSerializableLeavesBook dataFromFile = JsonUtil.readJsonFile(
                 DUPLICATE_DATA_FILE, JsonSerializableLeavesBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableLeavesBook.MESSAGE_DUPLICATE_LEAVE, () ->
+        assertThrows(IllegalValueException.class, SerializableLeavesBook.MESSAGE_DUPLICATE_LEAVE, () ->
                 dataFromFile.toModelType(getTypicalAddressBook()));
     }
 

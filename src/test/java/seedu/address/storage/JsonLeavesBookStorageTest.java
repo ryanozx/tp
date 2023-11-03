@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.BENSON_LEAVE_2;
@@ -19,7 +20,6 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.LeavesBook;
 import seedu.address.model.ReadOnlyLeavesBook;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class JsonLeavesBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonLeavesBookStorageTest");
@@ -62,8 +62,8 @@ public class JsonLeavesBookStorageTest {
     }
 
     @Test
-    public void readLeavesBook_invalidPerson_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> readLeavesBook("InvalidEmployeeName.json"));
+    public void readLeavesBook_invalidPerson_skipsRow() throws Exception {
+        assertTrue(readLeavesBook("InvalidEmployeeName.json").get().getLeaveList().isEmpty());
     }
 
     @Test

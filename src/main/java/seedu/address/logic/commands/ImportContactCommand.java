@@ -18,7 +18,7 @@ import seedu.address.storage.CsvAddressBookStorage;
 /**
  * Imports records from file
  */
-public class ImportCommand extends Command {
+public class ImportContactCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
@@ -37,7 +37,7 @@ public class ImportCommand extends Command {
     /**
      * Constructs a default ImportCommand that triggers a file dialog
      */
-    public ImportCommand() {
+    public ImportContactCommand() {
         fileHandler = new FileDialogHandlerImpl();
     }
 
@@ -46,7 +46,7 @@ public class ImportCommand extends Command {
      * ImportCommands that use mock FileDialogHandlers.
      * @param fileHandler FileDialogHandler to invoke when executing the command.
      */
-    public ImportCommand(FileDialogHandler fileHandler) {
+    public ImportContactCommand(FileDialogHandler fileHandler) {
         this.fileHandler = fileHandler;
     }
 
