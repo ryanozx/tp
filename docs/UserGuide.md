@@ -386,7 +386,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Expected Value on Failure:**
   * N/A (no expected failure)
 
-### Editing a leave record: `add-leave`
+### Adding a leave record: `add-leave`
 * **What It Does:**
   * Adds a leave record in HRMate based on employee index
 
@@ -410,7 +410,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * `The leave index provided is invalid` - if the index provided does not match with any employee record in the displayed leave list
   * `Invalid command format!... ` - if any of the required field missing
   * `Leave titles should only contain...` - if the title input is empty or invalid
-  * `end date cannot be before start date` - the end date provided is before the current or provided start date
+  * `End date cannot be before start date` - the end date provided is before the current or provided start date
 
 
 ### Editing a leave record: `edit-leave`
@@ -537,6 +537,48 @@ This command is used to add an employee to the address book. Let's examine how w
   * `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` - you provided an invalid status,
     try either `APPROVED`, `PENDING`, or `REJECTED` instead
 
+### View all leaves: `find-all-leave`
+
+* **What It Does:**
+  * Shows all leave records in HRMate
+* **Format:**
+  * `find-all-leave`
+* **Examples:**
+
+| S/N | Command information                                                                      |
+|-----|------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-all-leave` <br><br> **Output:** Returns all leaves in the application |
+
+* **Expected Output on Success:**
+  * GUI Changes: All leave applications will be returned
+  * Message shown to user: "Current # of Leave Request(s): [Number of leave applications]"
+  * If there are no leave applications on the app, the message shown to the user is: "There are currently no leave requests."
+* **Expected Output on Failure:**
+  * None, this command is not expected to fail
+
+### Find leave records belonging to an employee: `find-leave`
+
+* **What It Does:**
+  * Finds all leave records that are associated with an employee, so that you can see the person's leave history and 
+  * upcoming leaves
+* **Format:**
+  * `find-leave INDEX`
+* **Examples:**
+
+| S/N | Command information                                                                                                                                                                                              |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **Command:** `find-leave 1` <br><br> **Output:** Returns all leaves associated with the employee with index 1. For instance, if the employee "John Smith" has employee index 1, John's leaves will be displayed. |
+
+* **Acceptable Values:**
+  * The specified `INDEX` must match with a employee record shown in the displayed employee list.
+* **Expected Output on Success:**
+  * GUI Changes: All leave applications associated with the requested employee will be returned.
+  * Message shown to user: "[number of leaves matched] leaves listed!"
+* **Expected Output on Failure:**
+  * `The person index provided is invalid` - The index you provided does not match with any known employee. To resolve this,
+    make sure that the employee that you are requesting for is currently displayed in the employee list. Use the number to
+    the left of the employee's name as the index
+  * `Invalid command format` - There was no employee index provided, please make sure that you supply a number as the index 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Importing/Exporting employee records
@@ -676,30 +718,32 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                     |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                    | Format, Examples                                                                                                                                                      |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add Leave**             | `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`<br> e.g., `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`                                                                                                      |
-| **Add Tag**               | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                       |
-| **Clear**                 | `clear`                                                                                                                                                              |
-| **Delete**                | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                    |
-| **Delete Leave**          | `delete-leave LEAVE_LIST_INDEX`<br> e.g., `delete-leave 1`                                                                                                           |
-| **Delete Tag**            | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                 |
-| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                          |
-| **Edit Leave**            | `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`<br> e.g., `edit-leave 1 title/medical leave start/2023-11-01`          |
-| **Exit**                  | `exit`                                                                                                                                                               |
-| **Export Contacts**       | `export FILE_NAME`                                                                                                                                                   |           
-| **Export Leaves**         | `export-leaves FILE_NAME`                                                                                                                                            |           
-| **Find**                  | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                  |
-| **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                               |
-| **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                             |
-| **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                 | 
-| **Find Leaves by Status** | `find-leave-status STATUS`                                                                                                                                           |                 
-| **Help**                  | `help`                                                                                                                                                               |
-| **Import Contacts**       | `import`                                                                                                                                                             |
-| **Import Leaves**         | `import-leaves`                                                                                                                                                      |
-| **List**                  | `list`                                                                                                                                                               |
-| **View tag**              | `view-tag`                                                                                                                                                           |
+| **Add Leave**             | `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`<br> e.g., `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`              |
+| **Add Tag**               | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                        |
+| **Clear**                 | `clear`                                                                                                                                                               |
+| **Delete**                | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| **Delete Leave**          | `delete-leave LEAVE_LIST_INDEX`<br> e.g., `delete-leave 1`                                                                                                            |
+| **Delete Tag**            | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                  |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Edit Leave**            | `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`<br> e.g., `edit-leave 1 title/medical leave start/2023-11-01`           |
+| **Exit**                  | `exit`                                                                                                                                                                |
+| **Export Contacts**       | `export FILE_NAME`                                                                                                                                                    |           
+| **Export Leaves**         | `export-leaves FILE_NAME`                                                                                                                                             |           
+| **Find**                  | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
+| **Find All Leaves**       | `find-all-leave`                                                                                                                                                      |
+| **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
+| **Find Leaves**           | `find-leave INDEX`<br> e.g., `fin-leave 1`                                                                                                                            |
+| **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                  | 
+| **Find Leaves by Status** | `find-leave-status STATUS`                                                                                                                                            |
+| **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
+| **Help**                  | `help`                                                                                                                                                                |
+| **Import Contacts**       | `import`                                                                                                                                                              |
+| **Import Leaves**         | `import-leaves`                                                                                                                                                       |
+| **List**                  | `list`                                                                                                                                                                |
+| **View tag**              | `view-tag`                                                                                                                                                            |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
