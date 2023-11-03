@@ -42,7 +42,6 @@ public class FindLeaveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         ObservableList<Person> personList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= personList.size()) {
