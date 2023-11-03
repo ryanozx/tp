@@ -16,6 +16,7 @@ public class FindAllLeaveCommand extends Command {
     public static final String COMMAND_WORD = "find-all-leave";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all leaves available in the leave list.\n";
     public static final String MESSAGE_FIND_LEAVE_NONE = "There are currently no leave requests.";
+    public static final String MESSAGE_LEAVE_COUNT = "Current # of Leave Request(s): %d";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -31,8 +32,7 @@ public class FindAllLeaveCommand extends Command {
             return new CommandResult(MESSAGE_FIND_LEAVE_NONE);
         }
 
-        String leave = "Current # of Leave Request(s):" + leaveSize;
-        return new CommandResult(leave);
+        return new CommandResult(String.format(MESSAGE_LEAVE_COUNT, leaveSize));
     }
 
     @Override
