@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LEAVES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.logging.Logger;
 
@@ -42,15 +40,14 @@ public class FindLeaveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> personList = model.getFilteredPersonList();
+        ObservableList<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= personList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LEAVE_INDEX);
+        if (index.getZeroBased() >= lastShownPersonList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person employee = personList.get(index.getZeroBased());
+        Person employee = lastShownPersonList.get(index.getZeroBased());
         LeaveContainsPersonPredicate predicate = new LeaveContainsPersonPredicate(employee);
-        model.updateFilteredLeaveList(PREDICATE_SHOW_ALL_LEAVES);
         model.updateFilteredLeaveList(predicate);
 
         logger.info("predicate: " + predicate); //dummy logger

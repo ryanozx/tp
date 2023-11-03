@@ -578,7 +578,7 @@ This command is used to add an employee to the address book. Let's examine how w
   * `The person index provided is invalid` - The index you provided does not match with any known employee. To resolve this,
     make sure that the employee that you are requesting for is currently displayed in the employee list. Use the number to
     the left of the employee's name as the index
-  * `Invalid command format` - There was no employee index provided, please make sure that you supply a number as the index 
+  * `Invalid command format` - There was no employee index provided, please make sure that you supply a number as the indexh 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Importing/Exporting employee records
