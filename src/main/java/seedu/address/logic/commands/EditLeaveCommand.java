@@ -16,14 +16,14 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
 import seedu.address.model.leave.Title;
+import seedu.address.model.leave.exceptions.DuplicateLeaveException;
 import seedu.address.model.leave.exceptions.EndBeforeStartException;
 
 /**
@@ -49,6 +49,9 @@ public class EditLeaveCommand extends Command {
     public static final String MESSAGE_EDIT_LEAVE_SUCCESS = "Edited Leave: %1$s";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
+    public static final String MESSAGE_DUPLICATED_LEAVE =
+        "Leave entry with matching employee, start date and end already exists";
 
     private final Index index;
     private final EditLeaveDescriptor editLeaveDescriptor;
@@ -79,30 +82,41 @@ public class EditLeaveCommand extends Command {
             Leave editedLeave = createEditedLeave(leaveToEdit, editLeaveDescriptor);
             model.setLeave(leaveToEdit, editedLeave);
             return new CommandResult(String.format(MESSAGE_EDIT_LEAVE_SUCCESS, Messages.format(editedLeave)));
-        } catch (EndBeforeStartException e) {
+        } catch (EndBeforeStartException ebse) {
             throw new CommandException(Range.MESSAGE_INVALID_END_DATE);
+        } catch (DuplicateLeaveException dle) {
+            throw new CommandException(MESSAGE_DUPLICATED_LEAVE);
         }
     }
 
     private static Leave createEditedLeave(Leave leaveToEdit, EditLeaveDescriptor editLeaveDescriptor)
-            throws CommandException {
+            throws EndBeforeStartException {
         assert leaveToEdit != null;
 
         Title updatedTitle = editLeaveDescriptor.getTitle().orElse(leaveToEdit.getTitle());
         Description updatedDescription = editLeaveDescriptor.getDescription().orElse(leaveToEdit.getDescription());
 
-        String startDate = editLeaveDescriptor.getStart().orElse(leaveToEdit.getStart().toFormattedString());
-        String endDate = editLeaveDescriptor.getEnd().orElse(leaveToEdit.getEnd().toFormattedString());
+        Date startDate = editLeaveDescriptor.getStart().orElse(leaveToEdit.getStart());
+        Date endDate = editLeaveDescriptor.getEnd().orElse(leaveToEdit.getEnd());
+        Range updatedRange = Range.createNonNullRange(startDate, endDate);
+        Status updatedStatus = editLeaveDescriptor.getStatus().orElse(leaveToEdit.getStatus());
 
-        try {
-            Range updatedRange = ParserUtil.parseNonNullRange(startDate, endDate);
+        return new Leave(leaveToEdit.getEmployee(), updatedTitle, updatedRange, updatedDescription, updatedStatus);
+    }
 
-            Status updatedStatus = editLeaveDescriptor.getStatus().orElse(leaveToEdit.getStatus());
-
-            return new Leave(leaveToEdit.getEmployee(), updatedTitle, updatedRange, updatedDescription, updatedStatus);
-        } catch (ParseException e) {
-            throw new CommandException(Range.MESSAGE_INVALID_END_DATE);
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
         }
+
+        if (!(other instanceof EditLeaveCommand)) {
+            return false;
+        }
+
+        EditLeaveCommand otherEditLeaveCommand = (EditLeaveCommand) other;
+        return index.equals(otherEditLeaveCommand.index)
+            && editLeaveDescriptor.equals(otherEditLeaveCommand.editLeaveDescriptor);
     }
 
     /**
@@ -113,8 +127,8 @@ public class EditLeaveCommand extends Command {
 
         private Title title;
         private Description description;
-        private String start;
-        private String end;
+        private Date start;
+        private Date end;
         private Status status;
 
         public EditLeaveDescriptor() {}
@@ -147,19 +161,19 @@ public class EditLeaveCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setStart(String start) {
+        public void setStart(Date start) {
             this.start = start;
         }
 
-        public Optional<String> getStart() {
+        public Optional<Date> getStart() {
             return Optional.ofNullable(start);
         }
 
-        public void setEnd(String end) {
+        public void setEnd(Date end) {
             this.end = end;
         }
 
-        public Optional<String> getEnd() {
+        public Optional<Date> getEnd() {
             return Optional.ofNullable(end);
         }
 
@@ -185,7 +199,8 @@ public class EditLeaveCommand extends Command {
             return Objects.equals(title, otherEditLeaveDescriptor.title)
                 && Objects.equals(description, otherEditLeaveDescriptor.description)
                 && Objects.equals(start, otherEditLeaveDescriptor.start)
-                && Objects.equals(end, otherEditLeaveDescriptor.end);
+                && Objects.equals(end, otherEditLeaveDescriptor.end)
+                && Objects.equals(status, otherEditLeaveDescriptor.status);
         }
 
         @Override
@@ -195,6 +210,7 @@ public class EditLeaveCommand extends Command {
                     .add("description", description)
                     .add("start", start)
                     .add("end", end)
+                    .add("status", status)
                     .toString();
         }
     }
