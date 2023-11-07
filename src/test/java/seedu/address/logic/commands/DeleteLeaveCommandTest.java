@@ -63,7 +63,7 @@ public class DeleteLeaveCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexFilteredList_failure() {
         showLeaveByPerson(model, TypicalPersons.BENSON);
 
         Index outofBoundsIndex = INDEX_SECOND_LEAVE;
