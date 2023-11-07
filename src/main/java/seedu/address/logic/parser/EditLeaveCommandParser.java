@@ -8,10 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
+import java.time.format.DateTimeParseException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.EditLeaveCommand.EditLeaveDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Status;
 import seedu.address.model.leave.Title;
 
@@ -38,8 +42,8 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DESCRIPTION, PREFIX_LEAVE_DATE_START, PREFIX_LEAVE_DATE_END);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DESCRIPTION, PREFIX_LEAVE_DATE_START,
+                PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_STATUS);
 
         EditLeaveDescriptor editLeaveDescriptor = new EditLeaveDescriptor();
 
@@ -50,14 +54,23 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
             throw new ParseException(Title.MESSAGE_CONSTRAINTS);
         }
 
-        argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).ifPresent((s) ->
-                editLeaveDescriptor.setDescription(ParserUtil.parseDescription(s)));
-
-        if (argMultimap.getValue(PREFIX_LEAVE_DATE_START).isPresent()) {
-            editLeaveDescriptor.setStart(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get());
+        try {
+            argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION).ifPresent((s) ->
+                    editLeaveDescriptor.setDescription(ParserUtil.parseDescription(s)));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        if (argMultimap.getValue(PREFIX_LEAVE_DATE_END).isPresent()) {
-            editLeaveDescriptor.setEnd(argMultimap.getValue(PREFIX_LEAVE_DATE_END).get());
+
+        try {
+            argMultimap.getValue(PREFIX_LEAVE_DATE_START).ifPresent((s) -> editLeaveDescriptor.setStart(Date.of(s)));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            argMultimap.getValue(PREFIX_LEAVE_DATE_END).ifPresent((s) -> editLeaveDescriptor.setEnd(Date.of(s)));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
 
         try {
