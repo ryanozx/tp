@@ -1,196 +1,162 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_PHONE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_TITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_END;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_START;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_END_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_START_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
+import seedu.address.model.leave.Leave;
+import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Title;
+import seedu.address.testutil.LeaveBuilder;
 
 public class AddLeaveCommandParserTest {
     private AddLeaveCommandParser parser = new AddLeaveCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        // without description
+        Leave expectedLeave = new LeaveBuilder().withTitle(VALID_LEAVE_TITLE)
+                .withStart(Date.of(VALID_LEAVE_DATE_START)).withEnd(Date.of(VALID_LEAVE_DATE_END))
+                .withDescription("NONE").build();
+        Range dateRange = Range.createNonNullRange(expectedLeave.getStart(), expectedLeave.getEnd());
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, " 1" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC, new AddLeaveCommand(INDEX_FIRST_LEAVE, expectedLeave.getTitle(),
+                dateRange, expectedLeave.getDescription()));
 
 
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+        // with description
+        Leave expectedLeaveWithDescription = new LeaveBuilder().withTitle(VALID_LEAVE_TITLE)
+                .withStart(Date.of(VALID_LEAVE_DATE_START)).withEnd(Date.of(VALID_LEAVE_DATE_END))
+                .withDescription(VALID_LEAVE_DESCRIPTION).build();
+        Range dateRangeWithDescription = Range.createNonNullRange(
+                expectedLeaveWithDescription.getStart(), expectedLeaveWithDescription.getEnd());
+
+        assertParseSuccess(parser, " 2" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC,
+                new AddLeaveCommand(INDEX_SECOND_LEAVE, expectedLeaveWithDescription.getTitle(),
+                        dateRangeWithDescription , expectedLeaveWithDescription.getDescription()));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+    public void parse_duplicatedFieldPrefix_failure() {
+        String validExpectedLeaveString = " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC;
 
-        // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_NAME));
+        // multiple title
+        assertParseFailure(parser, VALID_LEAVE_TITLE_DESC + validExpectedLeaveString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE));
 
-        // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_PHONE));
+        // multiple startDate
+        assertParseFailure(parser, VALID_LEAVE_START_DATE_DESC + validExpectedLeaveString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DATE_START));
 
-        // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_EMAIL));
+        // multiple endDate
+        assertParseFailure(parser, VALID_LEAVE_END_DATE_DESC + validExpectedLeaveString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DATE_END));
 
-        // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_ADDRESS));
+        // multiple description
+        assertParseFailure(parser, VALID_LEAVE_DESCRIPTION_DESC + validExpectedLeaveString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DESCRIPTION));
 
         // multiple fields repeated
-        assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_NAME, PREFIX_PERSON_ADDRESS,
-                        PREFIX_PERSON_EMAIL, PREFIX_PERSON_PHONE));
+        assertParseFailure(parser,VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                        + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC + validExpectedLeaveString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
+                        PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_DESCRIPTION));
 
         // invalid value followed by valid value
 
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_NAME));
+        // invalid title
+        assertParseFailure(parser, validExpectedLeaveString + INVALID_LEAVE_TITLE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE));
 
-        // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_EMAIL));
+        // invalid startDate
+        assertParseFailure(parser, validExpectedLeaveString + INVALID_LEAVE_DATE_START_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DATE_START));
 
-        // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_PHONE));
+        // invalid endDate
+        assertParseFailure(parser, validExpectedLeaveString + INVALID_LEAVE_DATE_END_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DATE_END));
 
-        // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_ADDRESS));
+        // invalid description
+        assertParseFailure(parser, validExpectedLeaveString + INVALID_LEAVE_DESCRIPTION_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DESCRIPTION));
 
-        // valid value followed by invalid value
-
-        // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_NAME));
-
-        // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_EMAIL));
-
-        // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_PHONE));
-
-        // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_ADDRESS));
-    }
-
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE);
 
-        // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // missing index
+        assertParseFailure(parser,  VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                        + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC, expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // missing title prefix
+        assertParseFailure(parser, " 3" + VALID_LEAVE_START_DATE_DESC
+                        + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC, expectedMessage);
 
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // missing startDate prefix
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC
+                        + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC, expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        // missing endDate prefix
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                        + VALID_LEAVE_DESCRIPTION_DESC, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser," 3" + VALID_LEAVE_TITLE + VALID_LEAVE_DATE_START
+                                + VALID_LEAVE_DATE_END + VALID_LEAVE_DESCRIPTION, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+        // invalid title
+        assertParseFailure(parser, " 3" + INVALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC, Title.MESSAGE_CONSTRAINTS);
 
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        // invalid startDate
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + INVALID_LEAVE_DATE_START_DESC
+                + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC, Date.MESSAGE_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+        // invalid endDate
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + INVALID_LEAVE_DATE_END_DESC + VALID_LEAVE_DESCRIPTION_DESC, Date.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+        // invalid description
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC + INVALID_LEAVE_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " 3" + INVALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                        + VALID_LEAVE_END_DATE_DESC + INVALID_LEAVE_DESCRIPTION_DESC,
+                Title.MESSAGE_CONSTRAINTS);
 
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
