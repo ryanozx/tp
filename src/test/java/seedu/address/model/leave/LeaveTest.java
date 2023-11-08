@@ -194,6 +194,8 @@ public class LeaveTest {
 
     @Test
     public void isConcurrentMethod() {
+        assertFalse(ALICE_LEAVE.isConcurrent(null));
+
         // same employee, same start date, same end date -> returns true
         assertTrue(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
                 .withDescription("Alice's Maternity Leave 2 Description").build()));
