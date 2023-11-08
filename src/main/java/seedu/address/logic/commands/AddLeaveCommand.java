@@ -32,13 +32,13 @@ public class AddLeaveCommand extends Command {
             + PREFIX_LEAVE_TITLE + "TITLE "
             + PREFIX_LEAVE_DATE_START + "DATE START "
             + PREFIX_LEAVE_DATE_END + "DATE END "
-            + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION "
+            + "[" + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION] "
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_LEAVE_TITLE + "John's Paternity Leave "
             + PREFIX_LEAVE_DATE_START + "2023-10-28 "
             + PREFIX_LEAVE_DATE_END + "2023-10-29 "
-            + PREFIX_LEAVE_DESCRIPTION + "John's Paternity Leave Description ";
+            + PREFIX_LEAVE_DESCRIPTION + "John's Paternity Leave Description [OPTIONAL] ";
 
     public static final String MESSAGE_SUCCESS = "New leave is added : %1$s";
     public static final String MESSAGE_DUPLICATE_LEAVE = "This leave has already exists for the employee";
