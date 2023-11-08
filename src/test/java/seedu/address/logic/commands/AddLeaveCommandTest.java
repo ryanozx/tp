@@ -1,7 +1,24 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE;
+import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
+import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,24 +36,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.LeaveBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE;
-import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
-import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 public class AddLeaveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
@@ -46,12 +45,14 @@ public class AddLeaveCommandTest {
     }
 
     @Test
-    public void execute_leaveAcceptedByModel_success() throws Exception{
+    public void execute_leaveAcceptedByModel_success() throws Exception {
 
-        AddLeaveCommandTest.ModelStubAcceptingLeaveAdded modelStub = new AddLeaveCommandTest.ModelStubAcceptingLeaveAdded();
+        AddLeaveCommandTest.ModelStubAcceptingLeaveAdded modelStub = new AddLeaveCommandTest
+                .ModelStubAcceptingLeaveAdded();
         Leave validLeave = new LeaveBuilder().build();
 
         Range dateRange = Range.createNonNullRange(validLeave.getStart(), validLeave.getEnd());
+
 
         CommandResult commandResult = new AddLeaveCommand(INDEX_FIRST_LEAVE, validLeave.getTitle(),
                 dateRange, validLeave.getDescription()).execute(modelStub);
@@ -65,11 +66,14 @@ public class AddLeaveCommandTest {
     public void execute_duplicateLeave_throwsCommandException() {
         Leave validLeave = new LeaveBuilder().build();
         Range dateRange = Range.createNonNullRange(validLeave.getStart(), validLeave.getEnd());
-        AddLeaveCommand addLeaveCommand= new AddLeaveCommand(INDEX_FIRST_LEAVE, validLeave.getTitle(), dateRange, validLeave.getDescription());
+
+        AddLeaveCommand addLeaveCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, validLeave.getTitle(),
+                dateRange, validLeave.getDescription());
 
         AddLeaveCommandTest.ModelStub modelStub = new AddLeaveCommandTest.ModelStubWithLeave(validLeave);
 
-        assertThrows(CommandException.class, AddLeaveCommand.MESSAGE_DUPLICATE_LEAVE, () -> addLeaveCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddLeaveCommand.MESSAGE_DUPLICATE_LEAVE, () -> addLeaveCommand.execute(modelStub));
     }
 
     @Test
@@ -81,14 +85,17 @@ public class AddLeaveCommandTest {
         Range aliceDateRange = Range.createNonNullRange(aliceLeave.getStart(), aliceLeave.getEnd());
         Range bobDateRange = Range.createNonNullRange(bobLeave.getStart(), aliceLeave.getEnd());
 
-        AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(), aliceDateRange, aliceLeave.getDescription());
-        AddLeaveCommand addBobCommand = new AddLeaveCommand(INDEX_SECOND_LEAVE, bobLeave.getTitle(), bobDateRange, bobLeave.getDescription());
+        AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
+                aliceDateRange, aliceLeave.getDescription());
+        AddLeaveCommand addBobCommand = new AddLeaveCommand(INDEX_SECOND_LEAVE, bobLeave.getTitle(),
+                bobDateRange, bobLeave.getDescription());
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddLeaveCommand addAliceCommandCopy = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(), aliceDateRange, aliceLeave.getDescription());
+        AddLeaveCommand addAliceCommandCopy = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
+                aliceDateRange, aliceLeave.getDescription());
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -104,12 +111,14 @@ public class AddLeaveCommandTest {
     @Test
     public void toStringMethod() {
         Person alice = new PersonBuilder().withName("Alice").build();
-        Leave aliceLeave = new LeaveBuilder().withEmployee(alice).build();
+        Leave aliceLeave = new LeaveBuilder().withEmployee(alice).withStart(ALICE_LEAVE.getStart())
+                .withEnd(ALICE_LEAVE.getEnd()).build();
         Range aliceDateRange = Range.createNonNullRange(aliceLeave.getStart(), aliceLeave.getEnd());
-        AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(), aliceDateRange, aliceLeave.getDescription());
-        String expected = AddLeaveCommand.class.getCanonicalName() + "{title=" + ALICE_LEAVE.getTitle() +
-                ", description=" + ALICE_LEAVE.getDescription() + ", start=" + ALICE_LEAVE.getStart() +
-                ", end=" + ALICE_LEAVE.getEnd() + "}";
+        AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
+                aliceDateRange, aliceLeave.getDescription());
+        String expected = AddLeaveCommand.class.getCanonicalName() + "{title=" + ALICE_LEAVE.getTitle()
+                + ", description=" + ALICE_LEAVE.getDescription() + ", start=" + ALICE_LEAVE.getStart()
+                + ", end=" + ALICE_LEAVE.getEnd() + "}";
         assertEquals(expected, addAliceCommand.toString());
     }
 
