@@ -239,4 +239,11 @@ public class AddressBookParserTest {
     public void parseCommand_rejectLeave() throws Exception {
         assertTrue(parser.parseCommand(RejectLeaveCommand.COMMAND_WORD + " 1") instanceof RejectLeaveCommand);
     }
+
+    @Test
+    public void parseCommand_caseInsensitive_success() throws ParseException {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD.toUpperCase()) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD.substring(0, 1).toUpperCase()
+                + ClearCommand.COMMAND_WORD.substring(1).toLowerCase()) instanceof ClearCommand);
+    }
 }
