@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NO_STATUS_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
@@ -22,7 +23,6 @@ import seedu.address.model.leave.Title;
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
     private static final String NO_DESCRIPTION_PLACEHOLDER = "NONE";
-    private static final String NO_STATUS_PREFIX_MESSAGE = "Status is PENDING by default, do not enter `s/` \n%1$s";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -42,7 +42,7 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         }
 
         if (arePrefixesPresent(argMultimap, PREFIX_LEAVE_STATUS)) {
-            throw new ParseException(String.format(NO_STATUS_PREFIX_MESSAGE, AddLeaveCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_NO_STATUS_PREFIX, AddLeaveCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
