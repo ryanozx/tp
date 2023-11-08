@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -71,6 +72,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getPerson_personDoesNotExist_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> addressBook.getPerson(ALICE));
+    }
+
+    @Test
+    public void getPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.getPerson(null));
+    }
+
+    @Test
+    public void getPerson_validPerson_success() {
+        addressBook.addPerson(ALICE);
+        assertEquals(ALICE, addressBook.getPerson(ALICE));
+    }
+
+    @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
@@ -87,6 +104,38 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equalsMethod() {
+        // same object
+        assertTrue(addressBook.equals(addressBook));
+
+        // different class
+        assertFalse(addressBook.equals(new Object()));
+
+        // same class, different person list
+        AddressBook addressBook2 = new AddressBook();
+        addressBook2.addPerson(ALICE);
+        assertFalse(addressBook.equals(addressBook2));
+
+        // same class, same person list
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.equals(addressBook2));
+    }
+
+    @Test
+    public void hashcodeMethod() {
+        // same object
+        assertTrue(addressBook.hashCode() == addressBook.hashCode());
+
+        // different class
+        assertFalse(addressBook.hashCode() == new Object().hashCode());
+
+        // same class, different person list
+        AddressBook addressBook2 = new AddressBook();
+        addressBook2.addPerson(ALICE);
+        assertFalse(addressBook.hashCode() == addressBook2.hashCode());
     }
 
     /**
