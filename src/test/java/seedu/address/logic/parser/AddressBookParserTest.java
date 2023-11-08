@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_END_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_START_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
@@ -29,6 +31,8 @@ import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditLeaveCommand;
+import seedu.address.logic.commands.EditLeaveCommand.EditLeaveDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportContactCommand;
 import seedu.address.logic.commands.ExportLeaveCommand;
@@ -53,6 +57,7 @@ import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EditLeaveDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -88,6 +93,14 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editLeave() throws Exception {
+        EditLeaveDescriptor descriptor = new EditLeaveDescriptorBuilder().withTitle(VALID_LEAVE_TITLE).build();
+        EditLeaveCommand command = (EditLeaveCommand) parser.parseCommand(EditLeaveCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_LEAVE.getOneBased() + VALID_LEAVE_TITLE_DESC);
+        assertEquals(new EditLeaveCommand(INDEX_FIRST_LEAVE, descriptor), command);
     }
 
     @Test
@@ -206,7 +219,8 @@ public class AddressBookParserTest {
 
         LeaveInPeriodPredicate expectedPredicate = new LeaveInPeriodPredicate(
                 Range.createNonNullRange(Date.of(startDate), Date.of(endDate)));
-        String userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_START_DATE + VALID_END_DATE;
+        String userInput = FindLeaveByPeriodCommand.COMMAND_WORD + VALID_LEAVE_START_DATE_DESC
+            + VALID_LEAVE_END_DATE_DESC;
         assertTrue(parser.parseCommand(userInput) instanceof FindLeaveByPeriodCommand);
         assertEquals(parser.parseCommand(userInput), new FindLeaveByPeriodCommand(expectedPredicate));
     }
