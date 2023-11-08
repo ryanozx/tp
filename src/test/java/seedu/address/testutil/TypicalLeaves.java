@@ -16,10 +16,10 @@ import seedu.address.model.leave.Title;
  */
 public class TypicalLeaves {
 
-    private static final Date DEFAULT_START = Date.of("2020-01-01");
-    private static final Date DEFAULT_END = Date.of("2020-01-02");
-    private static final Date DEFAULT_START_2 = Date.of("2020-01-03");
-    private static final Date DEFAULT_END_2 = Date.of("2020-01-04");
+    public static final Date DEFAULT_START = Date.of("2020-01-01");
+    public static final Date DEFAULT_END = Date.of("2020-01-02");
+    public static final Date DEFAULT_START_2 = Date.of("2020-01-03");
+    public static final Date DEFAULT_END_2 = Date.of("2020-01-04");
     public static final Leave ALICE_LEAVE = new Leave(ALICE, new Title("Alice's Maternity Leave"),
             Range.createNonNullRange(DEFAULT_START, DEFAULT_END),
             new Description("Alice's Maternity Leave Description"));

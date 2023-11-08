@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_NAME;
@@ -19,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.leave.LeaveContainsPersonPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -64,8 +68,23 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
-    public static final String VALID_START_DATE = " " + PREFIX_LEAVE_DATE_START + "2023-10-30";
-    public static final String VALID_END_DATE = " " + PREFIX_LEAVE_DATE_END + "2023-10-31";
+    public static final String VALID_LEAVE_TITLE = "Medical leave";
+    public static final String VALID_LEAVE_DESCRIPTION = "going on medical leave";
+    public static final String VALID_LEAVE_DATE_START = "2023-10-30";
+    public static final String VALID_LEAVE_DATE_END = "2023-10-31";
+    public static final String VALID_LEAVE_STATUS_APPROVED = "APPROVED";
+
+    public static final String VALID_LEAVE_TITLE_DESC = " " + PREFIX_LEAVE_TITLE + VALID_LEAVE_TITLE;
+    public static final String VALID_LEAVE_DESCRIPTION_DESC = " " + PREFIX_LEAVE_DESCRIPTION + VALID_LEAVE_DESCRIPTION;
+    public static final String VALID_LEAVE_START_DATE_DESC = " " + PREFIX_LEAVE_DATE_START + VALID_LEAVE_DATE_START;
+    public static final String VALID_LEAVE_END_DATE_DESC = " " + PREFIX_LEAVE_DATE_END + VALID_LEAVE_DATE_END;
+    public static final String VALID_LEAVE_STATUS_DESC = " " + PREFIX_LEAVE_STATUS + VALID_LEAVE_STATUS_APPROVED;
+
+    public static final String INVALID_LEAVE_TITLE_DESC = " " + PREFIX_LEAVE_TITLE + "Medical leave&";
+    public static final String INVALID_LEAVE_DESCRIPTION_DESC = " " + PREFIX_LEAVE_DESCRIPTION + "Going to childcare&";
+    public static final String INVALID_LEAVE_DATE_START_DESC = " " + PREFIX_LEAVE_DATE_START + "2023-13-11";
+    public static final String INVALID_LEAVE_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + "2024-12-32";
+    public static final String INVALID_LEAVE_STATUS_DESC = " " + PREFIX_LEAVE_STATUS + "NONSENSE";
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -130,6 +149,14 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the leave that belongs to the {@code person}
+     */
+    public static void showLeaveByPerson(Model model, Person person) {
+        LeaveContainsPersonPredicate p = new LeaveContainsPersonPredicate(person);
+        model.updateFilteredLeaveList(p);
     }
 
 }
