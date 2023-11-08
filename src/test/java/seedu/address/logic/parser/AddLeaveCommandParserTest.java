@@ -71,7 +71,7 @@ public class AddLeaveCommandParserTest {
 
         String expectedMessageWithoutDescription = String.format(MESSAGE_NO_STATUS_PREFIX,
                 AddLeaveCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, " 3"  + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
                         + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC + " " + PREFIX_LEAVE_STATUS,
                 expectedMessageWithoutDescription);
     }
