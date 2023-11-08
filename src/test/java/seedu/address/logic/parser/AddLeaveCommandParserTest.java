@@ -4,6 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_EARLY_DATE_END_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_LATE_DATE_START_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_END;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_START;
@@ -84,7 +86,7 @@ public class AddLeaveCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_DESCRIPTION));
 
         // multiple fields repeated
-        assertParseFailure(parser,VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+        assertParseFailure(parser, VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
                         + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC + validExpectedLeaveString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
                         PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_DESCRIPTION));
@@ -114,7 +116,7 @@ public class AddLeaveCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE);
 
         // missing index
-        assertParseFailure(parser,  VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+        assertParseFailure(parser, VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
                         + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC, expectedMessage);
 
         // missing title prefix
@@ -130,7 +132,7 @@ public class AddLeaveCommandParserTest {
                         + VALID_LEAVE_DESCRIPTION_DESC, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser," 3" + VALID_LEAVE_TITLE + VALID_LEAVE_DATE_START
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE + VALID_LEAVE_DATE_START
                                 + VALID_LEAVE_DATE_END + VALID_LEAVE_DESCRIPTION, expectedMessage);
     }
 
@@ -149,6 +151,10 @@ public class AddLeaveCommandParserTest {
         assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
                 + INVALID_LEAVE_DATE_END_DESC + VALID_LEAVE_DESCRIPTION_DESC, Date.MESSAGE_CONSTRAINTS);
 
+        // invalid endDate which is earlier than the startDate
+        assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + INVALID_LEAVE_LATE_DATE_START_DESC
+                + INVALID_LEAVE_EARLY_DATE_END_DESC + VALID_LEAVE_DESCRIPTION_DESC, Range.MESSAGE_INVALID_END_DATE);
+
         // invalid description
         assertParseFailure(parser, " 3" + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
                 + VALID_LEAVE_END_DATE_DESC + INVALID_LEAVE_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
@@ -157,6 +163,27 @@ public class AddLeaveCommandParserTest {
         assertParseFailure(parser, " 3" + INVALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
                         + VALID_LEAVE_END_DATE_DESC + INVALID_LEAVE_DESCRIPTION_DESC,
                 Title.MESSAGE_CONSTRAINTS);
-
     }
+    @Test
+    public void parse_invalidPreamble_failure() {
+        String validExpectedLeaveString = VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC;
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE);
+
+        // negative index
+        assertParseFailure(parser, "-5" + validExpectedLeaveString, expectedMessage);
+
+        // zero index
+        assertParseFailure(parser, "0" + validExpectedLeaveString, expectedMessage);
+
+        // duplicated index
+        assertParseFailure(parser, "1 1" + validExpectedLeaveString, expectedMessage);
+
+        // invalid arguments being parsed as preamble
+        assertParseFailure(parser, "1 some random string", expectedMessage);
+
+        // invalid prefix being parsed as preamble
+        assertParseFailure(parser, "1 i/ string", expectedMessage);
+    }
+
 }
