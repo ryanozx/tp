@@ -54,6 +54,9 @@ public class AddLeaveCommand extends Command {
      * Creates an AddLeaveCommand to add the specified {@code Leave}
      */
     public AddLeaveCommand(Index index, Title title, Range dates, Description description) {
+        requireNonNull(index);
+        requireNonNull(title);
+        requireNonNull(dates);
         this.index = index;
         this.title = title;
         this.dateRange = dates;
@@ -91,14 +94,19 @@ public class AddLeaveCommand extends Command {
             return false;
         }
 
-        AddLeaveCommand otherAddCommand = (AddLeaveCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddLeaveCommand otherAddLeaveCommand = (AddLeaveCommand) other;
+        return index.equals(otherAddLeaveCommand.index) && title.equals(otherAddLeaveCommand.title)
+                && dateRange.equals(otherAddLeaveCommand.dateRange)
+                && description.equals(otherAddLeaveCommand.description);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("title", title)
+                .add("description", description)
+                .add("start", dateRange.getStartDate().get())
+                .add("end", dateRange.getEndDate().get())
                 .toString();
     }
 }
