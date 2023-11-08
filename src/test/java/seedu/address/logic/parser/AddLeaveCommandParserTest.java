@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NO_STATUS_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DESCRIPTION_DESC;
@@ -18,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE_DES
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -62,6 +64,16 @@ public class AddLeaveCommandParserTest {
                 + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC,
                 new AddLeaveCommand(INDEX_SECOND_LEAVE, expectedLeaveWithDescription.getTitle(),
                         dateRangeWithDescription , expectedLeaveWithDescription.getDescription()));
+    }
+
+    @Test
+    public void parse_extraStatusPrefix_failure() {
+
+        String expectedMessageWithoutDescription = String.format(MESSAGE_NO_STATUS_PREFIX,
+                AddLeaveCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " 3"  + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                        + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC + " " + PREFIX_LEAVE_STATUS,
+                expectedMessageWithoutDescription);
     }
 
     @Test
