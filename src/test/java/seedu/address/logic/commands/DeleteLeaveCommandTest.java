@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showLeaveByPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
@@ -17,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.leave.Leave;
+import seedu.address.testutil.TypicalPersons;
 
 public class DeleteLeaveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
@@ -43,15 +45,33 @@ public class DeleteLeaveCommandTest {
         assertCommandFailure(deleteLeaveCommand, model, Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
     }
 
-    // TODO
     @Test
-    public void execute_validINdexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() {
+        showLeaveByPerson(model, TypicalPersons.BENSON);
 
+        Leave leaveToDelete = model.getFilteredLeaveList().get(INDEX_FIRST_LEAVE.getZeroBased());
+        DeleteLeaveCommand command = new DeleteLeaveCommand(INDEX_FIRST_LEAVE);
+
+        String expectedMessage = String.format(DeleteLeaveCommand.MESSAGE_DELETE_LEAVE_SUCCESS,
+                Messages.format(leaveToDelete));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getLeavesBook(), new UserPrefs());
+        expectedModel.deleteLeave(leaveToDelete);
+        showNoLeave(expectedModel);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
-    // TODO
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexFilteredList_failure() {
+        showLeaveByPerson(model, TypicalPersons.BENSON);
+
+        Index outofBoundsIndex = INDEX_SECOND_LEAVE;
+        assertTrue(outofBoundsIndex.getZeroBased() < model.getLeavesBook().getLeaveList().size());
+
+        DeleteLeaveCommand deleteLeaveCommand = new DeleteLeaveCommand(outofBoundsIndex);
+
+        assertCommandFailure(deleteLeaveCommand, model, Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
 
     }
 
@@ -70,5 +90,14 @@ public class DeleteLeaveCommandTest {
         assertFalse(deleteLeaveFirstCommand.equals(null));
 
         assertFalse(deleteLeaveFirstCommand.equals(deleteLeaveSecondCommand));
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show no one
+     */
+    private void showNoLeave(Model model) {
+        model.updateFilteredLeaveList(l -> false);
+
+        assertTrue(model.getFilteredLeaveList().isEmpty());
     }
 }

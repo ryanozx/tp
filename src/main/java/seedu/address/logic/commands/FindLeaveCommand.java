@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  * Find Leaves with the exact employee of the given index
  */
 public class FindLeaveCommand extends Command {
-    public static final String COMMAND_WORD = "view-leave";
+    public static final String COMMAND_WORD = "find-leave";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all leaves whose employee matches "
             + "the given index of the employee and displays them as a list with index numbers.\n"
             + "Parameters: INDEX (must be a positive integer within in the range of the Employee List)\n"
@@ -40,13 +40,13 @@ public class FindLeaveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> personList = model.getFilteredPersonList();
+        ObservableList<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= personList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LEAVE_INDEX);
+        if (index.getZeroBased() >= lastShownPersonList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person employee = personList.get(index.getZeroBased());
+        Person employee = lastShownPersonList.get(index.getZeroBased());
         LeaveContainsPersonPredicate predicate = new LeaveContainsPersonPredicate(employee);
         model.updateFilteredLeaveList(predicate);
 
