@@ -41,7 +41,7 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         }
 
-        if(arePrefixesPresent(argMultimap,PREFIX_LEAVE_STATUS)) {
+        if (arePrefixesPresent(argMultimap, PREFIX_LEAVE_STATUS)) {
             throw new ParseException(String.format(NO_STATUS_PREFIX_MESSAGE, AddLeaveCommand.MESSAGE_USAGE));
         }
 
