@@ -569,7 +569,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 It's painful having to add in each employee into HRMate manually. That's why HRMate provides import and export commands,
 so you can bring in all your records from Excel with just a single command!
 
-With the import and export commands, HRMate can read and save files in [CSV](#Glossary) format, which is supported
+With the import and export commands, HRMate can read and save files in [CSV](#glossary) format, which is supported
 by major spreadsheet applications such as Microsoft Excel. 
 
 

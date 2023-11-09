@@ -1,5 +1,7 @@
 package seedu.address.model.leave;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Name;
 
@@ -10,7 +12,13 @@ public class PersonEntry implements ComparablePerson {
 
     private final Name name;
 
+    /**
+     * Constructs a {@code PersonEntry}.
+     *
+     * @param name
+     */
     public PersonEntry(String name) {
+        requireNonNull(name);
         this.name = new Name(name);
     }
 

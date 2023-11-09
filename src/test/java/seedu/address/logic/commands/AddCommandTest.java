@@ -189,6 +189,11 @@ public class AddCommandTest {
             return false;
         }
 
+        @Override
+        public boolean hasConcurrentLeave(Leave leave) {
+            return false;
+        }
+
         /**
          * Adds the given leave.
          * {@code leave} must not already exist in the leave book.
