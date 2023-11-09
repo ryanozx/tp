@@ -39,6 +39,8 @@ public class StatusTest {
 
         // same values -> returns true
         assertTrue(status.equals(Status.of("PENDING")));
+        assertTrue(status.equals(Status.of(StatusType.PENDING)));
+        assertTrue(status.equals(Status.of("pending")));
 
         // same object -> returns true
         assertTrue(status.equals(status));
@@ -59,11 +61,13 @@ public class StatusTest {
         assertTrue(Status.isValidStatus("APPROVED"));
         assertTrue(Status.isValidStatus("PENDING"));
         assertTrue(Status.isValidStatus("REJECTED"));
+        assertTrue(Status.isValidStatus("approved"));
+        assertTrue(Status.isValidStatus("pEnDiNG"));
 
         assertFalse(Status.isValidStatus(""));
         assertFalse(Status.isValidStatus(" "));
         assertFalse(Status.isValidStatus("INVALID"));
-        assertFalse(Status.isValidStatus("approved"));
+        assertFalse(Status.isValidStatus("invalid"));
     }
 
     @Test
