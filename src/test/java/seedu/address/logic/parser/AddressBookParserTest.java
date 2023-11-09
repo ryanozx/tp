@@ -61,7 +61,6 @@ import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagsContainAllTagsPredicate;
-import seedu.address.model.person.TagsContainAllTagsPredicateTest;
 import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditLeaveDescriptorBuilder;
@@ -79,8 +78,6 @@ public class AddressBookParserTest {
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
-
-  
 
     @Test
     public void parseCommand_clear() throws Exception {
