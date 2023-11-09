@@ -38,38 +38,6 @@ tasks done faster than traditional GUI apps.
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-## How to read each command's description
-
-The description for each command will contain the following
-
-### **[Action]**: [Command name]
-
-* **What It does:**
-  * A short description of what the command helps you to do
-* **Format:**
-  * Contained within a `code block`. It specifies how the command should be formatted. You should follow the specified
-    format to ensure the command performs the desired action. Refer to [How to interpret command formats](#how-to-interpret-command-formats) for
-    more details.
-* **Examples:**
-  * Gives a few examples of how the command is used and describes the outcome of the command
-* **Acceptable Values:**
-  * Describes any restrictions on the type of values used in a command field. Values for these fields must satisfy the
-    restrictions for the command to be acceptable.
-* **Warning:**
-  <box type="warning" seamless>
-  Describes any potential dangers of using a particular command that may lead to unexpected side effects. You should
-  pay attention to the warnings to avoid performing a costly operation.
-  </box>
-* **Expected Output On Success:**
-  * Describes what you should see if the command is accepted. Changes can be of one of two types - either through visual
-    elements (stated as GUI changes) or via messages.
-* **Expected Output On Failure:**
-  * Describes what you should see if the command is rejected
-* **For advanced users:**
-  * Describes actions that users familiar with the application can use to provide greater convenience. Be careful when
-    performing these actions, especially if you are a new user!
-
 ## How to interpret command formats
 
 Example command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
@@ -95,49 +63,36 @@ This command is used to add an employee to the address book. Let's examine how w
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 --------------------------------------------------------------------------------------------------------------------
 ## Features
-### Viewing help : `help`
 
-* **What It Does:**
-  * Shows a message explaining how to access the help page.
-* **Format:**
-  * `help`
-* **Examples:**
+### Getting help
+Should you need any help, you can access this online user guide (this document) with the `help` [command](#glossary).
 
-| S/N | Command information                                                                              |
-|-----|--------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `help` <br><br> **Output:** Displays a message showing how to access the help page. |
-* **Acceptable Values:**
-  * This command does not have any parameters
-* **Expected Output on Success:**
-  * GUI Changes: A message appears showing how to access the help page
+#### Getting help : `help`
 
-* **Expected Output on Failure:**
-  * Error messages: N/A (no expected failure)
+1. Type in the following command in the [command box](#glossary): `help`. 
+2. Press "Enter" on your keyboard.
+3. The following pop up should show:
+![help menu](images/help-menu.png)
 
-### Adding a new employee or adding employees to set up HRMate initially: `add`
+4. Click on the "copy link" button to copy the link to the user guide, and paste into any [web browser](#glossary) to access the user guide. Alternatively, click the red button at the corner of the window to close the pop up.
 
-* **What It Does:**
-  * Uses employee fields from the command to add an employee
-* **Format:**
-  * `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`
-* **Examples:**
+### Adding a new employee
+When a new employee joins, you can use the `add` [command](#glossary) to add their information into HRMate.
 
-| S/N | Command information                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01` <br><br> **Output:** Adds an employee with the following details into the address book: <ul><li>Name: John Doe</li> <li>Phone number: 98765432</li> <li>Email address: johnd@example.com</li> <li>Home address: John Street, block 123 #01-01</li></ul>                                                                                           |
-| 2   | **Command:** `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/91234567 t/criminal t/friend` <br><br> **Output:** Adds an employee with the following details into the address book: <ul><li>Name: Betsy Crowe</li> <li>Phone number: 91234567</li> <li>Email address: betsycrowe@example.com</li> <li>Home address: Newgate Prison</li> <li>Tags: criminal, friend (Note: we can add multiple tags to the same record)</li></ul> |
-* **Acceptable Values:**
-  * A non-empty input for name, phone number, email address, home address and each optional tag
-* **Expected Output on Success:**
-  * GUI Changes: the created user is shown in a dedicated interface section
-  * Message shown to user: "Successfully created employee"
-* **Expected Output on Failure:**
-  * `Missing argument error` -  if a compulsory argument is missing (compulsory arguments are `NAME`, `EMAIL`,
-    `PHONE_NUMBER` and `HOME_ADDRESS`)
-  * `FIELD must be of format...` - if at least one of the field inputs violates the field's format requirements. Follow
-    the displayed error message to fix the format error.
-* **For advanced users:**
-  * `add` takes in any number of tags, as an employee can have any number of tags
+#### Add an employee: `add`
+
+1. Type in the following [command](#glossary) in the [command box](#glossary): `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replace `NAME` with employee name, `PHONE_NUMBER` with employee phone number `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field with one or more [tags](#glossary), with `TAG` being the name of the tag.
+ - For instance, if you have an employee name John Doe with phone number 98765432, email johnd@example.com, home address John Street, block 123 #01-01 and tags full-time and remote, type in the command `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01 t/full-time t/remote`
+ - If your employee does not require any tags, using the same information as above, the command would be `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01`
+2. Press "enter" on your keyboard and you should see the person information at the end of the [employee list](#glossary). 
+
+Here are the potential error messages that you may receive and here's how to fix them:
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name.
+| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format. |
+| `This employee already exists in the address book` | The provided employee name is already found in HRMate | Use another name for the employee. For example, if trying to add another John Doe, use the name John Doe (HR) to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.
 
 ### Listing all employees: `list`
 
@@ -157,41 +112,83 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Expected Output on Failure:**
   * N/A (no expected failure)
 
-### Editing an employee's personal information: `edit`
+### Editing employee records
+HRMate offers different [commands](#glossary) for editing employee records. `add-tag` and `delete-tag` would add and remove an employee's [tags](#glossary) while `edit` is for editing name, phone number, email address, home address and tags.
 
-* **What It Does:**
-  * Edits an existing person in HRMate based on their index on the [list](#listing-all-employees-list) command
-* **Format:**
-  * `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...`
-* **Examples:**
+#### Adding tags to employees : `add-tag`
 
-| S/N | Command information                                                                                                                                                                                                                                         |
-|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `edit 1 p/91234567 e/johndoe@example.com` <br><br> **Output:** Edits the employee with index 1 to have the below changes: <ul><li>Phone number: 91234567</li> <li>Email: johndoe@example.com</li> <li>No changes to the other fields</li></ul> |
-| 2   | **Command:** `edit 2 n/Betsy Crower t/` <br><br> **Output:** Edits the employee with index 2 to have the below changes: <ul><li>Name: Betsy Crower</li> <li>Tags: (all removed)</li> <li>No changes to the other fields</li></ul>                           |
-| 3   | **Command:** `edit 3 t/friend` <br><br> **Output:** Edits the employee with index 3 to have the below changes: <ul><li>Tags: friend (all other existing tags removed)</li> <li>No changes to the other fields</li></ul>                                     |
-* **Acceptable Values:**
-  * The specified `INDEX` must match with an employee shown in the displayed person list
-  * At least one employee field must be changes (`edit 1` would be invalid as no employee fields are changed)
-  * Only fields specified will be modified; fields not specified in the command will not be modified. A field is
-    specified by including its associated field prefix in the command (i.e. `n/` for name, `p/` for phone number etc.)
-  * For the name, phone number, email address and home address fields: If these fields are included in the command, they
-    cannot be left empty (e.g. `n/` is not allowed as the new name cannot be empty)
-* **Warning:**
-    <box type="warning" seamless>
-    If the tag prefix is specified, all existing tags currently associated with the employee will be removed and
-    replaced with the new tags specified in the command, if any (see examples 2 and 3 above). Therefore, to avoid losing
-    any tags associated with the employee, we recommend using the [add-tag](#adding-tags-to-employees-add-tag) and [delete-tag](#removing-tags-from-employees-delete-tag) commands instead for
-    greater control.
-    </box>
-* **Expected output on failure:**
-  * `At least one field to edit must be provided` - if no fields are provided
-  * `The person index provided is invalid` - if the index provided does not match with any employee in the displayed
-    person list
-  * `FIELD must be of format...` - if at least one of the field inputs violates the field's format requirements. Follow
-    the displayed error message to fix the format error.
+1. Find the employee under the [employee list](#glossary).
+
+<box type="info" seamless>
+If the employee is not found, consider using [list](#glossary) or any [find commands]() to locate the employee in the employee list.
+</box>
+
+2. Type in the following [command](#glossary) in the [command box](#glossary) `add-tag INDEX t/TAG...` where `INDEX` is the [index](#glossary) of the employee in the list currently, `TAG` is the name of the [tag](#glossary) to be added and `t/TAG...` representing one or more tags. 
+ - For instance, if you want to add the tags full-time and remote to the employee indexed 2, type `add-tag 2 t/full-time t/remote` to the command box.
+3. Press "enter" on your keyboard and you should see the input tags added to the employee specified.
+
+Here are the potential error messages that you may receive and here's how to fix them:
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specfied format | Ensure the command you entered follows the following format: `add-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. |
+| `At least one tag must be provided` | No tags were provided | Add tags to the command in the command box. Note that the tags must have a t/ prefix. For example, to add the tag full-time, use `t/full-time`.
+| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use `list` or any find commands to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command. |
+| `The employee already has some of the tags` | The employee already has some of the tags which you are trying to add | Remove the tags the employee has from the input command. For example, for an employee who already has the full-time tag, the command `add-tag 2 t/full-time t/remote` would not work. Instead try `add-tag 2 t/remote`.|
+| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+
+#### Removing tags from employees : `delete-tag`
+1. Get the [index](#glossary) of the employee in the [employee list](#glossary).
+
+<box type="info" seamless>
+If the employee is not found, consider using [list]() or any [find commands]() to locate the employee in the employee list.
+</box>
+
+2. Type in the following [command](#glossary) in the [command box](#glossary) `delete-tag INDEX t/TAG...` where `INDEX` is the index of the employee in the list currently, `TAG` is the name of the [tag](#glossary) to be deleted and `t/TAG...` representing one or more tags. 
+ - For instance, if you want to remove the tags full-time and remote to the employee indexed 2, type `delete-tag 2 t/full-time t/remote` to the command box.
+3. Press "enter" on your keyboard and you should see the input tags removed from the employee specified.
+
+Here are the potential error messages you may receive and here's how to fix them:
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specfied format | Ensure the command you entered follows the following format: `delete-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be deleted and `t/TAG...` representing one or more tags. |
+| `At least one tag must be provided` | No tags were provided | Add tags to the command in the command box. Note that the tags must have a t/prefix. For example, to remove the tag full-time, use `t/full-time` |
+| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use `list` or any find commands to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete-tag` command. |
+| `Some of the tags are not found on this employee.` | The employee does not have some of the tags you are trying to delete | Remove the tags not found on the employee from the input command. For example, for an employee without the tag full-time, the command `delete-tag 2 t/full-time t/remote` does not work. Instead try `delete-tag 2 t/remote`.|
+| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+
+#### Editing the name, phone number, email address, home address or tags of employees : `edit`
+1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
+
+<box type="info" seamless>
+If the employee is not found, consider using [list]() or any [find commands]() to locate the employee in the employee list.
+</box>
+
+2. Type in the following [command](#glossary) in the [command box](#glossary) `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more [tags](#glossary) where `TAG` is the tag name. Note that at least one field to edit must be present and only the fields present will be edited.
+ - For example, to change the phone number, email address and tags of the employee indexed 2 to 98765432, johndoe@example.com and full-time and remote, type in the command `edit 2 p/98765432 e/johndoe@example.com t/full-time t/remote`. Note that the name and home address will remain unchanged.
+ - In another example, to change the home address of the employee indexed 1 to John street, block 123 #01-01 and remove all tags from the employee, type in the command `edit 1 a/John street, block 123 #01-01 t/`. Note that the name, phone number and email_address will remain unchanged.
+
+
+<box type="warning" seamless>
+If the tag prefix is specified, all existing tags under the employee will be removed and replaced with the new tags in the command.
+In the first example, the employee will have all tags removed and replaced by 2 tags: full-time and remote.
+In the second example, the employee will have all tags removed. No tags will be added since no tags are specified.
+Therefore, to avoid unintentionally losing any information while editing tags, we recommend using the <a href="#adding-tags-to-employees--add-tag">add tag</a> and <a href="#removing-tags-from-employees--delete-tag">delete-tag</a> commands instead for editing tag
+</box>
+
+3. Press "enter" on your keyboard and you should see the changes applied to the employee.
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format. |
+| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use `list` or any find commands to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command. |
+| `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there is any input fields in the command inputted. An input like `edit 1` is not accepted as there is no edits to be made. |
+| `This employee already exists in the address book` | The provided employee name is already found in HRMate | Use another name for the employee. For example, if trying to add another John Doe, use the name John Doe (HR) to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.
+
 * **For advanced users:**
-  * You can remove all the tags of an employee with `edit INDEX t/` (see example 2 above)
+  * You can remove all the tags of an employee with `edit INDEX t/` (see warning above)
 
 ### Viewing All Tags: `view-tag`
 
@@ -214,62 +211,7 @@ This command is used to add an employee to the address book. Let's examine how w
 * **Expected Output on Failure:**
   * Error messages: N/A (since no parameters are involved, the command will not fail due to invalid input)
 
-### Adding tags to employees: `add-tag`
-
-
-* **What It Does:**
-  * Adds a tag to an employee record, useful for classifying employees like 'remote', 'contract', etc.
-
-* **Format:**
-  * `add-tag EMPLOYEE_LIST_INDEX TAG`
-* **Examples:**
-
-| S/N | Command information                                                                                                                                                                                                                        |
-|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `add-tag 3 t/remote` <br><br> **Output:** Adds the tag “remote” to the employee whose index is 3. For instance, if “Paolo Maldini” is the employee whose index is 3, Maldini’s record will now contain the tag “remote”.        |
-| 2   | **Command:** `add-tag 14 t/temp t/contract` <br><br> **Output:** Adds the tag “temp” “contract” to the employee whose index is 14. For instance, if “Thierry Henry” is the employee whose index is 14, Henry’s record will now contain the tags “temp” and “contract”  |
-
-* **Acceptable Values:**
-  * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
-  * Tag: A non-empty string used to categorise and label an employee. Tags names only allows alphanumeric characters, spaces, and dashes. (e.g., remote, contract-worker, full time). They are also case-sensitive, so “friend” and “Friend” are different tags.
-* **Expected Output on Success:**
-  * GUI Changes: The employee's record shows the new tag.
-  * Message shown to the user: "Edited Person: ..." followed by the person's updated information
-* **Expected Output on Failure:**
-  * `The employee index provided is invalid` - An invalid index was specified
-  * `This employee already has some of the tags.` - The specified tag already exists in the employee's record
-  * `Invalid command format!...` followed by command information - There were missing parameters in command
-
-### Removing tags from employees: `delete-tag`
-
-* **What It Does:**
-  * Removes a tag from an employee record. This is used when an employee's category changes or the tag no longer applies.
-
-* **Format:**
-  * `delete-tag EMPLOYEE_LIST_INDEX TAG`
-* **Examples:**
-
-| S/N | Command information                                                                                                                                                                                                                                        |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `delete-tag 5 t/remote` <br><br> **Output:** Removes the tag “remote” from the employee whose index is 5. For instance, if “Rio Ferdinand” is the employee whose index is 5, the tag “remote” will be removed from Ferdinand’s record.          |
-| 2   | **Command:** `delete-tag 7 t/contract t/temp` <br><br> **Output:** Removes the tag “contract” and "temp" from the employee whose index is 7. For instance, if “Cristiano Ronaldo” is the employee whose index is 7, the tag “contract” and "temp" will be removed from Ronaldo’s record.  |
-
-* **Acceptable Values:**
-  * Employee List Index: A unique identifier corresponding to a row entry shown in the address book. It must be a valid number and cannot exceed the number of entries in the address book.
-  * Tag: A non-empty string used to categorise and label an employee. Tags names only allows alphanumeric characters, spaces, and dashes. (e.g., remote, contract-worker, full time). They are also case-sensitive, so “friend” and “Friend” are different tags.
-* **Expected Output on Success:**
-  * GUI Changes: The employee's record is updated to remove the deleted tag.
-  * Message shown to the user: "Tag [Tag] removed from [Employee name]."
-* **Expected Output on Failure:**
-  * `The employee index provided is invalid` - An invalid index was specified
-  * `Some of the tags are not found on this employee.` - The specified tag does not exist in the employee's record
-  * `Invalid command format!...` followed by command information - There were missing parameters in command
-
-
-
-
 ### Finding employees with all tags in a group of tags: `find-all-tag`
-
 
 * **What It Does:**
   * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
@@ -799,3 +741,10 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 | Term | Meaning                                                                                                                         |
 |------|---------------------------------------------------------------------------------------------------------------------------------|
 | CSV  | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel. |
+| Command | A line of instructions that you input. Refer to []() for a picture |
+| Command box | A box for you to input commands. Refer to []() for a picture. |
+| Employee list | The employee list is the list of employees on the left side of the application. Refer to []() for a picture. |
+| Prefix | A letter or phrase before an input. Refer to []() for more details |
+| Tag  | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote). |
+| Index | The number labelling each employee in the employee list. Refer to []() for a picture. |
+| Web browser | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now! |
