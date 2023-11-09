@@ -42,7 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-
+    public static final String VALID_TAG_REMOTE = "remote";
+    public static final String VALID_TAG_FULL_TIME = "full time";
     public static final String NAME_DESC_AMY = " " + PREFIX_PERSON_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_PERSON_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PERSON_PHONE + VALID_PHONE_AMY;
@@ -53,6 +54,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_PERSON_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_PERSON_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_PERSON_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_REMOTE = " " + PREFIX_PERSON_TAG + VALID_TAG_REMOTE;
+    public static final String TAG_DESC_FULL_TIME = " " + PREFIX_PERSON_TAG + VALID_TAG_FULL_TIME;
     public static final String TAG_EMPTY = " " + PREFIX_PERSON_TAG;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_PERSON_NAME + "James&"; // '&' not allowed in names
