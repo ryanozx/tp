@@ -65,4 +65,24 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents an integer
+     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE}, -1, -2, -3, ..., {@code Integer.MIN_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "+1", " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     *
+     * @param s string to be tested
+     * @return true if {@code s} represents an integer
+     */
+    public static boolean isInteger(String s) {
+        requireNonNull(s);
+
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
