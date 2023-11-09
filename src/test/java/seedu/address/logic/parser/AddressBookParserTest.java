@@ -96,7 +96,7 @@ public class AddressBookParserTest {
                 + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC);
         Range dateRange = Range.createNonNullRange(leave.getStart(), leave.getEnd());
         assertEquals(new AddLeaveCommand(INDEX_FIRST_LEAVE, leave.getTitle(),
-                dateRange,leave.getDescription()), command);
+                dateRange, leave.getDescription()), command);
     }
 
     @Test
