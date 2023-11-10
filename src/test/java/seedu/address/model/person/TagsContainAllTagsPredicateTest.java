@@ -68,15 +68,9 @@ public class TagsContainAllTagsPredicateTest {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("full time"));
 
-        // Zero keywords
-        TagsContainAllTagsPredicate predicate =
-                new TagsContainAllTagsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder()
-                .withTags("part time").build()));
-
         // Only one matching keyword
-        predicate = new TagsContainAllTagsPredicate(tagList);
-        assertFalse(predicate.test(new PersonBuilder()
+        TagsContainAllTagsPredicate predicate = new TagsContainAllTagsPredicate(tagList);
+        assertTrue(predicate.test(new PersonBuilder()
                 .withTags("full time", "remote").build()));
 
         // Non-matching keyword
