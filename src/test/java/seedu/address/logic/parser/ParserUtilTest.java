@@ -65,21 +65,33 @@ public class ParserUtilTest {
     }
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
-    }
+        // no numeric index at all
+        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseIndex("abc"));
 
-    @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString((long) Integer.MAX_VALUE + 1)));
+        // "10a" is not numeric; even though we could potentially extract "10" out of it
+        // but it's better not to, to avoid dealing with cases like "1a2b3c4a"
+        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseIndex("10a"));
+
+        // numeric index must come at the start
+        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseIndex("abc 10"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsInvalidIndexException() {
+        // reject negative indices
         assertThrows(InvalidIndexException.class, InvalidIndexException.MESSAGE_INVALID_INDEX, ()
                 -> ParserUtil.parseIndex("-1"));
+        // reject zero index
         assertThrows(InvalidIndexException.class, InvalidIndexException.MESSAGE_INVALID_INDEX, ()
                 -> ParserUtil.parseIndex("0"));
+
+        // reject indices beyond Integer.MAX_VALUE
+        String exceedIntMaxInput = Long.toString((long) Integer.MAX_VALUE + 1);
+        assertThrows(InvalidIndexException.class, InvalidIndexException.MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseIndex(exceedIntMaxInput));
     }
 
     @Test
@@ -88,7 +100,10 @@ public class ParserUtilTest {
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex(WHITESPACE + "1" + WHITESPACE));
+
+        // ignores additional characters in the preamble
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1 a"));
     }
 
     @Test

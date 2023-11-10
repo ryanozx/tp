@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
@@ -74,7 +75,7 @@ public class EditLeaveCommand extends Command {
         List<Leave> lastShownList = model.getFilteredLeaveList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LEAVE_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
         }
 
         Leave leaveToEdit = lastShownList.get(index.getZeroBased());

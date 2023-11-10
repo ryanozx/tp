@@ -6,6 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -28,28 +30,45 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not an integer from 1 to 2^31 - 1.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not an integer.";
+    private static final String INDEX_REGEX = "[+-]?\\d+";
+    private static final Pattern INDEX_PATTERN = Pattern.compile(INDEX_REGEX);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * trimmed. If {@code oneBasedIndex} contains a value between 1 and 2^31 - 1 at the start of the input,
+     * this value will be returned as the index, otherwise an error is returned.
+     *
+     * @throws InvalidIndexException if the specified index is greater than 2^31 - 1 or less than 1.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex) throws InvalidIndexException, ParseException {
         requireNonNull(oneBasedIndex);
         String trimmedIndex = oneBasedIndex.trim();
+        Matcher indexMatcher = INDEX_PATTERN.matcher(trimmedIndex);
+        final int startPos = 0;
 
-        // Once trimmed, first check the completely invalid formats, ie empty string, or non-integer
-        // Then check if is a non-zero unsigned integer
-
-        if (!StringUtil.isInteger(trimmedIndex)) {
+        // "abc" does not have an index, while "1 abc" has an index
+        boolean hasNumericIndex = indexMatcher.find()
+                && indexMatcher.start() == startPos;
+        if (!hasNumericIndex) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
 
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        String matchedIndex = indexMatcher.group();
+        // check that index does not contain any letters e.g. "50a"
+        boolean hasNoLettersInIndex = matchedIndex.length() == trimmedIndex.length()
+                    || trimmedIndex.charAt(indexMatcher.end()) == ' ';
+        if (!hasNoLettersInIndex) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        // check for positive integer
+        boolean isPositiveInt = StringUtil.isNonZeroUnsignedInteger(matchedIndex);
+        if (!isPositiveInt) {
             throw new InvalidIndexException();
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(Integer.parseInt(matchedIndex));
     }
 
     /**

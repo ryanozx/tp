@@ -2,18 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INDEX;
 import static seedu.address.logic.parser.ParserUtil.parseIndex;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FindLeaveCommand;
+import seedu.address.logic.parser.exceptions.InvalidIndexException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new FindLeaveCommand object
  */
 public class FindLeaveCommandParser implements Parser<FindLeaveCommand> {
-    public static final String MESSAGE_FORMAT_REMINDER =
-            String.format("\nFormat reminder: %1$s", FindLeaveCommand.MESSAGE_USAGE);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindLeaveCommand
@@ -26,6 +26,8 @@ public class FindLeaveCommandParser implements Parser<FindLeaveCommand> {
 
         try {
             index = parseIndex(args);
+        } catch (InvalidIndexException iie) {
+            throw new ParseException(MESSAGE_INVALID_PERSON_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindLeaveCommand.MESSAGE_USAGE), pe);

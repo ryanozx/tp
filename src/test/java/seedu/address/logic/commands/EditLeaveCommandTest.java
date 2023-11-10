@@ -41,7 +41,8 @@ public class EditLeaveCommandTest {
     private static final String DEFAULT_DESCRIPTION = "New Leave Description";
     private static final String DEFAULT_EMPTY_DESCRIPTION = "";
     private static final StatusType DEFAULT_STATUS = StatusType.REJECTED;
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(),
+            new UserPrefs());
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Leave editedLeave = new LeaveBuilder().build();

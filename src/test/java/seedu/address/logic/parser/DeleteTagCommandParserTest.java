@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -44,16 +45,19 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_INDEX);
 
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        // non-numeric index
+        assertParseFailure(parser, "abc" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "10a" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "abc 10" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
 
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        // out-of-bound index
+        String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
+        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_INDEX);
     }
 
     @Test
@@ -76,7 +80,16 @@ public class DeleteTagCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         DeleteTagCommand expectedCommand = new DeleteTagCommand(targetIndex, List.of(new Tag(VALID_TAG_FRIEND)));
+        assertParseSuccess(parser, userInput, expectedCommand);
 
+        // ignore arguments parsed as preamble
+        userInput = targetIndex.getOneBased() + " some random string" + TAG_DESC_FRIEND;
+        expectedCommand = new DeleteTagCommand(targetIndex, List.of(new Tag(VALID_TAG_FRIEND)));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // invalid prefix being parsed as preamble
+        userInput = targetIndex.getOneBased() + " i/ string" + TAG_DESC_FRIEND;
+        expectedCommand = new DeleteTagCommand(targetIndex, List.of(new Tag(VALID_TAG_FRIEND)));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

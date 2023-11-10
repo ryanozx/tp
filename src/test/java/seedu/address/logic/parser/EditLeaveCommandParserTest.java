@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_ST
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_TITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_END;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_START;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DESCRIPTION;
@@ -46,7 +47,7 @@ public class EditLeaveCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             EditLeaveCommand.MESSAGE_USAGE);
 
-    private EditLeaveCommandParser parser = new EditLeaveCommandParser();
+    private final EditLeaveCommandParser parser = new EditLeaveCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -55,6 +56,10 @@ public class EditLeaveCommandParserTest {
         assertParseFailure(parser, "1", EditLeaveCommand.MESSAGE_NOT_EDITED);
 
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, "abc", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "10a", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "abc 10", MESSAGE_INVALID_FORMAT);
     }
 
 
@@ -66,11 +71,14 @@ public class EditLeaveCommandParserTest {
         // zero index
         assertParseFailure(parser, "0" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_INDEX);
 
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        // non-numeric index
+        assertParseFailure(parser, "abc" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "10a" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "abc 10" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_FORMAT);
 
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        // out-of-bound index
+        String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
+        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_LEAVE_INDEX);
     }
 
     @Test public void parse_invalidValue_failure() {
@@ -105,6 +113,16 @@ public class EditLeaveCommandParserTest {
             .withDescription(VALID_LEAVE_DESCRIPTION).build();
         EditLeaveCommand expectedCommand = new EditLeaveCommand(targetIndex, descriptor);
 
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // ignore arguments being parsed as preamble
+        userInput = targetIndex.getOneBased() + " some random string" + VALID_LEAVE_DESCRIPTION_DESC
+                + VALID_LEAVE_TITLE_DESC;
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // ignore prefix being parsed as preamble
+        userInput = targetIndex.getOneBased() + " i/ string" + VALID_LEAVE_DESCRIPTION_DESC
+                + VALID_LEAVE_TITLE_DESC;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -150,7 +168,7 @@ public class EditLeaveCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_STATUS_DESC
             + VALID_LEAVE_START_DATE_DESC + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_STATUS_DESC
             + VALID_LEAVE_START_DATE_DESC;

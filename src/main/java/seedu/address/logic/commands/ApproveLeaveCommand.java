@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -49,7 +50,7 @@ public class ApproveLeaveCommand extends Command {
         ObservableList<Leave> leaveList = model.getFilteredLeaveList();
 
         if (index.getZeroBased() >= leaveList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LEAVE_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
         }
 
         Leave leaveToApprove = leaveList.get(index.getZeroBased());

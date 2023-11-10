@@ -53,4 +53,12 @@ public class Description {
                 || (other instanceof Description // instanceof handles nulls
                 && description.equals(((Description) other).description)); // state check
     }
+
+    /**
+     * Returns whether the description is empty.
+     * @return True if empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return description.isEmpty();
+    }
 }
