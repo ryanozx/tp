@@ -165,7 +165,8 @@ public class EditLeaveCommand extends Command {
         }
 
         public void setStart(Date start) throws EndBeforeStartException {
-            if (this.end != null && start.isAfter(this.end)) {
+            boolean isStartAfterEnd = this.end != null && start.isAfter(this.end);
+            if (isStartAfterEnd) {
                 throw new EndBeforeStartException();
             }
             this.start = start;
@@ -176,7 +177,8 @@ public class EditLeaveCommand extends Command {
         }
 
         public void setEnd(Date end) throws EndBeforeStartException {
-            if (this.start != null && end.isBefore(this.start)) {
+            boolean isEndBeforeStart = this.start != null && end.isBefore(this.start);
+            if (isEndBeforeStart) {
                 throw new EndBeforeStartException();
             }
             this.end = end;
