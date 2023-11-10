@@ -11,4 +11,12 @@ written in Java with about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* To be added
+* User Guide
+  * Add documentation for the following commands: `find-leave-range`, `find-leave-status`, `find-all-leave`
+    `find-leave` and `delete-leave`
+
+* Feature Development
+  * Develop the delete-tag command
+  * Improve code coverage of code base by implementing unit tests
+  * Build Leave, LeavesBook and LeavesBookStorage classes and integrated them into the
+    existing code base
