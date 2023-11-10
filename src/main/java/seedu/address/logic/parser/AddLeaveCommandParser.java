@@ -20,8 +20,6 @@ import seedu.address.model.leave.Title;
  */
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
-    private static final String NO_DESCRIPTION_PLACEHOLDER = "NONE";
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -62,7 +60,7 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
         Description description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
                     .map(ParserUtil::parseDescription)
-                    .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
+                    .orElse(new Description(Description.DESCRIPTION_PLACEHOLDER));
         return new AddLeaveCommand(index, title, dateRange, description);
     }
 
