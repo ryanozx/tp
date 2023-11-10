@@ -56,10 +56,9 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws NullPointerException if the given {@code name} is null.
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws NullPointerException, ParseException {
+    public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         try {
             String trimmedName = name.trim();
