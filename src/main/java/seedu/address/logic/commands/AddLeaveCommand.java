@@ -41,7 +41,7 @@ public class AddLeaveCommand extends Command {
             + PREFIX_LEAVE_DESCRIPTION + "John's Paternity Leave Description [OPTIONAL] ";
 
     public static final String MESSAGE_SUCCESS = "New leave is added : %1$s";
-    public static final String MESSAGE_DUPLICATE_LEAVE = "This leave has already exists for the employee";
+    public static final String MESSAGE_DUPLICATE_LEAVE = "This leave has already existed for the employee";
 
     private Leave toAdd;
 
