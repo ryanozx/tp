@@ -18,8 +18,9 @@ public class Description {
      * Constructs a {@code Description}.
      *
      * @param description A valid description.
+     * @throws IllegalArgumentException if description is not empty and contains illegal characters
      */
-    public Description(String description) {
+    public Description(String description) throws IllegalArgumentException {
         requireNonNull(description);
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;

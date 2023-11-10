@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_EARLY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_LATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_TITLE_DESC;
@@ -33,6 +36,7 @@ import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.EditLeaveCommand.EditLeaveDescriptor;
 import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Description;
+import seedu.address.model.leave.Range;
 import seedu.address.model.leave.Status;
 import seedu.address.model.leave.Title;
 import seedu.address.testutil.EditLeaveDescriptorBuilder;
@@ -57,10 +61,10 @@ public class EditLeaveCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -161,6 +165,19 @@ public class EditLeaveCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE,
                     PREFIX_LEAVE_STATUS, PREFIX_LEAVE_DATE_START));
+    }
+
+    @Test
+    public void parse_endBeforeStart_throwsError() {
+        Index targetIndex = INDEX_FIRST_LEAVE;
+        // ensure that order is thrown regardless of whether start or end is processed first
+        String userInput = targetIndex.getOneBased() + VALID_LEAVE_TITLE_DESC + INVALID_LEAVE_DATE_END_EARLY_DESC
+                + INVALID_LEAVE_DATE_START_LATE_DESC;
+        assertParseFailure(parser, userInput, Range.MESSAGE_END_BEFORE_START_ERROR);
+
+        userInput = targetIndex.getOneBased() + VALID_LEAVE_TITLE_DESC + INVALID_LEAVE_DATE_START_LATE_DESC
+                + INVALID_LEAVE_DATE_END_EARLY_DESC;
+        assertParseFailure(parser, userInput, Range.MESSAGE_END_BEFORE_START_ERROR);
     }
 }
 

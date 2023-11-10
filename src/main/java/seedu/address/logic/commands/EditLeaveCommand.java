@@ -83,7 +83,7 @@ public class EditLeaveCommand extends Command {
             model.setLeave(leaveToEdit, editedLeave);
             return new CommandResult(String.format(MESSAGE_EDIT_LEAVE_SUCCESS, Messages.format(editedLeave)));
         } catch (EndBeforeStartException ebse) {
-            throw new CommandException(Range.MESSAGE_INVALID_END_DATE);
+            throw new CommandException(Range.MESSAGE_END_BEFORE_START_ERROR);
         } catch (DuplicateLeaveException dle) {
             throw new CommandException(MESSAGE_DUPLICATED_LEAVE);
         }
@@ -139,6 +139,9 @@ public class EditLeaveCommand extends Command {
         public EditLeaveDescriptor(EditLeaveDescriptor toCopy) {
             setTitle(toCopy.title);
             setDescription(toCopy.description);
+            setStart(toCopy.start);
+            setEnd(toCopy.end);
+            setStatus(toCopy.status);
         }
 
         public boolean isAnyFieldEdited() {
@@ -161,7 +164,10 @@ public class EditLeaveCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setStart(Date start) {
+        public void setStart(Date start) throws EndBeforeStartException {
+            if (this.end != null && start.isAfter(this.end)) {
+                throw new EndBeforeStartException();
+            }
             this.start = start;
         }
 
@@ -169,7 +175,10 @@ public class EditLeaveCommand extends Command {
             return Optional.ofNullable(start);
         }
 
-        public void setEnd(Date end) {
+        public void setEnd(Date end) throws EndBeforeStartException {
+            if (this.start != null && end.isBefore(this.start)) {
+                throw new EndBeforeStartException();
+            }
             this.end = end;
         }
 

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -59,10 +60,14 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         Range dateRange = ParserUtil.parseNonNullRange(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get(),
                 argMultimap.getValue(PREFIX_LEAVE_DATE_END).get());
 
+        Optional<String> descriptionInput = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION);
+        Description description;
+        if (descriptionInput.isPresent()) {
+            description = ParserUtil.parseDescription(descriptionInput.get());
+        } else {
+            description = new Description(NO_DESCRIPTION_PLACEHOLDER);
+        }
 
-        Description description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
-                    .map(ParserUtil::parseDescription)
-                    .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
         return new AddLeaveCommand(index, title, dateRange, description);
     }
 
