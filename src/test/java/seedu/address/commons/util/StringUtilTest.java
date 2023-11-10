@@ -140,4 +140,17 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void isIntegerMethod() {
+        assertTrue(StringUtil.isInteger("1"));
+        assertTrue(StringUtil.isInteger("123"));
+        assertTrue(StringUtil.isInteger("-123")); // Signed negative integers
+        assertTrue(StringUtil.isInteger("+123")); // Signed positive integers
+
+        assertFalse(StringUtil.isInteger("")); // Empty string
+        assertFalse(StringUtil.isInteger(" ")); // Whitespace
+        assertFalse(StringUtil.isInteger("a")); // Non-numeric characters
+        assertFalse(StringUtil.isInteger("123a")); // Non-numeric characters
+    }
+
 }
