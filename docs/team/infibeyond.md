@@ -11,14 +11,12 @@ written in Java with about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **Code**:
-
-* **Project management**:
-
 * **Documentation**:
   * User Guide:
   * Developer Guide:
 
 
-* **Community**:
-* **Tools**:
+* **Feature Development**:
+  * Develop the `view-tag`, `approve-leave`, `reject-leave`, `find-leave`, and `find-all-leave` commands
+  * Write unit tests for the above commands
+  * Update Model, Model Manager and Leave classes to integrate with newly implemented features
