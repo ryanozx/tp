@@ -202,7 +202,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 > [!WARNING]
 > Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
 > Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the
-> [edit](#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees-edit) command instead to modify the record.
+> [edit](#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit) command instead to modify the record.
 
 3. Press "enter" on your keyboard and you should see the employee removed from the employee list with all leaves related to that employee in the leave list being removed.
 
