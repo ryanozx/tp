@@ -57,6 +57,7 @@ public class AddLeaveCommand extends Command {
         requireNonNull(index);
         requireNonNull(title);
         requireNonNull(dates);
+        requireNonNull(description);
         this.index = index;
         this.title = title;
         this.dateRange = dates;
