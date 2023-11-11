@@ -88,6 +88,9 @@ public class CommandTestUtil {
     public static final String INVALID_LEAVE_DESCRIPTION_DESC = " " + PREFIX_LEAVE_DESCRIPTION + "Going to childcare&";
     public static final String INVALID_LEAVE_DATE_START_DESC = " " + PREFIX_LEAVE_DATE_START + "2023-13-11";
     public static final String INVALID_LEAVE_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + "2024-12-32";
+    public static final String INVALID_LEAVE_LATE_DATE_START_DESC = " " + PREFIX_LEAVE_DATE_START
+            + VALID_LEAVE_DATE_END;
+    public static final String INVALID_LEAVE_EARLY_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + VALID_LEAVE_DATE_START;
     public static final String INVALID_LEAVE_STATUS_DESC = " " + PREFIX_LEAVE_STATUS + "NONSENSE";
 
     static {
