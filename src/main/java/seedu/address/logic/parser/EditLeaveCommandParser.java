@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
@@ -62,7 +62,7 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
         try {
             return ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (InvalidIndexException iie) {
-            throw new ParseException(MESSAGE_INVALID_LEAVE_INDEX);
+            throw new ParseException(MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE), pe);
         }

@@ -27,8 +27,7 @@ public class MessagesTest {
                 + TITLE_HEADER + DEFAULT_TITLE
                 + START_HEADER + DEFAULT_START
                 + END_HEADER + DEFAULT_END
-                + STATUS_HEADER + DEFAULT_STATUS
-                + DESCRIPTION_HEADER + DEFAULT_DESCRIPTION;
+                + STATUS_HEADER + DEFAULT_STATUS;
         Leave leaveWithDescription = new LeaveBuilder()
                 .withEmployee(DEFAULT_PERSON)
                 .withTitle(DEFAULT_TITLE.toString())

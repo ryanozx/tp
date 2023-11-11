@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_EARLY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
@@ -66,10 +66,10 @@ public class EditLeaveCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_INDEX);
+        assertParseFailure(parser, "-5" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_INDEX);
+        assertParseFailure(parser, "0" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
 
         // non-numeric index
         assertParseFailure(parser, "abc" + VALID_LEAVE_STATUS_DESC, MESSAGE_INVALID_FORMAT);
@@ -78,7 +78,7 @@ public class EditLeaveCommandParserTest {
 
         // out-of-bound index
         String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
-        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_LEAVE_INDEX);
+        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
     }
 
     @Test public void parse_invalidValue_failure() {

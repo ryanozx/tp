@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
@@ -47,12 +47,12 @@ public class RejectLeaveCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         // negative index
-        assertParseFailure(parser, "-5", MESSAGE_INVALID_LEAVE_INDEX);
+        assertParseFailure(parser, "-5", MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0", MESSAGE_INVALID_LEAVE_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
 
         // exceed Integer.MAX_VALUE
-        assertParseFailure(parser, "2147483648", MESSAGE_INVALID_LEAVE_INDEX);
+        assertParseFailure(parser, "2147483648", MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
     }
 }

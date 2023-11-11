@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -42,10 +42,10 @@ public class FindLeaveCommandParserTest {
     @Test
     public void parse_invalidTags_throwsParseException() {
         // negative index
-        assertParseFailure(parser, "-5", MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, "-5", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0", MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // non-numeric indices
         assertParseFailure(parser, "abc", MESSAGE_INVALID_FORMAT);
@@ -54,6 +54,6 @@ public class FindLeaveCommandParserTest {
 
         // out-of-bound index
         String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
-        assertParseFailure(parser, intMaxPlusOne, MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, intMaxPlusOne, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 }

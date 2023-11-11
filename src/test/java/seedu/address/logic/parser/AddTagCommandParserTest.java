@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -47,10 +47,10 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, "-5" + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // non-numeric index
         assertParseFailure(parser, "abc" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
@@ -59,7 +59,7 @@ public class AddTagCommandParserTest {
 
         // out-of-bound index
         String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
-        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

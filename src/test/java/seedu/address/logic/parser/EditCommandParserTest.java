@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -69,11 +69,11 @@ public class EditCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // negative index
         // assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "-5", MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, "-5", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // zero index
         // assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "0", MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // non-numeric index
         assertParseFailure(parser, "abc" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
@@ -82,7 +82,7 @@ public class EditCommandParserTest {
 
         // out-of-bound index
         String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
-        assertParseFailure(parser, intMaxPlusOne + NAME_DESC_AMY, MESSAGE_INVALID_PERSON_INDEX);
+        assertParseFailure(parser, intMaxPlusOne + NAME_DESC_AMY, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
