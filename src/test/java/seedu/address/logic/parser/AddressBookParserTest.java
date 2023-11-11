@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FULL_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_REMOTE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_END_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_START_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE;
@@ -37,10 +39,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportContactCommand;
 import seedu.address.logic.commands.ExportLeaveCommand;
 import seedu.address.logic.commands.FindAllLeaveCommand;
+import seedu.address.logic.commands.FindAllTagCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindLeaveByPeriodCommand;
 import seedu.address.logic.commands.FindLeaveByStatusCommand;
 import seedu.address.logic.commands.FindLeaveCommand;
+import seedu.address.logic.commands.FindSomeTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportContactCommand;
 import seedu.address.logic.commands.ImportLeaveCommand;
@@ -56,6 +60,8 @@ import seedu.address.model.leave.Status;
 import seedu.address.model.leave.Status.StatusType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagsContainAllTagsPredicate;
+import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditLeaveDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -135,6 +141,22 @@ public class AddressBookParserTest {
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
+    @Test
+    public void parseCommand_findAllTag() throws Exception {
+        List<Tag> keywords = Arrays.asList(new Tag("remote"), new Tag("full time"));
+        FindAllTagCommand command = (FindAllTagCommand) parser.parseCommand(
+                FindAllTagCommand.COMMAND_WORD + " " + TAG_DESC_REMOTE + TAG_DESC_FULL_TIME);
+        assertEquals(new FindAllTagCommand(new TagsContainAllTagsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findSomeTag() throws Exception {
+        List<Tag> keywords = Arrays.asList(new Tag("remote"), new Tag("full time"));
+        FindSomeTagCommand command = (FindSomeTagCommand) parser.parseCommand(
+                FindSomeTagCommand.COMMAND_WORD + " " + TAG_DESC_REMOTE + TAG_DESC_FULL_TIME);
+        assertEquals(new FindSomeTagCommand(new TagsContainSomeTagsPredicate(keywords)), command);
+    }
+    
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
