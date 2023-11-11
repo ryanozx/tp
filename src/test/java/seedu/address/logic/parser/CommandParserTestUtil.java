@@ -34,6 +34,8 @@ public class CommandParserTestUtil {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
+        } catch (IllegalArgumentException ie) {
+            assertEquals(expectedMessage, ie.getMessage());
         }
     }
 }

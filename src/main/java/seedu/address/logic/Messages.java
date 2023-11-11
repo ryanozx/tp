@@ -15,18 +15,10 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    // used when the employee index is out of bounds with respect to the Employee List
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
-            "The employee index provided does not refer to any valid person."
-            + " Please refer to the Employee list and verify that you have typed in the correct employee index.";
-    // used when the employee index is < 1 or > 2^31 - 1
-    public static final String MESSAGE_INVALID_PERSON_INDEX = "The employee index provided is not a value"
-            + " between 1 and 2147483647";
-    public static final String MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX =
-            "The leave index provided does not refer to any valid leave."
-            + " Please refer to the Leave list and verify that you have typed in the correct leave index.";
-    public static final String MESSAGE_INVALID_LEAVE_INDEX = "The leave index provided is not a value"
-            + " between 1 and 2147483647";
+
+    public static final String MESSAGE_NO_STATUS_PREFIX = "Status is PENDING by default, do not enter `s/` \n%1$s";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_LEAVE_INDEX = "The leave index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_LEAVES_LISTED_OVERVIEW = "%1$d leaves listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -83,10 +75,6 @@ public class Messages {
                 .append(leave.getEnd())
                 .append(STATUS_HEADER)
                 .append(leave.getStatus());
-        if (!leave.getDescription().isEmpty()) {
-            builder.append(DESCRIPTION_HEADER)
-                    .append(leave.getDescription());
-        }
         return builder.toString();
     }
 

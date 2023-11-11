@@ -20,7 +20,7 @@ public class TagsContainAllTagsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<Tag> personTags = person.getTags();
-        return personTags.containsAll(tags) && tags.containsAll(personTags);
+        return personTags.containsAll(tags);
     }
 
     @Override
