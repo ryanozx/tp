@@ -176,7 +176,6 @@ public class AddressBookParserTest {
                 FindSomeTagCommand.COMMAND_WORD + " " + TAG_DESC_REMOTE + TAG_DESC_FULL_TIME);
         assertEquals(new FindSomeTagCommand(new TagsContainSomeTagsPredicate(keywords)), command);
     }
-    
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
