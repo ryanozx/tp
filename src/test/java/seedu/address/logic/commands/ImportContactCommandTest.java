@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.FileAndPathUtil.MockSuccessfulFileDialogHandler;
-import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.File;
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.stage.FileChooser.ExtensionFilter;
 import seedu.address.commons.controllers.FileDialogHandler;
+import seedu.address.model.LeavesBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -24,7 +24,7 @@ public class ImportContactCommandTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CsvFiles");
     private static final Path INVALID_ADDRESS_BOOK_PATH = Paths.get("src", "test", "data",
             "CsvAddressBookStorageTest", "validAndInvalidPersonAddressBook.csv");
-    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new LeavesBook(), new UserPrefs());
 
     private Path addToTestDataPathIfNotNull(String filename) {
         return FileAndPathUtil.addToTestDataPathIfNotNull(TEST_DATA_FOLDER, filename);

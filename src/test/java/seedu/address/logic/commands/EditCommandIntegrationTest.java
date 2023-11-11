@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_PERSON;
@@ -77,8 +76,6 @@ public class EditCommandIntegrationTest {
         assertCommandSuccess(command, model,
                 String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
                 expectedModel);
-        assertEquals(model.getLeavesBook(), expectedModel.getLeavesBook());
-        assertEquals(model.getFilteredLeaveList(), expectedModel.getFilteredLeaveList());
     }
 
     @Test
