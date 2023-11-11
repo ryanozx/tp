@@ -90,7 +90,7 @@ public class ParserUtilTest {
 
         // reject indices beyond Integer.MAX_VALUE
         String exceedIntMaxInput = Long.toString((long) Integer.MAX_VALUE + 1);
-        assertThrows(InvalidIndexException.class, InvalidIndexException.MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, ()
                 -> ParserUtil.parseIndex(exceedIntMaxInput));
     }
 
@@ -101,9 +101,6 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex(WHITESPACE + "1" + WHITESPACE));
-
-        // ignores additional characters in the preamble
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1 a"));
     }
 
     @Test

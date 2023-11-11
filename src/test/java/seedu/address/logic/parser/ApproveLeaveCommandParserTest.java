@@ -1,14 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ApproveLeaveCommand;
 
 public class ApproveLeaveCommandParserTest {
@@ -19,13 +17,8 @@ public class ApproveLeaveCommandParserTest {
 
     @Test
     public void parse_validIndex_success() {
-        Index targetIndex = INDEX_FIRST_LEAVE;
-        String userInput = String.valueOf(targetIndex.getOneBased());
+        String userInput = String.valueOf(INDEX_FIRST_LEAVE.getOneBased());
         ApproveLeaveCommand expectedCommand = new ApproveLeaveCommand(INDEX_FIRST_LEAVE);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // ignore other characters in preamble
-        userInput = targetIndex.getOneBased() + " " + "some random string";
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
@@ -45,12 +38,12 @@ public class ApproveLeaveCommandParserTest {
     @Test
     public void parse_outOfBoundIndex_failure() {
         // negative index
-        assertParseFailure(parser, "-5", MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
+        assertParseFailure(parser, "-5", MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0", MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_FORMAT);
 
         // exceed Integer.MAX_VALUE
-        assertParseFailure(parser, "2147483648", MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
+        assertParseFailure(parser, "2147483648", MESSAGE_INVALID_FORMAT);
     }
 }

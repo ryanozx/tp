@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,23 +28,15 @@ public class FindLeaveCommandParserTest {
         String userInput = String.valueOf(targetIndex.getOneBased());
         FindLeaveCommand expectedCommand = new FindLeaveCommand(targetIndex);
         assertParseSuccess(parser, userInput, expectedCommand);
-
-        // ignore arguments being parsed as preamble
-        userInput = targetIndex.getOneBased() + " some random string";
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // ignore prefix being parsed as prea,ble
-        userInput = targetIndex.getOneBased() + " i/ string";
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_invalidTags_throwsParseException() {
         // negative index
-        assertParseFailure(parser, "-5", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, "-5", MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_FORMAT);
 
         // non-numeric indices
         assertParseFailure(parser, "abc", MESSAGE_INVALID_FORMAT);
@@ -54,6 +45,9 @@ public class FindLeaveCommandParserTest {
 
         // out-of-bound index
         String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
-        assertParseFailure(parser, intMaxPlusOne, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, intMaxPlusOne, MESSAGE_INVALID_FORMAT);
+
+        // invalid arguments being parsed as preamble
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
     }
 }

@@ -2,12 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.ParserUtil.parseIndex;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RejectLeaveCommand;
-import seedu.address.logic.parser.exceptions.InvalidIndexException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -25,8 +23,6 @@ public class RejectLeaveCommandParser implements Parser<RejectLeaveCommand> {
 
         try {
             index = parseIndex(args);
-        } catch (InvalidIndexException iie) {
-            throw new ParseException(MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RejectLeaveCommand.MESSAGE_USAGE), pe);
