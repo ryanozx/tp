@@ -194,23 +194,22 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
 
-<box type="info" seamless>
-If the employee is not found, consider using <a href="">list</a> or any <a href="">find commands</a> to locate the employee in the employee list.
-</box>
+> [!NOTE]
+> If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list.
 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `delete INDEX` where `INDEX` is the index of the employee in the list currently
  - For instance, to remove the whole record of the employee indexed 1, type `delete 1` to the command box.
-<box type="warning" seamless>
-Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
-Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the <a href="#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit">edit</a> command instead to modify the record.
-</box>
+> [!WARNING]
+> Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
+> Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the
+> [edit](#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees-edit) command instead to modify the record.
 
 3. Press "enter" on your keyboard and you should see the employee removed from the employee list with all leaves related to that employee in the leave list being removed.
 
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add INDEX` where `INDEX` is the index of the employee in the list currently.|
-| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete` command. |
+| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete` command. |
 | `Index is not an integer.` | The index specified is not an integer | Check if the index is an integer, then use the correct employee index in the `delete` command.
 
 ### Viewing All Tags: `view-tag`
@@ -257,7 +256,7 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is the name of the [tags](#glossary) (case-sensitive), `t/TAG` representing at least one tag should be entered to search and `[t/MORE_TAGS]...` representing optional more tags to be entered.|
-| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+| `Tags names only allow alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
                                                                                                                                                                                             
 * **For advanced users:**
   * Employees are displayed in the order in which they are arranged in the employee list.
@@ -271,7 +270,7 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is the name of the [tags](#glossary) (case-sensitive), `t/TAG` representing at least one tag should be entered to search and `[t/MORE_TAGS]...` representing optional more tags to be entered.|
-| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+| `Tags names only allow alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
                                                                                                                                                                                             
 * **For advanced users:**
   * Employees are displayed in the order in which they are arranged in the employee list.
@@ -305,24 +304,23 @@ When an employee apply for leave, you can use the `add-leave` [command](#glossar
 #### Adding a leave record: `add-leave`
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
 
-<box type="info" seamless>
-If the employee is not found, consider using <a href="">list</a> or any <a href="">find commands</a> to locate the employee in the employee list.
-</box>
+> [!NOTE]
+> If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list.
 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace `NAME` with the index of the employee applied for leave in the employee list, `Title` with the title of the leave, `START_DATE` with the start date of the leave and `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`. `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` representing the description of the leave. Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.
   - For instance, to add a leave of one day on 2023-11-01 to employee indexed 1 with a title of `Sample Leave 1`, type `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`` to the command box.
   - For another instance, to add a leave of two days from 2023-11-01 to 2023-11-02 to employee indexed 2 with a title of `Sample Leave 2` and a description of `Sample Description`, type `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` to the command box.
-<box type="important" seamless>
-There is a status field of leave that is `PENDING` by default when a leave is added. Please DO NOT enter any status field of the leave, no recognitions of status field and any other prefix are provided.
-Therefore, to change the status of a leave, please use the <a href="#approve-leave-record-by-index--approve-leave">approve-leave</a> or <a href="#reject-leave-record-by-index--reject-leave">reject-leave</a> commands instead to modify the record.
-</box>
+> [!IMPORTANT]
+> There is a status field of leave that is `PENDING` by default when a leave is added. Please DO NOT enter any status field of the leave, no recognitions of status field and any other prefix are provided.
+> Therefore, to change the status of a leave, please use the [approve-leave](#approve-leave-record-by-index-approve-leave) or [reject-leave](#reject-leave-record-by-index-reject-leave) commands instead to modify the record.
+
 3. Press "enter" on your keyboard and you should see the leave information at the end of the overall [leave list](#glossary). Note that if there is no description field added, the description will be `NONE` by default.
     
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace `NAME` with the index of the employee applied for leave in the employee list, `Title` with the title of the leave, `START_DATE` with the start date of the leave and `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`. `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` representing the description of the leave. Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.|
-| `This leave has already existed for the employee` | The start date and end date are exactly the same as the existing leave | Double check if the dates for the new leave do not have the same dates as the existing ones by checking against the list from [find-leave]() or [find-leave-range](). You may choose to [edit-leave]() if the new leave has the exact same start and end dates as the existing leave, in other words, they are the same leave. |
-| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-leave` command. |
+| `This leave has already existed for the employee` | The start date and end date are exactly the same as the existing leave | Double check if the dates for the new leave do not have the same dates as the existing ones by checking against the list from [find-leave](#find-leave-records-belonging-to-an-employee-find-leave) or [find-leave-range](#find-leave-records-by-time-period-find-leave-range). You may choose to [edit-leave](#editing-a-leave-record-edit-leave) if the new leave has the exact same start and end dates as the existing leave, in other words, they are the same leave. |
+| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-leave` command. |
 | `Index is not an integer.` | The index specified is not an integer | Check if the index is an integer, then use the correct employee index in the `add-leave` command.
 | `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` | Title input is blank and/or contains illegal characters | Add title and/or remove the illegal characters from the input |
 | `The end date is earlier than the start date!` | The end date input is earlier than the start date input | Double check the date inputs. |
