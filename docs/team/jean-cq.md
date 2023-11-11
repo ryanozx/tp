@@ -11,15 +11,14 @@ written in Java with about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **Code contributed**:
-
-* **Project management**:
-
-* **Enhancements to existing features**:
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `find-all-tag` and `find-one-tag` [\#14]()
+    * Added documentation for the features `find`,`find-all-tag`, `find-one-tag`, `delete` and `add-leave`
+  * Developer Guide:
+    * 
 
-
-* **Community**:
-* **Tools**:
+* **Feature Development**:
+  * Develop the `find-all-tag`, `find-some-tag` and `add-leave`
+  * Write unit tests for the above commands
+  * Modify UI for both lists to display and minor changes for better UI display
+  * 
