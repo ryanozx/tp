@@ -142,6 +142,7 @@ public class UniqueLeaveList implements Iterable<Leave> {
         toEdit.forEach((l) -> setLeave(l, l.copyWithNewPerson(editedPerson)));
     }
 
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

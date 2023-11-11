@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NO_STATUS_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE_TITLE;
 
 import java.util.stream.Stream;
@@ -32,11 +34,15 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
-                        PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_DESCRIPTION);
+                        PREFIX_LEAVE_DATE_END, PREFIX_LEAVE_DESCRIPTION, PREFIX_LEAVE_STATUS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
                 PREFIX_LEAVE_DATE_END)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        }
+
+        if (arePrefixesPresent(argMultimap, PREFIX_LEAVE_STATUS)) {
+            throw new ParseException(String.format(MESSAGE_NO_STATUS_PREFIX, AddLeaveCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LEAVE_TITLE, PREFIX_LEAVE_DATE_START,
@@ -59,10 +65,15 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         Range dateRange = ParserUtil.parseNonNullRange(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get(),
                 argMultimap.getValue(PREFIX_LEAVE_DATE_END).get());
 
-
-        Description description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
+        Description description;
+        try {
+            description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
                     .map(ParserUtil::parseDescription)
                     .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+
         return new AddLeaveCommand(index, title, dateRange, description);
     }
 
