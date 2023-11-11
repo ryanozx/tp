@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -42,6 +43,33 @@ public class AddLeaveCommandIntegrationTest {
                 dateRange, validLeave.getDescription()), model,
                 String.format(AddLeaveCommand.MESSAGE_SUCCESS, Messages.format(validLeave)),
                 expectedModel);
+    }
+
+    @Test
+    public void constructor_nullLeave_throwsNullPointerException() {
+        Leave leaveInList = model.getLeavesBook().getLeaveList().get(0);
+        Range validDateRange = Range.createNonNullRange(leaveInList.getStart(), leaveInList.getEnd());
+
+        //index null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, leaveInList.getTitle(),
+                validDateRange, leaveInList.getDescription()));
+
+        //title null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_FIRST_LEAVE, null,
+                validDateRange, leaveInList.getDescription()));
+
+        //range null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_FIRST_LEAVE, leaveInList.getTitle(),
+                null, leaveInList.getDescription()));
+
+        //description null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_FIRST_LEAVE, leaveInList.getTitle(),
+                validDateRange, null));
+
+        //all null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null,
+                null, null));
+
     }
 
     @Test

@@ -65,10 +65,15 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         Range dateRange = ParserUtil.parseNonNullRange(argMultimap.getValue(PREFIX_LEAVE_DATE_START).get(),
                 argMultimap.getValue(PREFIX_LEAVE_DATE_END).get());
 
-
-        Description description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
+        Description description;
+        try {
+            description = argMultimap.getValue(PREFIX_LEAVE_DESCRIPTION)
                     .map(ParserUtil::parseDescription)
                     .orElse(new Description(NO_DESCRIPTION_PLACEHOLDER));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+
         return new AddLeaveCommand(index, title, dateRange, description);
     }
 

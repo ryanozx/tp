@@ -4,9 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_END;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_START;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LEAVE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LEAVE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -30,8 +36,11 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLeavesBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Description;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.Range;
+import seedu.address.model.leave.Title;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.LeaveBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -41,7 +50,29 @@ public class AddLeaveCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
     @Test
     public void constructor_nullLeave_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null, null, null));
+        Range validDateRange = Range.createNonNullRange(Date.of(VALID_LEAVE_DATE_START),
+                Date.of(VALID_LEAVE_DATE_END));
+        //index null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, new Title(VALID_LEAVE_TITLE),
+                validDateRange, new Description(VALID_LEAVE_DESCRIPTION)));
+
+        //title null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE, null,
+                validDateRange, new Description(VALID_LEAVE_DESCRIPTION)));
+
+        //range null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE,
+                new Title(VALID_LEAVE_TITLE),
+                null, new Description(VALID_LEAVE_DESCRIPTION)));
+
+        //description null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE,
+                new Title(VALID_LEAVE_TITLE),
+                validDateRange, null));
+
+        //all null
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null,
+                null, null));
     }
 
     @Test
@@ -81,12 +112,29 @@ public class AddLeaveCommandTest {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
         Leave aliceLeave = new LeaveBuilder().withEmployee(alice).build();
+        Leave aliceLeaveDifferentTitle = new LeaveBuilder().withEmployee(alice).withTitle("Different Title").build();
+        Leave aliceLeaveDifferentRange = new LeaveBuilder().withEmployee(alice)
+                .withStart(Date.of("2000-01-01")).withEnd(Date.of("2000-01-01")).build();
+        Leave aliceLeaveDifferentDescription = new LeaveBuilder().withEmployee(alice)
+                .withDescription("Different Description").build();
         Leave bobLeave = new LeaveBuilder().withEmployee(bob).build();
         Range aliceDateRange = Range.createNonNullRange(aliceLeave.getStart(), aliceLeave.getEnd());
+        Range aliceDifferentDateRange = Range.createNonNullRange(aliceLeaveDifferentRange.getStart(),
+                aliceLeaveDifferentRange.getEnd());
+
         Range bobDateRange = Range.createNonNullRange(bobLeave.getStart(), aliceLeave.getEnd());
 
         AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
                 aliceDateRange, aliceLeave.getDescription());
+        AddLeaveCommand addAliceDifferentTitleCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE,
+                aliceLeaveDifferentTitle.getTitle(),
+                aliceDateRange, aliceLeave.getDescription());
+        AddLeaveCommand addAliceDifferentRangeCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE,
+                aliceLeave.getTitle(),
+                aliceDifferentDateRange, aliceLeave.getDescription());
+        AddLeaveCommand addAliceDifferentDescriptionCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE,
+                aliceLeave.getTitle(),
+                aliceDifferentDateRange, aliceLeaveDifferentDescription.getDescription());
         AddLeaveCommand addBobCommand = new AddLeaveCommand(INDEX_SECOND_LEAVE, bobLeave.getTitle(),
                 bobDateRange, bobLeave.getDescription());
 
@@ -104,8 +152,17 @@ public class AddLeaveCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different leave -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+
+        //Title is not equal
+        assertFalse(addAliceCommand.equals(addAliceDifferentTitleCommand));
+
+        //Range is not equal
+        assertFalse(addAliceCommand.equals(addAliceDifferentRangeCommand));
+
+        //Description is not equal
+        assertFalse(addAliceCommand.equals(addAliceDifferentDescriptionCommand));
     }
 
     @Test
@@ -133,12 +190,14 @@ public class AddLeaveCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -148,7 +207,8 @@ public class AddLeaveCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -158,7 +218,8 @@ public class AddLeaveCommandTest {
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -168,17 +229,20 @@ public class AddLeaveCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -207,7 +271,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public void deleteLeave(Leave leave) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -226,6 +291,18 @@ public class AddLeaveCommandTest {
         }
 
         /**
+         * Returns true if a leave belonging to same employee has overlapping dates as {@code leave} exists in the
+         * leave book.
+         *
+         * @param leave
+         * @return
+         */
+        @Override
+        public boolean hasConcurrentLeave(Leave leave) {
+            return false;
+        }
+
+        /**
          * Adds the given leave.
          * {@code leave} must not already exist in the leave book.
          *
@@ -233,7 +310,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public void addLeave(Leave leave) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         /**
@@ -255,7 +333,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public Path getLeavesBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         /**
@@ -273,7 +352,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public ReadOnlyLeavesBook getLeavesBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
