@@ -27,7 +27,7 @@ This user guide is targeted at users of HRMate.
         <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
         <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
     </ul>
-    See <a href="#faq">How do I open a termainal?</a> for more info.
+    See <a href="#faq">How do I open a terminal?</a> for more information.
 </box>
 
 3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
