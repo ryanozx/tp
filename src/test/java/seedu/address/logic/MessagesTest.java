@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.DESCRIPTION_HEADER;
 import static seedu.address.logic.Messages.EMPLOYEE_HEADER;
 import static seedu.address.logic.Messages.END_HEADER;
 import static seedu.address.logic.Messages.START_HEADER;
