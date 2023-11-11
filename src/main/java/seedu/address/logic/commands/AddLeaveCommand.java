@@ -75,7 +75,7 @@ public class AddLeaveCommand extends Command {
 
         toAdd = new Leave(personToEdit, title, dateRange, description);
 
-        if (model.hasLeave(toAdd) || model.hasConcurrentLeave(toAdd)) {
+        if (model.hasLeave(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LEAVE);
         }
 
