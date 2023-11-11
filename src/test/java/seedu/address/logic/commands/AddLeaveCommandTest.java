@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -61,15 +60,18 @@ public class AddLeaveCommandTest {
                 validDateRange, new Description(VALID_LEAVE_DESCRIPTION)));
 
         //range null
-        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE, new Title(VALID_LEAVE_TITLE),
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE,
+                new Title(VALID_LEAVE_TITLE),
                 null, new Description(VALID_LEAVE_DESCRIPTION)));
 
         //description null
-        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE, new Title(VALID_LEAVE_TITLE),
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(INDEX_THIRD_LEAVE,
+                new Title(VALID_LEAVE_TITLE),
                 validDateRange, null));
 
         //all null
-        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null,
+                null, null));
 
     }
 
@@ -124,11 +126,14 @@ public class AddLeaveCommandTest {
 
         AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
                 aliceDateRange, aliceLeave.getDescription());
-        AddLeaveCommand addAliceDifferentTitleCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeaveDifferentTitle.getTitle(),
+        AddLeaveCommand addAliceDifferentTitleCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE,
+                aliceLeaveDifferentTitle.getTitle(),
                 aliceDateRange, aliceLeave.getDescription());
-        AddLeaveCommand addAliceDifferentRangeCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
+        AddLeaveCommand addAliceDifferentRangeCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE,
+                aliceLeave.getTitle(),
                 aliceDifferentDateRange, aliceLeave.getDescription());
-        AddLeaveCommand addAliceDifferentDescriptionCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
+        AddLeaveCommand addAliceDifferentDescriptionCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE,
+                aliceLeave.getTitle(),
                 aliceDifferentDateRange, aliceLeaveDifferentDescription.getDescription());
         AddLeaveCommand addBobCommand = new AddLeaveCommand(INDEX_SECOND_LEAVE, bobLeave.getTitle(),
                 bobDateRange, bobLeave.getDescription());
@@ -185,12 +190,14 @@ public class AddLeaveCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -200,7 +207,8 @@ public class AddLeaveCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -210,7 +218,8 @@ public class AddLeaveCommandTest {
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -220,17 +229,20 @@ public class AddLeaveCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -259,7 +271,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public void deleteLeave(Leave leave) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -297,7 +310,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public void addLeave(Leave leave) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         /**
@@ -319,7 +333,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public Path getLeavesBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         /**
@@ -337,7 +352,8 @@ public class AddLeaveCommandTest {
          */
         @Override
         public ReadOnlyLeavesBook getLeavesBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
