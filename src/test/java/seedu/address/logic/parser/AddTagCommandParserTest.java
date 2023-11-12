@@ -67,7 +67,7 @@ public class AddTagCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // empty tag
-        assertParseFailure(parser, "1" + TAG_EMPTY, AddTagCommand.MESSAGE_NO_TAGS_ADDED);
+        assertParseFailure(parser, "1" + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -88,5 +88,4 @@ public class AddTagCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 }

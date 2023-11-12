@@ -129,6 +129,7 @@ public class UniqueLeaveList implements Iterable<Leave> {
      * @see Leave#belongsTo(Person)
      */
     public void removePerson(Person p) {
+        requireNonNull(p);
         List<Leave> toRemove = internalList.stream().filter((l) -> l.belongsTo(p)).collect(Collectors.toList());
         toRemove.forEach(this::remove);
     }
@@ -138,6 +139,7 @@ public class UniqueLeaveList implements Iterable<Leave> {
      * @see Leave#belongsTo(Person)
      */
     public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
         List<Leave> toEdit = internalList.stream().filter((l) -> l.belongsTo(target)).collect(Collectors.toList());
         toEdit.forEach((l) -> setLeave(l, l.copyWithNewPerson(editedPerson)));
     }
