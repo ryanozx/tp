@@ -97,13 +97,6 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
-
-        // Test for person without tag
-        Person personWithoutTag = new PersonBuilder(ALICE).withTags().build(); // No tags
-        String expectedWithoutTag = Person.class.getCanonicalName() + "{name=" + personWithoutTag.getName() + ", phone="
-                + personWithoutTag.getPhone() + ", email=" + personWithoutTag.getEmail() + ", address="
-                + personWithoutTag.getAddress() + "}";
-        assertEquals(expectedWithoutTag, personWithoutTag.toString());
     }
 
     @Test

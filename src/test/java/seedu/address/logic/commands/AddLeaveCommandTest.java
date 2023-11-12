@@ -289,18 +289,6 @@ public class AddLeaveCommandTest {
         }
 
         /**
-         * Returns true if a leave belonging to same employee has overlapping dates as {@code leave} exists in the
-         * leave book.
-         *
-         * @param leave
-         * @return
-         */
-        @Override
-        public boolean hasConcurrentLeave(Leave leave) {
-            return false;
-        }
-
-        /**
          * Adds the given leave.
          * {@code leave} must not already exist in the leave book.
          *

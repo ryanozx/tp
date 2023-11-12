@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.leave.Date;
 import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.exceptions.DuplicateLeaveException;
 import seedu.address.model.leave.exceptions.LeaveNotFoundException;
@@ -69,31 +68,6 @@ public class LeavesBookTest {
     public void hasLeave_leaveInLeavesBook_returnsTrue() {
         leavesBook.addLeave(ALICE_LEAVE);
         assertTrue(leavesBook.hasLeave(ALICE_LEAVE));
-    }
-
-    @Test
-    public void hasConcurrentLeave_leaveInLeavesBook_returnsTrue() {
-        leavesBook.addLeave(ALICE_LEAVE);
-        assertTrue(leavesBook.hasConcurrentLeave(ALICE_LEAVE));
-
-        // Leave with same name, different start date, same end date
-        Leave editedAlice = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build();
-        assertTrue(leavesBook.hasConcurrentLeave(editedAlice));
-
-        // Leave with same name, same start date, different end date
-        Leave editedAlice2 = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 3")
-                .withDescription("Alice's Maternity Leave 3 Description")
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build();
-        assertTrue(leavesBook.hasConcurrentLeave(editedAlice2));
-
-        // Leave with same name, different start date, different end date
-        Leave editedAlice3 = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 4")
-                .withDescription("Alice's Maternity Leave 4 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1)))
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build();
-        assertTrue(leavesBook.hasConcurrentLeave(editedAlice3));
     }
 
     @Test

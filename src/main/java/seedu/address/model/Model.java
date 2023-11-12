@@ -105,15 +105,6 @@ public interface Model {
      */
     boolean hasLeave(Leave leave);
 
-    /**
-     * Returns true if a leave belonging to same employee has overlapping dates as {@code leave} exists in the
-     * leave book.
-     *
-     * @param leave
-     * @return
-     */
-    boolean hasConcurrentLeave(Leave leave);
-
 
     /**
      * Adds the given leave.
