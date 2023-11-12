@@ -6,9 +6,10 @@
 
 # HRMate User Guide
 
-HRMate is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while
-still having the benefits of a Graphical User Interface (GUI). If you can type fast, HRMate can get your contact management
-tasks done faster than traditional GUI apps.
+Hi HR managers, this is HRMate. HRMate is a **desktop app for managing employee and leave records**.
+HRMate uses a Command Line Interface ([CLI](#glossary)) and Graphical User Interface ([GUI](#glossary)).
+That means that we are optimized for fast typers like you, and can help you complete your HR tasks faster than traditional HR apps like Oracle and SAP.
+This user guide is targeted at users of HRMate.
 
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
@@ -17,57 +18,48 @@ tasks done faster than traditional GUI apps.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Download the latest `hrmate.jar` from [to be updated]() and move to your desired location. See [How do I move a file?](#faq) for help.
 
-2. Download the latest `hrmate.jar` from [to be updated]().
+2. Open a terminal or your computer.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your HRMate.
+<box type="info" seamless>
+    <ul>
+        <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
+        <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
+    </ul>
+    See <a href="#faq">How do I open a termainal?</a> for more info.
+</box>
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hrmate.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+4. Ensure you have Java `11` or above installed in your Computer. This can be done by typing `java -version` in your terminal.
+ - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognise the `java` input. 
 
-   * `list` : Lists all contacts.
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `clear` : Deletes all contacts.
-   * `exit` : Exits the app.
+5. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
+An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
+We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
+![Ui](images/Ui.png)
 
-6. Refer to the [Features](#features) below for details of each command.
+6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
+ - `help` : Opens the help window.
+ - `list` : Lists all contacts.
+ - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the employee list
+ - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11` : Adds an leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
+ - `delete 3` : Deletes the 3rd employee shown in the current employee list.
+ - `clear` : Deletes all employees and leaves.
+ - `exit` : Exits the app.
 
-## How to interpret command formats
+6. Refer to [How to interpret command formats?](#how-to-interpret-command-formats) for more info on the command structure. 
+Also, look through [Features](#features) for more commands and the details of each command. We hope to aid you in your HR journey!
 
-Example command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-This command is used to add an employee to the address book. Let's examine how we can use this command.
-
-| **Command component examples** | **What they mean**                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| add                            | The name of the command. It is the first word of the command. You must specify the command that you intend to use.                                                                                                                                                                                                                                                                                                                                               |
-| n/NAME                         | Command fields. We use these fields to supply further information that the command requires, in this case, the employee's name. Fields are separated by a space. Some fields require a field prefix, while other fields do not have a field prefix. Let's look at the field in greater detail.                                                                                                                                                                   |
-| n/                             | Field prefix. It contains a letter followed by a forward slash (/). If the field has a field prefix, the prefix must be specified at the start of the field. Each of these fields has a unique prefix, which can be found by referring to the command format (e.g. n/ for the name field, p/ for the phone number field). Additionally, fields with field prefixes can be written in any order, so long as they are written after fields without field prefixes. |
-| NAME                           | Field name. For field names that contain more than one word, they are separated by an underscore, e.g. PHONE_NUMBER. We can replace this with information specific to our scenario. For instance, if we add an employee named *John Smith*, we will type in the field as `n/John Smith`, where *John Smith* replaces NAME.                                                                                                                                       |
-| [t/TAG]                        | Optional command fields. Fields wrapped in square brackets i.e. [] are optional and need not be filled in for the command to succeed. Nevertheless, if you want to supply this field to the command, follow the format specified within the square brackets. For instance, if we want to provide a tag (e.g. *manager*) an optional field, we will key in the field as `t/manager`.                                                                              |
-| ...                            | The ellipsis following a field indicates that we can supply any number of that particular field, with each field separated by a space. In the example, [t/TAG]... means we can provide any number of tags in the command. For instance, if we want to provide the tags *manager* and *sales*, we can key them in as `t/manager t/sales`.                                                                                                                         |
-**Notes**
-* Parameters can be in any order <br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also
-  acceptable.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored <br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
 --------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
-### Getting help
+## Getting help
 Should you need any help, you can access this online user guide (this document) with the `help` [command](#glossary).
 
-#### Getting help : `help`
+### Getting help : `help`
 
 1. Type in the following command in the [command box](#glossary): `help`. 
 2. Press "Enter" on your keyboard.
@@ -76,25 +68,26 @@ Should you need any help, you can access this online user guide (this document) 
 
 4. Click on the "copy link" button to copy the link to the user guide, and paste into any [web browser](#glossary) to access the user guide. Alternatively, click the red button at the corner of the window to close the pop up.
 
-### Adding a new employee
+## Adding a new employee
 When a new employee joins, you can use the `add` [command](#glossary) to add their information into HRMate.
 
-#### Adding an employee: `add`
+### Adding an employee: `add`
 
 1. Type in the following [command](#glossary) in the [command box](#glossary): `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replace `NAME` with employee name, `PHONE_NUMBER` with employee phone number `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field with one or more [tags](#glossary), with `TAG` being the name of the tag.
  - For instance, if you have an employee name John Doe with phone number 98765432, email johnd@example.com, home address John Street, block 123 #01-01 and tags full-time and remote, type in the command `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01 t/full-time t/remote`
  - If your employee does not require any tags, using the same information as above, the command would be `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01`
+ - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 2. Press "enter" on your keyboard and you should see the person information at the end of the [employee list](#glossary). 
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
-| Error message | Why it happens | Fix |
-|---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name.
-| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format. |
-| `This employee already exists in the address book` | The provided employee name is already found in HRMate | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries. |
+| Error message                                                                                                                                          | Why it happens                                                                                                  | Fix                                                                                                                                                                                                                                                                                                                                                                                                              |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                            |
+| `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
 
-### Listing all employees: `list`
+## Listing all employees: `list`
 
 * **What It Does:**
   * Shows a list of all employees in HRMate
@@ -112,10 +105,10 @@ Here are the potential error messages that you may receive and here's how to fix
 * **Expected Output on Failure:**
   * N/A (no expected failure)
 
-### Editing employee records
+## Editing employee records
 HRMate offers different [commands](#glossary) for editing employee records. `add-tag` and `delete-tag` would add and remove an employee's [tags](#glossary) while `edit` is for editing name, phone number, email address, home address and tags.
 
-#### Adding tags to employees : `add-tag`
+### Adding tags to employees : `add-tag`
 
 1. Find the employee under the [employee list](#glossary).
 
@@ -125,19 +118,20 @@ If the employee is not found, consider using <a href="">list</a> or any <a href=
 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `add-tag INDEX t/TAG...` where `INDEX` is the [index](#glossary) of the employee in the list currently, `TAG` is the name of the [tag](#glossary) to be added and `t/TAG...` representing one or more tags. 
  - For instance, if you want to add the tags full-time and remote to the employee indexed 2, type `add-tag 2 t/full-time t/remote` to the command box.
+ - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 3. Press "enter" on your keyboard and you should see the input tags added to the employee specified.
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
-| Error message | Why it happens | Fix |
-|---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specfied format | Ensure the command you entered follows the following format: `add-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. |
-| `At least one tag must be provided` | No tags were provided | Add tags to the command in the command box. Note that the tags must have a t/ [prefix](#glossary). For example, to add the tag full-time, use `t/full-time`.
-| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command. |
-| `The employee already has some of the tags` | The employee already has some of the tags which you are trying to add | Remove the tags the employee has from the input command. For example, for an employee who already has the full-time tag, the command `add-tag 2 t/full-time t/remote` would not work. Instead try `add-tag 2 t/remote`.|
-| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+| Error message                                                         | Why it happens                                                        | Fix                                                                                                                                                                                                                                     |
+|-----------------------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                             | The command you input does not follow the specfied format             | Ensure the command you entered follows the following format: `add-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. |
+| `At least one tag must be provided`                                   | No tags were provided                                                 | Add tags to the command in the command box. Note that the tags must have a t/ [prefix](#glossary). For example, to add the tag full-time, use `t/full-time`.                                                                            |
+| `The person index provided is invalid`                                | The index specified does not refer to any employee                    | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command.          |
+| `The employee already has some of the tags`                           | The employee already has some of the tags which you are trying to add | Remove the tags the employee has from the input command. For example, for an employee who already has the full-time tag, the command `add-tag 2 t/full-time t/remote` would not work. Instead try `add-tag 2 t/remote`.                 |
+| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters                            | Remove the illegal characters from the input.                                                                                                                                                                                           |
 
-#### Removing tags from employees : `delete-tag`
+### Removing tags from employees : `delete-tag`
 1. Get the [index](#glossary) of the employee in the [employee list](#glossary).
 
 <box type="info" seamless>
@@ -146,6 +140,7 @@ If the employee is not found, consider using [list]() or any [find commands]() t
 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `delete-tag INDEX t/TAG...` where `INDEX` is the index of the employee in the list currently, `TAG` is the name of the [tag](#glossary) to be deleted and `t/TAG...` representing one or more tags. 
  - For instance, if you want to remove the tags full-time and remote to the employee indexed 2, type `delete-tag 2 t/full-time t/remote` to the command box.
+ - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 3. Press "enter" on your keyboard and you should see the input tags removed from the employee specified.
 
 Here are the potential error messages you may receive and here's how to fix them:
@@ -158,7 +153,7 @@ Here are the potential error messages you may receive and here's how to fix them
 | `Some of the tags are not found on this employee.` | The employee does not have some of the tags you are trying to delete | Remove the tags not found on the employee from the input command. For example, for an employee without the tag full-time, the command `delete-tag 2 t/full-time t/remote` does not work. Instead try `delete-tag 2 t/remote`.|
 | `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
 
-#### Editing the name, phone number, email address, home address or tags of employees : `edit`
+### Editing the name, phone number, email address, home address or tags of employees : `edit`
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
 
 <box type="info" seamless>
@@ -168,7 +163,7 @@ If the employee is not found, consider using <a href="">list</a> or any <a href=
 2. Type in the following [command](#glossary) in the [command box](#glossary) `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more [tags](#glossary) where `TAG` is the tag name. Note that at least one field to edit must be present and only the fields present will be edited.
  - For example, to change the phone number, email address and tags of the employee indexed 2 to 98765432, johndoe@example.com and full-time and remote, type in the command `edit 2 p/98765432 e/johndoe@example.com t/full-time t/remote`. Note that the name and home address will remain unchanged.
  - In another example, to change the home address of the employee indexed 1 to John street, block 123 #01-01 and remove all tags from the employee, type in the command `edit 1 a/John street, block 123 #01-01 t/`. Note that the name, phone number and email_address will remain unchanged.
-
+ - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 
 <box type="warning" seamless>
 If the tag prefix is specified, all existing tags under the employee will be removed and replaced with the new tags in the command.
@@ -179,13 +174,13 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 3. Press "enter" on your keyboard and you should see the changes applied to the employee.
 
-| Error message | Why it happens | Fix |
-|---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. |
-| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format. |
-| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command. |
-| `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there is any input fields in the command inputted. An input like `edit 1` is not accepted as there is no edits to be made. |
-| `This employee already exists in the address book` | The provided employee name is already found in HRMate | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.
+| Error message                                                                                                                                          | Why it happens                                                                                                  | Fix                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                                                                                                                                                                                                                           |
+| `The person index provided is invalid`                                                                                                                 | The index specified does not refer to any employee                                                              | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command.                                                                                                                                                                                                                                                                                                                                                                                     |
+| `At least one field to edit must be provided`                                                                                                          | The command you input does not contain any fields to edit                                                       | Check if there is any input fields in the command inputted. An input like `edit 1` is not accepted as there is no edits to be made.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                                                                                                                                                                                                                           |
 
 * **For advanced users:**
   * You can remove all the tags of an employee with `edit INDEX t/` (see warning above)
@@ -304,30 +299,6 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
   * `Employee List Index does not exist` - An invalid index was specified
   * `Employee List Index not specified` - No index was specified by the user
 
-### Restarting HRMate by clearing all existing records : `clear`
-
-* **What It Does:**
-  * Removes every entry from HRMate, such that the address book in HRMate is empty. A possible use case of this command
-    is to remove all sample records in HRMate so that you can fill it with employee records instead.
-* **Format:**
-  * `clear`
-* **Examples:**
-
-| S/N | Command information                                                                          |
-|-----|----------------------------------------------------------------------------------------------|
-| 1   | **Command:** `clear` <br><br> **Output:** Deletes every employee record in the address book. |
-* **Acceptable Values:**
-  * This command does not require any parameters.
-* **Warning:**
-  <box type="warning" seamless>
-    Be careful when using this command - the records are irretrievable once deleted.
-  </box>
-* **Expected Value on Success:**
-  * GUI Changes: All existing records are no longer visible in the address book
-  * Message shown to the user: "Address book has been cleared"
-* **Expected Value on Failure:**
-  * N/A (no expected failure)
-
 ### Adding a leave record: `add-leave`
 * **What It Does:**
   * Adds a leave record in HRMate based on employee index
@@ -404,24 +375,6 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 * **Expected Output on Failure:**
   * `Leave list index does not exist` - An invalid index was specified.
   * `Employee list index not specified` - No index was specified by the user.
-
-### Closes the application : `exit`
-
-* **What It Does:**
-  * Closes and exits the application.
-* **Format:**
-  * `exit`
-* **Examples:**
-
-| S/N | Command information                                               |
-|-----|-------------------------------------------------------------------|
-| 1   | **Command:** `exit` <br><br> **Output:** Closes and exits HRMate. |
-* **Acceptable Values:**
-  * This command does not require any parameters.
-* **Expected Value on Success:**
-  * GUI Changes: The application window closes.
-* **Expected Value on Failure:**
-  * N/A (no expected failure)
 
 ### Approve leave record by index: `approve-leave`
 
@@ -565,36 +518,65 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
   * `Invalid command format` - There was no employee index provided, please make sure that you supply a number as the indexh 
 --------------------------------------------------------------------------------------------------------------------
 
-### Importing/Exporting employee records
+## Importing/Exporting employee records
 It's painful having to add in each employee into HRMate manually. That's why HRMate provides import and export commands,
 so you can bring in all your records from Excel with just a single command!
 
-With the import and export commands, HRMate can read and save files in [CSV](#glossary) format, which is supported
+With the import and export commands, HRMate can read and save files in [CSV](#csv) format, which is supported
 by major spreadsheet applications such as Microsoft Excel. 
 
 
-#### Importing employee records : `import`
+### Importing employee records : `import`
+
+<box type="warning" seamless>
+Imported employee records will overwrite existing employee records in HRMate. Remember to make a copy of your existing
+employee records if you want to save them! You can do so by <a href="#exporting-employee-records-export">exporting your current records</a>.
+</box>
 
 Here's how you can bring over your records from Excel:
 
 1. Export your Excel save file in CSV format. Ensure that the separator is set to be a semicolon(`;`), and that you have
-the following fields: Name, Phone, Email, Address. You may also include a Tags column if you wish.
+the following fields: Name, Phone, Email, Address, Tags. Note that tags in the Tags field have to be separated by commas.
    * You may skip this step if you already have a CSV file (e.g. you are importing a previously exported CSV file generated by
    HRMate)
-2. In HRMate, type in the following command in the command box: `import`
-3. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
-4. You should see your employee records show up in HRMate, along with the message "Employee records have been imported from [your file name]!"
+
+<box type="warning" seamless>
+If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
+which will cause problems when trying to import employee records. To fix this problem, 
+<a href="#excel-separator-faq">click here</a> to find out how you
+can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users.
+</box>
+
+2. If you are unsure how your file should look like, you may refer to the following images:
+   * Here's how your CSV file should look like if you open it up in Notepad:
+   ![import-employee-notepad](images/import-employee-notepad.png)
+     * It is okay if your CSV file does not contain the first line `sep=;`, as this is a line added to files exported by HRMate
+     to help Excel open the file. Do ensure the next line has to be the following:
+     `Name;Phone;Email;Address;Tags` in order for HRMate to read it. Also note that tags are separated by commas 
+     (see `colleagues, friends` under `Bernice Yu`'s row).
+   * If you open your CSV file in Excel, your file should look like this:
+   <br/>
+   <br/>
+   ![import-employee-excel](images/import-employee-excel.png)
+   <br/>
+   <br/>
+     * Do ensure that the first row contains the following headers: `Name`, `Phone`, `Email`, `Address`, and `Tags`. 
+     Note that tags, if present, should be separated by commas (see cell `E3` for an example).
+
+3. In HRMate, type in the following command in the command box: `import`
+4. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
+5. You should see your employee records show up in HRMate, along with the message "Employee records have been imported from [your file name]!"
 
 Here are some possible error messages you might encounter and here's how you can fix them:
 
-| Error Message                                                       | Why it happens                                                               | Fix                                                                               |
-|---------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| Employee records were not imported                                  | You did not select a file in the file dialog                                 | Retype the command, and make sure to select a CSV file when the file dialog opens |
-| Records in file [file name] could not be imported, import cancelled | Your file likely contains illegal characters or is corrupted                 | Ensure that your data fulfils the following constraints (to be added)             |
-| No valid records found in file [file name], import cancelled        | Your file either is empty or does not contain a single valid employee record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
+| Error Message                                                        | Why it happens                                                               | Fix                                                                               |
+|----------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| Employee records were not imported.                                  | You did not select a file in the file dialog                                 | Retype the command, and make sure to select a CSV file when the file dialog opens |
+| Records in file [file name] could not be imported, import cancelled. | Your file likely contains illegal characters or is corrupted                 | Ensure that your data fulfils the following constraints (to be added)             |
+| No valid records found in file [file name], import cancelled         | Your file either is empty or does not contain a single valid employee record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
 
 
-#### Exporting employee records : `export`
+### Exporting employee records : `export`
 
 Not only can you bring your data into HRMate, you can also bring your data out of HRMate. HRMate's export feature allows you
 to export either the entire set of employee records, or employee records with a particular filter applied (e.g. only export
@@ -619,12 +601,17 @@ Here are potential error messages that you may receive and here's how to fix the
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Importing/Exporting leave records
+## Importing/Exporting leave records
 The import and export feature extends to importing and exporting leaves. This allows you to generate lists of leave
 applications that can be opened in other major spreadsheet applications such as Microsoft Excel.
 
 
-#### Importing employee records : `import-leave`
+### Importing leave records : `import-leave`
+
+<box type="warning" seamless>
+Imported leave records will overwrite existing leave records in HRMate. Remember to make a copy of your existing
+leave records if you want to save them! You can do so by <a href="#exporting-leave-records-export-leave">exporting your current records</a>.
+</box>
 
 Here's how you can bring over your leave records from Excel:
 
@@ -632,9 +619,30 @@ Here's how you can bring over your leave records from Excel:
    the following fields: Title, Employee, Start, End, Description, Status.
   * You may skip this step if you already have a CSV file (e.g. you are importing a previously exported CSV file generated by
     HRMate)
-2. In HRMate, type in the following command in the command box: `import-leave`
-3. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
-4. You should see your leave records show up in HRMate, along with the message "Leave records have been imported from [your file name]!"
+    
+<box type="warning" seamless>
+    If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
+    which will cause problems when trying to import leave records. To fix this problem,
+    <a href="excel-separator-faq">click here</a> to find out how you
+    can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users
+</box>
+
+2. If you are unsure how your file should look like, you may refer to the following images:
+  * Here's how your CSV file should look like if you open it up in Notepad:
+  ![import-leave-notepad](images/import-leave-notepad.png)
+  * It is okay if your CSV file does not contain the first line `sep=;`, as this is a line added to files exported by HRMate
+    to help Excel open the file. Do ensure the next line has to be the following:
+    `Title;Employee;Start;End;Description;Status` in order for HRMate to read it.
+    * If you open your CSV file in Excel, your file should look like this:
+      <br/>
+      <br/>
+      ![import-leave-excel](images/import-leave-excel.png)
+      <br/>
+      <br/>
+    * Do ensure that the first row contains the following headers: `Title`, `Employee`, `Start`, `End`, `Description`, and `Status`.
+3. In HRMate, type in the following command in the command box: `import-leave`
+4. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
+5. You should see your leave records show up in HRMate, along with the message "Leave records have been imported from [your file name]!"
 
 Here are some possible error messages you might encounter and here's how you can fix them:
 
@@ -645,7 +653,7 @@ Here are some possible error messages you might encounter and here's how you can
 | No valid records found in file [file name], import cancelled        | Your file either is empty or does not contain a single valid leave record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
 
 
-#### Exporting leave records : `export-leave`
+### Exporting leave records : `export-leave`
 
 Not only can you bring your data into HRMate, you can also bring your data out of HRMate. HRMate's export feature allows you
 to export either the entire set of leave application records, or leave records with a particular filter applied (e.g. only export
@@ -666,11 +674,43 @@ Here are potential error messages that you may receive and here's how to fix the
 
 | Error Message                     | Why it happens                                   | Fix                                                                                                                                                                                                                   |
 |-----------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |      
-
+| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |
 --------------------------------------------------------------------------------------------------------------------
 
+## Resetting HRMate
+After playing with the different features in HRMate, you might feel that it's time to delete HRMate's sample employee
+contacts and instead use your own. Rather than manually deleting every employee contact and leave record, here's a
+quick and easy way to clear them in the app!
+### Resetting HRMate by clearing all existing records : `clear`
 
+Here's how you can remove every employee contact and leave application from the app:
+
+1. In HRMate, type this command into the [command box](#command-box): `clear` and press Enter.
+2. That's it! You should notice that your [Employee List](#employee-list) and [Leave List](#leave-list) are both empty.
+   You should also notice that the [Command Output Box](#command-output-box) will display the message:
+   `All employee contacts and leave records have been cleared!` Now you have a clean slate and can start adding your
+   own data!
+
+**Warning:**
+<box type="warning" seamless>
+Be careful when using this command - resetting the application is permanent. If you have not already exported your
+<a href="#exporting-employee-records-export">employee records</a> and
+<a href="#exporting-leave-records-export-leave">leave records</a>, you will not be able to get them back!
+</box>
+--------------------------------------------------------------------------------------------------------------------
+
+## Exit HRMate
+Once you've finished your work, you might want to close HRMate. If you love typing over
+clicking, you can close the app via keyboard too!
+
+### Close the application: `exit`
+Here's how you can close HRMate using your keyboard:
+
+1. In HRMate, type this command into the [command box](#command-box): `exit` and press enter.
+2. That's it! HRMate will now close, and you will find your employee records and leave records there the next time you
+reopen HRMate.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
@@ -683,15 +723,70 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 * **Warning:**
   <box type="warning" seamless>
     If your changes to the data file makes its format invalid, HRMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-  </box>
+  </box> 
+
+--------------------------------------------------------------------------------------------------------------------
+
+## How to interpret command formats
+
+Example command formats: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`, `add-tag INDEX t/TAG...`
+
+The first command is used to add an employee while the second is used to add tags to a specified employee. Let's examine how the command is used.
+
+| **Command component examples** | **What they mean** |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `add`, `add-tag`                            | The name of the command. The first word of the command is used to specify what command is used. |
+| `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, `a/ADDRESS`, `t/TAG` | Mandatory command fields. These fields are used to provide further information that the commmand needs. The start of a field is denoted by a field prefix. |
+| `n/`, `p/`, `e/`, `a/`, `t/` | Field prefix. These indicate what the field type is (name, phone number, email address etc.). They have a letter or phrase, followed by a backslash ("/"). This allows fields to be written in any order. For example, `edit 1 n/John Doe p/98765432` would have the same effect as `edit 1 p/98765432 n/John Doe`. |
+| `INDEX` | The [index](#glossary) of the command. Some command requires an index to specified which employee or leave to act on. It must be the second word of the command, after the name of the command. |
+| `[t/TAG]` | Optional command field. The square brackets ("[" and "]") indicates that a field is optional. However, some commands like [edit](#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit) have additional requirements like at least one of the optional fields must be specified. |
+| `...` | Variable optional fields. This indicates that we can supply more than one field of the same type. When coupled with the optional command field ("[" and "]"), this means that zero or more command fields of that type can be provided. For example, `[t/TAG]...` indicates **zero** or more tags can be specified while `t/TAG...` indicates **one** or more tags can be specified. To specify multiple fields, use multiple tag prefixes. For instance, to use full-time and remote as tag fields to a command, type `t/full-time t/remote` |
+
+**Notes**
+* Parameters can be in any order <br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also
+  acceptable.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored <br>
+  e.g. if the command `help 123` is executed, it will be interpreted as `help`.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRMate home folder.
+**A**: We recommend using the [import and export command for employee](#importingexporting-employee-records) and [import and export command for leave records](#importingexporting-leave-records).
 
+**Q**: How do I move a file?<br>
+**A**: For **windows**, first open File Explorer and find the file. Afterwards, drag the selected file's icon to the desired location using your mouse. For more help, please consult the [Microsoft documentation](https://support.microsoft.com/en-gb/office/move-or-copy-an-item-to-another-folder-19768dfe-86c4-40bf-b82c-1c084b624492)<br>
+For **mac**, first open Finder and find the specific file. Then drag it to the desired location using the mouse. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/mac-help/mh26885/mac).
+
+**Q**: How do I open a terminal?<br>
+**A**: For **windows**, press the windows key, type in `powershell` and press Enter. The terminal should open. For more help, please consult the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/terminal/install).
+For **mac**, open the terminal app on your mac. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal.).
+
+**Q**: How do I navigate files in terminal?<br>
+**A**: You can use the `cd` command to navigate in terminal. For more information, please consult this [documentation](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command). 
+
+**Q**: How do I download Java 11?<br>
+**A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+
+<a name="excel-separator-faq"></a>
+**Q**: How do I change the separator of my CSV file into semicolons(`;`) in Excel?<br/>
+**A**: Follow these steps to change the separator when exporting:
+* If you are using Windows, follow these steps:
+  1. In Excel, click on File > Options > Advanced.
+  2. Under Editing options, uncheck the `Use system separators` check box.
+  3. Change the Decimal separator to a comma (`,`) and the Thousands separator to a period (`.`).
+  4. Save your file. When saving your file, change the save type (`Save as type`) to `CSV (Coma delimited) (*.csv)`
+  5. After saving your file, remember to reset your Excel separators. Repeat steps 1 and 2, only that this time remember to
+    check the `Use system separators` check box instead.
+  <br/>
+  <br/>
+* Unfortunately, if you are using Mac OS, Excel makes it very difficult to change the separator
+to semicolons. Stay tuned for future releases that will extend support for Mac OS!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -736,15 +831,21 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 | **View tag**              | `view-tag`                                                                                                                                                            |
 --------------------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Glossary
 
-| Term | Meaning                                                                                                                         |
-|------|---------------------------------------------------------------------------------------------------------------------------------|
-| CSV  | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel. |
-| Command | A line of instructions that you input. Refer to []() for a picture |
-| Command box | A box for you to input commands. Refer to []() for a picture. |
-| Employee list | The employee list is the list of employees on the left side of the application. Refer to []() for a picture. |
-| Prefix | A letter or phrase before an input. Refer to []() for more details |
-| Tag  | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote). |
-| Index | The number labelling each employee in the employee list. Refer to []() for a picture. |
-| Web browser | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now! |
+| Term                                                 | Meaning                                                                                                                                                                                                                          |
+|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI                                                  | A text based interface where users type in commands instead of interacting with the application's graphics. Also see: GUI                                                                                                        |
+| CSV <a name="csv"></a>                               | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.                                                                                                  |
+| Command                                              | A line of instructions that you input into the command box. Also see: Command box                                                                                                                                                |
+| Command Box <a name="command-box"></a>                                         | A box for you to input commands. Refer to [quick start](#quick-start) for more information.                                                                                                                                      |
+| Command Output Box <a name="command-output-box"></a> | A box that displays the results of the command you keyed in. It will tell you whether the command you entered has successfully run, or if there is an error in your command that needs to be fixed. Refer to []() for a picture. |
+| Employee List <a name="employee-list"></a>           | The Employee list is the list of employees on the left side of the application. Refer to [quick start](#quick-start) for a picture.                                                                                              |
+| Leave List <a name="leave-list"></a>                 | The Leave list is the list of leaves on the right side of the application. Refer to [quick start](#quick-start) for a picture.                                                                                                   |
+| GUI                                                  | A graphical based interface where users interact the the application's graphics like buttons or scrollpanes. Also see: CLI                                                                                                       |
+| Prefix                                               | A letter or phrase before an input. Refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information.                                                                                         |
+| Tag                                                  | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote).                                                                              |
+| Index                                                | The number labelling each employee in the employee list. Refer to [quick start](#quick-start) for more information.                                                                                                              |
+| Web browser                                          | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now!                                                                            |
