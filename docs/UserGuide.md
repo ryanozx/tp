@@ -9,7 +9,7 @@
 Hi HR managers, this is HRMate. HRMate is a **desktop app for managing employee and leave records**.
 HRMate uses a Command Line Interface ([CLI](#glossary)) and Graphical User Interface ([GUI](#glossary)).
 That means that we are optimized for fast typers like you, and can help you complete your HR tasks faster than traditional HR apps like Oracle and SAP.
-This user guide is targeted at users of HRMate.
+This user guide aims to help new users quickly familiarise themselves with HRMate and help experienced users to explore advanced features of HRMate, with the goal of using HRMate to better facilitate your HR needs.
 
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
