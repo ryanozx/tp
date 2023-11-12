@@ -61,6 +61,10 @@ This command is used to add an employee to the address book. Let's examine how w
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+> [!IMPORTANT]  
+> Our program are coded to take in the exact commands stated in this user guide. Please do not change the spelling, remove or add symbols, adjust spaces, or change letter case of the commands. Any changes to the commands, unless otherwise stated in this user guide, can lead to the program unable to interpret the input. TO ensure the best user experience, please follow the commands exactly as described in this user guide. Check out our [command summary](#command-summary) for a concise list of available commands and their formats.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
