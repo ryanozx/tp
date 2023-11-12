@@ -2,10 +2,14 @@ package seedu.address.model.leave;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLeaves.ALICE_LEAVE;
 import static seedu.address.testutil.TypicalLeaves.BOB_LEAVE;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.List;
@@ -208,5 +212,90 @@ public class UniqueLeaveListTest {
         // same internal list -> returns true
         uniqueLeaveList.add(ALICE_LEAVE);
         assertTrue(uniqueLeaveList.equals(uniqueLeaveListCopy));
+    }
+
+    @Test
+    public void removePerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new UniqueLeaveList().removePerson(null));
+    }
+
+    @Test
+    public void removePerson_personInList_success() {
+        Leave aliceLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(ALICE.getName().toString())).build();
+        Leave bobLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(BOB.getName().toString())).build();
+
+        // ensure we are not comparing based on same instance
+        assertNotEquals(aliceLeave.getEmployee(), ALICE);
+        assertNotEquals(bobLeave.getEmployee(), BOB);
+
+        UniqueLeaveList ull = new UniqueLeaveList();
+        ull.add(aliceLeave);
+        ull.add(bobLeave);
+
+        ull.removePerson(ALICE);
+        assertTrue(ull.contains(bobLeave));
+        assertFalse(ull.contains(aliceLeave));
+    }
+
+    @Test
+    public void removePerson_personNotInList_noChange() {
+        Leave aliceLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(ALICE.getName().toString())).build();
+
+        assertNotEquals(aliceLeave.getEmployee(), BOB);
+
+        UniqueLeaveList ull = new UniqueLeaveList();
+        ull.add(aliceLeave);
+        ull.removePerson(BOB);
+        assertTrue(ull.contains(aliceLeave));
+    }
+
+    @Test
+    public void setPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new UniqueLeaveList().setPerson(null, BOB));
+        assertThrows(NullPointerException.class, () -> new UniqueLeaveList().setPerson(ALICE, null));
+    }
+
+    @Test
+    public void setPerson_personInList_success() {
+        Leave aliceLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(ALICE.getName().toString())).build();
+        Leave bobLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(BOB.getName().toString())).build();
+
+        // ensure we are not comparing based on same instance
+        assertNotEquals(aliceLeave.getEmployee(), ALICE);
+        assertNotEquals(bobLeave.getEmployee(), BOB);
+
+        UniqueLeaveList ull = new UniqueLeaveList();
+        ull.add(aliceLeave);
+        ull.add(bobLeave);
+
+        Leave expectedChangedLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(AMY.getName().toString())).build();
+
+        assertFalse(ull.contains(expectedChangedLeave));
+
+        ull.setPerson(ALICE, AMY);
+        assertTrue(ull.contains(bobLeave));
+        assertFalse(ull.contains(aliceLeave));
+        assertTrue(ull.contains(expectedChangedLeave));
+    }
+
+    @Test
+    public void setPerson_personNotInList_noChange() {
+        Leave aliceLeave = new LeaveBuilder().withEmployee(
+                new PersonEntry(ALICE.getName().toString())).build();
+
+        // ensure we are not comparing based on same instance
+        assertNotEquals(aliceLeave.getEmployee(), ALICE);
+
+        UniqueLeaveList ull = new UniqueLeaveList();
+        ull.add(aliceLeave);
+
+        ull.setPerson(BOB, AMY);
+        assertTrue(ull.contains(aliceLeave));
     }
 }

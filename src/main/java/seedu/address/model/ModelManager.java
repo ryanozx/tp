@@ -222,10 +222,10 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         // TODO implement leaves import so the below test case passes
         return addressBook.equals(otherModelManager.addressBook)
-                // && leavesBook.equals(otherModelManager.leavesBook)
+                && leavesBook.equals(otherModelManager.leavesBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
-        // && filteredLeaves.equals(otherModelManager.filteredLeaves);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredLeaves.equals(otherModelManager.filteredLeaves);
     }
 
     @Override
