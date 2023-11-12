@@ -19,8 +19,9 @@ public class Description {
      * Constructs a {@code Description}.
      *
      * @param description A valid description.
+     * @throws IllegalArgumentException if description is not empty and contains illegal characters
      */
-    public Description(String description) {
+    public Description(String description) throws IllegalArgumentException {
         requireNonNull(description);
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
@@ -52,5 +53,13 @@ public class Description {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
                 && description.equals(((Description) other).description)); // state check
+    }
+
+    /**
+     * Returns whether the description is empty.
+     * @return True if empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return description.isEmpty();
     }
 }

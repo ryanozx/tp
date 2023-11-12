@@ -134,7 +134,7 @@ abstract class AdaptedLeave implements ToModelTyper<Leave> {
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         } catch (EndBeforeStartException e) {
-            throw new IllegalValueException(Range.MESSAGE_INVALID_END_DATE);
+            throw new IllegalValueException(Range.MESSAGE_END_BEFORE_START_ERROR);
         }
     }
 

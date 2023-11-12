@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_LEAVES_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -19,7 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.TestUtil;
 
 public class FindLeaveCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
     @Test
     public void execute_findLeave_success() {
         Index index = Index.fromOneBased(1);
@@ -44,6 +46,13 @@ public class FindLeaveCommandTest {
         String expectedMessage = String.format(MESSAGE_LEAVES_LISTED_OVERVIEW,
                 expectedModel.getFilteredLeaveList().size());
         assertCommandSuccess(findLeaveCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_indexOutOfBounds_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        FindLeaveCommand findLeaveCommand = new FindLeaveCommand(outOfBoundIndex);
+        assertCommandFailure(findLeaveCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

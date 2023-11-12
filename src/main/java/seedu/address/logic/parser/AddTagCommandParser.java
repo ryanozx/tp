@@ -41,8 +41,8 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         return new AddTagCommand(index, ParserUtil.parseTags(tags));
     }
 
-    private boolean isTagsEmpty(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private boolean isTagsEmpty(Collection<String> tags) {
+        requireNonNull(tags);
 
         return tags.isEmpty();
 

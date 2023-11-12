@@ -24,7 +24,7 @@ public class DeleteLeaveCommand extends Command {
 
     public static final String MESSAGE_DELETE_LEAVE_SUCCESS = "Deleted Leave: %1$s";
 
-    private Index targetIndex;
+    private final Index targetIndex;
 
     /**
      * @param targetIndex of the leave in the filtered leave list to delete
