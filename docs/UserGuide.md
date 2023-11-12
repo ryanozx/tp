@@ -312,9 +312,9 @@ quick and easy way to clear them in the app!
 
 Here's how you can remove every employee contact and leave application from the app:
 
-1. In HRMate, type this command into the [command box](#glossary): `clear`
-2. That's it! You should notice that your [Employee List](#glossary) and [Leave List](#glossary) are both empty. 
-You should also notice that the [Command Output Box](#glossary) will display the message:
+1. In HRMate, type this command into the [command box](#command-box): `clear` and press Enter.
+2. That's it! You should notice that your [Employee List](#employee-list) and [Leave List](#leave-list) are both empty. 
+You should also notice that the [Command Output Box](#command-output-box) will display the message:
 `All employee contacts and leave records have been cleared!` Now you have a clean slate and can start adding your
 own data!
 
@@ -402,24 +402,6 @@ own data!
 * **Expected Output on Failure:**
   * `Leave list index does not exist` - An invalid index was specified.
   * `Employee list index not specified` - No index was specified by the user.
-
-### Closes the application : `exit`
-
-* **What It Does:**
-  * Closes and exits the application.
-* **Format:**
-  * `exit`
-* **Examples:**
-
-| S/N | Command information                                               |
-|-----|-------------------------------------------------------------------|
-| 1   | **Command:** `exit` <br><br> **Output:** Closes and exits HRMate. |
-* **Acceptable Values:**
-  * This command does not require any parameters.
-* **Expected Value on Success:**
-  * GUI Changes: The application window closes.
-* **Expected Value on Failure:**
-  * N/A (no expected failure)
 
 ### Approve leave record by index: `approve-leave`
 
@@ -662,7 +644,19 @@ Here are potential error messages that you may receive and here's how to fix the
 
 | Error Message                     | Why it happens                                   | Fix                                                                                                                                                                                                                   |
 |-----------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |      
+| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |
+--------------------------------------------------------------------------------------------------------------------
+
+### Exit HRMate
+Once you've finished your work, you might want to close HRMate. If you love typing over
+clicking, you can close the app via keyboard too!
+
+#### Close the application: `exit`
+Here's how you can close HRMate using your keyboard:
+
+1. In HRMate, type this command into the [command box](#command-box): `exit` and press enter.
+2. That's it! HRMate will now close, and you will find your employee records and leave records there the next time you
+reopen HRMate.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -734,15 +728,15 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 
 ## Glossary
 
-| Term                  | Meaning                                                                                                                                                                                                                          |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CSV<a name="csv"></a> | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.                                                                                                  |
-| Command               | A line of instructions that you input. Refer to []() for a picture                                                                                                                                                               |
-| Command box           | A box for you to input commands. Refer to []() for a picture.                                                                                                                                                                    |
-| Command Output Box    | A box that displays the results of the command you keyed in. It will tell you whether the command you entered has successfully run, or if there is an error in your command that needs to be fixed. Refer to []() for a picture. |
-| Employee List         | The Employee list is the list of employees on the left side of the application. Refer to []() for a picture.                                                                                                                     |
-| Leave List            | The Leave list is the list of leaves on the right side of the application. Refer to []() for a picture.                                                                                                                          |
-| Prefix                | A letter or phrase before an input. Refer to []() for more details                                                                                                                                                               |
-| Tag                   | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote).                                                                              |
-| Index                 | The number labelling each employee in the employee list. Refer to []() for a picture.                                                                                                                                            |
-| Web browser           | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now!                                                                            |
+| Term                                                 | Meaning                                                                                                                                                                                                                          |
+|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CSV<a name="csv"></a>                                | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.                                                                                                  |
+| Command                                              | A line of instructions that you input. Refer to []() for a picture                                                                                                                                                               |
+| Command Box <a name="command-box"></a>               | A box for you to input commands. Refer to []() for a picture.                                                                                                                                                                    |
+| Command Output Box <a name="command-output-box"></a> | A box that displays the results of the command you keyed in. It will tell you whether the command you entered has successfully run, or if there is an error in your command that needs to be fixed. Refer to []() for a picture. |
+| Employee List <a name="employee-list"></a>           | The Employee list is the list of employees on the left side of the application. Refer to []() for a picture.                                                                                                                     |
+| Leave List <a name="leave-list"></a>                 | The Leave list is the list of leaves on the right side of the application. Refer to []() for a picture.                                                                                                                          |
+| Prefix                                               | A letter or phrase before an input. Refer to []() for more details                                                                                                                                                               |
+| Tag                                                  | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote).                                                                              |
+| Index                                                | The number labelling each employee in the employee list. Refer to []() for a picture.                                                                                                                                            |
+| Web browser                                          | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now!                                                                            |
