@@ -199,13 +199,14 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `delete INDEX` where `INDEX` is to be replaced with the index of the employee in the list currently
  - For instance, to remove the whole record of the employee indexed 1, type `delete 1` to the command box.
+![Before Delete](images/before-delete.png)
 > [!WARNING]
 > Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
 > Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the
 > [edit](#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit) command instead to modify the record.
 
 3. Press "enter" on your keyboard and you should see the employee removed from the employee list with all leaves related to that employee in the leave list being removed.
-
+![After Delete](images/after-delete.png)
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add INDEX` where `INDEX` is the index of the employee in the list currently.|
