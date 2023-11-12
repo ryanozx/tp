@@ -21,8 +21,8 @@ public class LeaveBuilder {
     public static final Description DEFAULT_DESCRIPTION = new Description("Alice's Maternity Leave Description");
     public static final Person DEFAULT_PERSON = ALICE;
     public static final Status DEFAULT_STATUS = Status.getDefault();
-    public static final Date DEFAULT_START = Date.of("2020-01-01");
-    public static final Date DEFAULT_END = Date.of("2020-01-02");
+    public static final Date DEFAULT_START = Date.of("2020-02-01");
+    public static final Date DEFAULT_END = Date.of("2020-02-02");
 
     private Title title;
     private Description description;

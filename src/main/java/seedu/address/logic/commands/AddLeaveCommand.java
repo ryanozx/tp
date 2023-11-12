@@ -32,13 +32,13 @@ public class AddLeaveCommand extends Command {
             + PREFIX_LEAVE_TITLE + "TITLE "
             + PREFIX_LEAVE_DATE_START + "DATE START "
             + PREFIX_LEAVE_DATE_END + "DATE END "
-            + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION "
+            + "[" + PREFIX_LEAVE_DESCRIPTION + "DESCRIPTION] "
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_LEAVE_TITLE + "John's Paternity Leave "
             + PREFIX_LEAVE_DATE_START + "2023-10-28 "
             + PREFIX_LEAVE_DATE_END + "2023-10-29 "
-            + PREFIX_LEAVE_DESCRIPTION + "John's Paternity Leave Description ";
+            + PREFIX_LEAVE_DESCRIPTION + "John's Paternity Leave Description [OPTIONAL] ";
 
     public static final String MESSAGE_SUCCESS = "New leave is added : %1$s";
     public static final String MESSAGE_DUPLICATE_LEAVE = "This leave has already exists for the employee";
@@ -54,6 +54,10 @@ public class AddLeaveCommand extends Command {
      * Creates an AddLeaveCommand to add the specified {@code Leave}
      */
     public AddLeaveCommand(Index index, Title title, Range dates, Description description) {
+        requireNonNull(index);
+        requireNonNull(title);
+        requireNonNull(dates);
+        requireNonNull(description);
         this.index = index;
         this.title = title;
         this.dateRange = dates;
@@ -91,14 +95,19 @@ public class AddLeaveCommand extends Command {
             return false;
         }
 
-        AddLeaveCommand otherAddCommand = (AddLeaveCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddLeaveCommand otherAddLeaveCommand = (AddLeaveCommand) other;
+        return index.equals(otherAddLeaveCommand.index) && title.equals(otherAddLeaveCommand.title)
+                && dateRange.equals(otherAddLeaveCommand.dateRange)
+                && description.equals(otherAddLeaveCommand.description);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("title", title)
+                .add("description", description)
+                .add("start", dateRange.getStartDate().get())
+                .add("end", dateRange.getEndDate().get())
                 .toString();
     }
 }
