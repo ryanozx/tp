@@ -40,7 +40,7 @@ public class Status {
         if (!isValidStatus(status)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
-        return new Status(StatusType.valueOf(status.toUpperCase()));
+        return new Status(StatusType.valueOf(status));
     }
 
     /**
@@ -61,7 +61,7 @@ public class Status {
      * @return True if string matches a StatusType value, False otherwise
      */
     public static boolean isValidStatus(String status) {
-        return status.toUpperCase().matches(REGEX);
+        return status.matches(REGEX);
     }
 
     /**

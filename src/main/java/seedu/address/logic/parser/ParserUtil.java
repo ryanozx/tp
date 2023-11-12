@@ -211,6 +211,9 @@ public class ParserUtil {
     public static Description parseDescription(String description) {
         requireNonNull(description);
         String trimmedDescription = description.trim();
+        if (trimmedDescription.isEmpty()) {
+            trimmedDescription = Description.DESCRIPTION_PLACEHOLDER;
+        }
         return new Description(trimmedDescription);
     }
 }
