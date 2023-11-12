@@ -370,18 +370,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                             | I want to …                         | So that I can …                                                          |
-|----------|------------------------------------|-------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user                           | see usage instructions              | refer to instructions when I forget how to use the App                   |
-| `* * *`  | HR manager                         | add a new employee                  |                                                                          |
-| `* * *`  | HR manager                         | delete an employee                  | remove employees who no longer work here                                 |
-| `* * *`  | HR manager                         | find an employee by name            | locate details of employees without having to go through the entire list |
-| `* * *`  | organised HR manager               | add/delete a tag to an employee     | change the label of an employee                                          |
-| `* * *`  | organised HR manager               | view all my tags                    | filter by them                                                           |
-| `* * *`  | organised HR manager               | find employees by tags              | find specific category of employees for higher level workflows           |
-| `* *`    | HR manager                         | hide private contact details        | minimize chance of someone else seeing them by accident                  |
-| `* *`    | HR manager                         | import/export records in CSV format | open the records in other apps                                           |
-| `*`      | HR manager of a large organisation | sort employees by name              | locate an employee easily                                                |
+| Priority | As a …                             | I want to …                                | So that I can …                                                        |
+|----------|------------------------------------|--------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                           | see usage instructions                     | refer to instructions when I forget how to use the App                 |
+| `* * *`  | HR manager                         | add a new employee                         |                                                                        |
+| `* * *`  | HR manager                         | delete an employee                         | remove employees who no longer work here                               |
+| `* * *`  | HR manager                         | find an employee by name                   | locate details of employees without having to go through the entire list |
+| `* * *`  | organised HR manager               | add/delete a tag to an employee            | change the label of an employee                                        |
+| `* * *`  | organised HR manager               | view all my tags                           | filter by them                                                         |
+| `* * *`  | organised HR manager               | find employees by tags                     | find specific category of employees for higher level workflows         |
+| `* * *`  | organised HR manager               | add a new leave application of an employee | keep track of the leaves applications                                  |
+| `* *`    | HR manager                         | hide private contact details               | minimize chance of someone else seeing them by accident                |
+| `* *`    | HR manager                         | import/export records in CSV format        | open the records in other apps                                         |
+| `*`      | HR manager of a large organisation | sort employees by name                     | locate an employee easily                                              |
 
 *{More to be added}*
 
@@ -554,6 +555,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+
+**Use case: Add a leave application**
+
+**MSS**
+
+1. The HR manager requests to find an employee by name.
+2. HRMate shows a list of employees with the same name.
+3. The HR manager requests to add a leave application for the selected employee 
+4. HRMate adds the leave application to the employee's record based on the provided information.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. The list of employees with the provided name is empty.
+* 
+    * 2a1. HRMate informs the HR manager that no employees with the given name were found. 
+  
+      Use case ends.
+  
+* 3a. The provided employee index is invalid.
+
+    * 3a1. HRMate shows an error message indicating that the employee name is not valid.
+      
+      Use case resumes at step 2.
+
+* 4a. The provided leave application details are invalid. 
+
+    * 4a1. HRMate shows an error message specifying the issue with the provided details (e.g., date format, missing fields).
+
+      Use case resumes at step 3.
 
 *{More to be added}*
 
