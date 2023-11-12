@@ -79,6 +79,8 @@ public class CommandTestUtil {
     public static final String VALID_LEAVE_DATE_START = "2023-10-30";
     public static final String VALID_LEAVE_DATE_END = "2023-10-31";
     public static final String VALID_LEAVE_STATUS_APPROVED = "APPROVED";
+    public static final String VALID_LEAVE_STATUS_REJECTED = "REJECTED";
+    public static final String DESCRIPTION_EMPTY = " " + PREFIX_LEAVE_DESCRIPTION;
 
     public static final String VALID_LEAVE_TITLE_DESC = " " + PREFIX_LEAVE_TITLE + VALID_LEAVE_TITLE;
     public static final String VALID_LEAVE_DESCRIPTION_DESC = " " + PREFIX_LEAVE_DESCRIPTION + VALID_LEAVE_DESCRIPTION;
