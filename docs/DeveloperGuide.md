@@ -659,6 +659,54 @@ testers are expected to do more exploratory testing.</box>
 
 2. { more test cases …​ }_
 
+### Finding all tags matched
+1. Finding Employees with All Tags in a Valid Scenario
+   1. Prerequisites:
+      1. Have a dataset with employees having different tags, specifically `remote`, `full time`, `part time` and `on-site`. 
+      2. List all employees using the list command to identify available tags. 
+   2. Test Case: find-all-tag t/remote t/full time 
+      Expected: GUI Changes: A dedicated interface section displays a list of employees with both tags `remote` and `full time`. Status message indicates the number of matched employees. Verify that employees with additional tags are also displayed.
+   3. Test Case: find-all-tag
+      Expected: Error message indicates an invalid command format.Status bar remains the same.
+   4. Test Case: find-all-tag t/Nonexistent tag
+      Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+   5. Test Case: find-all-tag t/REMOTE
+      Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+   6. Test Case: find-all-tag t/123!
+      Expected: Error message indicates illegal tag names. Status bar remains the same.
+   7. Test Case: find-all-tag t/re
+      Expected:Employees with tag named `re` are displayed. Verify that employees with additional tags are also displayed.
+### Finding some tags matched
+1. Finding Employees with All Tags in a Valid Scenario
+    1. Prerequisites:
+        1. Have a dataset with employees having different tags, specifically `remote`, `full time`, `part time` and `on-site`.
+        2. List all employees using the list command to identify available tags.
+    2. Test Case: find-some-tag t/remote t/full time
+       Expected: GUI Changes: A dedicated interface section displays a list of employees with either tags `remote` and `full time`. Status message indicates the number of matched employees. Verify that employees with additional tags are also displayed.
+    3. Test Case: find-some-tag
+       Expected: Error message indicates an invalid command format.Status bar remains the same.
+    4. Test Case: find-some-tag t/Nonexistent tag
+       Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+    5. Test Case: find-some-tag t/REMOTE
+       Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+    6. Test Case: find-some-tag t/123!
+       Expected: Error message indicates illegal tag names. Status bar remains the same.
+    7. Test Case: find-some-tag t/re
+       Expected:Employees with tag named `re` are displayed. Verify that employees with additional tags are also displayed.
+
+### Adding a leave
+1. Adding a leave while all leaves are being shown
+
+   1. Prerequisites: List all leaves using the list-leaves command. Multiple leaves in the list.
+
+   2. Test case: add-leave 1 title/Vacation start/2023-11-15 end/2023-11-20<br>
+   Expected: The leave is added to the list. Details of the added leave shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case: add-leave 0 title/Conference start/2023-12-01 end/2023-12-03 d/Attending conference<br>
+   Expected: No leave is added. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect add-leave commands to try: add-leave, add-leave x, ... (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 ### Saving data
 
 1. Dealing with missing/corrupted data files

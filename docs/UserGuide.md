@@ -206,7 +206,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 * **Expected Output on Failure:**
   * Error messages: N/A (since no parameters are involved, the command will not fail due to invalid input)
 
-### Finding employees with all tags in a group of tags: `find-all-tag`
+~~### Finding employees with all tags in a group of tags: `find-all-tag`
 
 * **What It Does:**
   * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
@@ -228,7 +228,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
   * Message shown to the user: "[Number of matched employees] employees matched: "
 * **Expected Output on Failure:**
   * `Invalid command format!` - Missing parameters
-  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
+  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs~~
 
 ### Finding employees with at least one tag in a group of tags: `find-some-tag`
 
