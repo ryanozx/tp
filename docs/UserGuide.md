@@ -556,7 +556,7 @@ the following fields: Name, Phone, Email, Address, Tags. Note that tags in the T
 <box type="warning" seamless>
 If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
 which will cause problems when trying to import employee records. To fix this problem, 
-<a href="#excel-separator-faq">click here</a> to find out how you
+<a href="#q-how-do-i-change-the-separator-of-my-csv-file-into-semicolons-in-excel">click here</a> to find out how you
 can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users.
 </box>
 
@@ -636,7 +636,7 @@ Here's how you can bring over your leave records from Excel:
 <box type="warning" seamless>
     If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
     which will cause problems when trying to import leave records. To fix this problem,
-    <a href="#excel-separator-faq">click here</a> to find out how you
+    <a href="#q-how-do-i-change-the-separator-of-my-csv-file-into-semicolons-in-excel">click here</a> to find out how you
     can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users
 </box>
 
@@ -771,36 +771,38 @@ The first command is used to add an employee while the second is used to add tag
 
 ### Q: How do I transfer my data to another computer?
 **A**: We recommend using the [import and export command for employees](#importingexporting-employee-records) and [import and export command for leave records](#importingexporting-leave-records).
-
+<br/>
+<br/>
 ### Q: How do I move a file?
-**A**: For **Windows** users, first open File Explorer and find the file. Afterwards, drag the selected file's icon to the desired location using your mouse. For more help, please consult the [Microsoft documentation](https://support.microsoft.com/en-gb/office/move-or-copy-an-item-to-another-folder-19768dfe-86c4-40bf-b82c-1c084b624492)<br>
-For **Mac** users, first open Finder and find the specific file. Then drag it to the desired location using the mouse. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/mac-help/mh26885/mac).
-
+**A**: 
+* For **Windows** users, first open File Explorer and find the file. Afterwards, drag the selected file's icon to the desired location using your mouse. For more help, please consult the [Microsoft documentation](https://support.microsoft.com/en-gb/office/move-or-copy-an-item-to-another-folder-19768dfe-86c4-40bf-b82c-1c084b624492)<br>
+* For **Mac** users, first open Finder and find the specific file. Then drag it to the desired location using the mouse. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/mac-help/mh26885/mac).
+<br/>
+<br/>
 ### Q: How do I open a terminal?
-**A**: For **Windows** users, press the Windows key, type in `powershell` and press Enter. The terminal should open. For more help, please consult the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/terminal/install).
-For **Mac** users, open the Terminal app on your Mac. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal.).
-
+**A**: 
+* For **Windows** users, press the Windows key, type in `powershell` and press Enter. The terminal should open. For more help, please consult the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/terminal/install).
+* For **Mac** users, open the Terminal app on your Mac. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal.).
+<br/>
+<br/>
 ### Q: How do I navigate files in terminal?
 **A**: You can use the `cd` command to navigate in terminal. For more information, please consult this [documentation](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command). 
-
-### Q: How do I download Java 11?<br>
-**A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-
-<a name="excel-separator-faq"></a>
-### Q: How do I change the separator of my CSV file into semicolons(`;`) in Excel?<br/>
-**A**: Follow these steps to change the separator when exporting:
-
-If you are a **Windows** user, follow these steps:
+<br/>
+<br/>
+### Q: How do I download Java 11?
+**A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+<br/>
+<br/>
+### Q: How do I change the separator of my CSV file into semicolons(`;`) in Excel?
+**A**:
+* If you are a **Windows** user:
   1. In Excel, click on File > Options > Advanced.
   2. Under Editing options, uncheck the `Use system separators` check box.
   3. Change the Decimal separator to a comma (`,`) and the Thousands separator to a period (`.`).
-  4. Save your file. When saving your file, change the save type (`Save as type`) to `CSV (Coma delimited) (*.csv)`
+  4. Save your file. When saving your file, change the save type (`Save as type`) to `CSV (Comma delimited) (*.csv)`
   5. After saving your file, remember to reset your Excel separators. Repeat steps 1 and 2, only that this time remember to
     check the `Use system separators` check box instead.
-  <br/>
-  <br/>
-
-If you are a **Mac** user, unfortunately Excel makes it very difficult to change the separator to semicolons. 
+* If you are a **Mac** user, unfortunately Excel makes it very difficult to change the separator to semicolons. 
 Stay tuned for future releases that will extend support for Mac OS!
 --------------------------------------------------------------------------------------------------------------------
 
