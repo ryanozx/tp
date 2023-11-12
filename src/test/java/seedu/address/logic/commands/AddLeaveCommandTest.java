@@ -46,7 +46,6 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddLeaveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
     @Test
     public void constructor_nullLeave_throwsNullPointerException() {
         Range validDateRange = Range.createNonNullRange(Date.of(VALID_LEAVE_DATE_START),

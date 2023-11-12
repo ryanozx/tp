@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DESCRIPTION_DESC;
@@ -161,6 +162,17 @@ public class EditLeaveCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LEAVE_TITLE,
                     PREFIX_LEAVE_STATUS, PREFIX_LEAVE_DATE_START));
+    }
+
+    @Test
+    public void parse_emptyDescription_success() {
+        Index targetIndex = INDEX_FIRST_LEAVE;
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_EMPTY;
+        EditLeaveDescriptor descriptor = new EditLeaveDescriptorBuilder()
+            .withDescription(Description.DESCRIPTION_PLACEHOLDER).build();
+        EditLeaveCommand expectedCommand = new EditLeaveCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
 

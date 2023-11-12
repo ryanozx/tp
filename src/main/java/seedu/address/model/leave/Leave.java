@@ -113,10 +113,17 @@ public class Leave {
     }
 
     public boolean belongsTo(Person employee) {
-        return this.employee.equals(employee);
+        return this.employee.isSamePerson(employee);
     }
 
+    /**
+     * Creates a new Leave instance with all fields identical to the leave the method is called on,
+     * except with a new person
+     * @param p Person to replace the person field in the leave with
+     * @return New Leave instance containing the person
+     */
     public Leave copyWithNewPerson(Person p) {
+        requireNonNull(p);
         return new Leave(p, title, Range.createNonNullRange(start, end), description, status);
     }
 
