@@ -231,7 +231,8 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 
 ### Finding employees
 #### Finding employees by name: `find`
-  1. Type in the following [command](#glossary) in the [command box](#glossary) `find NAME....` where `NAME...` are to be replaced with one or more names of the employees for search. Words entered are case insensitive, meaning you do not have to worry about the capitalization of the words entered. 
+  1. Type in the following [command](#glossary) in the [command box](#glossary) `find NAME....` where `NAME...` are to be replaced with one or more names of the employees for search.
+     * The words for search are case insensitive, meaning you do not have to worry about the capitalization of the words entered. 
   - For instance, to find employees whose names contain `Martin`, type `find martin` to the command box.
   - For another instance, to find employees whose names contain either "*Harry*" or "*Redknapp*, type `find harry redknapp` to the command box.
   - However, if you want to find employees whose names contain `martin` but only entered `mar`, NO employee named Martin will be found, instead employee named Mar will be found. Note that he search looks for names containing the entire specified word.
@@ -246,7 +247,9 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 
 #### Finding employees by all specified tags: `find-all-tag`
 
-1. Type in the following [command](#glossary) in the [command box](#glossary) `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. 
+1. Type in the following [command](#glossary) in the [command box](#glossary) `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary).
+   * At least one tag should be entered for search and more tags can be entered if you want to search for more.
+   * The tag names are case sensitive, meaning the capitalization of the words entered matters. 
   - For instance, to find employees with both tag `remote` and tag `full time`, type `find-all-tag t/remote t/full time` to the command box.
   - However, if you want to find employees with tag `remote`, but only entered `re` as the tag name, NO employees with tag `remote` will be found, instead, employees with tag `re` will be found. Note that only tags containing the entire specified word are matched.
 2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with additional tags other than the specified ones will also be displayed.
@@ -261,7 +264,9 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 
 #### Finding employees by at least one specified tag: `find-some-tag`
 
-1. Type in the following [command](#glossary) in the [command box](#glossary) `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. 
+1. Type in the following [command](#glossary) in the [command box](#glossary) `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary).
+   * At least one tag should be entered for search and more tags can be entered if you want to search for more.
+   * The tag names are case sensitive, meaning the capitalization of the words entered matters. 
   - For instance, to find employees with either tag `remote` and tag `full time`, type `find-some-tag t/remote t/full time` to the command box.
   - However, if you want to find employees with tag `remote`, but only entered `re` as the tag name, NO employees with tag `remote` will be found, instead, employees with tag `re` will be found. Note that only tags containing the entire specified word are matched.
 2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with additional tags other than the specified ones will also be displayed.
@@ -306,7 +311,7 @@ When an employee apply for leave, you can use the `add-leave` [command](#glossar
 <box type="info" seamless>
 If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
 </box>
-> 
+
 2. Type in the following [command](#glossary) in the [command box](#glossary) `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace
    * `NAME` with the index of the employee applied for leave in the employee list
    * `Title` with the title of the leave
