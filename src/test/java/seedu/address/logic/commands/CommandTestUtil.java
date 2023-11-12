@@ -21,7 +21,9 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LeavesBook;
 import seedu.address.model.Model;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.LeaveContainsPersonPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -44,6 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_REMOTE = "remote";
     public static final String VALID_TAG_FULL_TIME = "full time";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_PERSON_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_PERSON_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PERSON_PHONE + VALID_PHONE_AMY;
@@ -87,6 +90,9 @@ public class CommandTestUtil {
     public static final String INVALID_LEAVE_DESCRIPTION_DESC = " " + PREFIX_LEAVE_DESCRIPTION + "Going to childcare&";
     public static final String INVALID_LEAVE_DATE_START_DESC = " " + PREFIX_LEAVE_DATE_START + "2023-13-11";
     public static final String INVALID_LEAVE_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + "2024-12-32";
+    public static final String INVALID_LEAVE_LATE_DATE_START_DESC = " " + PREFIX_LEAVE_DATE_START
+            + VALID_LEAVE_DATE_END;
+    public static final String INVALID_LEAVE_EARLY_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + VALID_LEAVE_DATE_START;
     public static final String INVALID_LEAVE_STATUS_DESC = " " + PREFIX_LEAVE_STATUS + "NONSENSE";
 
     static {
@@ -134,11 +140,15 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Person> expectedFilteredPersonList = new ArrayList<>(actualModel.getFilteredPersonList());
+        LeavesBook expectedLeavesBook = new LeavesBook(actualModel.getLeavesBook());
+        List<Leave> expectedFilteredLeaveList = new ArrayList<>(actualModel.getFilteredLeaveList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredPersonList, actualModel.getFilteredPersonList());
+        assertEquals(expectedLeavesBook, actualModel.getLeavesBook());
+        assertEquals(expectedFilteredLeaveList, actualModel.getFilteredLeaveList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
