@@ -7,7 +7,7 @@
                 }
             },
             "start": "2020-01-01",
-            "end": "2020-01-05",
+            "end": "2020-01-02",
             "title": "Alice's Maternity Leave",
             "description": "Alice's Maternity Leave Description",
             "status": "PENDING"
@@ -19,7 +19,7 @@
                 }
             },
             "start": "2020-01-01",
-            "end": "2020-01-05",
+            "end": "2020-01-02",
             "title": "Benson's Paternity Leave",
             "description": "Benson's Paternity Leave Description",
             "status": "PENDING"

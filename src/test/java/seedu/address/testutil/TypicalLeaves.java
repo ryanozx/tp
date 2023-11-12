@@ -17,7 +17,7 @@ import seedu.address.model.leave.Title;
 public class TypicalLeaves {
 
     public static final Date DEFAULT_START = Date.of("2020-01-01");
-    public static final Date DEFAULT_END = Date.of("2020-01-05");
+    public static final Date DEFAULT_END = Date.of("2020-01-02");
     public static final Date DEFAULT_START_2 = Date.of("2020-01-03");
     public static final Date DEFAULT_END_2 = Date.of("2020-01-04");
     public static final Leave ALICE_LEAVE = new Leave(ALICE, new Title("Alice's Maternity Leave"),
