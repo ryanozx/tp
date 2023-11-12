@@ -279,30 +279,6 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 * **For advanced users:**
   * Employees are displayed in the order in which they are arranged in the employee list.
 
-### Restarting HRMate by clearing all existing records : `clear`
-
-* **What It Does:**
-  * Removes every entry from HRMate, such that the address book in HRMate is empty. A possible use case of this command
-    is to remove all sample records in HRMate so that you can fill it with employee records instead.
-* **Format:**
-  * `clear`
-* **Examples:**
-
-| S/N | Command information                                                                          |
-|-----|----------------------------------------------------------------------------------------------|
-| 1   | **Command:** `clear` <br><br> **Output:** Deletes every employee record in the address book. |
-* **Acceptable Values:**
-  * This command does not require any parameters.
-* **Warning:**
-  <box type="warning" seamless>
-    Be careful when using this command - the records are irretrievable once deleted.
-  </box>
-* **Expected Value on Success:**
-  * GUI Changes: All existing records are no longer visible in the address book
-  * Message shown to the user: "Address book has been cleared"
-* **Expected Value on Failure:**
-  * N/A (no expected failure)
-  * 
 ### Adding a new leave
 When an employee apply for leave, you can use the `add-leave` [command](#glossary) to add their leave into HRMate leave list.
 #### Adding a leave record: `add-leave`
