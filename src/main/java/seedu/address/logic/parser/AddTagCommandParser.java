@@ -44,7 +44,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
     private boolean isTagsEmpty(Collection<String> tags) {
         requireNonNull(tags);
 
-        return tags.isEmpty() || (tags.size() == 1 && tags.contains(""));
+        return tags.isEmpty();
 
     }
 

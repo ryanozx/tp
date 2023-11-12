@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_END_EARLY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVE_DATE_START_DESC;
@@ -192,6 +193,17 @@ public class EditLeaveCommandParserTest {
         userInput = targetIndex.getOneBased() + VALID_LEAVE_TITLE_DESC + INVALID_LEAVE_DATE_START_LATE_DESC
                 + INVALID_LEAVE_DATE_END_EARLY_DESC;
         assertParseFailure(parser, userInput, Range.MESSAGE_END_BEFORE_START_ERROR);
+    }
+
+    @Test
+    public void parse_emptyDescription_success() {
+        Index targetIndex = INDEX_FIRST_LEAVE;
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_EMPTY;
+        EditLeaveDescriptor descriptor = new EditLeaveDescriptorBuilder()
+            .withDescription(Description.DESCRIPTION_PLACEHOLDER).build();
+        EditLeaveCommand expectedCommand = new EditLeaveCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
 

@@ -8,6 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
+    public static final String DESCRIPTION_PLACEHOLDER = "NONE";
     public static final String MESSAGE_CONSTRAINTS = "Leave descriptions should only contain"
                 + " alphanumeric characters, spaces, dashes, commas, apostrophes and full stops.";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum} \\-',.]*$";
