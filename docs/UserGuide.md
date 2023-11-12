@@ -30,11 +30,11 @@ tasks done faster than traditional GUI apps.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `clear` : Deletes all contacts.
-   * `exit` : Exits the app.
+   * `list`: Lists all contacts.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a contact named `John Doe` to the Address Book.
+   * `delete 3`: Deletes the 3rd contact shown in the current list.
+   * `clear`: Deletes all contacts.
+   * `exit`: Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -106,7 +106,7 @@ When you would like to view all employees, you can use the `list` [command](#glo
 2. Press "enter" on your keyboard and you should see the information of all employees listed in the [employee list](#glossary).
 
 > [!NOTE]  
-> This command does not require any parameters. However, to account for possible typing mistakes, the program reads in inputs like `list 123`, `list abc`, and `list 1a2b` all as the command `list`.
+> This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `list 123`, `list abc`, and `list 1a2b` all as the command `list`.
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
@@ -199,7 +199,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 2. Press "enter" on your keyboard and you should see a list of all tags currently in use within the [employee list](#glossary).
 
 > [!NOTE]  
-> This command does not require any parameters. However, to account for possible typing mistakes, the program reads in inputs like `view-tag 123`, `view-tag abc`, and `view-tag 1a2b` all as the command `view-tag`.
+> This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `view-tag 123`, `view-tag abc`, and `view-tag 1a2b` all as the command `view-tag`.
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
@@ -338,15 +338,15 @@ Here are the potential error messages that you may receive and here's how to fix
 | 2   | **Command:** `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` <br><br> **Output:** Adds a leave with the following details into the leaves book: <ul><li>Employee: Steve Nash (employee with index 2)</li> <li>Title: Sample Leave 2</li> <li>Start: 2023-11-01</li> <li>End: 2023-11-02</li> <li>Description: Sample Description</li> <li>Status: PENDING</li></ul> |
 
 * **Acceptable value:**
-  * The specified `INDEX` must match with a employee record shown in the displayed employee list.
+  * The specified `INDEX` must match with an employee record shown in the displayed employee list.
   * Description field is optional, the rest of field cannot be left empty.
-  * For start and end: they must be in the format `yyyy-mm-dd` (like 2023-11-01 for 2023 November 1st). Additionally, the start date must be before or equals to the end date.
+  * For start and end: they must be in the format `yyyy-mm-dd` (like 2023-11-01 for 2023 November 1st). Additionally, the start date must be before or equal to the end date.
   * For status: it is PENDING status in default when a leave is first added.
 
 * **Expected output on failure:**
   * `Date should be valid and in a format of "yyyy-MM-dd"` - if the format of date is invalid or no date input after "start/" and/or "end/"
   * `The leave index provided is invalid` - if the index provided does not match with any employee record in the displayed leave list
-  * `Invalid command format!... ` - if any of the required field missing
+  * `Invalid command format!... ` - if any of the required fields missing
   * `Leave titles should only contain...` - if the title input is empty or invalid
   * `End date cannot be before start date` - the end date provided is before the current or provided start date
 
@@ -357,7 +357,7 @@ Here are the potential error messages that you may receive and here's how to fix
 > If the employee is not found, consider using `find-all-leave` or any `find commands` to locate the leave in the leave list.
 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. Note that at least one field to edit must be present and only the fields present will be edited.
- - For example, to change the title and desctiption of the leave indexed 2 to John's sick leave and MC provided, type in the command `edit-leave 2 title/John's sick leave d/MC provided`. Note that the start date, end date, and status will remain unchanged.
+ - For example, to change the title and description of the leave indexed 2 to John's sick leave and MC provided, type in the command `edit-leave 2 title/John's sick leave d/MC provided`. Note that the start date, end date, and status will remain unchanged.
  - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 
 > [!IMPORTANT]  
@@ -368,10 +368,11 @@ Here are the potential error messages that you may receive and here's how to fix
 
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit-leav INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. |
-| `Date should be valid and in a format of yyyy-MM-dd`| The start or end date format does not conform to the program's standard. | Please update the date format to `yyyy-MM-dd` and reenter the comand. |
-| `The leave index provided is invalid` | The index specified does not refer to any leave | Double check if the index appears in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave in the leave list. Afterwards, use the correct leave index in the `edit-leave` command. |
-| `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there is any input fields in the command inputted. An input like `edit-elave 1` is not accepted as there is no edits to be made. |
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Leave titles` or `Date` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on-screen message to fix the field in question. For example, `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` means that the input title does not follow the prescribed format. | 
+|`Date should be valid and in a format of yyyy-MM-dd`| The start or end date format does not conform to the program's standard. | Please update the date format to `yyyy-MM-dd` and reenter the command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave in the leave list. Afterwards, use the correct leave index in the `edit-leave` command. |
+| `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there are any input fields in the command inputted. An input like `edit-leave 1` is not accepted as there are no edits to be made. |
 | `The end date is earlier than the start date!` | The end date provided is before the current or provided start date. | Please double-check the inputted dates and make sure the end date is not before the current or provided start date. |
 
 ### Removing a leave record: `delete-leave`
@@ -427,7 +428,7 @@ Here are the potential error messages that you may receive and here's how to fix
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `approve-leave LEAVE_LIST_INDEX`.
-| `The leave index provided is invalid` | The index specified does not refer to any leave request | Double check if the index appears in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave request in the leave list. Afterwards, use the correct leave index in the `approve-leave` command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave request | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave request in the leave list. Afterwards, use the correct leave index in the `approve-leave` command. |
 | `Leave previously approved: ` followed by the leave information | The provided leave request is already approved in HRMate | If this is the leave you would like to approve, you don't have to do anything.
 
 ### Reject leave record by index: `reject-leave`
@@ -443,7 +444,7 @@ Here are the potential error messages that you may receive and here's how to fix
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `approve-leave LEAVE_LIST_INDEX`.
-| `The leave index provided is invalid` | The index specified does not refer to any leave request | Double check if the index appears in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave request in the leave list. Afterwards, use the correct leave index in the `reject-leave` command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave request | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave request in the leave list. Afterwards, use the correct leave index in the `reject-leave` command. |
 | `Leave previously rejected: ` followed by the leave information | The provided leave request is already rejected in HRMate | If this is the leave you would like to reject, you don't have to do anything.
 
 
