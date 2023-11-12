@@ -192,12 +192,12 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 #### Removing an employee record : `delete`
 
-1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
+1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this [UI image](images/Ui.png).
 
 > [!NOTE]
 > If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list.
 
-2. Type in the following [command](#glossary) in the [command box](#glossary) `delete INDEX` where `INDEX` is the index of the employee in the list currently
+2. Type in the following [command](#glossary) in the [command box](#glossary) `delete INDEX` where `INDEX` is to be replaced with the index of the employee in the list currently
  - For instance, to remove the whole record of the employee indexed 1, type `delete 1` to the command box.
 > [!WARNING]
 > Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
@@ -235,9 +235,10 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 ### Finding employees
 #### Finding employees by name: `find`
-  1. Type in the following [command](#glossary) in the [command box](#glossary) `find NAME....` where `NAME` is the name of the employee to search (case-insensitive) and `NAME...` representing one or more names. Note that only names containing the whole word are matched.
-  - For instance, to find employees whose names contain `martin`, type `find martin` to the command box.
-  - For another instance, to find employees whose names contain either "*harry*" or "*redknapp*, type `find harry redknapp` to the command box.
+  1. Type in the following [command](#glossary) in the [command box](#glossary) `find NAME....` where `NAME...` are to be replaced with one or more names of the employees for search. Words entered are case insensitive, meaning you do not have to worry about the capitalization of the words entered. 
+  - For instance, to find employees whose names contain `Martin`, type `find martin` to the command box.
+  - For another instance, to find employees whose names contain either "*Harry*" or "*Redknapp*, type `find harry redknapp` to the command box.
+  - However, if you want to find employees whose names contain `martin` but only entered `mar`, NO employee named Martin will be found, instead employee named Mar will be found. Note that he search looks for names containing the entire specified word.
   2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list.
     
 | Error message | Why it happens | Fix |
@@ -249,9 +250,10 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 #### Finding employees by all specified tags: `find-all-tag`
 
-1. Type in the following [command](#glossary) in the [command box](#glossary) `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is the name of the [tags](#glossary) (case-sensitive), `t/TAG` representing at least one tag should be entered to search and `[t/MORE_TAGS]...` representing optional more tags to be entered. Note that only tags containing the whole word are matched.
+1. Type in the following [command](#glossary) in the [command box](#glossary) `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. 
   - For instance, to find employees with both tag `remote` and tag `full time`, type `find-all-tag t/remote t/full time` to the command box.
-2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with more than all specified tags will also be displayed.
+  - However, if you want to find employees with tag `remote`, but only entered `re` as the tag name, NO employees with tag `remote` will be found, instead, employees with tag `re` will be found. Note that only tags containing the entire specified word are matched.
+2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with additional tags other than the specified ones will also be displayed.
     
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
@@ -263,9 +265,10 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 #### Finding employees by at least one specified tag: `find-some-tag`
 
-1. Type in the following [command](#glossary) in the [command box](#glossary) `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is the name of the [tags](#glossary) (case-sensitive), `t/TAG` representing at least one tag should be entered to search and `[t/MORE_TAGS]...` representing optional more tags to be entered. Note that only tags containing the whole word are matched.
+1. Type in the following [command](#glossary) in the [command box](#glossary) `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. 
   - For instance, to find employees with either tag `remote` and tag `full time`, type `find-some-tag t/remote t/full time` to the command box.
-2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with more than at least one specified tags will also be displayed.
+  - However, if you want to find employees with tag `remote`, but only entered `re` as the tag name, NO employees with tag `remote` will be found, instead, employees with tag `re` will be found. Note that only tags containing the entire specified word are matched.
+2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with additional tags other than the specified ones will also be displayed.
     
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
@@ -307,7 +310,13 @@ When an employee apply for leave, you can use the `add-leave` [command](#glossar
 > [!NOTE]
 > If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list.
 
-2. Type in the following [command](#glossary) in the [command box](#glossary) `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace `NAME` with the index of the employee applied for leave in the employee list, `Title` with the title of the leave, `START_DATE` with the start date of the leave and `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`. `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` representing the description of the leave. Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.
+2. Type in the following [command](#glossary) in the [command box](#glossary) `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace
+   * `NAME` with the index of the employee applied for leave in the employee list
+   * `Title` with the title of the leave
+   * `START_DATE` with the start date of the leave
+   * `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`
+   * `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` to be replaced with the description of the leave.
+   * Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.
   - For instance, to add a leave of one day on 2023-11-01 to employee indexed 1 with a title of `Sample Leave 1`, type `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`` to the command box.
   - For another instance, to add a leave of two days from 2023-11-01 to 2023-11-02 to employee indexed 2 with a title of `Sample Leave 2` and a description of `Sample Description`, type `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` to the command box.
 > [!IMPORTANT]
