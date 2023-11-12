@@ -528,6 +528,11 @@ by major spreadsheet applications such as Microsoft Excel.
 
 ### Importing employee records : `import`
 
+<box type="warning" seamless>
+Imported employee records will overwrite existing employee records in HRMate. Remember to make a copy of your existing
+employee records if you want to save them! You can do so by <a href="#exporting-employee-records-export">exporting your current records</a>.
+</box>
+
 Here's how you can bring over your records from Excel:
 
 1. Export your Excel save file in CSV format. Ensure that the separator is set to be a semicolon(`;`), and that you have
@@ -601,7 +606,12 @@ The import and export feature extends to importing and exporting leaves. This al
 applications that can be opened in other major spreadsheet applications such as Microsoft Excel.
 
 
-### Importing employee records : `import-leave`
+### Importing leave records : `import-leave`
+
+<box type="warning" seamless>
+Imported leave records will overwrite existing leave records in HRMate. Remember to make a copy of your existing
+leave records if you want to save them! You can do so by <a href="#exporting-leave-records-export-leave">exporting your current records</a>.
+</box>
 
 Here's how you can bring over your leave records from Excel:
 
