@@ -188,17 +188,17 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 #### Removing an employee record : `delete`
 
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this [UI image](images/Ui.png).
-
-> [!NOTE]
-> If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list.
-
+<box type="info" seamless>
+If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
+</box>
 2. Type in the following [command](#glossary) in the [command box](#glossary) `delete INDEX` where `INDEX` is to be replaced with the index of the employee in the list currently
  - For instance, to remove the whole record of the employee indexed 1, type `delete 1` to the command box.
 ![Before Delete](images/before-delete.png)
-> [!WARNING]
-> Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
-> Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the
-> [edit](#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit) command instead to modify the record.
+<box type="warning" seamless>
+Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
+Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the
+<a href= "#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit">edit</a> command instead to modify the record.
+</box>
 
 3. Press "enter" on your keyboard and you should see the employee removed from the employee list with all leaves related to that employee in the leave list being removed.
 ![After Delete](images/after-delete.png)
@@ -253,7 +253,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
     
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is the name of the [tags](#glossary) (case-sensitive), `t/TAG` representing at least one tag should be entered to search and `[t/MORE_TAGS]...` representing optional more tags to be entered.|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...`  where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. |
 | `Tags names only allow alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
                                                                                                                                                                                             
 * **For advanced users:**
@@ -268,7 +268,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
     
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is the name of the [tags](#glossary) (case-sensitive), `t/TAG` representing at least one tag should be entered to search and `[t/MORE_TAGS]...` representing optional more tags to be entered.|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. |
 | `Tags names only allow alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
                                                                                                                                                                                             
 * **For advanced users:**
@@ -303,9 +303,10 @@ When an employee apply for leave, you can use the `add-leave` [command](#glossar
 #### Adding a leave record: `add-leave`
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
 
-> [!NOTE]
-> If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list.
-
+<box type="info" seamless>
+If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
+</box>
+> 
 2. Type in the following [command](#glossary) in the [command box](#glossary) `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace
    * `NAME` with the index of the employee applied for leave in the employee list
    * `Title` with the title of the leave
@@ -315,9 +316,10 @@ When an employee apply for leave, you can use the `add-leave` [command](#glossar
    * Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.
   - For instance, to add a leave of one day on 2023-11-01 to employee indexed 1 with a title of `Sample Leave 1`, type `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`` to the command box.
   - For another instance, to add a leave of two days from 2023-11-01 to 2023-11-02 to employee indexed 2 with a title of `Sample Leave 2` and a description of `Sample Description`, type `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` to the command box.
-> [!IMPORTANT]
-> There is a status field of leave that is `PENDING` by default when a leave is added. Please DO NOT enter any status field of the leave, no recognitions of status field and any other prefix are provided.
-> Therefore, to change the status of a leave, please use the [approve-leave](#approve-leave-record-by-index-approve-leave) or [reject-leave](#reject-leave-record-by-index-reject-leave) commands instead to modify the record.
+<box type="info" seamless>
+There is a status field of leave that is `PENDING` by default when a leave is added. Please DO NOT enter any status field of the leave, no recognitions of status field and any other prefix are provided.
+Therefore, to change the status of a leave, please use the <a href= "#approve-leave-record-by-index-approve-leave">approve-leave</a> or <a href= "#reject-leave-record-by-index-reject-leave">reject-leave</a> commands instead to modify the record.
+</box>
 
 3. Press "enter" on your keyboard and you should see the leave information at the end of the overall [leave list](#glossary). Note that if there is no description field added, the description will be `NONE` by default.
     
