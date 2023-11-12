@@ -9,7 +9,7 @@
 Hi HR managers, this is HRMate. HRMate is a **desktop app for managing employee and leave records**.
 HRMate uses a Command Line Interface ([CLI](#glossary)) and Graphical User Interface ([GUI](#glossary)).
 That means that we are optimized for fast typers like you, and can help you complete your HR tasks faster than traditional HR apps like Oracle and SAP.
-This user guide is targeted at users of HRMate.
+This user guide aims to help new users quickly familiarise themselves with HRMate and help experienced users to explore advanced features of HRMate, with the goal of using HRMate to better facilitate your HR needs.
 
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
@@ -27,7 +27,7 @@ This user guide is targeted at users of HRMate.
         <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
         <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
     </ul>
-    See <a href="#faq">How do I open a termainal?</a> for more info.
+    See <a href="#faq">How do I open a terminal?</a> for more information.
 </box>
 
 3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
