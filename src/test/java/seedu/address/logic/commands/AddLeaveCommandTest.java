@@ -71,7 +71,6 @@ public class AddLeaveCommandTest {
         //all null
         assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null,
                 null, null));
-
     }
 
     @Test
