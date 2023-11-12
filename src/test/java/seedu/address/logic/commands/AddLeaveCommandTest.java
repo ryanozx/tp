@@ -119,7 +119,6 @@ public class AddLeaveCommandTest {
         Range aliceDateRange = Range.createNonNullRange(aliceLeave.getStart(), aliceLeave.getEnd());
         Range aliceDifferentDateRange = Range.createNonNullRange(aliceLeaveDifferentRange.getStart(),
                 aliceLeaveDifferentRange.getEnd());
-
         Range bobDateRange = Range.createNonNullRange(bobLeave.getStart(), aliceLeave.getEnd());
 
         AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
