@@ -568,6 +568,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+## **Appendix: Effort**
+
+HRMate is built for extensibility. Not much effort is needed to implement new commands that are variations of existing features (like TODO ex), but effort is needed to add new entities.
+
+### Challenges Faced
+The first challenge given is understanding the code infrastructure. HRMate uses many design patterns like Facade pattern, Command pattern and MVC pattern. Without knowledge of these patterns, HRMate would seem complicated and difficult to understand.
+Overall the understanding that the `Model` is a Facade for `AddressBook` and `LeavesBook`, input commands follow the Command pattern, and that `AddressBook` and `LeavesBook` are the models, JavaFX is used for the view and `ModelManager` functions as the controller greatly help in the understanding of HRMate's infrastructure.
+
+Another significant challenge is the implementation of the leaves module. Given HRMate's immutable design philosophy, some design choices like replacing stale `Leave` with new instances of `Leave` with the updated `Person` are chosen. Care must be taken to update `Leave` everytime a `Person` is replaced like in the `EditCommand`, `AddTagCommand` and `DeleteCommand`. When adding a new potential module like `Report`, we anticipate that care must be taken when the associated `Person` or `Leave` is replaced.
+
+### Effort Required
+To illustrate the difference in effort, the effort needed to create `AddTagCommand` and the `Leave` module will be compared.
+
+Given that `AddTagCommand` is a specific case of `EditCommand`, much of the logic is similar to `EditCommand`. In this case, `AddTagCommand` copies a `Person`, adds the new `Tag` before calling `Model#SetPerson`.
+
+Adding a new command is easy compared to the implementation of the `Leave` module. We took inspiration from the `Person` class and created wrapper classes for the fields like `Title`, `Description` and `Date`. One of the significant challenges were the added constraint of comparing two fields, `start` and `end`. This logic was not present in `Person`. For example `Name` validations do not concern `Tag` validations and vice versa. In `Leave` case, `start` affects the validations for `end`, as `end` must be on or after `start`. To resolve this, we created `Leave`'s constructor to use `Range`, whose creation mandates `start` be on or before `end`. This ensures that the created `Leave` adheres to the constraint of `start` being before or on `end`. We anticipate that the creation of other entities like `Report` to require the creation of new wrapper classes, or even validation classes to enforce validations that span across multiple fields.
+
+Efforts were also spent on ensuring data validity for `Person` and `Leave` when the associated object is modified. As mentioned above, one of the challenges faced was the immutable principle that AB3 used. When a `Person` is edited through `EditCommand`, `AddTagCommand` or `DeleteTagCommand`, the old `Person` is replaced by the newly created `Person`. This results in some `Leave` pointing to the stale `Person`. Thus, `Model#SetPerson` and `Model#DeletePerson` must be amended to edit `LeavesBook` as well to avoid any `Leave` pointing to any stale `Person`. We expect that such methods like `Model#SetPerson`, `Model#DeletePerson`, `Model#SetLeave`, `Model#DeleteLeave` must be amended when adding new modules if the new entities is reliant on information from pre-existing entities.
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
