@@ -19,8 +19,9 @@ public class Title {
      * Constructs a {@code Title}.
      *
      * @param title A valid title.
+     * @throws IllegalArgumentException if title
      */
-    public Title(String title) {
+    public Title(String title) throws NullPointerException, IllegalArgumentException {
         requireNonNull(title);
         checkArgument(isValidTitle(title), MESSAGE_CONSTRAINTS);
         this.title = title;

@@ -19,8 +19,9 @@ public class Phone {
      * Constructs a {@code Phone}.
      *
      * @param phone A valid phone number.
+     * @throws IllegalArgumentException if phone number is not a valid phone number.
      */
-    public Phone(String phone) {
+    public Phone(String phone) throws IllegalArgumentException {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
