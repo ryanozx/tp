@@ -139,6 +139,9 @@ public class EditLeaveCommand extends Command {
         public EditLeaveDescriptor(EditLeaveDescriptor toCopy) {
             setTitle(toCopy.title);
             setDescription(toCopy.description);
+            setStart(toCopy.start);
+            setEnd(toCopy.end);
+            setStatus(toCopy.status);
         }
 
         public boolean isAnyFieldEdited() {
