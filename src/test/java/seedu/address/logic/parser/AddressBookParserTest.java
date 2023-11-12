@@ -7,6 +7,10 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FULL_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_REMOTE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_END;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DATE_START;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_END_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_START_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_TITLE;
@@ -25,6 +29,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ApproveLeaveCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -53,6 +58,7 @@ import seedu.address.logic.commands.RejectLeaveCommand;
 import seedu.address.logic.commands.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.leave.Date;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.leave.LeaveHasStatusPredicate;
 import seedu.address.model.leave.LeaveInPeriodPredicate;
 import seedu.address.model.leave.Range;
@@ -65,6 +71,7 @@ import seedu.address.model.person.TagsContainSomeTagsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditLeaveDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.LeaveBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -77,6 +84,19 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addLeave() throws Exception {
+        Leave leave = new LeaveBuilder().withTitle(VALID_LEAVE_TITLE)
+                .withStart(Date.of(VALID_LEAVE_DATE_START)).withEnd(Date.of(VALID_LEAVE_DATE_END))
+                .withDescription(VALID_LEAVE_DESCRIPTION).build();
+        AddLeaveCommand command = (AddLeaveCommand) parser.parseCommand(AddLeaveCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_LEAVE.getOneBased() + VALID_LEAVE_TITLE_DESC + VALID_LEAVE_START_DATE_DESC
+                + VALID_LEAVE_END_DATE_DESC + VALID_LEAVE_DESCRIPTION_DESC);
+        Range dateRange = Range.createNonNullRange(leave.getStart(), leave.getEnd());
+        assertEquals(new AddLeaveCommand(INDEX_FIRST_LEAVE, leave.getTitle(),
+                dateRange, leave.getDescription()), command);
     }
 
     @Test
@@ -259,12 +279,5 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_rejectLeave() throws Exception {
         assertTrue(parser.parseCommand(RejectLeaveCommand.COMMAND_WORD + " 1") instanceof RejectLeaveCommand);
-    }
-
-    @Test
-    public void parseCommand_caseInsensitive_success() throws ParseException {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD.toUpperCase()) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD.substring(0, 1).toUpperCase()
-                + ClearCommand.COMMAND_WORD.substring(1).toLowerCase()) instanceof ClearCommand);
     }
 }

@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.LeaveBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class LeaveTest {
 
@@ -72,6 +74,23 @@ public class LeaveTest {
         Leave leave = new Leave(ALICE, ALICE_LEAVE.getTitle(),
                 constructRange(ALICE_LEAVE.getStart(), ALICE_LEAVE.getStart()), ALICE_LEAVE.getDescription());
         assertEquals(leave.getStart(), leave.getEnd());
+    }
+
+    @Test
+    public void copyWithNewPerson_nullPerson_throwsNullExceptionPointer() {
+        assertThrows(NullPointerException.class, () -> new LeaveBuilder().build().copyWithNewPerson(null));
+    }
+
+    @Test
+    public void copyWithNewPerson_success() {
+        Leave existingLeave = new LeaveBuilder().withEmployee(ALICE).build();
+        Leave newLeave = existingLeave.copyWithNewPerson(BOB);
+        assertEquals(newLeave.getEmployee(), BOB);
+        assertEquals(newLeave.getDescription(), existingLeave.getDescription());
+        assertEquals(newLeave.getStart(), existingLeave.getStart());
+        assertEquals(newLeave.getEnd(), existingLeave.getEnd());
+        assertEquals(newLeave.getTitle(), existingLeave.getTitle());
+        assertEquals(newLeave.getStatus(), existingLeave.getStatus());
     }
 
     @Test
@@ -162,6 +181,12 @@ public class LeaveTest {
 
         // different employee -> returns false
         assertFalse(ALICE_LEAVE.belongsTo(BOB));
+
+        // different employee instance but share the same name -> returns true
+        // This test is needed as leaves loaded from storage will not share the same employee
+        // instance as an existing employee instance in the address book
+        Person aliceDuplicate = new PersonBuilder().withName(ALICE.getName().toString()).build();
+        assertTrue(ALICE_LEAVE.belongsTo(aliceDuplicate));
     }
 
     @Test
