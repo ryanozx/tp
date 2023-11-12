@@ -187,7 +187,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 #### Removing an employee record : `delete`
 
-1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this [UI image](images/Ui.png).
+1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this image in [quick start](#quick-start) for more information.
 <box type="info" seamless>
 If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
 </box>
@@ -306,7 +306,7 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 ### Adding a new leave
 When an employee apply for leave, you can use the `add-leave` [command](#glossary) to add their leave into HRMate leave list.
 #### Adding a leave record: `add-leave`
-1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
+1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this image in [quick start](#quick-start) for more information.
 
 <box type="info" seamless>
 If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
