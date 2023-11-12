@@ -351,12 +351,14 @@ If you wish to remove a leave record from HRMate, you can use the `delete-leave`
 
 
 1. Type in the following [command](#glossary) in the [command box](#glossary): `delete-leave LEAVE_LIST_INDEX`, and replace `LEAVE_LIST_INDEX` with the index of the leave record you wish to remove.
- - For instance: if you wanted to remove the leave record titled "medical leave" with employee "David de Gea", you would type in `delete-leave 1` in the command box.
+ - For instance, referring to the figure below: if you wanted to remove the leave record titled "medical leave" with employee "Bernice Yu", you would type in `delete-leave 2` in the command box.
  - Do note that the index of the leave record you wish to remove must be a valid number
    - The index must be a positive number that is larger than 0
    - The index cannot exceed the number of entries in the leave book
 2. Press "enter" on your keyboard and you should see the leave record removed from HRMate.
 
+
+![delete-leave](images/delete-leaveUI.png)
 
 Here are some potential error messages that you may receive and here's how to solve them:
 
@@ -424,7 +426,7 @@ you can use the `find-leave-range` command to do so.
  - Do note that neither the start or end fields are required:
    - If you wanted to view all leave records that start on or after 2023-10-27, you can type in `find-leave-range start/2023-10-27`.
    - If you wanted to view all leave records that end on or before 2023-11-03, you can type in `find-leave-range end/2023-11-03`.
- - If you wanted to view all leave records, you can type in `find-leave-range` or `find-all-leave` instead.
+ - If you wanted to view all leave records, you can type in `find-leave-range` or [`find-all-leave`](#view-all-leaves-find-all-leave) instead.
 2. Press `Enter` to execute the command. You should see the leave records that fall within the time period you specified.
 
 
@@ -450,7 +452,7 @@ If you wish to view the leave records in HRMate that have a particular status, y
  - Do note that the status field is required, and the status must be either `APPROVED`, `PENDING` or `REJECTED`.
    - The status is case-sensitive. For instance, `approved` is not a valid status. Ensure you use the correct casing, which is `APPROVED`.
    - You can only specify one status at a time.
- - If you wish to view all leave records, you can use the `find-all-leave` command instead.
+ - If you wish to view all leave records, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
 2. Press `Enter` to execute the command. You should see the leave records that have the status you specified.
 
 
