@@ -311,6 +311,17 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Add A Leave application feature
+
+The add-leave command allows the HR manager to add a leave record for a specific employee. This feature enhances the HRMate system by providing a way to manage and track employee leaves efficiently.
+Here is an example usage of the `add-leave` feature:
+1. The user uses the `find` command to filter for employees named Martin.
+2. The user enters the command `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01` with Martin being index 1.
+3. A record of leave with specified title and dates for Martin is created.
+
+#### Design considerations
+The command follows a structured format to ensure ease of use and to minimize errors. The use of an index ensures that the leave is associated with a specific employee. The format of the command is designed to be clear and straightforward.
+
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
