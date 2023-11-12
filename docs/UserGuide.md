@@ -770,7 +770,7 @@ The first command is used to add an employee while the second is used to add tag
 ## FAQ
 
 ### Q: How do I transfer my data to another computer?
-**A**: We recommend using the [import and export command for employees](#importingexporting-employee-records) and [import and export command for leave records](#importingexporting-leave-records).
+**A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave records](#importing-exporting-leave-records).
 <br/>
 <br/>
 ### Q: How do I move a file?
