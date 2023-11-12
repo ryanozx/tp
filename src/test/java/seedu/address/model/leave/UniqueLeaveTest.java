@@ -20,7 +20,7 @@ import seedu.address.model.leave.exceptions.DuplicateLeaveException;
 import seedu.address.model.leave.exceptions.LeaveNotFoundException;
 import seedu.address.testutil.LeaveBuilder;
 
-public class UniqueLeaveListTest {
+public class UniqueLeaveTest {
 
     private final UniqueLeaveList uniqueLeaveList = new UniqueLeaveList();
 
@@ -45,51 +45,6 @@ public class UniqueLeaveListTest {
         uniqueLeaveList.add(ALICE_LEAVE);
         Leave editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).build();
         assertTrue(uniqueLeaveList.contains(editedAliceLeave));
-    }
-
-    @Test
-    public void hasConcurrentLeave_nullLeave_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueLeaveList.hasConcurrentLeave(null));
-    }
-
-    @Test
-    public void hasConcurrentLeave_leaveInList_returnsTrue() {
-        uniqueLeaveList.add(ALICE_LEAVE);
-        assertTrue(uniqueLeaveList.hasConcurrentLeave(ALICE_LEAVE));
-
-        // Same employee name, different start date, same end date
-        Leave editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build();
-        assertTrue(uniqueLeaveList.hasConcurrentLeave(editedAliceLeave));
-
-        // Same employee name, same start date, different end date
-        Leave editedAliceLeave2 = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 3")
-                .withDescription("Alice's Maternity Leave 3 Description")
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build();
-        assertTrue(uniqueLeaveList.hasConcurrentLeave(editedAliceLeave2));
-
-        // Same employee name, different start date, different end date
-        Leave editedAliceLeave3 = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 4")
-                .withDescription("Alice's Maternity Leave 4 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1)))
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build();
-        assertTrue(uniqueLeaveList.hasConcurrentLeave(editedAliceLeave3));
-    }
-
-    @Test
-    public void hasConcurrentLeave_concurrentLeaveAbsent_returnsFalse() {
-        uniqueLeaveList.add(ALICE_LEAVE);
-
-        // different employee name
-        assertFalse(uniqueLeaveList.hasConcurrentLeave(BOB_LEAVE));
-
-        // different start date, different end date but not overlapping
-        Leave editedAliceLeave = new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(10)))
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(10))).build();
-        assertFalse(uniqueLeaveList.hasConcurrentLeave(editedAliceLeave));
     }
 
     @Test

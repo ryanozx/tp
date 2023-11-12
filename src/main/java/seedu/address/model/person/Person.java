@@ -186,16 +186,13 @@ public class Person implements ComparablePerson {
 
     @Override
     public String toString() {
-        ToStringBuilder personString = new ToStringBuilder(this)
+        return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address);
-
-        if (!tags.isEmpty()) {
-            personString.add("tags", tags);
-        }
-
-        return personString.toString();
+                .add("address", address)
+                .add("tags", tags)
+                .toString();
     }
+
 }

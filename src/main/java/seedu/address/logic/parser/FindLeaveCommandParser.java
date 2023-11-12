@@ -12,8 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new FindLeaveCommand object
  */
 public class FindLeaveCommandParser implements Parser<FindLeaveCommand> {
-    public static final String MESSAGE_FORMAT_REMINDER =
-            String.format("\nFormat reminder: %1$s", FindLeaveCommand.MESSAGE_USAGE);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindLeaveCommand

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalLeaves.getTypicalLeavesBook;
@@ -23,7 +24,7 @@ import seedu.address.testutil.TestUtil;
 
 public class ApproveLeaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalLeavesBook(), new UserPrefs());
 
     @Test
     public void execute_approveLeave_success() {
@@ -60,7 +61,7 @@ public class ApproveLeaveCommandTest {
     public void execute_invalidIndex_failure() {
         Index outOfBoundIndex = TestUtil.getInvalidLeaveIndex(model);
         ApproveLeaveCommand approveLeaveCommand = new ApproveLeaveCommand(outOfBoundIndex);
-        String expectedMessage = Messages.MESSAGE_INVALID_LEAVE_INDEX;
+        String expectedMessage = MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX;
         assertCommandFailure(approveLeaveCommand, model, expectedMessage);
     }
 

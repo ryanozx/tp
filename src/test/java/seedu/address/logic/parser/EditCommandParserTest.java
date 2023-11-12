@@ -67,18 +67,25 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        // assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "-5", Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        // assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "0", Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // non-numeric index
+        assertParseFailure(parser, "abc" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "10a" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "abc 10" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // out-of-bound index
+        String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
+        assertParseFailure(parser, intMaxPlusOne + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -183,7 +190,7 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PERSON_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
