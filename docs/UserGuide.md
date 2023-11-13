@@ -66,6 +66,10 @@ To facilitate ease of transfer of information, a core feature of HRMate is its a
 leave applications in [CSV](#glossary) format. This allows you to easily transfer your employee records and leave applications to and from
 HRMate, so you can use HRMate alongside other HR management tools.
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Download the latest `hrmate.jar` from [to be updated]() and move the downloaded file to your desired location. 
@@ -102,44 +106,63 @@ For new users, especially first-time users, it is very important and helpful to 
 Also, look through [Features](#features) for commands and the details of each command. If you would like a concise summary of the commands, please check out our [command summary](#command-summary). We hope to aid you in your HR journey!
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Important things to note
-> [!WARNING]  
-> HRmate is coded to take in the exact commands stated in this user guide. Please do not change the spelling, remove or add symbols, adjust spaces, or change the letter case of the commands. Any changes to the commands, unless otherwise stated in this user guide, can lead to the program being unable to interpret the input. To ensure the best user experience, please follow the commands exactly as instructed in this user guide.
->
+
+**Warning:**
+<box type="warning" seamless>
+HRmate is coded to take in the exact commands stated in this user guide. Please do not change the spelling, remove or add symbols, adjust spaces, or change the letter case of the commands. Any changes to the commands, unless otherwise stated in this user guide, can lead to the program being unable to interpret the input. To ensure the best user experience, please follow the commands exactly as instructed in this user guide.
+
+
 > - For a more detailed introduction to the command structure of HRmate and specific information on the parts of a command we can and cannot modify, please refer to [How to interpret command formats?](#how-to-interpret-command-formats).
 >   
 > - Read through our [features](#features) section for detailed information on each command.
 >
 > - Check out our [command summary](#command-summary) for a concise list of available commands and their formats.
 
+</box>
+
 #### Character Limit
-> [!IMPORTANT]
-> Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display `...` for the remaining characters after the character limit.
+<box type='info'>
+Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display `...` for the remaining characters after the character limit.
+</box>
 
 #### Index
-> [!IMPORTANT]
-> HRmate's lists are indexed from 1 onwards. Anything else apart from positive integers (1, 2, 3, ...) isn't accepted as an index in HRmate. This means that numbers such as 0, -1, 1.2 and characters like "a" and "one" cannot be used as indexes. This is particularly important for index-specific commands (i.e. `edit`, `approve-leave`, etc.) as they require a valid index to function properly. Please also note that the indexes are limited to the number of employees or leaves shown in the current list in HRmate. Inputting an index larger than the currently available index can result in error messages and the command is unable to function correctly.
+<box type='info'>
+HRmate's lists are indexed from 1 onwards. Anything else apart from positive integers (1, 2, 3, ...) isn't accepted as an index in HRmate. This means that numbers such as 0, -1, 1.2 and characters like "a" and "one" cannot be used as indexes. This is particularly important for index-specific commands (i.e. `edit`, `approve-leave`, etc.) as they require a valid index to function properly. Please also note that the indexes are limited to the number of employees or leaves shown in the current list in HRmate. Inputting an index larger than the currently available index can result in error messages and the command is unable to function correctly.
+</box>
+
+<div style="page-break-after: always;"></div>
 
 #### Name
-> [!IMPORTANT]
-> HRmate's names are case-sensitive. This means that the names `Alex` and `alex` are interpreted as different names.
+<box type='info'>
+  HRmate's names are case-sensitive. This means that the names `Alex` and `alex` are interpreted as different names.
+</box>
 
 #### Tag
-> [!IMPORTANT]
-> HRmate's tags are case-sensitive. This means that tags `Part-Time` and `part-time` are interpreted as different tags. Having redundant tags with similar spelling may decrease efficiency and add unnecessary workload. To see all current tags in use, you may refer to the `view-tag` command. Please make note of this while interacting with tag-related commands like `add-tag`.
+<box type='info'>
+HRmate's tags are case-sensitive. This means that tags `Part-Time` and `part-time` are interpreted as different tags. Having redundant tags with similar spelling may decrease efficiency and add unnecessary workload. To see all current tags in use, you may refer to the `view-tag` command. Please make note of this while interacting with tag-related commands like `add-tag`.
+</box>
 
 #### Command Order
-> [!IMPORTANT]
-> Please note that you are unable to edit employees or leave applications when the respective list is empty. Please start by adding some employees or leave applications before attempting to edit them.
+<box type='info'>
+Please note that you are unable to edit employees or leave applications when the respective list is empty. Please start by adding some employees or leave applications before attempting to edit them.
+</box>
 
 #### PDF Version Copy and Paste
-> [!IMPORTANT]
-> If you are using a PDF version of this document, please be careful when copying and pasting commands that span multiple lines as space characters surrounding line breaks may be omitted when copied over to the application.
+<box type='important'>
+If you are using a PDF version of this document, please be careful when copying and pasting commands that span multiple lines as space characters surrounding line breaks may be omitted when copied over to the application.
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
-## Employee-related features
+## Employee-related operations
 
 ###  Add an employee record
 When a new employee joins, use the [`add`](#adding-an-employee-add) command to add their information into HRMate.
@@ -162,14 +185,23 @@ Here are the potential error messages that you may receive and here's how to fix
 | `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                            |
 | `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
 
-> [!IMPORTANT]
-> Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
 
-> [!IMPORTANT]
-> HRmate's names are case-sensitive. This means that the names `Alex` and `alex` are interpreted as different names. 
+<box type='important'>
+Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
+</box>
 
-> [!IMPORTANT]
-> HRmate's tags are case-sensitive. This means that tags `Part-Time` and `part-time` are interpreted as different tags. Having redundant tags with similar spelling may decrease efficiency and add unnecessary workload. To see all current tags in use, you may refer to the `view-tag` command.
+
+
+
+<box type='info'>
+HRmate's names are case-sensitive. This means that the names `Alex` and `alex` are interpreted as different names. 
+</box>
+
+<box type='info'>
+HRmate's tags are case-sensitive. This means that tags `Part-Time` and `part-time` are interpreted as different tags. Having redundant tags with similar spelling may decrease efficiency and add unnecessary workload. To see all current tags in use, you may refer to the `view-tag` command.
+</box>
+
+<div style="page-break-after: always;"></div>
 
 ### Find an employee record
 HRMate makes it easy to find an employee and there are multiple ways of doing so. You can use the [`list`](#listing-all-employees-list) command to list all employees, or use the [`find`](#finding-employees-by-name-find) command to find employees by name. You can also use the [`find-all-tag`](#finding-employees-by-all-specified-tags-find-all-tag) and [`find-some-tag`](#finding-employees-by-at-least-one-specified-tag-find-some-tag) commands to find employees by their associated [tags](#glossary).
@@ -267,6 +299,8 @@ To find employees by at least one of the specified tags, use the `find-some-tag`
 * **For advanced users:**
   * Employees are displayed in the order in which they are arranged in the employee list.
 
+<div style="page-break-after: always;"></div>
+
 ### Edit an employee record
 HRMate offers different commands for editing employee records. [`add-tag`](#adding-tags-to-employees-add-tag) and [`delete-tag`](#removing-tags-from-employees-delete-tag) would add and remove an employee's tags while [`edit`](#editing-employee-information-edit) is for editing name, phone number, email address, home address and tags.
 
@@ -354,6 +388,8 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 * **For advanced users:**
   * You can remove all the tags of an employee with `edit INDEX t/` (see warning above)
 
+<div style="page-break-after: always;"></div>
+
 ### Delete an employee record
 
 Delete employee records from HRMate using the [`delete`](#deleting-a-record-delete) command.
@@ -384,7 +420,7 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 | `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete` command. |
 |
 
-
+<div style="page-break-after: always;"></div>
 
 ### Import/export employee records
 It's painful having to add in each employee into HRMate manually. That's why HRMate provides [`import`](#importing-employee-records-import) and [`export`](#exporting-employee-records-export) commands,
@@ -472,15 +508,17 @@ Here are potential error messages that you may receive and here's how to fix the
 
 
 
+<div style="page-break-after: always;"></div>
+
 
 ## Leave-related operations
 
-### Add a leave record
+### Add a leave application
 When an employee applies for leave, you can use the `add-leave` command to add their leave application into HRMate.
 
-#### Adding a leave record: `add-leave`
+#### Adding a leave application: `add-leave`
 
-Use the `add-leave` command to add a leave record to HRMate. This command will add the specified leave record to the leave list.
+Use the `add-leave` command to add a leave application to HRMate. This command will add the specified leave application to the leave list.
 
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 
@@ -514,24 +552,26 @@ Therefore, to change the status of leave, please use the <a href= "#approve-leav
 | `Date should be valid and in a format of `yyyy-MM-dd`` | The start date and end date inputs are not in the correct format | Ensure that the inputs of dates are in the format of `yyyy-MM-dd`, for example, `2023-01-01`. |
 | `Leave descriptions should only contain alphanumeric characters, spaces, dashes, commas, apostrophes and full stops.` | Description input contains illegal characters | Remove the illegal characters from the input.
 
-### Find a leave record
+<div style="page-break-after: always;"></div>
 
-HRMate offers different commands for finding leave records. [`find-leave-range`](#find-leave-records-by-time-period-find-leave-range) and [`find-leave-status`](#find-leave-records-by-leave-status-find-leave-status) would find leave records by time period and leave status respectively while [`find-leave`](#find-leave-records-belonging-to-an-employee-find-leave) and [`find-all-leave`](#view-all-leaves-find-all-leave) would find leave records by employee and view all leave records respectively.
+### Find a leave application
 
-#### Find leave records by time period: `find-leave-range`
+HRMate offers different commands for finding leave applications. [`find-leave-range`](#find-leave-records-by-time-period-find-leave-range) and [`find-leave-status`](#find-leave-records-by-leave-status-find-leave-status) would find leave applications by time period and leave status respectively while [`find-leave`](#find-leave-records-belonging-to-an-employee-find-leave) and [`find-all-leave`](#view-all-leaves-find-all-leave) would find leave applications by employee and view all leave applications respectively.
 
-To find leave records by time period, use the `find-leave-range` command. This command will find leave records that fall within the specified time period.
+#### Find leave applications by time period: `find-leave-range`
+
+To find leave applications by time period, use the `find-leave-range` command. This command will find leave applications that fall within the specified time period.
 
 1. Type in the following command in the command box:
    `find-leave-range [start/START_DATE] [end/END_DATE]`, and replace `START_DATE` with the start date of the time period,
    and `END_DATE` with the end date of the time period, both in the format `yyyy-MM-dd`.
- - For instance: if you wanted to view all leave records that fall within the time period of 2023-10-27 and 2023-11-03 inclusive,
+ - For instance: if you wanted to view all leave applications that fall within the time period of 2023-10-27 and 2023-11-03 inclusive,
    you would type in `find-leave-range start/2023-10-27 end/2023-11-03` in the command box.
  - Do note that neither the start or end fields are required:
-   - If you wanted to view all leave records that start on or after 2023-10-27, you can type in `find-leave-range start/2023-10-27`.
-   - If you wanted to view all leave records that end on or before 2023-11-03, you can type in `find-leave-range end/2023-11-03`.
- - If you wanted to view all leave records, you can type in `find-leave-range` or [`find-all-leave`](#view-all-leaves-find-all-leave) instead.
-2. Press `Enter` to execute the command. You should see the leave records that fall within the time period you specified.
+   - If you wanted to view all leave applications that start on or after 2023-10-27, you can type in `find-leave-range start/2023-10-27`.
+   - If you wanted to view all leave applications that end on or before 2023-11-03, you can type in `find-leave-range end/2023-11-03`.
+ - If you wanted to view all leave applications, you can type in `find-leave-range` or [`find-all-leave`](#view-all-leaves-find-all-leave) instead.
+2. Press `Enter` to execute the command. You should see the leave applications that fall within the time period you specified.
 
 
 Here are some potential error messages that you may receive and here's how to solve them:
@@ -544,18 +584,18 @@ Here are some potential error messages that you may receive and here's how to so
 
 Note: `yyyy-MM-dd` refers to the format of the date in the form of year-month-day. For example, 2023-11-01 refers to 1st November 2023.
 
-#### Find leave records by leave status: `find-leave-status`
+#### Find leave applications by leave status: `find-leave-status`
 
-To find leave records by leave status, use the `find-leave-status` command. This command will find leave records that have the specified status.
+To find leave applications by leave status, use the `find-leave-status` command. This command will find leave applications that have the specified status.
 
 1. Type in the following command in the command box:
-   `find-leave-status STATUS`, and replace `STATUS` with the status of the leave records you wish to view.
- - For instance: if you wanted to view all leave records that have been approved, you would type in `find-leave-status APPROVED` in the command box.
+   `find-leave-status STATUS`, and replace `STATUS` with the status of the leave applications you wish to view.
+ - For instance: if you wanted to view all leave applications that have been approved, you would type in `find-leave-status APPROVED` in the command box.
  - Do note that the status field is required, and the status must be either `APPROVED`, `PENDING` or `REJECTED`.
    - The status is case-sensitive. For instance, `approved` is not a valid status. Ensure you use the correct casing, which is `APPROVED`.
    - You can only specify one status at a time.
- - If you wish to view all leave records, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
-2. Press `Enter` to execute the command. You should see the leave records that have the status you specified.
+ - If you wish to view all leave applications, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
+2. Press `Enter` to execute the command. You should see the leave applications that have the status you specified.
 
 
 Here are some potential error messages that you may receive and here's how to solve them:
@@ -565,19 +605,19 @@ Here are some potential error messages that you may receive and here's how to so
 |-----------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------------------|
 | `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` | The status you provided is not valid | Make sure that the status you provided is either `APPROVED`, `PENDING` or `REJECTED` |
 
-#### Find leave records belonging to an employee: `find-leave`
+#### Find leave applications belonging to an employee: `find-leave`
 
-To find leave records belonging to an employee, use the `find-leave` command. This command will find leave records that belong to the employee specified by their index in the employee list.
+To find leave applications belonging to an employee, use the `find-leave` command. This command will find leave applications that belong to the employee specified by their index in the employee list.
 
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 2. Type in the following command in the command box:
-   `find-leave INDEX`, and replace `INDEX` with the index of the employee whose leave records you wish to view.
- - For instance: if you wanted to view all leave records that belong to the employee with index 1, you would type in `find-leave 1` in the command box.
+   `find-leave INDEX`, and replace `INDEX` with the index of the employee whose leave applications you wish to view.
+ - For instance: if you wanted to view all leave applications that belong to the employee with index 1, you would type in `find-leave 1` in the command box.
  - Do note that the index field is required, and the index must be a valid number.
    - The index must be a positive number.
    - The index must be within the range of the number of employees in HRMate.
- - If you wish to view all leave records, you can use the `find-all-leave` command instead.
-3. Press `Enter` to execute the command. You should see the leave records that belong to the employee with the index you specified.
+ - If you wish to view all leave applications, you can use the `find-all-leave` command instead.
+3. Press `Enter` to execute the command. You should see the leave applications that belong to the employee with the index you specified.
 
 
 ![find-leave](images/find-leaveUI.png)
@@ -593,20 +633,22 @@ Here are some potential error messages that you may receive and here's how to so
 
 #### View all leaves: `find-all-leave`
 
-Use the `find-all-leave` command to view all leave records currently stored in HRMate.
+Use the `find-all-leave` command to view all leave applications currently stored in HRMate.
 
 1. Type in the following command in the command box:
    `find-all-leave`
-2. Press `Enter` to execute the command. You should see all the leave records in HRMate.
+2. Press `Enter` to execute the command. You should see all the leave applications in HRMate.
+
+<div style="page-break-after: always;"></div>
 
 
-### Edit a leave record
+### Edit a leave application
 
-HRMate offers different commands for editing leave records. [`approve-leave`](#approve-leave-record-by-index-approve-leave) and [`reject-leave`](#reject-leave-record-by-index-reject-leave) would approve and reject leave records respectively while [`edit-leave`](#editing-a-leave-record-edit-leave) would edit the leave record comprehensively.
+HRMate offers different commands for editing leave applications. [`approve-leave`](#approve-leave-record-by-index-approve-leave) and [`reject-leave`](#reject-leave-record-by-index-reject-leave) would approve and reject leave applications respectively while [`edit-leave`](#editing-a-leave-record-edit-leave) would edit the leave application comprehensively.
 
-#### Approve leave record by index: `approve-leave`
+#### Approve leave application by index: `approve-leave`
 
-Use the `approve-leave` command to approve a leave record in HRMate. This command will approve the specified leave record.
+Use the `approve-leave` command to approve a leave application in HRMate. This command will approve the specified leave application.
 
 1. Get the [index](#glossary) of the leave under the leave list.
 
@@ -622,9 +664,9 @@ Use the `approve-leave` command to approve a leave record in HRMate. This comman
 | `The leave index provided is invalid` | The index specified does not refer to any leave application | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave application in the leave list. Afterwards, use the correct leave index in the `approve-leave` command. |
 | `Leave previously approved: ` followed by the leave information | The provided leave application is already approved in HRMate | If this is the leave you would like to approve, you don't have to do anything.
 
-#### Reject leave record by index: `reject-leave`
+#### Reject leave application by index: `reject-leave`
 
-Use the `reject-leave` command to reject a leave record in HRMate. This command will reject the specified leave record.
+Use the `reject-leave` command to reject a leave application in HRMate. This command will reject the specified leave application.
 
 1. Get the [index](#glossary) of the leave under the leave list.
 
@@ -641,9 +683,9 @@ Use the `reject-leave` command to reject a leave record in HRMate. This command 
 | `Leave previously rejected: ` followed by the leave information | The provided leave application is already rejected in HRMate | If this is the leave you would like to reject, you don't have to do anything.
 
 
-#### Editing a leave record: `edit-leave`
+#### Editing a leave application: `edit-leave`
 
-For a more comprehensive editing of a leave record, use the `edit-leave` command to edit a leave record in HRMate. This command will edit the specified leave record.
+For a more comprehensive editing of a leave application, use the `edit-leave` command to edit a leave application in HRMate. This command will edit the specified leave application.
 
 1. Get the [index](#glossary) of the leave under the leave list.
 > [!NOTE]  
@@ -653,8 +695,10 @@ For a more comprehensive editing of a leave record, use the `edit-leave` command
  - For example, to change the title and description of the leave indexed 2 to John's sick leave and MC provided, type in the command `edit-leave 2 title/John's sick leave d/MC provided`. Note that the start date, end date, and status will remain unchanged.
  - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 
-> [!IMPORTANT]  
-> To update the status of a leave application, we recommend you to use the `approve-leave` or `reject-leave` commands to approve or reject the leave applications. It is possible to update the status of the leave applications with the `edit-leave` command, but it must be either APPROVED, PENDING or REJECTED (in all capital letters).
+ 
+<box type='important'>
+To update the status of a leave application, we recommend you to use the `approve-leave` or `reject-leave` commands to approve or reject the leave applications. It is possible to update the status of the leave applications with the `edit-leave` command, but it must be either APPROVED, PENDING or REJECTED (in all capital letters).
+</box>
 
 3. Press "enter" on your keyboard and you should see the changes applied to the leave.
 * Examples:
@@ -669,20 +713,22 @@ For a more comprehensive editing of a leave record, use the `edit-leave` command
 | `The end date is earlier than the start date!` | The end date provided is before the current or provided start date. | Please double-check the inputted dates and make sure the end date is not before the current or provided start date. |
 
 
-### Delete a leave record
+<div style="page-break-after: always;"></div>
 
-To delete a leave record, use the [`delete-leave`](#removing-a-leave-record-delete-leave) command.
+### Delete a leave application
 
-#### Removing a leave record: `delete-leave`
+To delete a leave application, use the [`delete-leave`](#removing-a-leave-record-delete-leave) command.
 
-Use the `delete-leave` command to remove a leave record from HRMate. This command will remove the specified leave record from the leave list.
+#### Removing a leave application: `delete-leave`
 
-1. Type in the following command in the command box: `delete-leave LEAVE_LIST_INDEX`, and replace `LEAVE_LIST_INDEX` with the index of the leave record you wish to remove.
- - For instance, referring to the figure below: if you wanted to remove the leave record titled "medical leave" with employee "Bernice Yu", you would type in `delete-leave 2` in the command box.
- - Do note that the index of the leave record you wish to remove must be a valid number
+Use the `delete-leave` command to remove a leave application from HRMate. This command will remove the specified leave application from the leave list.
+
+1. Type in the following command in the command box: `delete-leave LEAVE_LIST_INDEX`, and replace `LEAVE_LIST_INDEX` with the index of the leave application you wish to remove.
+ - For instance, referring to the figure below: if you wanted to remove the leave application titled "medical leave" with employee "Bernice Yu", you would type in `delete-leave 2` in the command box.
+ - Do note that the index of the leave application you wish to remove must be a valid number
    - The index must be a positive number that is larger than 0
    - The index cannot exceed the number of entries in the leave book
-2. Press "enter" on your keyboard and you should see the leave record removed from HRMate.
+2. Press "enter" on your keyboard and you should see the leave application removed from HRMate.
 
 
 ![delete-leave](images/delete-leaveUI.png)
@@ -692,28 +738,30 @@ Here are some potential error messages that you may receive and here's how to so
 
 | Error message                         | Why it happens                                                                                                    | Fix                                                                                                                                                                                                                                                            |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `The leave index provided is invalid` | The index specified does not refer to any leave record                                                            | Double check if the index appears in the leave list. Afterwards, use the correct leave index to the left of the leave record in the `delete-leave` command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave application                                                            | Double check if the index appears in the leave list. Afterwards, use the correct leave index to the left of the leave application in the `delete-leave` command. |
 | `Invalid command format!`             | An index was not specified in the command, or the index specified is not a positive number that is greater than 0 | Make sure that you provide an index when using this command. If you require assistance identifying the index, refer to the box directly above. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.                                                                                                                 |
 
 
 
+<div style="page-break-after: always;"></div>
 
-### Importing/Exporting leave records
+
+### Importing/Exporting leave applications
 The import and export feature extends to importing and exporting leaves, with [`import-leave`](#importing-leave-records-import-leave) and [`export-leave`](#exporting-leave-records-export-leave). This allows you to generate lists of leave
 applications that can be opened in other major spreadsheet applications such as Microsoft Excel.
 
 
-#### Importing leave records : `import-leave`
+#### Importing leave applications : `import-leave`
 
-Use the `import-leave` command to import leave records from a CSV file. This command will import the leave records from
+Use the `import-leave` command to import leave applications from a CSV file. This command will import the leave applications from
 the specified CSV file into HRMate.
 
 <box type="warning" seamless>
-Imported leave records will overwrite existing leave records in HRMate. Remember to make a copy of your existing
-leave records if you want to save them! You can do so by <a href="#exporting-leave-records-export-leave">exporting your current records</a>.
+Imported leave applications will overwrite existing leave applications in HRMate. Remember to make a copy of your existing
+leave applications if you want to save them! You can do so by <a href="#exporting-leave-records-export-leave">exporting your current records</a>.
 </box>
 
-Here's how you can bring over your leave records from Excel:
+Here's how you can bring over your leave applications from Excel:
 
 1. Export your Excel save file in CSV format. Ensure that the separator is set to be a semicolon(`;`), and that you have
    the following fields: Title, Employee, Start, End, Description, Status.
@@ -722,7 +770,7 @@ Here's how you can bring over your leave records from Excel:
     
 <box type="warning" seamless>
     If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
-    which will cause problems when trying to import leave records. To fix this problem,
+    which will cause problems when trying to import leave applications. To fix this problem,
     <a href="#q-how-do-i-change-the-separator-of-my-csv-file-into-semicolons-in-excel">click here</a> to find out how you
     can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users
 </box>
@@ -742,21 +790,21 @@ Here's how you can bring over your leave records from Excel:
     * Do ensure that the first row contains the following headers: `Title`, `Employee`, `Start`, `End`, `Description`, and `Status`.
 3. In HRMate, type in the following command in the command box: `import-leave` and press "Enter"
 4. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
-5. You should see your leave records show up in HRMate, along with the message "Leave records have been imported from [your file name]!"
+5. You should see your leave applications show up in HRMate, along with the message "leave applications have been imported from [your file name]!"
 
 Here are some possible error messages you might encounter and here's how you can fix them:
 
 | Error Message                                                       | Why it happens                                                            | Fix                                                                               |
 |---------------------------------------------------------------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| Leave records were not imported                                     | You did not select a file in the file dialog                              | Retype the command, and make sure to select a CSV file when the file dialog opens |
+| leave applications were not imported                                     | You did not select a file in the file dialog                              | Retype the command, and make sure to select a CSV file when the file dialog opens |
 | Records in file [file name] could not be imported, import cancelled | Your file likely contains illegal characters or is corrupted              | Ensure that your data fulfils the following constraints (to be added)             |
-| No valid records found in file [file name], import cancelled        | Your file either is empty or does not contain a single valid leave record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
+| No valid records found in file [file name], import cancelled        | Your file either is empty or does not contain a single valid leave application | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
 
 
-#### Exporting leave records: `export-leave`
+#### Exporting leave applications: `export-leave`
 
 Not only can you bring your data into HRMate, you can also bring your data out of HRMate. HRMate's export feature allows you
-to export either the entire set of leave application records, or leave records with a particular filter applied (e.g. only export
+to export either the entire set of leave application records, or leave applications with a particular filter applied (e.g. only export
 all leaves in a given time period). You can then either store your exported CSV file for future use,
 open it in a different application, or send it to another employee for them to import!
 
@@ -765,7 +813,7 @@ Here's how you can export your data out of HRMate:
 1. In HRMate, type in the following command in the command box: `export-leave [file name]`, replacing `[file name]` with the name
    you will like to give your file. Your files will be saved in CSV format automatically.
   - For instance, if you would like to save your file as  `today.csv`, type in the command `export today`
-2. You should see the message "Leave records have been saved to [file name]!"
+2. You should see the message "leave applications have been saved to [file name]!"
 3. To retrieve your exported file, go to the folder in which HRMate is stored in your File Explorer (if using Windows) or
    Finder (if using Mac OS). From there, click on the `export` folder.
 4. You should see your file in the `export` folder.
@@ -774,11 +822,13 @@ Here are potential error messages that you may receive and here's how to fix the
 
 | Error Message                     | Why it happens                                   | Fix                                                                                                                                                                                                                   |
 |-----------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |
+| leave applications could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |
 
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Other operations
 
@@ -799,7 +849,7 @@ Should you need any help, you can access this online user guide (this document) 
 ### Reset HRMate
 
 After playing with the different features in HRMate, you might feel that it's time to delete HRMate's sample employee
-contacts and instead use your own. Rather than manually deleting every employee contact and leave record, here's a
+contacts and instead use your own. Rather than manually deleting every employee contact and leave application, here's a
 quick and easy way to clear them in the app!
 
 #### Resetting HRMate by clearing all existing records: `clear`
@@ -809,16 +859,19 @@ Here's how you can remove every employee contact and leave application from the 
 1. In HRMate, type this command into the [command box](#command-box): `clear` and press Enter.
 2. That's it! You should notice that your [Employee List](#employee-list) and [Leave List](#leave-list) are both empty.
    You should also notice that the [Command Output Box](#command-output-box) will display the message:
-   `All employee contacts and leave records have been cleared!` Now you have a clean slate and can start adding your
+   `All employee contacts and leave applications have been cleared!` Now you have a clean slate and can start adding your
    own data!
 
 **Warning:**
 <box type="warning" seamless>
 Be careful when using this command - resetting the application is permanent. If you have not already exported your
 <a href="#exporting-employee-records-export">employee records</a> and
-<a href="#exporting-leave-records-export-leave">leave records</a>, you will not be able to get them back!
+<a href="#exporting-leave-records-export-leave">leave applications</a>, you will not be able to get them back!
 </box>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Exit HRMate
 Once you've finished your work, you might want to close HRMate. You can do so by clicking on the "X" button at the top
@@ -828,10 +881,9 @@ right corner of the window. Alternatively,  If you love typing over clicking, yo
 Here's how you can close HRMate using your keyboard:
 
 1. In HRMate, type this command into the [command box](#command-box): `exit` and press enter.
-2. That's it! HRMate will now close, and you will find your employee records and leave records there the next time you
+2. That's it! HRMate will now close, and you will find your employee records and leave applications there the next time you
 reopen HRMate.
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
@@ -850,6 +902,8 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## How to interpret command formats
 
@@ -878,10 +932,12 @@ The first command is used to add an employee while the second is used to add tag
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 #### Q: How do I transfer my data to another computer?
-**A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave records](#importing-exporting-leave-records).
+**A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave applications](#importing-exporting-leave-records).
 <br/>
 <br/>
 
@@ -927,6 +983,8 @@ Stay tuned for future releases that will extend support for Mac OS!
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
