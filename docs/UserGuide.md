@@ -68,7 +68,7 @@ We have added some annotations in <span style="color:red">red</span> so that you
 
 6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
  - `help`: Opens the help window.
- - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds an employee named `John Doe` to the employee list
+ - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds an employee named `John Doe` to the employee list.
  - `list`: Lists all employees.
  - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11`: Adds a leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
  - `delete 2`: Deletes the second employee shown in the current employee list.
