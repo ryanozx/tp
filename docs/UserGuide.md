@@ -72,7 +72,7 @@ HRMate, so you can use HRMate alongside other HR management tools.
 
 ## Quick start
 
-1. Download the latest `hrmate.jar` from [to be updated]() and move the downloaded file to your desired location. 
+1. Download the latest `hrmate.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-1/tp/releases/tag/v1.4.0) and move the downloaded file to your desired location. 
 See [How do I move a file?](#q-how-do-i-move-a-file) for help.
 
 2. Open a terminal or your computer.
