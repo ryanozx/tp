@@ -587,6 +587,11 @@ Adding a new command is easy compared to the implementation of the `Leave` modul
 
 Efforts were also spent on ensuring data validity for `Person` and `Leave` when the associated object is modified. As mentioned above, one of the challenges faced was the immutable principle that AB3 used. When a `Person` is edited through `EditCommand`, `AddTagCommand` or `DeleteTagCommand`, the old `Person` is replaced by the newly created `Person`. This results in some `Leave` pointing to the stale `Person`. Thus, `Model#SetPerson` and `Model#DeletePerson` must be amended to edit `LeavesBook` as well to avoid any `Leave` pointing to any stale `Person`. We expect that such methods like `Model#SetPerson`, `Model#DeletePerson`, `Model#SetLeave`, `Model#DeleteLeave` must be amended when adding new modules if the new entities is reliant on information from pre-existing entities.
 
+### Achievements of HRMate
+ * Successfully implemented second entity, `Leave` alongside `Person` with information consistency even when `Person` is edited or deleted.
+ * Created new way to import data using csv for both `Leave` and `Person`, opening up changing in app data to users who might not understand json.
+ * Added 19 more commands while increasing code coverage by 2%.
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
