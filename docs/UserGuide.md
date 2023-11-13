@@ -592,7 +592,6 @@ To find leave applications by leave status, use the `find-leave-status` command.
    `find-leave-status STATUS`, and replace `STATUS` with the status of the leave applications you wish to view.
  - For instance: if you wanted to view all leave applications that have been approved, you would type in `find-leave-status APPROVED` in the command box.
  - Do note that the status field is required, and the status must be either `APPROVED`, `PENDING` or `REJECTED`.
-   - The status is case-sensitive. For instance, `approved` is not a valid status. Ensure you use the correct casing, which is `APPROVED`.
    - You can only specify one status at a time.
  - If you wish to view all leave applications, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
 2. Press `Enter` to execute the command. You should see the leave applications that have the status you specified.
