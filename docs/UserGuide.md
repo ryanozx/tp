@@ -49,7 +49,7 @@ See [How do I move a file?](#q-how-do-i-move-a-file) for help.
 
 2. Open a terminal or your computer.
 <box type="info" seamless>
-
+    <ul>
         <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
         <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
         <li><strong>See <a href="#faq">How do I open a terminal?</a> for more information.</li>
@@ -58,8 +58,8 @@ See [How do I move a file?](#q-how-do-i-move-a-file) for help.
 
 3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
 
-4. Ensure you have `Java 11` or above installed on your Computer. This can be done by typing `java -version` in your terminal.
- - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognize the `java` input. 
+4. Ensure you have `Java 11` or above installed on your Computer. This can be done by typing `java -version` in your terminal and pressing "Enter".
+ - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognise the `java` input. 
 
 5. Type `java -jar hrmate.jar` into the terminal and press "Enter" on your keyboard.<br>
 An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
@@ -71,7 +71,7 @@ We have added some annotations in <span style="color:red">red</span> so that you
  - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds an employee named `John Doe` to the employee list.
  - `list`: Lists all employees.
  - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11`: Adds a leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
- - `delete 2`: Deletes the second employee shown in the current employee list.
+ - `delete 2`: Deletes the second employee shown in the current employee list and any leave requests associated with the second employee.
  - `exit`: Exits the app.
 
 For new users, especially first-time users, it is very important and helpful to read through the [How to interpret command formats?](#how-to-interpret-command-formats). This section provides a detailed overview of the overall structure of all commands used in HRmate.
@@ -99,7 +99,7 @@ Also, look through [Features](#features) for commands and the details of each co
 
 #### Command Order
 > [!IMPORTANT]
-> Do note that you are unable to edit employees or leaves when the respective list is empty, please start by adding some employees or leave requests before attempting to edit them.
+> Do note that you are unable to edit employees or leave requests when the respective list is empty. Please start by adding some employees or leave requests before attempting to edit them.
 
 #### PDF Version Copy and Paste
 > [!IMPORTANT]
@@ -132,7 +132,7 @@ Here are the potential error messages that you may receive and here's how to fix
 | `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
 
 > [!IMPORTANT]
-> > Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
+> Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
 
 ### Find an employee record
 HRMate makes it easy to find an employee and there are multiple ways of doing so. You can use the [`list`](#listing-all-employees-list) command to list all employees, or use the [`find`](#finding-employees-by-name-find) command to find employees by name. You can also use the [`find-all-tag`](#finding-employees-by-all-specified-tags-find-all-tag) and [`find-some-tag`](#finding-employees-by-at-least-one-specified-tag-find-some-tag) commands to find employees by their associated tags.
