@@ -597,8 +597,6 @@ testers are expected to do more exploratory testing.</box>
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. { more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -614,12 +612,38 @@ testers are expected to do more exploratory testing.</box>
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. { more test cases …​ }_
+2. Deleting a person after applying a filter
+
+    1. Prerequisites: Filter to the second person using `find PERSON_NAME` where `PERSON_NAME` is the name of the second person.
+
+    2. Test case: `delete 1`<br>
+        Expected: First visible contact is delete from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `delete 2`<br>
+       Expected: No person is delete. Error details shown in the status message. Status bar remains the same.
+
+    4. Follow up actions: `list`<br>
+       Expected: Only the previously deleted person is deleted.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Open `./data/addressbook.json` and delete the first character `{`. Then open HRMate. <br>
+       Expected: HRMate opens an empty address book.
 
-2. { more test cases …​ }
+    2. Add a person using `add` and a leave using `add-leave`, then `exit`. Open `./data/leavesbook.json` and edit the fullName of the name of the employee of a leave. Reopen HRMate.<br>
+       Expected: HRMate restores all data except for the edited leave.
+
+### Data integrity between `Person` and `Leave`
+
+1. Dealing with edits to `Person`
+
+    1. Add a `Person` using `add` and a `Leave` using `add-leave`. Edit the `Person` name using `edit`. <br>
+       Expected: The Employee under the created `Leave` is edited also.
+
+2. Dealing with deletes to `Person`
+
+    1. Add a `Person` using `add` and a `Leave` using `add-leave`. Delete the `Person` with `delete`. <br>
+       Expected: The previously created `Leave` is deleted also.
+
