@@ -1,0 +1,27 @@
+@startuml
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+package PersonObjectDiagram {
+    Object "<u>:Person" as Employee {
+    }
+
+    Object "<u>:Name" as Name {
+    }
+    Object "<u>:Phone" as Phone {
+    }
+    Object "<u>:Email" as Email {
+    }
+    Object "<u>:Address" as Address {
+    }
+    Object "<u>:Tags" as Tags {
+    }
+}
+
+Name <-- Employee : has <
+Phone <-- Employee : has <
+Email <-- Employee : has <
+Address <-- Employee : has <
+Tags <-- Employee : has <
+
+@enduml

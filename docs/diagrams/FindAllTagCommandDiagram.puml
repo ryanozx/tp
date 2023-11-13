@@ -1,0 +1,79 @@
+@startuml
+
+!include style.puml
+skinparam ArrowFontStyle plain
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindAllTagCommandParser" as FindAllTagCommandParser LOGIC_COLOR
+participant "predicate:TagsContainAllTagsPredicate" as TagsContainAllTagsPredicate LOGIC_COLOR
+participant "d:FindAllTagCommand" as FindAllTagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find-all-tag t/remote")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-all-tag t/remote")
+activate AddressBookParser
+
+create FindAllTagCommandParser
+AddressBookParser -> FindAllTagCommandParser
+activate FindAllTagCommandParser
+
+FindAllTagCommandParser --> AddressBookParser
+deactivate FindAllTagCommandParser
+
+AddressBookParser -> FindAllTagCommandParser : parse("t/remote")
+activate FindAllTagCommandParser
+
+create TagsContainAllTagsPredicate
+FindAllTagCommandParser -> TagsContainAllTagsPredicate
+activate TagsContainAllTagsPredicate
+
+TagsContainAllTagsPredicate --> FindAllTagCommandParser : predicate
+deactivate TagsContainAllTagsPredicate
+
+create FindAllTagCommand
+FindAllTagCommandParser -> FindAllTagCommand : FindAllTagCommand(predicate)
+activate FindAllTagCommand
+
+FindAllTagCommand --> FindAllTagCommandParser
+deactivate FindAllTagCommand
+
+FindAllTagCommandParser --> AddressBookParser
+deactivate FindAllTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindAllTagCommandParser -[hidden]-> AddressBookParser
+destroy FindAllTagCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> FindAllTagCommand : execute()
+activate FindAllTagCommand
+
+FindAllTagCommand -> Model :  updateFilteredPersonList(predicate)
+activate Model
+
+Model --> FindAllTagCommand
+deactivate Model
+
+
+create CommandResult
+FindAllTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindAllTagCommand
+deactivate CommandResult
+
+FindAllTagCommand --> LogicManager : result
+deactivate FindAllTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

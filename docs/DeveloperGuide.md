@@ -161,6 +161,96 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+
+### The Person class
+
+ManageHR keeps track of employees within the company with the use of `Person` and `UniquePersonList`. The `UniquePersonList` serves as a container for the `Person` objects,
+while enforcing the constraints that no 2 employees have the same name.
+
+The `Person` class contains the following attributes.
+<puml src="diagrams/PersonObjectDiagram.puml", width="250"></puml>
+
+1. `Name`: The name of the employee.
+2. `Phone`: The phone number of the employee.
+3. `Email`: The email address of the employee.
+4. `Address`: The address of the employee.
+5. `Tags`: The customised tag added by the user.
+
+### Find an Employee by tags
+`FindAllTagCommand` and `FindSomeTagCommand` are implemented similar to `FindCommand`.
+They use `TagsContainAllTagsPredicate` and `TagsContainAllTagsPredicate` respectively as predicate to filter the employee list. And then update the displayed employee list of the model
+
+The following sequence diagram shows how `FindAllTagCommand` executes.
+<puml src="diagrams/FindAllTagCommandDiagram.puml", width="250"></puml>
+
+#### Design considerations:
+`FindAllTagCommand` matches employees with all specified tags while `FindSomeTagCommand` matches employees with any of the specified tags.
+The nuance difference is made to cater to users' needs for efficient searching.
+### Adding tag feature
+
+#### Implementation
+`AddTagCommand` is implemented similar to `EditCommand`.
+A new `Person` is created with the information from the old `Person`.
+The tags are then added before replacing the old `Person` with the new `Person`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
+
+#### Design considerations:
+
+**Aspect: How AddTagCommand executes:**
+* **Alternative 1 (current choice):** Builts a new Person.
+    * Pros: Easy to implement (using `EditCommand` as reference), immutability allows for potential redo and undo commands.
+    * Cons: Memory intensive, costly in terms of time.
+* **Alternative 2:** Add tags to `Person`.
+    * Pros: Memory efficient
+    * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
+
+### The Leave class
+
+ManageHR keeps track of the leaves of employees within the company with the use of `Leave` and `UniqueLeaveList`. The `UniqueLeaveList` serves as a container for the `Leave` objects,
+while enforcing the constraints that no 2 leaves can have same start date and end date for the same employee.
+
+The `Leave` class contains the following attributes.
+<puml src="diagrams/LeaveObjectDiagram.puml", width="250"></puml>>
+
+1. `ComparablePerson`: The employee.
+2. `Title`: The title of the leave.
+3. `Description`: The description of the leave.
+4. `Date start`: The start date of the leave.
+5. `Date end`: The end date of the leave.
+5. `Status`: The status of the leave.
+
+`Date start` must be earlier than or the same as the `Date end`.
+All the attributes except Description and Status are compulsory fields for adding a leave.
+
+### Add A Leave application feature
+
+The add-leave command allows the HR manager to add a leave record for a specific employee. This feature enhances the HRMate system by providing a way to manage and track employee leaves efficiently.
+Fields compulsory to enter for `add-leave` as `String` type include:
+1. `index`: The index of the person for the leave application, it will be parsed as `Index` type to `AddLeaveCommand` object and converted to `Person` type based on the displayed list when a new `Leave` object created.
+2. `title`: The title of the leave, it will be parsed as `Title` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+3. `date start`: The start date of the leave in "yyyy-MM-dd" format, it will be parsed together with `date end` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+4. `date end`: The end date of the leave in "yyyy-MM-dd" format, it will be parsed together with `date start` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+5. `description`: The description of the leave, it is optional, it will be parsed as `NONE` if no description field exists, otherwise it will be parsed as `Description` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+
+* CommandException will be thrown at `AddLeaveCommand` for unfounded index in the list.
+* The rest of the invalid fields exception including illegal arguments and end date before start date will be handled by ParserException in `AddLeaveCommandParser`.
+* Same leave exception will be handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
+
+The activity diagram for adding a leave is as followed:
+<puml src="diagrams/AddLeaveCommandActivityDiagram.puml", width="250"></puml>
+
+Here is an example usage of the `add-leave` feature:
+1. The user uses the `find` command to filter for employees named Martin.
+2. The user enters the command `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01` with Martin being index 1.
+3. A record of leave with specified title and dates for Martin is created.
+
+#### Design considerations
+The command follows a structured format to ensure ease of use and to minimize errors. The use of an index ensures that the leave is associated with a specific employee. The format of the command is designed to be clear and straightforward.
+
 ### Import file
 
 The import feature allows users to import employee records in CSV format, increasing portability of
@@ -311,75 +401,12 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-#### Design considerations
-The command follows a structured format to ensure ease of use and to minimize errors. The use of an index ensures that the leave is associated with a specific employee. The format of the command is designed to be clear and straightforward.
-
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Adding tag feature
-
-#### Implementation
-
-`AddTagCommand` is implemented similar to `EditCommand`.
-A new `Person` is created with the information from the old `Person`.
-The tags are then added before replacing the old `Person` with the new `Person`.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
-
-#### Design considerations:
-
-**Aspect: How AddTagCommand executes:**
-* **Alternative 1 (current choice):** Builts a new Person.
-  * Pros: Easy to implement (using `EditCommand` as reference), immutability allows for potential redo and undo commands.
-  * Cons: Memory intensive, costly in terms of time.
-* **Alternative 2:** Add tags to `Person`.
-  * Pros: Memory efficient
-  * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
-
-#### The Leave class
-
-ManageHR keeps track of employees within the company with the use of `Leave` and `UniqueLeaveList`. The `UniqueLeaveList` serves as a container for the `Leave` objects,
-while enforcing the constraints that no 2 leaves can have same start date and end date for the same employee.
-
-The `Leave` class contains the following attributes.
-
-1. `ComparablePerson`: The employee.
-2. `Title`: The title of the leave.
-3. `Description`: The description of the leave.
-4. `Date start`: The start date of the leave.
-5. `Date end`: The end date of the leave.
-5. `Status`: The status of the leave.
-   
-`Date start` must be earlier than or the same as the `Date end`.
-All the attributes except Description and Status are compulsory fields for adding a leave.
-
-### Add A Leave application feature
-
-The add-leave command allows the HR manager to add a leave record for a specific employee. This feature enhances the HRMate system by providing a way to manage and track employee leaves efficiently.
-Fields compulsory to enter for `add-leave` as `String` type include:
-1. `index`: The index of the person for the leave application, it will be parsed as `Index` type to `AddLeaveCommand` object and converted to `Person` type based on the displayed list when a new `Leave` object created.
-2. `title`: The title of the leave, it will be parsed as `Title` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-3. `date start`: The start date of the leave in "yyyy-MM-dd" format, it will be parsed together with `date end` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-4. `date end`: The end date of the leave in "yyyy-MM-dd" format, it will be parsed together with `date start` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-5. `description`: The description of the leave, it is optional, it will be parsed as `NONE` if no description field exists, otherwise it will be parsed as `Description` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-
-* CommandException will be thrown at `AddLeaveCommand` for unfounded index in the list.
-* The rest of the invalid fields exception including illegal arguments and end date before start date will be handled by ParserException in `AddLeaveCommandParser`.
-* Same leave exception will be handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
-
-The activity diagram for adding a leave is as followed:
-<puml src="diagrams/AddLeaveCommandActivityDiagram.puml" alt="AddLeaveCommandActivityDiagram"></puml>
-
-  Here is an example usage of the `add-leave` feature:
-1. The user uses the `find` command to filter for employees named Martin.
-2. The user enters the command `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01` with Martin being index 1.
-3. A record of leave with specified title and dates for Martin is created.
 
 
 
