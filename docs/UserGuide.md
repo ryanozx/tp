@@ -87,6 +87,9 @@ Here are the potential error messages that you may receive and here's how to fix
 | `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                            |
 | `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
 
+> [!IMPORTANT]
+> > Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
+
 ## Listing all employees: `list`
 
 1. Type in the following [command](#glossary) in the [command box](#glossary): `list`.
