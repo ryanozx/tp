@@ -63,7 +63,7 @@ An app similar to the one below should appear in a few seconds. The app is popul
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
 ![Ui](images/Ui-annotated.png)
 
-6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
+6. Try typing some commands into the command box and pressing "enter" to execute. Here are some commands to start with.<br>
  - `help` : Opens the help window.
  - `list` : Lists all contacts.
  - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the employee list
@@ -72,7 +72,7 @@ We have added some annotations in <span style="color:red">red</span> so that you
  - `clear` : Deletes all employees and leaves.
  - `exit` : Exits the app.
 
-6. Refer to [How to interpret command formats?](#how-to-interpret-command-formats) for more info on the command structure. 
+7. Refer to [How to interpret command formats?](#how-to-interpret-command-formats) for more info on the command structure. 
 Also, look through [Features](#features) for more commands and the details of each command. We hope to aid you in your HR journey!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,9 @@ Should you need any help, you can access this online user guide (this document) 
 
 1. Type in the following command in the [command box](#glossary): `help`. 
 2. Press "Enter" on your keyboard.
-3. The following pop up should show:
+3. The following pop up should show: 
+
+<br>
 ![help menu](images/help-menu.png)
 
 4. Click on the "copy link" button to copy the link to the user guide, and paste into any [web browser](#glossary) to access the user guide. Alternatively, click the red button at the corner of the window to close the pop up.
@@ -749,26 +751,31 @@ The first command is used to add an employee while the second is used to add tag
 **A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave records](#importing-exporting-leave-records).
 <br/>
 <br/>
+
 ### Q: How do I move a file?
 **A**: 
 * For **Windows** users, first open File Explorer and find the file. Afterwards, drag the selected file's icon to the desired location using your mouse. For more help, please consult the [Microsoft documentation](https://support.microsoft.com/en-gb/office/move-or-copy-an-item-to-another-folder-19768dfe-86c4-40bf-b82c-1c084b624492)<br>
 * For **Mac** users, first open Finder and find the specific file. Then drag it to the desired location using the mouse. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/mac-help/mh26885/mac).
 <br/>
 <br/>
+
 ### Q: How do I open a terminal?
 **A**: 
 * For **Windows** users, press the Windows key, type in `powershell` and press Enter. The terminal should open. For more help, please consult the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/terminal/install).
 * For **Mac** users, open the Terminal app on your Mac. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal.).
 <br/>
 <br/>
+
 ### Q: How do I navigate files in terminal?
 **A**: You can use the `cd` command to navigate in terminal. For more information, please consult this [documentation](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command). 
 <br/>
 <br/>
+
 ### Q: How do I download Java 11?
 **A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
 <br/>
 <br/>
+
 ### Q: How do I change the separator of my CSV file into semicolons(`;`) in Excel?
 **A**:
 * If you are a **Windows** user:
