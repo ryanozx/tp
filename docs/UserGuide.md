@@ -38,7 +38,7 @@ This user guide aims to help new users quickly familiarise themselves with HRMat
 5. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
 An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
-![Ui](images/Ui.png)
+![Ui](images/Ui-annotated.png)
 
 6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
  - `help`: Opens the help window.
