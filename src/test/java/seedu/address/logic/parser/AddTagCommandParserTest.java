@@ -33,24 +33,35 @@ public class AddTagCommandParserTest {
         // no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
-        // no index specificed
+        // no index specified
         assertParseFailure(parser, VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", AddTagCommand.MESSAGE_NO_TAGS_ADDED);
+
+        // invalid index and no tag
+        assertParseFailure(parser, "1abc", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+
+        // non-numeric index
+        assertParseFailure(parser, "abc" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "10a" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "abc 10" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+
+        // out-of-bound index
+        String intMaxPlusOne = Long.toString((long) Integer.MAX_VALUE + 1);
+        assertParseFailure(parser, intMaxPlusOne + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
-
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
@@ -71,11 +82,11 @@ public class AddTagCommandParserTest {
     }
 
     @Test
-    public void parse_oneTag_success() {
+    public void parse_oneTagDf_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
+
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         AddTagCommand expectedCommand = new AddTagCommand(targetIndex, List.of(new Tag(VALID_TAG_FRIEND)));
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

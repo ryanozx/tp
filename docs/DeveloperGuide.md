@@ -15,8 +15,10 @@
 
 ## **Acknowledgements**
 
-{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
+* [Address Book 3](https://se-education.org/addressbook-level3/): HRMate is built on top of AB3
+* [JavaFX](https://openjfx.io/): The GUI framework used in HRMate
+* [Jackson](https://github.com/FasterXML/jackson): JSON parsing library used to read and write HRMate's JSON data files
+* [MarkBind](https://markbind.org/): Used to generate HRMate's project site
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -73,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `LeaveListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +84,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Leave` objects residing in the `Model`.
 
 ### Logic component
 
@@ -127,7 +129,8 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the leaves book data as well i.e., all `Leaves` objects (which are contained in a `UniqueLeavesList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of `find`) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+* stores the currently 'selected' `Leave` objects (e.g. results of `find-leave`) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Leave>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -147,9 +150,18 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
 
 The `Storage` component,
-* can save the address book data, leaves book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save the address book data, leaves book data and user preference data in either JSON or CSV format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage`, `LeavesBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<puml src="diagrams/AddressBookStorageClassDiagram.puml" width="550"></puml>
+<puml src="diagrams/LeavesBookStorageClassDiagram.puml" width="550"></puml>
+
+Both `AddressBookStorage` and `LeavesBookStorage` contain JSON and CSV implementations. These implementations exist separately
+as their methods invoke methods from different Util files - the JSON implementation invokes JsonUtil methods, while the
+CSV implementation invokes CsvUtil methods. `SerializableAddressBook`, `SerializableLeavesBook`, `AdaptedPerson` and
+`AdaptedLeave` have been abstracted out to promote code reusability, with the use of generics where possible to enforce
+type safety.
 
 ### Common classes
 
@@ -568,6 +580,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+## **Appendix: Effort**
+
+HRMate is built for extensibility. Not much effort is needed to implement new commands that are variations of existing features (like TODO ex), but effort is needed to add new entities.
+
+### Challenges Faced
+The first challenge given is understanding the code infrastructure. HRMate uses many design patterns like Facade pattern, Command pattern and MVC pattern. Without knowledge of these patterns, HRMate would seem complicated and difficult to understand.
+Overall the understanding that the `Model` is a Facade for `AddressBook` and `LeavesBook`, input commands follow the Command pattern, and that `AddressBook` and `LeavesBook` are the models, JavaFX is used for the view and `ModelManager` functions as the controller greatly help in the understanding of HRMate's infrastructure.
+
+Another significant challenge is the implementation of the leaves module. Given HRMate's immutable design philosophy, some design choices like replacing stale `Leave` with new instances of `Leave` with the updated `Person` are chosen. Care must be taken to update `Leave` everytime a `Person` is replaced like in the `EditCommand`, `AddTagCommand` and `DeleteCommand`. When adding a new potential module like `Report`, we anticipate that care must be taken when the associated `Person` or `Leave` is replaced.
+
+### Effort Required
+To illustrate the difference in effort, the effort needed to create `AddTagCommand` and the `Leave` module will be compared.
+
+Given that `AddTagCommand` is a specific case of `EditCommand`, much of the logic is similar to `EditCommand`. In this case, `AddTagCommand` copies a `Person`, adds the new `Tag` before calling `Model#SetPerson`.
+
+Adding a new command is easy compared to the implementation of the `Leave` module. We took inspiration from the `Person` class and created wrapper classes for the fields like `Title`, `Description` and `Date`. One of the significant challenges were the added constraint of comparing two fields, `start` and `end`. This logic was not present in `Person`. For example `Name` validations do not concern `Tag` validations and vice versa. In `Leave` case, `start` affects the validations for `end`, as `end` must be on or after `start`. To resolve this, we created `Leave`'s constructor to use `Range`, whose creation mandates `start` be on or before `end`. This ensures that the created `Leave` adheres to the constraint of `start` being before or on `end`. We anticipate that the creation of other entities like `Report` to require the creation of new wrapper classes, or even validation classes to enforce validations that span across multiple fields.
+
+Efforts were also spent on ensuring data validity for `Person` and `Leave` when the associated object is modified. As mentioned above, one of the challenges faced was the immutable principle that AB3 used. When a `Person` is edited through `EditCommand`, `AddTagCommand` or `DeleteTagCommand`, the old `Person` is replaced by the newly created `Person`. This results in some `Leave` pointing to the stale `Person`. Thus, `Model#SetPerson` and `Model#DeletePerson` must be amended to edit `LeavesBook` as well to avoid any `Leave` pointing to any stale `Person`. We expect that such methods like `Model#SetPerson`, `Model#DeletePerson`, `Model#SetLeave`, `Model#DeleteLeave` must be amended when adding new modules if the new entities is reliant on information from pre-existing entities.
+
+### Achievements of HRMate
+ * Successfully implemented second entity, `Leave` alongside `Person` with information consistency even when `Person` is edited or deleted.
+ * Created new way to import data using csv for both `Leave` and `Person`, opening up changing in app data to users who might not understand json.
+ * Added 19 more commands while increasing code coverage by 2%.
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -597,8 +633,6 @@ testers are expected to do more exploratory testing.</box>
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. { more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -614,12 +648,38 @@ testers are expected to do more exploratory testing.</box>
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. { more test cases …​ }_
+2. Deleting a person after applying a filter
+
+    1. Prerequisites: Filter to the second person using `find PERSON_NAME` where `PERSON_NAME` is the name of the second person.
+
+    2. Test case: `delete 1`<br>
+        Expected: First visible contact is delete from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `delete 2`<br>
+       Expected: No person is delete. Error details shown in the status message. Status bar remains the same.
+
+    4. Follow up actions: `list`<br>
+       Expected: Only the previously deleted person is deleted.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Open `./data/addressbook.json` and delete the first character `{`. Then open HRMate. <br>
+       Expected: HRMate opens an empty address book.
 
-2. { more test cases …​ }
+    2. Add a person using `add` and a leave using `add-leave`, then `exit`. Open `./data/leavesbook.json` and edit the fullName of the name of the employee of a leave. Reopen HRMate.<br>
+       Expected: HRMate restores all data except for the edited leave.
+
+### Data integrity between `Person` and `Leave`
+
+1. Dealing with edits to `Person`
+
+    1. Add a `Person` using `add` and a `Leave` using `add-leave`. Edit the `Person` name using `edit`. <br>
+       Expected: The Employee under the created `Leave` is edited also.
+
+2. Dealing with deletes to `Person`
+
+    1. Add a `Person` using `add` and a `Leave` using `add-leave`. Delete the `Person` with `delete`. <br>
+       Expected: The previously created `Leave` is deleted also.
+

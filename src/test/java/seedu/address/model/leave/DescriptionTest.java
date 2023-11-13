@@ -41,6 +41,15 @@ public class DescriptionTest {
     }
 
     @Test
+    public void isEmpty() {
+        String nonEmptyDescription = "testing";
+        assertFalse(new Description(nonEmptyDescription).isEmpty());
+
+        String emptyDescription = "";
+        assertTrue(new Description(emptyDescription).isEmpty());
+    }
+
+    @Test
     public void equalsMethod() {
         Description description = new Description("testing");
         Description descriptionCopy = new Description("testing");

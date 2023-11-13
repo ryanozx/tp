@@ -6,9 +6,11 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyLeavesBook" as ReadOnlyLeavesBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class LeavesBook
 Class ModelManager
 Class UserPrefs
 
@@ -20,6 +22,15 @@ Class Name
 Class Phone
 Class Tag
 
+Class UniqueLeavesList
+Class Leave
+Class Title
+Class Description
+Class Date
+Class Status
+Class "<<interface>>\nComparablePerson" as ComparablePerson
+
+
 Class I #FFFFFF
 }
 
@@ -27,21 +38,34 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+LeavesBook .up.|> ReadOnlyLeavesBook
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlyLeavesBook
+Model .right.> ReadOnlyUserPrefs
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" LeavesBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+LeavesBook *--> "1" UniqueLeavesList
 UniquePersonList --> "~* all" Person
+UniqueLeavesList --> "~* all" Leave
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+
+Leave *--> ComparablePerson
+Leave *--> Title
+Leave *--> Description
+Leave *--> "2" Date
+Leave *--> Status
+
+Person .|> ComparablePerson
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -50,5 +74,11 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
+ComparablePerson -[hidden]right->Title
+Title -[hidden]right-> Description
+Description -[hidden]right-> Date
+Date -[hidden]right-> Status
+
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Leave
 @enduml
