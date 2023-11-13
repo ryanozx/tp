@@ -294,7 +294,12 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
   * You can remove all the tags of an employee with `edit INDEX t/` (see warning above)
 
 ### Delete an employee record
+
+Delete employee records from HRMate using the [`delete`](#deleting-a-record-delete) command.
+
 #### Deleting a record : `delete`
+
+Use the `delete` command to delete an employee record from HRMate. This command will delete the specified employee from the employee list.
 
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this image in [quick start](#quick-start) for more information.
 <box type="info" seamless>
@@ -329,6 +334,9 @@ by major spreadsheet applications such as Microsoft Excel.
 
 
 #### Importing employee records : `import`
+
+Use the `import` command to import employee records from a CSV file. This command will import the employee records from
+the specified CSV file into HRMate.
 
 <box type="warning" seamless>
 Imported employee records will overwrite existing employee records in HRMate. Remember to make a copy of your existing
