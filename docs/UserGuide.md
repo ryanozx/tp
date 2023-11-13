@@ -213,8 +213,9 @@ Use the `list` command to view all employees that are currently listed in the em
 1. Type in the following command in the command box: `list`.
 2. Press "enter" on your keyboard and you should see the information of all employees listed in the employee list.
 
-> [!NOTE]  
-> This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `list 123`, `list abc`, and `list 1a2b` all as the command `list`.
+<box type='info'>
+This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `list 123`, `list abc`, and `list 1a2b` all as the command `list`.
+</box>
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
@@ -249,8 +250,10 @@ useful if you want to find employees by their associated tags using the [`find-a
 1. Type in the following command in the command box: `view-tag`.
 2. Press "enter" on your keyboard and you should see a list of all tags currently in use within the employee list.
 
-> [!NOTE]  
-> This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `view-tag 123`, `view-tag abc`, and `view-tag 1a2b` all as the command `view-tag`.
+
+<box type='info'>
+This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `view-tag 123`, `view-tag abc`, and `view-tag 1a2b` all as the command `view-tag`.
+</box>
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
@@ -537,7 +540,7 @@ If the employee is not found, consider using <a href= "#listing-all-employees-li
   - For another instance, to add a leave of two days from 2023-11-01 to 2023-11-02 to employee indexed 2 with a title of `Sample Leave 2` and a description of `Sample Description`, type `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` to the command box.
 <box type="info" seamless>
 There is a status field of leave that is `PENDING` by default when a leave is added. Please DO NOT enter any status field of the leave, no recognitions of the status field and any other prefix are provided.
-Therefore, to change the status of leave, please use the <a href= "#approve-leave-record-by-index-approve-leave">approve-leave</a> or <a href= "#reject-leave-record-by-index-reject-leave">reject-leave</a> commands instead to modify the record.
+Therefore, to change the status of leave, please use the <a href= "#approve-leave-application-by-index-approve-leave">approve-leave</a> or <a href= "#reject-leave-application-by-index-reject-leave">reject-leave</a> commands instead to modify the record.
 </box>
 
 3. Press "enter" on your keyboard and you should see the leave information at the end of the overall leave list. Note that if there is no description field added, the description will be `NONE` by default.
@@ -545,7 +548,7 @@ Therefore, to change the status of leave, please use the <a href= "#approve-leav
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace `NAME` with the index of the employee applied for leave in the employee list, `Title` with the title of the leave, `START_DATE` with the start date of the leave and `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`. `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` representing the description of the leave. Note that duplicated titles and concurrent leave (overlapping date duration of leaves) are allowed. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.|
-| `This leave has already existed for the employee` | The start date and end date are exactly the same as the existing leave | Double check if the dates for the new leave do not have the same dates as the existing ones by checking against the list from [find-leave](#find-leave-records-belonging-to-an-employee-find-leave) or [find-leave-range](#find-leave-records-by-time-period-find-leave-range). You may choose to [edit-leave](#editing-a-leave-record-edit-leave) if the new leave has the exact same start and end dates as the existing leave, in other words, they are the same leave. |
+| `This leave has already existed for the employee` | The start date and end date are exactly the same as the existing leave | Double check if the dates for the new leave do not have the same dates as the existing ones by checking against the list from [find-leave](#find-leave-application-belonging-to-an-employee-find-leave) or [find-leave-range](#find-leave-applications-by-time-period-find-leave-range). You may choose to [edit-leave](#editing-a-leave-application-edit-leave) if the new leave has the exact same start and end dates as the existing leave, in other words, they are the same leave. |
 | `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-leave` command. |
 | `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` | Title input is blank and/or contains illegal characters | Add title and/or remove the illegal characters from the input |
 | `The end date is earlier than the start date!` | The end date input is earlier than the start date input | Double check the date inputs. |
@@ -556,7 +559,7 @@ Therefore, to change the status of leave, please use the <a href= "#approve-leav
 
 ### Find a leave application
 
-HRMate offers different commands for finding leave applications. [`find-leave-range`](#find-leave-records-by-time-period-find-leave-range) and [`find-leave-status`](#find-leave-records-by-leave-status-find-leave-status) would find leave applications by time period and leave status respectively while [`find-leave`](#find-leave-records-belonging-to-an-employee-find-leave) and [`find-all-leave`](#view-all-leaves-find-all-leave) would find leave applications by employee and view all leave applications respectively.
+HRMate offers different commands for finding leave applications. [`find-leave-range`](#find-leave-applications-by-time-period-find-leave-range) and [`find-leave-status`](#find-leave-applications-by-leave-status-find-leave-status) would find leave applications by time period and leave status respectively while [`find-leave`](#find-leave-applications-belonging-to-an-employee-find-leave) and [`find-all-leave`](#view-all-leaves-find-all-leave) would find leave applications by employee and view all leave applications respectively.
 
 #### Find leave applications by time period: `find-leave-range`
 
@@ -615,7 +618,7 @@ To find leave applications belonging to an employee, use the `find-leave` comman
  - Do note that the index field is required, and the index must be a valid number.
    - The index must be a positive number.
    - The index must be within the range of the number of employees in HRMate.
- - If you wish to view all leave applications, you can use the `find-all-leave` command instead.
+ - If you wish to view all leave applications, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
 3. Press `Enter` to execute the command. You should see the leave applications that belong to the employee with the index you specified.
 
 
@@ -643,7 +646,7 @@ Use the `find-all-leave` command to view all leave applications currently stored
 
 ### Edit a leave application
 
-HRMate offers different commands for editing leave applications. [`approve-leave`](#approve-leave-record-by-index-approve-leave) and [`reject-leave`](#reject-leave-record-by-index-reject-leave) would approve and reject leave applications respectively while [`edit-leave`](#editing-a-leave-record-edit-leave) would edit the leave application comprehensively.
+HRMate offers different commands for editing leave applications. [`approve-leave`](#approve-leave-application-by-index-approve-leave) and [`reject-leave`](#reject-leave-application-by-index-reject-leave) would approve and reject leave applications respectively while [`edit-leave`](#editing-a-leave-application-edit-leave) would edit the leave application comprehensively.
 
 #### Approve leave application by index: `approve-leave`
 
@@ -651,8 +654,9 @@ Use the `approve-leave` command to approve a leave application in HRMate. This c
 
 1. Get the [index](#glossary) of the leave under the leave list.
 
-> [!NOTE]
-> If the leave application is not found, consider using `find-all-leave` or any `find commands` to locate the leave application in the leave list.
+<box type='info'>
+If the leave application is not found, consider using `find-all-leave` or any `find commands` to locate the leave application in the leave list.
+</box>
 
 2. Type in the following command in the command box `approve-leave LEAVE_LIST_INDEX`
 3. Press "enter" on your keyboard and the specified leave application is approved.
@@ -669,8 +673,9 @@ Use the `reject-leave` command to reject a leave application in HRMate. This com
 
 1. Get the [index](#glossary) of the leave under the leave list.
 
-> [!NOTE]
-> If the leave application is not found, consider using `find-all-leave` or any `find commands` to locate the leave application in the leave list.
+<box type='info'>
+If the leave application is not found, consider using `find-all-leave` or any `find commands` to locate the leave application in the leave list.
+</box>
 
 2. Type in the following command in the command box `reject-leave LEAVE_LIST_INDEX`
 3. Press "enter" on your keyboard and the specified leave application is approved.
@@ -687,8 +692,10 @@ Use the `reject-leave` command to reject a leave application in HRMate. This com
 For a more comprehensive editing of a leave application, use the `edit-leave` command to edit a leave application in HRMate. This command will edit the specified leave application.
 
 1. Get the [index](#glossary) of the leave under the leave list.
-> [!NOTE]  
-> If the employee is not found, consider using `find-all-leave` or any `find commands` to locate the leave in the leave list.
+
+<box type='info'>
+If the employee is not found, consider using `find-all-leave` or any `find commands` to locate the leave in the leave list.
+</box>
 
 2. Type in the following command in the command box `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. Note that at least one field to edit must be present and only the fields present will be edited.
  - For example, to change the title and description of the leave indexed 2 to John's sick leave and MC provided, type in the command `edit-leave 2 title/John's sick leave d/MC provided`. Note that the start date, end date, and status will remain unchanged.
@@ -716,7 +723,7 @@ To update the status of a leave application, we recommend you to use the `approv
 
 ### Delete a leave application
 
-To delete a leave application, use the [`delete-leave`](#removing-a-leave-record-delete-leave) command.
+To delete a leave application, use the [`delete-leave`](#removing-a-leave-application-delete-leave) command.
 
 #### Removing a leave application: `delete-leave`
 
@@ -746,7 +753,7 @@ Here are some potential error messages that you may receive and here's how to so
 
 
 ### Importing/Exporting leave applications
-The import and export feature extends to importing and exporting leaves, with [`import-leave`](#importing-leave-records-import-leave) and [`export-leave`](#exporting-leave-records-export-leave). This allows you to generate lists of leave
+The import and export feature extends to importing and exporting leaves, with [`import-leave`](#importing-leave-applications-import-leave) and [`export-leave`](#exporting-leave-applications-export-leave). This allows you to generate lists of leave
 applications that can be opened in other major spreadsheet applications such as Microsoft Excel.
 
 
@@ -757,7 +764,7 @@ the specified CSV file into HRMate.
 
 <box type="warning" seamless>
 Imported leave applications will overwrite existing leave applications in HRMate. Remember to make a copy of your existing
-leave applications if you want to save them! You can do so by <a href="#exporting-leave-records-export-leave">exporting your current records</a>.
+leave applications if you want to save them! You can do so by <a href="#exporting-leave-applications-export-leave">exporting your current records</a>.
 </box>
 
 Here's how you can bring over your leave applications from Excel:
@@ -865,7 +872,7 @@ Here's how you can remove every employee contact and leave application from the 
 <box type="warning" seamless>
 Be careful when using this command - resetting the application is permanent. If you have not already exported your
 <a href="#exporting-employee-records-export">employee records</a> and
-<a href="#exporting-leave-records-export-leave">leave applications</a>, you will not be able to get them back!
+<a href="#exporting-leave-applications-export-leave">leave applications</a>, you will not be able to get them back!
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -936,7 +943,7 @@ The first command is used to add an employee while the second is used to add tag
 ## FAQ
 
 #### Q: How do I transfer my data to another computer?
-**A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave applications](#importing-exporting-leave-records).
+**A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave applications](#importing-exporting-leave-applications).
 <br/>
 <br/>
 
