@@ -15,8 +15,10 @@
 
 ## **Acknowledgements**
 
-{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
+* [Address Book 3](https://se-education.org/addressbook-level3/): HRMate is built on top of AB3
+* [JavaFX](https://openjfx.io/): The GUI framework used in HRMate
+* [Jackson](https://github.com/FasterXML/jackson): JSON parsing library used to read and write HRMate's JSON data files
+* [MarkBind](https://markbind.org/): Used to generate HRMate's project site
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -73,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `LeaveListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +84,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Leave` objects residing in the `Model`.
 
 ### Logic component
 
@@ -127,7 +129,8 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the leaves book data as well i.e., all `Leaves` objects (which are contained in a `UniqueLeavesList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of `find`) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+* stores the currently 'selected' `Leave` objects (e.g. results of `find-leave`) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Leave>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -147,9 +150,18 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
 
 The `Storage` component,
-* can save the address book data, leaves book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save the address book data, leaves book data and user preference data in either JSON or CSV format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage`, `LeavesBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<puml src="diagrams/AddressBookStorageClassDiagram.puml" width="550"></puml>
+<puml src="diagrams/LeavesBookStorageClassDiagram.puml" width="550"></puml>
+
+Both `AddressBookStorage` and `LeavesBookStorage` contain JSON and CSV implementations. These implementations exist separately
+as their methods invoke methods from different Util files - the JSON implementation invokes JsonUtil methods, while the
+CSV implementation invokes CsvUtil methods. `SerializableAddressBook`, `SerializableLeavesBook`, `AdaptedPerson` and
+`AdaptedLeave` have been abstracted out to promote code reusability, with the use of generics where possible to enforce
+type safety.
 
 ### Common classes
 
@@ -621,8 +633,6 @@ testers are expected to do more exploratory testing.</box>
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. { more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -638,12 +648,38 @@ testers are expected to do more exploratory testing.</box>
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. { more test cases …​ }_
+2. Deleting a person after applying a filter
+
+    1. Prerequisites: Filter to the second person using `find PERSON_NAME` where `PERSON_NAME` is the name of the second person.
+
+    2. Test case: `delete 1`<br>
+        Expected: First visible contact is delete from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `delete 2`<br>
+       Expected: No person is delete. Error details shown in the status message. Status bar remains the same.
+
+    4. Follow up actions: `list`<br>
+       Expected: Only the previously deleted person is deleted.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Open `./data/addressbook.json` and delete the first character `{`. Then open HRMate. <br>
+       Expected: HRMate opens an empty address book.
 
-2. { more test cases …​ }
+    2. Add a person using `add` and a leave using `add-leave`, then `exit`. Open `./data/leavesbook.json` and edit the fullName of the name of the employee of a leave. Reopen HRMate.<br>
+       Expected: HRMate restores all data except for the edited leave.
+
+### Data integrity between `Person` and `Leave`
+
+1. Dealing with edits to `Person`
+
+    1. Add a `Person` using `add` and a `Leave` using `add-leave`. Edit the `Person` name using `edit`. <br>
+       Expected: The Employee under the created `Leave` is edited also.
+
+2. Dealing with deletes to `Person`
+
+    1. Add a `Person` using `add` and a `Leave` using `add-leave`. Delete the `Person` with `delete`. <br>
+       Expected: The previously created `Leave` is deleted also.
+
