@@ -50,8 +50,17 @@ Given below are my contributions to the project.
   * Add documentation for the following commands in User Guide: `view-tag`, `add-tag` and `delete-tag` [[PR#41]]
   * Add documentation for the following commands in User Guide: `find-leave-range`, `find-leave-status`, `find-all-leave`
     `find-leave` and `delete-leave` [[PR#166]]
+  * Reorder User Guide by rearranging commands into feature categories to allow for more intuitive navigation [[PR#194]]
+  * Add About section for HRMate to explain key terms and key features of application [[PR#195]]
+  * Add minor edits such as removal of excessive anchor links, and rewording of certain sections in User Guide [[PR#195]] [[PR#196]]
 
-* **Reviewing PRs**
+* **Reviewing PRs** 
+  * Review import/ export Developer Guide proposed implementation [[PR#43]]
+  * Review implementation of import / export feature of address book [[PR#53]]
+  * Review implementation of CSV Parser [[PR#58]]
+  * Review implementation of import / export feature of leaves book [[PR#103]]
+  * Review refactoring of exception handling by ParserUtil [[PR#165]]
+  * Review implementation of `find-leave-status` and `find-leave-range` commands [[PR#90]] [[PR#91]]
 
 * **Miscellaneous**
   * Fixed bugs reported during Practical Exam Dry Run [[PR#158]]
