@@ -38,7 +38,7 @@ This user guide aims to help new users quickly familiarise themselves with HRMat
 5. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
 An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
-![Ui](images/Ui.png)
+![Ui](images/Ui-annotated.png)
 
 6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
  - `help` : Opens the help window.
@@ -86,6 +86,9 @@ Here are the potential error messages that you may receive and here's how to fix
 | `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name. |
 | `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                            |
 | `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
+
+> [!IMPORTANT]
+> > Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
 
 ## Listing all employees: `list`
 
