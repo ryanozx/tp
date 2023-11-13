@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package LeavesBookStorage as LeavesBookStoragePackage {
+
+Class "<<interface>>\nLeavesBookStorage" as LeavesBookStorage
+
+package "Json LeavesBook Storage" #F4F6F6{
+Class JsonLeavesBookStorage
+Class JsonSerializableLeavesBook
+Class JsonAdaptedLeave
+}
+
+package "Csv LeavesBook Storage" #F4F6F6{
+Class CsvLeavesBookStorage
+Class CsvSerializableLeavesBook
+Class CsvAdaptedLeave
+}
+
+Class SerializableLeavesBook
+Class AdaptedLeave
+}
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> LeavesBookStorage
+
+JsonLeavesBookStorage .up.|> LeavesBookStorage
+JsonLeavesBookStorage ..> JsonSerializableLeavesBook
+JsonSerializableLeavesBook --> "*" JsonAdaptedLeave
+
+CsvLeavesBookStorage .up.|> LeavesBookStorage
+CsvLeavesBookStorage ..> CsvSerializableLeavesBook
+CsvSerializableLeavesBook --> "*" CsvAdaptedLeave
+
+SerializableLeavesBook <|-- JsonSerializableLeavesBook
+SerializableLeavesBook <|-- CsvSerializableLeavesBook
+
+AdaptedLeave <|-- JsonAdaptedLeave
+AdaptedLeave <|-- CsvAdaptedLeave
+@enduml

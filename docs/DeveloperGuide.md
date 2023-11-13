@@ -15,8 +15,10 @@
 
 ## **Acknowledgements**
 
-{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
+* [Address Book 3](https://se-education.org/addressbook-level3/): HRMate is built on top of AB3
+* [JavaFX](https://openjfx.io/): The GUI framework used in HRMate
+* [Jackson](https://github.com/FasterXML/jackson): JSON parsing library used to read and write HRMate's JSON data files
+* [MarkBind](https://markbind.org/): Used to generate HRMate's project site
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -73,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `LeaveListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +84,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Leave` objects residing in the `Model`.
 
 ### Logic component
 
@@ -127,7 +129,8 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the leaves book data as well i.e., all `Leaves` objects (which are contained in a `UniqueLeavesList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of `find`) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+* stores the currently 'selected' `Leave` objects (e.g. results of `find-leave`) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Leave>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -147,9 +150,18 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
 
 The `Storage` component,
-* can save the address book data, leaves book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save the address book data, leaves book data and user preference data in either JSON or CSV format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage`, `LeavesBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<puml src="diagrams/AddressBookStorageClassDiagram.puml" width="550"></puml>
+<puml src="diagrams/LeavesBookStorageClassDiagram.puml" width="550"></puml>
+
+Both `AddressBookStorage` and `LeavesBookStorage` contain JSON and CSV implementations. These implementations exist separately
+as their methods invoke methods from different Util files - the JSON implementation invokes JsonUtil methods, while the
+CSV implementation invokes CsvUtil methods. `SerializableAddressBook`, `SerializableLeavesBook`, `AdaptedPerson` and
+`AdaptedLeave` have been abstracted out to promote code reusability, with the use of generics where possible to enforce
+type safety.
 
 ### Common classes
 
