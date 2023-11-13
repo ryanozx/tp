@@ -6,10 +6,32 @@
 
 # HRMate User Guide
 
-Hi HR managers, this is HRMate. HRMate is a **desktop app for managing employee and leave records**.
-HRMate uses a Command Line Interface ([CLI](#glossary)) and Graphical User Interface ([GUI](#glossary)).
-That means that we are optimized for fast typers like you, and can help you complete your HR tasks faster than traditional HR apps like Oracle and SAP.
-This user guide aims to help new users quickly familiarise themselves with HRMate and help experienced users to explore advanced features of HRMate, with the goal of using HRMate to better facilitate your HR needs.
+Welcome to HRMate, the go-to desktop application designed exclusively for HR managers like yourself. 
+
+Discover a seamless one-stop solution within HRMate to oversee your team's contact details, 
+roles, and streamline leave application processes, so you can keep both your staff and management 
+satisfied.
+
+If you are a fast typist, you will love the swift speed of working in HRMate compared to traditional HR apps like 
+Oracle and SAP. HRMate's [Command Line Interface (CLI)](#glossary) is optimised for you, so you can perform nearly 
+every task simply by typing short commands ([What is a command?](#glossary)).
+
+This guide explains how you can setup and use the various features of HRMate, as well as provide
+troubleshooting insights to help solve any problems you might face while using HRMate. No matter your familiarity with 
+HRMate or technology, this guide has something for you.
+
+**New to HRMate?** Dive into our [Quick Start](#quick-start) guide for a step-by-step setup and key features tutorial, 
+so you can start using HRMate in no time.
+
+**Need a quick refresher on the commands?** Explore the [Command Summary](#command-summary), a concise compilation
+of commands and their usage.
+
+**Seasoned HRMate user?** Delve into our [Features](#features) section for an in-depth exploration of advanced features
+to elevate your HR management experience.
+
+We trust you will find this guide helpful in maximising your HRMate experience!
+
+_~ The HRMate team_
 
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
@@ -18,27 +40,28 @@ This user guide aims to help new users quickly familiarise themselves with HRMat
 
 ## Quick start
 
-1. Download the latest `hrmate.jar` from [to be updated]() and move to your desired location. See [How do I move a file?](#faq) for help.
+1. Download the latest `hrmate.jar` from [to be updated]() and move the downloaded file to your desired location. 
+See [How do I move a file?](#q-how-do-i-move-a-file) for help.
 
 2. Open a terminal or your computer.
-
 <box type="info" seamless>
     <ul>
-        <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
-        <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
+        <li><strong>For Mac users:</strong> Open the Terminal app on your Mac</li>
+        <li><strong>For Windows users:</strong> Press the Windows key on your keyboard, type `powershell` into the 
+                    dialog box that opens and press "Enter" on your keyboard to open up a terminal window.</li>
     </ul>
     See <a href="#faq">How do I open a terminal?</a> for more information.
 </box>
 
 3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
 
-4. Ensure you have Java `11` or above installed in your Computer. This can be done by typing `java -version` in your terminal.
+4. Ensure you have Java `11` or above installed in your Computer. This can be done by typing `java -version` in your terminal and pressing "Enter".
  - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognise the `java` input. 
 
-5. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
+5. Type `java -jar hrmate.jar` into the terminal and press "Enter" on your keyboard.<br>
 An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
-![Ui](images/Ui.png)
+![Ui](images/Ui-annotated.png)
 
 6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
  - `help` : Opens the help window.
@@ -509,7 +532,7 @@ the following fields: Name, Phone, Email, Address, Tags. Note that tags in the T
 <box type="warning" seamless>
 If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
 which will cause problems when trying to import employee records. To fix this problem, 
-<a href="#excel-separator-faq">click here</a> to find out how you
+<a href="#q-how-do-i-change-the-separator-of-my-csv-file-into-semicolons-in-excel">click here</a> to find out how you
 can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users.
 </box>
 
@@ -589,7 +612,7 @@ Here's how you can bring over your leave records from Excel:
 <box type="warning" seamless>
     If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
     which will cause problems when trying to import leave records. To fix this problem,
-    <a href="excel-separator-faq">click here</a> to find out how you
+    <a href="#q-how-do-i-change-the-separator-of-my-csv-file-into-semicolons-in-excel">click here</a> to find out how you
     can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users
 </box>
 
@@ -606,7 +629,7 @@ Here's how you can bring over your leave records from Excel:
       <br/>
       <br/>
     * Do ensure that the first row contains the following headers: `Title`, `Employee`, `Start`, `End`, `Description`, and `Status`.
-3. In HRMate, type in the following command in the command box: `import-leave`
+3. In HRMate, type in the following command in the command box: `import-leave` and press "Enter"
 4. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
 5. You should see your leave records show up in HRMate, along with the message "Leave records have been imported from [your file name]!"
 
@@ -722,37 +745,41 @@ The first command is used to add an employee while the second is used to add tag
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: We recommend using the [import and export command for employee](#importingexporting-employee-records) and [import and export command for leave records](#importingexporting-leave-records).
-
-**Q**: How do I move a file?<br>
-**A**: For **windows**, first open File Explorer and find the file. Afterwards, drag the selected file's icon to the desired location using your mouse. For more help, please consult the [Microsoft documentation](https://support.microsoft.com/en-gb/office/move-or-copy-an-item-to-another-folder-19768dfe-86c4-40bf-b82c-1c084b624492)<br>
-For **mac**, first open Finder and find the specific file. Then drag it to the desired location using the mouse. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/mac-help/mh26885/mac).
-
-**Q**: How do I open a terminal?<br>
-**A**: For **windows**, press the windows key, type in `powershell` and press Enter. The terminal should open. For more help, please consult the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/terminal/install).
-For **mac**, open the terminal app on your mac. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal.).
-
-**Q**: How do I navigate files in terminal?<br>
+### Q: How do I transfer my data to another computer?
+**A**: We recommend using the [import and export command for employees](#importing-exporting-employee-records) and [import and export command for leave records](#importing-exporting-leave-records).
+<br/>
+<br/>
+### Q: How do I move a file?
+**A**: 
+* For **Windows** users, first open File Explorer and find the file. Afterwards, drag the selected file's icon to the desired location using your mouse. For more help, please consult the [Microsoft documentation](https://support.microsoft.com/en-gb/office/move-or-copy-an-item-to-another-folder-19768dfe-86c4-40bf-b82c-1c084b624492)<br>
+* For **Mac** users, first open Finder and find the specific file. Then drag it to the desired location using the mouse. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/mac-help/mh26885/mac).
+<br/>
+<br/>
+### Q: How do I open a terminal?
+**A**: 
+* For **Windows** users, press the Windows key, type in `powershell` and press Enter. The terminal should open. For more help, please consult the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/terminal/install).
+* For **Mac** users, open the Terminal app on your Mac. For more help, please consult the [Apple documentation](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal.).
+<br/>
+<br/>
+### Q: How do I navigate files in terminal?
 **A**: You can use the `cd` command to navigate in terminal. For more information, please consult this [documentation](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command). 
-
-**Q**: How do I download Java 11?<br>
-**A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-
-<a name="excel-separator-faq"></a>
-**Q**: How do I change the separator of my CSV file into semicolons(`;`) in Excel?<br/>
-**A**: Follow these steps to change the separator when exporting:
-* If you are using Windows, follow these steps:
+<br/>
+<br/>
+### Q: How do I download Java 11?
+**A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+<br/>
+<br/>
+### Q: How do I change the separator of my CSV file into semicolons(`;`) in Excel?
+**A**:
+* If you are a **Windows** user:
   1. In Excel, click on File > Options > Advanced.
   2. Under Editing options, uncheck the `Use system separators` check box.
   3. Change the Decimal separator to a comma (`,`) and the Thousands separator to a period (`.`).
-  4. Save your file. When saving your file, change the save type (`Save as type`) to `CSV (Coma delimited) (*.csv)`
+  4. Save your file. When saving your file, change the save type (`Save as type`) to `CSV (Comma delimited) (*.csv)`
   5. After saving your file, remember to reset your Excel separators. Repeat steps 1 and 2, only that this time remember to
     check the `Use system separators` check box instead.
-  <br/>
-  <br/>
-* Unfortunately, if you are using Mac OS, Excel makes it very difficult to change the separator
-to semicolons. Stay tuned for future releases that will extend support for Mac OS!
+* If you are a **Mac** user, unfortunately Excel makes it very difficult to change the separator to semicolons. 
+Stay tuned for future releases that will extend support for Mac OS!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -763,38 +790,38 @@ to semicolons. Stay tuned for future releases that will extend support for Mac O
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                      |
-|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                    | Format, Examples                                                                                                                                                     |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add Leave**             | `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`<br> e.g., `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`              |
-| **Add Tag**               | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                        |
-| **Approve Leave**         | `approve-leave 1` <br> e.g., `approve-leave 1`                                                                                                                        |
-| **Clear**                 | `clear`                                                                                                                                                               |
-| **Delete**                | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| **Delete Leave**          | `delete-leave LEAVE_LIST_INDEX`<br> e.g., `delete-leave 1`                                                                                                            |
-| **Delete Tag**            | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                  |
-| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Edit Leave**            | `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`<br> e.g., `edit-leave 1 title/medical leave start/2023-11-01`           |
-| **Exit**                  | `exit`                                                                                                                                                                |
-| **Export Contacts**       | `export FILE_NAME`                                                                                                                                                    |           
-| **Export Leaves**         | `export-leaves FILE_NAME`                                                                                                                                             |           
+| **Add Leave**             | `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`<br> e.g., `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`             |
+| **Add Tag**               | `add-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `add-tag 3 remote`                                                                                                       |
+| **Approve Leave**         | `approve-leave 1` <br> e.g., `approve-leave 1`                                                                                                                       |
+| **Clear**                 | `clear`                                                                                                                                                              |
+| **Delete**                | `delete EMPLOYEE_LIST_INDEX`<br> e.g., `delete 3`                                                                                                                    |
+| **Delete Leave**          | `delete-leave LEAVE_LIST_INDEX`<br> e.g., `delete-leave 1`                                                                                                           |
+| **Delete Tag**            | `delete-tag EMPLOYEE_LIST_INDEX TAG`<br> e.g., `delete-tag 3 remote`                                                                                                 |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                          |
+| **Edit Leave**            | `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`<br> e.g., `edit-leave 1 title/medical leave start/2023-11-01`          |
+| **Exit**                  | `exit`                                                                                                                                                               |
+| **Export Contacts**       | `export FILE_NAME`                                                                                                                                                   |           
+| **Export Leaves**         | `export-leave FILE_NAME`                                                                                                                                             |           
 | **Find**                  | `find NAME...​`<br> e.g., `find James Jake`                                                                                                                   |
-| **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
-| **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
-| **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                  | 
-| **Find Leaves by Status** | `find-leave-status STATUS`                                                                                                                                            |
-| **Find All Leaves**       | `find-all-leave`                                                                                                                                                      |
-| **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
-| **Find Leaves**           | `find-leave INDEX`<br> e.g., `fin-leave 1`                                                                                                                            |
-| **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                  | 
-| **Find Leaves by Status** | `find-leave-status STATUS`                                                                                                                                            |
-| **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
-| **Help**                  | `help`                                                                                                                                                                |
-| **Import Contacts**       | `import`                                                                                                                                                              |
-| **Import Leaves**         | `import-leaves`                                                                                                                                                       |
-| **List**                  | `list`                                                                                                                                                                |
-| **Reject Leave**          | `reject-leave 1` <br> e.g., `reject-leave 1`                                                                                                                          |
-| **View tag**              | `view-tag`                                                                                                                                                            |
+| **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                               |
+| **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                             |
+| **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                 | 
+| **Find Leaves by Status** | `find-leave-status STATUS`                                                                                                                                           |
+| **Find All Leaves**       | `find-all-leave`                                                                                                                                                     |
+| **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                               |
+| **Find Leaves**           | `find-leave INDEX`<br> e.g., `fin-leave 1`                                                                                                                           |
+| **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                 | 
+| **Find Leaves by Status** | `find-leave-status STATUS`                                                                                                                                           |
+| **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                             |
+| **Help**                  | `help`                                                                                                                                                               |
+| **Import Contacts**       | `import`                                                                                                                                                             |
+| **Import Leaves**         | `import-leaves`                                                                                                                                                      |
+| **List**                  | `list`                                                                                                                                                               |
+| **Reject Leave**          | `reject-leave 1` <br> e.g., `reject-leave 1`                                                                                                                         |
+| **View tag**              | `view-tag`                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------------------
