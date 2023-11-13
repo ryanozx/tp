@@ -97,7 +97,6 @@ We have added some annotations in <span style="color:red">red</span> so that you
  - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11`: Adds a leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
  - `delete 2`: Deletes the second employee shown in the current employee list and any leave applications associated with the second employee.
  - `exit`: Exits the app.
-
 For new users, especially first-time users, it is very important and helpful to read through the [How to interpret command formats?](#how-to-interpret-command-formats). This section provides a detailed introduction to the overall structure of all commands used in HRmate.
 
 Also, look through [Features](#features) for commands and the details of each command. If you would like a concise summary of the commands, please check out our [command summary](#command-summary). We hope to aid you in your HR journey!
