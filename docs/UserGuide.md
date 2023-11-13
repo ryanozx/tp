@@ -31,8 +31,9 @@ to elevate your HR management experience.
 
 We trust you will find this guide helpful in maximising your HRMate experience!
 
-_~ The HRMate team_
---------------------------------------------------------------------------------------------------------------------
+~ _The HRMate team_
+
+
 
 <div style="page-break-after: always;"></div>
 <!-- * Table of Contents -->
@@ -66,7 +67,7 @@ An app similar to the one below should appear in a few seconds. The app is popul
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
 ![Ui](images/Ui-annotated.png)
 
-6. Try typing some commands into the command box and pressing "enter" to execute. Here are some commands to start with.<br>
+6. Try typing some commands into the command box and pressing "enter" to execute. Here are some commands to start with.
  - `help` : Opens the help window.
  - `list` : Lists all contacts.
  - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the employee list
@@ -85,15 +86,19 @@ Also, look through [Features](#features) for more commands and the details of ea
 
 
 ## Employee-related features
+
 ###  Add an employee record
-When a new employee joins, you can use the `add` [command](#glossary) to add their information into HRMate.
+When a new employee joins, use the [`add`](#adding-an-employee-add) [command](#glossary) to add their information into HRMate.
+
 #### Adding an employee: `add`
+
+Use the `add` command to add an employee to the [employee list](#glossary).
 
 1. Type in the following [command](#glossary) in the [command box](#glossary): `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replace `NAME` with employee name, `PHONE_NUMBER` with employee phone number `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field with one or more [tags](#glossary), with `TAG` being the name of the tag.
  - For instance, if you have an employee name John Doe with phone number 98765432, email johnd@example.com, home address John Street, block 123 #01-01 and tags full-time and remote, type in the command `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01 t/full-time t/remote`
  - If your employee does not require any tags, using the same information as above, the command would be `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01`
  - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
-2. Press "enter" on your keyboard and you should see the person information at the end of the [employee list](#glossary). 
+2. Press "enter" on your keyboard and you should see the person information at the end of the employee list. 
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
@@ -107,7 +112,11 @@ Here are the potential error messages that you may receive and here's how to fix
 > > Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
 
 ### Find an employee record
+HRMate makes it easy to find an employee and there are multiple ways of doing so. You can use the [`list`](#listing-all-employees-list) command to list all employees, or use the [`find`](#finding-employees-by-name-find) command to find employees by name. You can also use the [`find-all-tag`](#finding-employees-by-all-specified-tags-find-all-tag) and [`find-some-tag`](#finding-employees-by-at-least-one-specified-tag-find-some-tag) commands to find employees by their associated tags.
+
 #### Listing all employees: `list`
+
+Use the `list` command to view all employees that are currently listed in the [employee list](#glossary).
 
 1. Type in the following [command](#glossary) in the [command box](#glossary): `list`.
 2. Press "enter" on your keyboard and you should see the information of all employees listed in the [employee list](#glossary).
@@ -122,6 +131,9 @@ Here are the potential error messages that you may receive and here's how to fix
 | `Unknown command` | The command you inputted is not part of the commands available in HRmate. | Please check the spelling and try again.
 
 #### Finding employees by name: `find`
+
+Use the `find` command to find employees by name. This command will find employees whose names contain the specified words that you enter.
+
   1. Type in the following [command](#glossary) in the [command box](#glossary) `find NAME....` where `NAME...` are to be replaced with one or more names of the employees for search.
      * The words for search are case insensitive, meaning you do not have to worry about the capitalization of the words entered. 
   - For instance, to find employees whose names contain `Martin`, type `find martin` to the command box.
@@ -138,8 +150,11 @@ Here are the potential error messages that you may receive and here's how to fix
 
 #### Viewing All Tags: `view-tag`
 
+To view all tags currently in use within the employee list, use the `view-tag` command. This will be 
+useful if you want to find employees by their associated tags using the [`find-all-tag`](#finding-employees-by-all-specified-tags-find-all-tag) and [`find-some-tag`](#finding-employees-by-at-least-one-specified-tag-find-some-tag) commands.
+
 1. Type in the following [command](#glossary) in the [command box](#glossary): `view-tag`.
-2. Press "enter" on your keyboard and you should see a list of all tags currently in use within the [employee list](#glossary).
+2. Press "enter" on your keyboard and you should see a list of all tags currently in use within the employee list.
 
 > [!NOTE]  
 > This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `view-tag 123`, `view-tag abc`, and `view-tag 1a2b` all as the command `view-tag`.
@@ -154,6 +169,8 @@ Here are the potential error messages that you may receive and here's how to fix
 
 
 #### Finding employees by all specified tags: `find-all-tag`
+
+To find employees by a set of specified tags, use the `find-all-tag` command. This command will find employees that are currently associated with all the specified tags that you enter.
 
 1. Type in the following [command](#glossary) in the [command box](#glossary) `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary).
    * At least one tag should be entered for search and more tags can be entered if you want to search for more.
@@ -171,6 +188,8 @@ Here are the potential error messages that you may receive and here's how to fix
   * Employees are displayed in the order in which they are arranged in the employee list.
 
 #### Finding employees by at least one specified tag: `find-some-tag`
+
+To find employees by at least one of the specified tags, use the `find-some-tag` command. This command will find employees that are currently associated with at least one of the specified tags that you enter.
 
 1. Type in the following [command](#glossary) in the [command box](#glossary) `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary).
    * At least one tag should be entered for search and more tags can be entered if you want to search for more.
@@ -736,7 +755,7 @@ Should you need any help, you can access this online user guide (this document) 
 2. Press "Enter" on your keyboard.
 3. The following pop up should show: 
 
-<br>
+
 ![help menu](images/help-menu.png)
 
 4. Click on the "copy link" button to copy the link to the user guide, and paste into any [web browser](#glossary) to access the user guide. Alternatively, click the red button at the corner of the window to close the pop up.
