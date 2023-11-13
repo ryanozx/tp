@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package AddressBookStorage as AddressBookStoragePackage {
+
+Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+
+package "Json AddressBook Storage" #F4F6F6{
+Class JsonAddressBookStorage
+Class JsonSerializableAddressBook
+Class JsonAdaptedPerson
+}
+
+package "Csv AddressBook Storage" #F4F6F6{
+Class CsvAddressBookStorage
+Class CsvSerializableAddressBook
+Class CsvAdaptedPerson
+}
+
+Class SerializableAddressBook
+Class AdaptedPerson
+Class AdaptedTag
+}
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> AddressBookStorage
+
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+
+CsvAddressBookStorage .up.|> AddressBookStorage
+CsvAddressBookStorage ..> CsvSerializableAddressBook
+CsvSerializableAddressBook --> "*" CsvAdaptedPerson
+
+AdaptedPerson --> "*" AdaptedTag
+
+SerializableAddressBook <|-- JsonSerializableAddressBook
+SerializableAddressBook <|-- CsvSerializableAddressBook
+
+AdaptedPerson <|-- JsonAdaptedPerson
+AdaptedPerson <|-- CsvAdaptedPerson
+@enduml
