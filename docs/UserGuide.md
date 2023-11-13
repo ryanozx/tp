@@ -369,25 +369,28 @@ Therefore, to change the status of a leave, please use the <a href= "#approve-le
 
 ### Removing a leave record: `delete-leave`
 
-* **What It Does:**
-  * Removes an existing leave record form HRMate, so that the leave's record is no longer available in HRMate.
-* **Format:**
-  * `delete-leave LEAVE_LIST_INDEX`
-* **Examples:**
 
-| S/N | Command information                                                                                                                                                                                                                                                    |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `delete-leave 1` <br><br> **Output:** Deletes the leave record with index 1. For instance, if the leave record titled "medical leave" with employee "David de Gea" is indexed 1, then "medical leave" is removed from HRMate and no longer available.     |
-| 2   | **Command:** `delete-leave 2` <br><br> **Output:** Deletes the leave record with index 2. For instance, if the leave record titled "childcare leave" with employee "Carlos Puyol" is indexed 2, then "childcare leave" is removed from HRMate and no longer available. |
+If you wish to remove a leave record from HRMate, you can use the `delete-leave` command to do so.
 
-* **Acceptable Values:**
-  * The specified `LEAVE_LIST_INDEX` must correspond to an index number shown in the leave book. It must be a valid number, larger than zero, and cannot exceed the number of entries in the leave book.
-* **Expected Output on Success:**
-  * GUI Changes: The leave record of the specified index will no longer appear in the list of leave records.
-  * Message shown to user: "[leave title] deleted"
-* **Expected Output on Failure:**
-  * `Leave list index does not exist` - An invalid index was specified.
-  * `Employee list index not specified` - No index was specified by the user.
+
+1. Type in the following [command](#glossary) in the [command box](#glossary): `delete-leave LEAVE_LIST_INDEX`, and replace `LEAVE_LIST_INDEX` with the index of the leave record you wish to remove.
+ - For instance, referring to the figure below: if you wanted to remove the leave record titled "medical leave" with employee "Bernice Yu", you would type in `delete-leave 2` in the command box.
+ - Do note that the index of the leave record you wish to remove must be a valid number
+   - The index must be a positive number that is larger than 0
+   - The index cannot exceed the number of entries in the leave book
+2. Press "enter" on your keyboard and you should see the leave record removed from HRMate.
+
+
+![delete-leave](images/delete-leaveUI.png)
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                         | Why it happens                                                                                                    | Fix                                                                                                                                                                                                                                                            |
+|---------------------------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `The leave index provided is invalid` | The index specified does not refer to any leave record                                                            | Double check if the index appears in the leave list. Afterwards, use the correct leave index to the left of the leave record in the `delete-leave` command. |
+| `Invalid command format!`             | An index was not specified in the command, or the index specified is not a positive number that is greater than 0 | Make sure that you provide an index when using this command. If you require assistance identifying the index, refer to the box directly above.                                                                                                                 |
+
 
 ### Approve leave record by index: `approve-leave`
 
@@ -433,102 +436,98 @@ Therefore, to change the status of a leave, please use the <a href= "#approve-le
 
 ### Find leave records by time period: `find-leave-range`
 
-* **What It Does:**
-  * Finds all leave records in HRMate in a given time period. There are 4 possible scenarios:
-  * 1) The time period has a start date and an end date (inclusive) - all leaves with at least one day that falls within
-      this period will be displayed
-    2) The time period only has a start date (inclusive) - all leaves that either occur on the start date or will occur
-      after the start date will be displayed
-    3) The time period only has an end date (inclusive) - all leaves that either occur on the end date or will finish
-      before the end date will be displayed
-    4) The time period does not have a start date or end date - all leaves will be returned
-* **Format:**
-  * `find-leave-range [start/START_DATE] [end/END_DATE]`
-* **Examples:**
 
-| S/N | Command information                                                                                                                                                                     |
-|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-leave-range start/2023-10-27 end/2023-11-03` <br><br> **Output:** Returns all leaves that have at least one day in the period of 2023-10-27 and 2023-11-03 inclusive |
-| 2   | **Command:** `find-leave-range start/2023-10-27` <br><br> **Output:** Returns all leaves that have at least one day either on or after 2023-10-27                                       |
-| 3   | **Command:** `find-leave-range end/2023-11-03` <br><br> **Output:** Returns all leaves that have at least one day on or before 2023-11-03                                               |
-| 4   | **Command:** `find-leave-range` <br><br> **Output:** Returns all leaves                                                                                                                 |
+If you wish to view the leave records in HRMate that fall within a particular time period,
+you can use the `find-leave-range` command to do so.
 
-* **Acceptable Values:**
-  * The dates provided for START_DATE and END_DATE must be of the format `yyyy-MM-DD`
-  * If both end date and start date are provided, the end date cannot occur before the start date
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications that fall within the queried time period will be returned
-  * Message shown to user: "[number of leaves matched] leaves listed!"
-* **Expected Output on Failure:**
-  * `The end date is earlier than the start date!` - the start date cannot occur after the end date
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-leave-range [start/START_DATE] [end/END_DATE]`, and replace `START_DATE` with the start date of the time period,
+   and `END_DATE` with the end date of the time period, both in the format `yyyy-MM-dd`.
+ - For instance: if you wanted to view all leave records that fall within the time period of 2023-10-27 and 2023-11-03 inclusive,
+   you would type in `find-leave-range start/2023-10-27 end/2023-11-03` in the command box.
+ - Do note that neither the start or end fields are required:
+   - If you wanted to view all leave records that start on or after 2023-10-27, you can type in `find-leave-range start/2023-10-27`.
+   - If you wanted to view all leave records that end on or before 2023-11-03, you can type in `find-leave-range end/2023-11-03`.
+ - If you wanted to view all leave records, you can type in `find-leave-range` or [`find-all-leave`](#view-all-leaves-find-all-leave) instead.
+2. Press `Enter` to execute the command. You should see the leave records that fall within the time period you specified.
+
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                                          | Why it happens                                           | Fix                                                                |
+|--------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------------------|
+| `The end date is earlier than the start date!`         | The end date you provided is earlier than the start date | Make sure that the end date is later than the start date           |
+| `Date should be valid and in a format of "yyyy-MM-dd"` | The date you provided is not in the format `yyyy-MM-dd`  | Make sure that the date you provided is in the format `yyyy-MM-dd` |
+
+Note: `yyyy-MM-dd` refers to the format of the date in the form of year-month-day. For example, 2023-11-01 refers to 1st November 2023.
 
 ### Find leave records by leave status: `find-leave-status`
 
-* **What It Does:**
-  * Finds all leave records in HRMate that have a particular status (either APPROVED/PENDING/REJECTED), so that you can
-  * see which leaves still require approval
-* **Format:**
-  * `find-leave-status STATUS`
-* **Examples:**
 
-| S/N | Command information                                                                                               |
-|-----|-------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-leave-status APPROVED` <br><br> **Output:** Returns all leaves that have already been approved |
-| 2   | **Command:** `find-leave-status PENDING` <br><br> **Output:** Returns all leaves that are still pending approval  |
-| 3   | **Command:** `find-leave-status REJECTED` <br><br> **Output:** Returns all leaves that have been rejected         |
+If you wish to view the leave records in HRMate that have a particular status, you can use the `find-leave-status` command to do so.
 
-* **Acceptable Values:**
-  * Status must be either "APPROVED", "PENDING", or "REJECTED". If the value is not in uppercase, the command will still be
-    accepted, but all other values are rejected.
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications that have the requested status will be returned
-  * Message shown to user: "[number of leaves matched] leaves listed!"
-* **Expected Output on Failure:**
-  * `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` - you provided an invalid status,
-    try either `APPROVED`, `PENDING`, or `REJECTED` instead
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-leave-status STATUS`, and replace `STATUS` with the status of the leave records you wish to view.
+ - For instance: if you wanted to view all leave records that have been approved, you would type in `find-leave-status APPROVED` in the command box.
+ - Do note that the status field is required, and the status must be either `APPROVED`, `PENDING` or `REJECTED`.
+   - The status is case-sensitive. For instance, `approved` is not a valid status. Ensure you use the correct casing, which is `APPROVED`.
+   - You can only specify one status at a time.
+ - If you wish to view all leave records, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
+2. Press `Enter` to execute the command. You should see the leave records that have the status you specified.
+
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                                                                           | Why it happens                       | Fix                                                                                  |
+|-----------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------------------|
+| `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` | The status you provided is not valid | Make sure that the status you provided is either `APPROVED`, `PENDING` or `REJECTED` |
+
+
+
 
 ### View all leaves: `find-all-leave`
 
-* **What It Does:**
-  * Shows all leave records in HRMate
-* **Format:**
-  * `find-all-leave`
-* **Examples:**
 
-| S/N | Command information                                                                      |
-|-----|------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-leave` <br><br> **Output:** Returns all leaves in the application |
+If you wish to view all the leave records in HRMate, you can use the `find-all-leave` command to do so.
 
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications will be returned
-  * Message shown to user: "Current # of Leave Request(s): [Number of leave applications]"
-  * If there are no leave applications on the app, the message shown to the user is: "There are currently no leave requests."
-* **Expected Output on Failure:**
-  * None, this command is not expected to fail
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-all-leave`
+2. Press `Enter` to execute the command. You should see all the leave records in HRMate.
+
 
 ### Find leave records belonging to an employee: `find-leave`
 
-* **What It Does:**
-  * Finds all leave records that are associated with an employee, so that you can see the person's leave history and 
-  * upcoming leaves
-* **Format:**
-  * `find-leave INDEX`
-* **Examples:**
 
-| S/N | Command information                                                                                                                                                                                              |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-leave 1` <br><br> **Output:** Returns all leaves associated with the employee with index 1. For instance, if the employee "John Smith" has employee index 1, John's leaves will be displayed. |
+If you wish to view the leave records in HRMate that belong to a particular employee, you can use the `find-leave` command to do so.
 
-* **Acceptable Values:**
-  * The specified `INDEX` must match with a employee record shown in the displayed employee list.
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications associated with the requested employee will be returned.
-  * Message shown to user: "[number of leaves matched] leaves listed!"
-* **Expected Output on Failure:**
-  * `The person index provided is invalid` - The index you provided does not match with any known employee. To resolve this,
-    make sure that the employee that you are requesting for is currently displayed in the employee list. Use the number to
-    the left of the employee's name as the index
-  * `Invalid command format` - There was no employee index provided, please make sure that you supply a number as the index
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-leave INDEX`, and replace `INDEX` with the index of the employee whose leave records you wish to view.
+ - For instance: if you wanted to view all leave records that belong to the employee with index 1, you would type in `find-leave 1` in the command box.
+ - Do note that the index field is required, and the index must be a valid number.
+   - The index must be a positive number.
+   - The index must be within the range of the number of employees in HRMate.
+ - If you wish to view all leave records, you can use the `find-all-leave` command instead.
+2. Press `Enter` to execute the command. You should see the leave records that belong to the employee with the index you specified.
+
+
+![find-leave](images/find-leaveUI.png)
+
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                          | Why it happens                                                                   | Fix                                                                                                                                                                        |
+|----------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `The person index provided is invalid` | The index you provided does not match with any person in the address book        | Make sure that the employee that you are requesting for is currently displayed in the employee list. Then, use the number to the left of the employee's name as the index. |
+| `Invalid command format!`              | No index was provided, or index provided is not a positive number greater than 0 | Make sure that you provide an index when using this command. If you require assistance identifying the index, refer to the box directly above.                             |
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Importing/Exporting employee records
