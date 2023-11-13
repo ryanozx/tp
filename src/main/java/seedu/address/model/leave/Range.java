@@ -12,7 +12,7 @@ import seedu.address.model.leave.exceptions.EndBeforeStartException;
  * Guarantees: End date will not be before start date, if both are present
  */
 public class Range {
-    public static final String MESSAGE_INVALID_END_DATE =
+    public static final String MESSAGE_END_BEFORE_START_ERROR =
             "The end date is earlier than the start date!";
     private final Date startDate;
     private final Date endDate;

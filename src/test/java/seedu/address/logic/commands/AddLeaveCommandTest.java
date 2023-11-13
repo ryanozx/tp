@@ -71,7 +71,6 @@ public class AddLeaveCommandTest {
         //all null
         assertThrows(NullPointerException.class, () -> new AddLeaveCommand(null, null,
                 null, null));
-
     }
 
     @Test
@@ -120,7 +119,6 @@ public class AddLeaveCommandTest {
         Range aliceDateRange = Range.createNonNullRange(aliceLeave.getStart(), aliceLeave.getEnd());
         Range aliceDifferentDateRange = Range.createNonNullRange(aliceLeaveDifferentRange.getStart(),
                 aliceLeaveDifferentRange.getEnd());
-
         Range bobDateRange = Range.createNonNullRange(bobLeave.getStart(), aliceLeave.getEnd());
 
         AddLeaveCommand addAliceCommand = new AddLeaveCommand(INDEX_FIRST_LEAVE, aliceLeave.getTitle(),
@@ -286,18 +284,6 @@ public class AddLeaveCommandTest {
          */
         @Override
         public boolean hasLeave(Leave leave) {
-            return false;
-        }
-
-        /**
-         * Returns true if a leave belonging to same employee has overlapping dates as {@code leave} exists in the
-         * leave book.
-         *
-         * @param leave
-         * @return
-         */
-        @Override
-        public boolean hasConcurrentLeave(Leave leave) {
             return false;
         }
 

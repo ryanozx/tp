@@ -70,18 +70,6 @@ public class LeavesBook implements ReadOnlyLeavesBook {
     }
 
     /**
-     * Returns true if a leave belonging to same employee has overlapping dates as {@code leave} exists in the
-     * leaves book.
-     *
-     * @param leave
-     * @return
-     */
-    public boolean hasConcurrentLeave(Leave leave) {
-        requireNonNull(leave);
-        return leaves.hasConcurrentLeave(leave);
-    }
-
-    /**
      * Adds a leave to the leaves book.
      * The leave must not already exist in the leaves book.
      */

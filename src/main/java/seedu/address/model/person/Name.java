@@ -24,8 +24,9 @@ public class Name {
      * Constructs a {@code Name}.
      *
      * @param name A valid name.
+     * @throws IllegalArgumentException if the name contains illegal values
      */
-    public Name(String name) {
+    public Name(String name) throws IllegalArgumentException {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;

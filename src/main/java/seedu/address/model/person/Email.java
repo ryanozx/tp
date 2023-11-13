@@ -37,8 +37,9 @@ public class Email {
      * Constructs an {@code Email}.
      *
      * @param email A valid email address.
+     * @throws IllegalArgumentException if email is not valid.
      */
-    public Email(String email) {
+    public Email(String email) throws IllegalArgumentException {
         requireNonNull(email);
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;

@@ -97,6 +97,11 @@ public class CommandTestUtil {
     public static final String INVALID_LEAVE_EARLY_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + VALID_LEAVE_DATE_START;
     public static final String INVALID_LEAVE_STATUS_DESC = " " + PREFIX_LEAVE_STATUS + "NONSENSE";
 
+    public static final String INVALID_LEAVE_DATE_START_LATE_DESC = " " + PREFIX_LEAVE_DATE_START
+            + VALID_LEAVE_DATE_END;
+    public static final String INVALID_LEAVE_DATE_END_EARLY_DESC = " " + PREFIX_LEAVE_DATE_END
+            + VALID_LEAVE_DATE_START;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)

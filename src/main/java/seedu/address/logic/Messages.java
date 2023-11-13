@@ -18,12 +18,18 @@ public class Messages {
 
     public static final String MESSAGE_NO_STATUS_PREFIX = "Status is PENDING by default, do not enter `s/` \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_LEAVE_INDEX = "The leave index provided is invalid";
+    public static final String MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX = "The leave index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_LEAVES_LISTED_OVERVIEW = "%1$d leaves listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX = "The leave index provided is invalid";
+
+    public static final String EMPLOYEE_HEADER = "Employee: ";
+    public static final String TITLE_HEADER = "; Title: ";
+    public static final String START_HEADER = "; Start: ";
+    public static final String END_HEADER = "; End: ";
+    public static final String STATUS_HEADER = "; Status: ";
+    public static final String DESCRIPTION_HEADER = "; Description: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -59,15 +65,15 @@ public class Messages {
      */
     public static String format(Leave leave) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Employee: ")
+        builder.append(EMPLOYEE_HEADER)
                 .append(leave.getEmployee().getName())
-                .append(" Title: ")
+                .append(TITLE_HEADER)
                 .append(leave.getTitle())
-                .append(" Start: ")
+                .append(START_HEADER)
                 .append(leave.getStart())
-                .append(" End: ")
+                .append(END_HEADER)
                 .append(leave.getEnd())
-                .append(" Status: ")
+                .append(STATUS_HEADER)
                 .append(leave.getStatus());
         return builder.toString();
     }

@@ -117,7 +117,7 @@ public class AdaptedLeaveTest {
     public void toModelType_endBeforeStart_throwsIllegalValueException() {
         AdaptedLeave leave = new MockAdaptedLeave(VALID_END, VALID_START, VALID_TITLE,
                 VALID_DESCRIPTION, VALID_STATUS, VALID_EMPLOYEE);
-        String expectedMessage = Range.MESSAGE_INVALID_END_DATE;
+        String expectedMessage = Range.MESSAGE_END_BEFORE_START_ERROR;
         assertThrows(IllegalValueException.class, expectedMessage, leave::toModelType);
     }
 
