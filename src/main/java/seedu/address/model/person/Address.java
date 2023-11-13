@@ -23,15 +23,16 @@ public class Address {
      * Constructs an {@code Address}.
      *
      * @param address A valid address.
+     * @throws IllegalArgumentException if address is not a valid address.
      */
-    public Address(String address) {
+    public Address(String address) throws IllegalArgumentException {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);

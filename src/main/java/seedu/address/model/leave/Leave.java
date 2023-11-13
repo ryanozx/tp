@@ -160,23 +160,6 @@ public class Leave {
                 && otherLeave.getEnd().equals(getEnd());
     }
 
-    /**
-     * Returns true if both leaves have overlapping date ranges.
-     *
-     * @param otherLeave
-     * @return
-     */
-    public boolean isConcurrent(Leave otherLeave) {
-        if (otherLeave == this) {
-            return true;
-        }
-
-        return otherLeave != null
-                && otherLeave.getEmployee().isSamePerson(getEmployee())
-                && !otherLeave.getEnd().isBefore(getStart())
-                && !otherLeave.getStart().isAfter(getEnd());
-    }
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

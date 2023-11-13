@@ -182,12 +182,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasConcurrentLeave(Leave leave) {
-        requireNonNull(leave);
-        return leavesBook.hasConcurrentLeave(leave);
-    }
-
-    @Override
     public void addLeave(Leave leave) {
         leavesBook.addLeave(leave);
         updateFilteredLeaveList(PREDICATE_SHOW_ALL_LEAVES);
