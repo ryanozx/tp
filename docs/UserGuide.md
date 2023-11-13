@@ -66,13 +66,15 @@ An app similar to the one below should appear in a few seconds. The app is popul
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
 ![Ui](images/Ui-annotated.png)
 
-6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
- - `help`: Opens the help window.
- - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds an employee named `John Doe` to the employee list.
- - `list`: Lists all employees.
- - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11`: Adds a leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
- - `delete 2`: Deletes the second employee shown in the current employee list and any leave requests associated with the second employee.
- - `exit`: Exits the app.
+6. Try typing some commands into the command box and pressing "enter" to execute. Here are some commands to start with.
+ - `help` : Opens the help window. See [getting help](#getting-help) for more details.
+ - `list` : Lists all contacts. See [list](#find-an-employee-record) for more information.
+ - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the employee list. See [add](#add-an-employee-record) for more details.
+ - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11` : Adds an leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`. See [add-leave](#add-a-leave-record) for more information.
+ - `delete 3` : Deletes the 3rd employee shown in the current employee list. See [delete](#delete-an-employee-record) for more details.
+ - `clear` : Deletes all employees and leaves. See [clear](#resetting-hrmate) for more information.
+ - `import` : Imports data from a csv file to HRMate. See [import/export employee records](#import-export-employee-records) for more details.
+ - `exit` : Exits the app. See [exit](#exit-hrmate) for more information.
 
 For new users, especially first-time users, it is very important and helpful to read through the [How to interpret command formats?](#how-to-interpret-command-formats). This section provides a detailed overview of the overall structure of all commands used in HRmate.
 
@@ -110,7 +112,7 @@ Also, look through [Features](#features) for commands and the details of each co
 
 ## Employee-related features
 
-###  Add an employee record
+### Add an employee record
 When a new employee joins, use the [`add`](#adding-an-employee-add) [command](#glossary) to add their information into HRMate.
 
 #### Adding an employee: `add`
