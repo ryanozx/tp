@@ -720,11 +720,29 @@ Here are potential error messages that you may receive and here's how to fix the
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Resetting HRMate
+## Other operations
+
+### Getting help
+Should you need any help, you can access this online user guide (this document) with the `help` [command](#glossary).
+
+#### Getting help : `help`
+
+1. Type in the following command in the [command box](#glossary): `help`. 
+2. Press "Enter" on your keyboard.
+3. The following pop up should show: 
+
+
+![help menu](images/help-menu.png)
+
+4. Click on the "copy link" button to copy the link to the user guide, and paste into any [web browser](#glossary) to access the user guide. Alternatively, click the red button at the corner of the window to close the pop up.
+
+### Reset HRMate
+
 After playing with the different features in HRMate, you might feel that it's time to delete HRMate's sample employee
 contacts and instead use your own. Rather than manually deleting every employee contact and leave record, here's a
 quick and easy way to clear them in the app!
-### Resetting HRMate by clearing all existing records : `clear`
+
+#### Resetting HRMate by clearing all existing records : `clear`
 
 Here's how you can remove every employee contact and leave application from the app:
 
@@ -742,11 +760,11 @@ Be careful when using this command - resetting the application is permanent. If 
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
-## Exit HRMate
-Once you've finished your work, you might want to close HRMate. If you love typing over
-clicking, you can close the app via keyboard too!
+### Exit HRMate
+Once you've finished your work, you might want to close HRMate. You can do so by clicking on the "X" button at the top
+right corner of the window. Alternatively,  If you love typing over clicking, you can close the app via keyboard too!
 
-### Close the application: `exit`
+#### Close the application: `exit`
 Here's how you can close HRMate using your keyboard:
 
 1. In HRMate, type this command into the [command box](#command-box): `exit` and press enter.
@@ -768,20 +786,8 @@ HRMate data are saved automatically as a JSON file `[JAR file location]/data/hrm
     If your changes to the data file makes its format invalid, HRMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
   </box> 
 
---------------------------------------------------------------------------------------------------------------------
-## Getting help
-Should you need any help, you can access this online user guide (this document) with the `help` [command](#glossary).
-
-#### Getting help : `help`
-
-1. Type in the following command in the [command box](#glossary): `help`. 
-2. Press "Enter" on your keyboard.
-3. The following pop up should show: 
 
 
-![help menu](images/help-menu.png)
-
-4. Click on the "copy link" button to copy the link to the user guide, and paste into any [web browser](#glossary) to access the user guide. Alternatively, click the red button at the corner of the window to close the pop up.
 
 --------------------------------------------------------------------------------------------------------------------
 
