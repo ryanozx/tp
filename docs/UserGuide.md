@@ -26,14 +26,14 @@ This user guide aims to help new users quickly familiarise themselves with HRMat
     <ul>
         <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
         <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
+        <li><strong>See <a href="#faq">How do I open a terminal?</a> for more information.</li>
     </ul>
-    See <a href="#faq">How do I open a terminal?</a> for more information.
 </box>
 
 3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
 
-4. Ensure you have Java `11` or above installed in your Computer. This can be done by typing `java -version` in your terminal.
- - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognise the `java` input. 
+4. Ensure you have `Java 11` or above installed on your Computer. This can be done by typing `java -version` in your terminal.
+ - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognize the `java` input. 
 
 5. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
 An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
@@ -41,17 +41,33 @@ We have added some annotations in <span style="color:red">red</span> so that you
 ![Ui](images/Ui.png)
 
 6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
- - `help` : Opens the help window.
- - `list` : Lists all contacts.
- - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the employee list
- - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11` : Adds an leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
- - `delete 3` : Deletes the 3rd employee shown in the current employee list.
- - `clear` : Deletes all employees and leaves.
- - `exit` : Exits the app.
+ - `help`: Opens the help window.
+ - `list`: Lists all employees.
+ - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds an employee named `John Doe` to the employee list
+ - `add-leave 1 title/medical leave start/2023-11-11 end/2023-11-11`: Adds a leave entry for the first employee in the current employee list. Note that the default leave status is `PENDING`.
+ - `delete 3`: Deletes the 3rd employee shown in the current employee list.
+ - `clear`: Deletes all employees and leaves.
+ - `exit`: Exits the app.
 
 6. Refer to [How to interpret command formats?](#how-to-interpret-command-formats) for more info on the command structure. 
-Also, look through [Features](#features) for more commands and the details of each command. We hope to aid you in your HR journey!
+Also, look through [Features](#features) for commands and the details of each command. If you would like a concise summary of the commands, please check out our [command summary](#command-summary). We hope to aid you in your HR journey!
 
+--------------------------------------------------------------------------------------------------------------------
+## Important things to note
+> [!WARNING]  
+> HRmate is coded to take in the exact commands stated in this user guide. Please do not change the spelling, remove or add symbols, adjust spaces, or change the letter case of the commands. Any changes to the commands, unless otherwise stated in this user guide, can lead to the program being unable to interpret the input. To ensure the best user experience, please follow the commands exactly as described in this user guide. Check out our [command summary](#command-summary) for a concise list of available commands and their formats.
+
+#### Character Limit
+> [!IMPORTANT]
+> Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display `...` for the remaining characters after the character limit.
+
+#### Index
+> [!IMPORTANT]
+> HRmate's lists are indexed from 1 onwards. Anything else apart from positive integers (1, 2, 3, ...) isn't accepted as an index in HRmate. This means that numbers such as 0, -1, 1.2 and characters like "a" and "one" cannot be used as indexes. This is particularly important for index-specific commands (i.e. `edit`, `approve-leave`, etc.) as they require a valid index to function properly. Please also note that the indexes are limited to the number of employees or leaves shown in the current list in HRmate. Inputting an index larger than the current available index can result in error messages and the command is unable to function correctly.
+
+#### Command Order
+> [!IMPORTANT]
+> Do note that you are unable to edit employees or leaves when the respective list is empty, please start by adding some employees or leave requests before attempting to edit them.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -59,7 +75,7 @@ Also, look through [Features](#features) for more commands and the details of ea
 ## Getting help
 Should you need any help, you can access this online user guide (this document) with the `help` [command](#glossary).
 
-### Getting help : `help`
+### Getting help: `help`
 
 1. Type in the following command in the [command box](#glossary): `help`. 
 2. Press "Enter" on your keyboard.
