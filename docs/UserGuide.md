@@ -60,6 +60,8 @@ to help you keep track of the status of each leave application.
 
 Each leave application is associated with an employee by name, and has a title, description, start date, and end date.
 
+<br>
+
 To facilitate ease of transfer of information, a core feature of HRMate is its ability to import and export employee records and
 leave applications in [CSV](#glossary) format. This allows you to easily transfer your employee records and leave applications to and from
 HRMate, so you can use HRMate alongside other HR management tools.
