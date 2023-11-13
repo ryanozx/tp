@@ -79,6 +79,8 @@ public class CommandTestUtil {
     public static final String VALID_LEAVE_DATE_START = "2023-10-30";
     public static final String VALID_LEAVE_DATE_END = "2023-10-31";
     public static final String VALID_LEAVE_STATUS_APPROVED = "APPROVED";
+    public static final String VALID_LEAVE_STATUS_REJECTED = "REJECTED";
+    public static final String DESCRIPTION_EMPTY = " " + PREFIX_LEAVE_DESCRIPTION;
 
     public static final String VALID_LEAVE_TITLE_DESC = " " + PREFIX_LEAVE_TITLE + VALID_LEAVE_TITLE;
     public static final String VALID_LEAVE_DESCRIPTION_DESC = " " + PREFIX_LEAVE_DESCRIPTION + VALID_LEAVE_DESCRIPTION;
@@ -94,6 +96,11 @@ public class CommandTestUtil {
             + VALID_LEAVE_DATE_END;
     public static final String INVALID_LEAVE_EARLY_DATE_END_DESC = " " + PREFIX_LEAVE_DATE_END + VALID_LEAVE_DATE_START;
     public static final String INVALID_LEAVE_STATUS_DESC = " " + PREFIX_LEAVE_STATUS + "NONSENSE";
+
+    public static final String INVALID_LEAVE_DATE_START_LATE_DESC = " " + PREFIX_LEAVE_DATE_START
+            + VALID_LEAVE_DATE_END;
+    public static final String INVALID_LEAVE_DATE_END_EARLY_DESC = " " + PREFIX_LEAVE_DATE_END
+            + VALID_LEAVE_DATE_START;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

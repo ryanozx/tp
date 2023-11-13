@@ -216,46 +216,4 @@ public class LeaveTest {
         assertFalse(ALICE_LEAVE.hashCode() == new LeaveBuilder(ALICE_LEAVE).withEnd(
                 Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build().hashCode());
     }
-
-    @Test
-    public void isConcurrentMethod() {
-        assertFalse(ALICE_LEAVE.isConcurrent(null));
-
-        // same employee, same start date, same end date -> returns true
-        assertTrue(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description").build()));
-
-        // same employee, same start date, different end date -> returns true
-        assertTrue(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build()));
-
-        // same employee, different start date, same end date -> returns true
-        assertTrue(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build()));
-
-        // same employee, different start date, different end date -> returns true
-        assertTrue(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1)))
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build()));
-
-        // same employee, different start date, different end date, but non overlapping -> return false
-        assertFalse(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withTitle("Alice's Maternity Leave 2")
-                .withDescription("Alice's Maternity Leave 2 Description")
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(10)))
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(10))).build()));
-
-        // different employee, same start date, same end date -> returns false
-        assertFalse(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withEmployee(BOB).build()));
-
-        // different employee, same start date, different end date -> returns false
-        assertFalse(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withEmployee(BOB)
-                .withEnd(Date.of(ALICE_LEAVE.getEnd().getDate().plusDays(1))).build()));
-
-        // different employee, different start date, same end date -> returns false
-        assertFalse(ALICE_LEAVE.isConcurrent(new LeaveBuilder(ALICE_LEAVE).withEmployee(BOB)
-                .withStart(Date.of(ALICE_LEAVE.getStart().getDate().plusDays(1))).build()));
-    }
 }

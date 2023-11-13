@@ -32,15 +32,15 @@ This user guide aims to help new users quickly familiarise themselves with HRMat
 
 3. Use `cd` command in the terminal to navigate to the same location as `hrmate.jar` in step 1. See [How do I navigate files in terminal?](#faq)
 
-3. Ensure you have Java `11` or above installed in your Computer. This can be done by typing `java -version` in your terminal.
+4. Ensure you have Java `11` or above installed in your Computer. This can be done by typing `java -version` in your terminal.
  - See <a href="#faq">How do I download Java 11?</a> if Java is not updated or if the terminal does not recognise the `java` input. 
 
-4. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
+5. Type `java -jar hrmate.jar` into the terminal and press "enter" on your keyboard.<br>
 An app similar to the one below should appear in a few seconds. The app is populated with some sample data for you to experiment with.<br>
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
 ![Ui](images/Ui.png)
 
-5. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
+6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
  - `help` : Opens the help window.
  - `list` : Lists all contacts.
  - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the employee list
@@ -81,29 +81,25 @@ When a new employee joins, you can use the `add` [command](#glossary) to add the
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
-| Error message | Why it happens | Fix |
-|---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name.
-| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format. |
-| `This employee already exists in the address book` | The provided employee name is already found in HRMate | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries. |
+| Error message                                                                                                                                          | Why it happens                                                                                                  | Fix                                                                                                                                                                                                                                                                                                                                                                                                              |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                            |
+| `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
 
 ## Listing all employees: `list`
 
-* **What It Does:**
-  * Shows a list of all employees in HRMate
-* **Format:**
-  * `list`
-* **Examples:**
+1. Type in the following [command](#glossary) in the [command box](#glossary): `list`.
+2. Press "enter" on your keyboard and you should see the information of all employees listed in the [employee list](#glossary).
 
-| S/N | Command information                                                                        |
-|-----|--------------------------------------------------------------------------------------------|
-| 1   | **Command:** `list` <br><br> **Output:** Shows a list of all employees in the address book |
-* **Acceptable Values:**
-  * This command has no parameters
-* **Expected Output on Success:**
-  * GUI Changes: A list of employees is displayed in a dedicated interface section
-* **Expected Output on Failure:**
-  * N/A (no expected failure)
+> [!NOTE]  
+> This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `list 123`, `list abc`, and `list 1a2b` all as the command `list`.
+
+Here are the potential error messages that you may receive and here's how to fix them:
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Unknown command` | The command you inputted is not part of the commands available in HRmate. | Please check the spelling and try again.
 
 ## Editing employee records
 HRMate offers different [commands](#glossary) for editing employee records. `add-tag` and `delete-tag` would add and remove an employee's [tags](#glossary) while `edit` is for editing name, phone number, email address, home address and tags.
@@ -123,13 +119,13 @@ If the employee is not found, consider using <a href="">list</a> or any <a href=
 
 Here are the potential error messages that you may receive and here's how to fix them:
 
-| Error message | Why it happens | Fix |
-|---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specfied format | Ensure the command you entered follows the following format: `add-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. |
-| `At least one tag must be provided` | No tags were provided | Add tags to the command in the command box. Note that the tags must have a t/ [prefix](#glossary). For example, to add the tag full-time, use `t/full-time`.
-| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command. |
-| `The employee already has some of the tags` | The employee already has some of the tags which you are trying to add | Remove the tags the employee has from the input command. For example, for an employee who already has the full-time tag, the command `add-tag 2 t/full-time t/remote` would not work. Instead try `add-tag 2 t/remote`.|
-| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+| Error message                                                         | Why it happens                                                        | Fix                                                                                                                                                                                                                                     |
+|-----------------------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                             | The command you input does not follow the specfied format             | Ensure the command you entered follows the following format: `add-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. |
+| `At least one tag must be provided`                                   | No tags were provided                                                 | Add tags to the command in the command box. Note that the tags must have a t/ [prefix](#glossary). For example, to add the tag full-time, use `t/full-time`.                                                                            |
+| `The person index provided is invalid`                                | The index specified does not refer to any employee                    | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command.          |
+| `The employee already has some of the tags`                           | The employee already has some of the tags which you are trying to add | Remove the tags the employee has from the input command. For example, for an employee who already has the full-time tag, the command `add-tag 2 t/full-time t/remote` would not work. Instead try `add-tag 2 t/remote`.                 |
+| `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters                            | Remove the illegal characters from the input.                                                                                                                                                                                           |
 
 ### Removing tags from employees : `delete-tag`
 1. Get the [index](#glossary) of the employee in the [employee list](#glossary).
@@ -174,419 +170,373 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 
 3. Press "enter" on your keyboard and you should see the changes applied to the employee.
 
-| Error message | Why it happens | Fix |
-|---------------|----------------|-----|
-| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. |
-| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format. |
-| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command. |
-| `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there is any input fields in the command inputted. An input like `edit 1` is not accepted as there is no edits to be made. |
-| `This employee already exists in the address book` | The provided employee name is already found in HRMate | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.
+| Error message                                                                                                                                          | Why it happens                                                                                                  | Fix                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                                                                                                                                                                                                                           |
+| `The person index provided is invalid`                                                                                                                 | The index specified does not refer to any employee                                                              | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command.                                                                                                                                                                                                                                                                                                                                                                                     |
+| `At least one field to edit must be provided`                                                                                                          | The command you input does not contain any fields to edit                                                       | Check if there is any input fields in the command inputted. An input like `edit 1` is not accepted as there is no edits to be made.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                                                                                                                                                                                                                           |
 
 * **For advanced users:**
   * You can remove all the tags of an employee with `edit INDEX t/` (see warning above)
 
+#### Removing an employee record : `delete`
+
+1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this image in [quick start](#quick-start) for more information.
+<box type="info" seamless>
+If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
+</box>
+2. Type in the following [command](#glossary) in the [command box](#glossary) `delete INDEX` where `INDEX` is to be replaced with the index of the employee in the list currently
+ - For instance, to remove the whole record of the employee indexed 1, type `delete 1` to the command box.
+![Before Delete](images/before-delete.png)
+<box type="warning" seamless>
+Once you delete the record, the records will be no longer available in HRMate and cannot be recovered.
+Therefore, to avoid unintentionally losing any information of the employee, if you just want to modify some information, we recommend using the
+<a href= "#editing-the-name-phone-number-email-address-home-address-or-tags-of-employees--edit">edit</a> command instead to modify the record.
+</box>
+
+3. Press "enter" on your keyboard and you should see the employee removed from the employee list with all leaves related to that employee in the leave list being removed.
+![After Delete](images/after-delete.png)
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add INDEX` where `INDEX` is the index of the employee in the list currently.|
+| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete` command. |
+| `Index is not an integer.` | The index specified is not an integer | Check if the index is an integer, then use the correct employee index in the `delete` command.
+
 ### Viewing All Tags: `view-tag`
 
-* **What It Does:**
-  * Shows a list of all tags currently in use within the address book, which helps HR managers quickly identify different categories of employees.
+1. Type in the following [command](#glossary) in the [command box](#glossary): `view-tag`.
+2. Press "enter" on your keyboard and you should see a list of all tags currently in use within the [employee list](#glossary).
 
-* **Format:**
-  * `view-tag`
-* **Examples:**
+> [!NOTE]  
+> This command does not require any parameters. However, to account for possible typing mistakes, HRMate reads in inputs like `view-tag 123`, `view-tag abc`, and `view-tag 1a2b` all as the command `view-tag`.
 
-| S/N | Command information                                                                                                         |
-|-----|-----------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `view-tag` <br><br> **Output:** Shows a list of all tags assigned to at least one employee in the address book |
+Here are the potential error messages that you may receive and here's how to fix them:
 
-* **Acceptable Values:**
-  * This command doesn't require any parameters.
-* **Expected Output on Success:**
-  * GUI Changes: A list of tags is displayed in a dedicated interface section.
-  * Message shown to the user: "Successfully fetched all tags."
-* **Expected Output on Failure:**
-  * Error messages: N/A (since no parameters are involved, the command will not fail due to invalid input)
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Unknown command` | The command you inputted is not part of the commands available in HRmate. | Please check the spelling and try again.
 
-### Finding employees with all tags in a group of tags: `find-all-tag`
-
-* **What It Does:**
-  * Filters and displays individuals from a dataset who match all the specified tags (case-sensitive) exactly. It helps users narrow their search to find records meeting all the specified criteria.
-
-* **Format:**
-  * `find-all-tag t/TAG [t/MORE_TAGS]...`
-* **Examples:**
-
-
-| S/N | Command information                                                                                                                      |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-tag t/remote t/full time` <br><br> **Output:** Shows a list of employees who are both full-time and work remotely |
-
-* **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
-  * Only full words will be matched, e.g. “remote” will not match “remotely”
-* **Expected Output on Success:**
-  * GUI Changes: A list of employees who match some specified tags will be shown in a dedicated interface section
-  * Message shown to the user: "[Number of matched employees] employees matched: "
-* **Expected Output on Failure:**
-  * `Invalid command format!` - Missing parameters
-  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
-
-### Finding employees with at least one tag in a group of tags: `find-some-tag`
-
-
-* **What It Does:**
-  * Filters and displays individuals from a dataset who match at least one of the specified tags (case-sensitive). It provides flexibility by showing records that meet any of the criteria provided.
-
-* **Format:**
-  * `find-some-tag t/TAG [t/MORE_TAGS]...`
-* **Examples:**
-
-| S/N | Command information                                                                                                                                                           |
-|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-some-tag t/fullTime t/remote ` <br><br> **Output:** Shows a list of employees who either full-time or work remotely or both full-time and working remotely |
-
-* **Acceptable Values:**
-  * Tags: Any predefined tags available in the address book (e.g. remote, contract, fullTime)
-  * Only full words will be matched, e.g. “remote” will not match “remotely”
-* **Expected Output on Success:**
-  * GUI Changes: A list of employees who match some of the specified tags will be shown in a dedicated interface section
-  * Message shown to the user: "[Number of matched employees] employees matched: "
-* **Expected Output on Failure:**
-  * `Invalid command format!` - Missing parameters
-  * `Tags names only allows alphanumeric characters, spaces, and dashes.` - Invalid parameter inputs
-
-### Locating an employee in HRMate by name: `find`
-
-* **What It Does:**
-  * Finds all employees whose name contains at least one word in the search query (case-insensitive). Only name
-    containing the whole word are matched.
-* **Format:**
-  * `find SEARCH_QUERY...`
-* **Examples:**
-
-| S/N | Command information                                                                                                                                                                                                                  |
-|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find martinez` <br><br> **Output:** Returns a list of employees whose names contain "*martinez*" e.g. "*Emiliano <u>Martinez</u>*" and "*Lisandro <u>Martinez</u>*"                                                    |
-| 2   | **Command:** `find harry redknapp` <br><br> **Output:** Returns a list of employees whose names contain either "*harry*" or "*redknapp*" e.g. "*<u>Harry</u> Kane*", "*Jamie <u>Redknapp</u>*", and "*<u>Harry</u> <u>Redknapp</u>*" |
-| 3   | **Command:** `find martin` <br><br> **Output:** Returns a list of employees whose names contain "*martin*" e.g. "*<u>Martin</u> Odegaard*" but not "*Gabriel Martinelli*" (only full word matches are displayed)                     |
-* **Acceptable Values:**
-  * Search query: A non-empty input is required. Inputs can contain one or more words.
-* **Expected Output on Success:**
-  * GUI Changes: A list of employees whose names contain at least one of the words
-  * Message shown to user: "[Number of matches] employees matched:"
-* **Expected Output on Failure:**
-  * `Invalid Command Format` - if an empty input is provided
-* **For advanced users:**
-  * Employees are displayed in the order in which they are arranged in the address book
-
-### Removing an employee Record : `delete`
-
-* **What It Does:**
-  * Removes an existing employee from HRMate, so that the employee’s record is no longer available in HRMate.
-* **Format:**
-  * `delete EMPLOYEE_LIST_INDEX`
-* **Examples:**
-
-| S/N | Command information                                                                                                                                                                                                                         |
-|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `delete 1` <br><br> **Output:** Deletes the record belonging to the employee whose index is 1. For instance, if the record belongs to “*David de Gea*”, then *de Gea*’s record is removed from HRMate and no longer available. |
-| 2   | **Command:** `delete 5` <br><br> **Output:**: Deletes the record belonging to the employee whose index is 5. For instance, if the record belongs to “*Carlos Puyol*”, then *Puyol*’s record is removed from HRMate and no longer available. |
-* **Acceptable Values:**
-  * The specified `EMPLOYEE_LIST_INDEX` must correspond to an index number shown in the address book. It must be a valid number, larger than zero, and cannot exceed the number of entries in the address book.
-* **Expected Output on Success:**
-  * GUI Changes: The record of the employee whose index is specified will no longer appear in the list of employees
-  * Message shown to user: "[Employee name]'s record deleted"
-* **Expected Output on Failure:**
-  * `Employee List Index does not exist` - An invalid index was specified
-  * `Employee List Index not specified` - No index was specified by the user
-
-### Restarting HRMate by clearing all existing records : `clear`
-
-* **What It Does:**
-  * Removes every entry from HRMate, such that the address book in HRMate is empty. A possible use case of this command
-    is to remove all sample records in HRMate so that you can fill it with employee records instead.
-* **Format:**
-  * `clear`
-* **Examples:**
-
-| S/N | Command information                                                                          |
-|-----|----------------------------------------------------------------------------------------------|
-| 1   | **Command:** `clear` <br><br> **Output:** Deletes every employee record in the address book. |
-* **Acceptable Values:**
-  * This command does not require any parameters.
-* **Warning:**
-  <box type="warning" seamless>
-    Be careful when using this command - the records are irretrievable once deleted.
-  </box>
-* **Expected Value on Success:**
-  * GUI Changes: All existing records are no longer visible in the address book
-  * Message shown to the user: "Address book has been cleared"
-* **Expected Value on Failure:**
-  * N/A (no expected failure)
-
-### Adding a leave record: `add-leave`
-* **What It Does:**
-  * Adds a leave record in HRMate based on employee index
-
-* **Format:**
-  * `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`
-* Examples:
-
-| S/N | Command information                                                                                                                                                                                                                                                                                                                                                                                         |
-|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01` <br><br> **Output:** Adds a leave with the following details into the leaves book: <ul><li>Employee: John Doe (employee with index 1)</li> <li>Title: Sample Leave 1</li> <li>Start: 2023-11-01</li> <li>End: 2023-11-01</li> <li>Description: NONE</li> <li>Status: PENDING</li></ul>                                      |
-| 2   | **Command:** `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` <br><br> **Output:** Adds a leave with the following details into the leaves book: <ul><li>Employee: Steve Nash (employee with index 2)</li> <li>Title: Sample Leave 2</li> <li>Start: 2023-11-01</li> <li>End: 2023-11-02</li> <li>Description: Sample Description</li> <li>Status: PENDING</li></ul> |
-
-* **Acceptable value:**
-  * The specified `INDEX` must match with a employee record shown in the displayed employee list.
-  * Description field is optional, the rest of field cannot be left empty.
-  * For start and end: they must be in the format `yyyy-mm-dd` (like 2023-11-01 for 2023 November 1st). Additionally, the start date must be before or equals to the end date.
-  * For status: it is PENDING status in default when a leave is first added.
-
-* **Expected output on failure:**
-  * `Date should be valid and in a format of "yyyy-MM-dd"` - if the format of date is invalid or no date input after "start/" and/or "end/"
-  * `The leave index provided is invalid` - if the index provided does not match with any employee record in the displayed leave list
-  * `Invalid command format!... ` - if any of the required field missing
-  * `Leave titles should only contain...` - if the title input is empty or invalid
-  * `End date cannot be before start date` - the end date provided is before the current or provided start date
-
-
-### Editing a leave record: `edit-leave`
-* **What It Does:**
-  * Edits an existing leave record in HRMate based on their index
-
-* **Format:**
-  * `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]`
+### Finding employees
+#### Finding employees by name: `find`
+  1. Type in the following [command](#glossary) in the [command box](#glossary) `find NAME....` where `NAME...` are to be replaced with one or more names of the employees for search.
+     * The words for search are case insensitive, meaning you do not have to worry about the capitalization of the words entered. 
+  - For instance, to find employees whose names contain `Martin`, type `find martin` to the command box.
+  - For another instance, to find employees whose names contain either "*Harry*" or "*Redknapp*, type `find harry redknapp` to the command box.
+  - However, if you want to find employees whose names contain `martin` but only entered `mar`, NO employee named Martin will be found, instead employee named Mar will be found. Note that he search looks for names containing the entire specified word.
+  2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list.
     
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find NAME...` where `NAME` is the specified name of the employee to search (case-insensitive).
+                                                                                                                                                                                            
+* **For advanced users:**
+  * Employees are displayed in the order in which they are arranged in the employee list.
+
+#### Finding employees by all specified tags: `find-all-tag`
+
+1. Type in the following [command](#glossary) in the [command box](#glossary) `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary).
+   * At least one tag should be entered for search and more tags can be entered if you want to search for more.
+   * The tag names are case sensitive, meaning the capitalization of the words entered matters. 
+  - For instance, to find employees with both tag `remote` and tag `full time`, type `find-all-tag t/remote t/full time` to the command box.
+  - However, if you want to find employees with tag `remote`, but only entered `re` as the tag name, NO employees with tag `remote` will be found, instead, employees with tag `re` will be found. Note that only tags containing the entire specified word are matched.
+2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with additional tags other than the specified ones will also be displayed.
+    
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...`  where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. |
+| `Tags names only allow alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+                                                                                                                                                                                            
+* **For advanced users:**
+  * Employees are displayed in the order in which they are arranged in the employee list.
+
+#### Finding employees by at least one specified tag: `find-some-tag`
+
+1. Type in the following [command](#glossary) in the [command box](#glossary) `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary).
+   * At least one tag should be entered for search and more tags can be entered if you want to search for more.
+   * The tag names are case sensitive, meaning the capitalization of the words entered matters. 
+  - For instance, to find employees with either tag `remote` and tag `full time`, type `find-some-tag t/remote t/full time` to the command box.
+  - However, if you want to find employees with tag `remote`, but only entered `re` as the tag name, NO employees with tag `remote` will be found, instead, employees with tag `re` will be found. Note that only tags containing the entire specified word are matched.
+2.  Press "enter" on your keyboard and you should see the employees matched being listed in the employee list. Note that employees with additional tags other than the specified ones will also be displayed.
+    
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the [tags](#glossary), and capitalization of the tag names mattered (case-sensitive). At least one tag should be entered for search and more tags can be entered if you want to search for more. |
+| `Tags names only allow alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+                                                                                                                                                                                            
+* **For advanced users:**
+  * Employees are displayed in the order in which they are arranged in the employee list.
+
+### Adding a new leave
+When an employee apply for leave, you can use the `add-leave` [command](#glossary) to add their leave into HRMate leave list.
+#### Adding a leave record: `add-leave`
+1. Get the [index](#glossary) of the employee under the [employee list](#glossary). View this image in [quick start](#quick-start) for more information.
+
+<box type="info" seamless>
+If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
+</box>
+
+2. Type in the following [command](#glossary) in the [command box](#glossary) `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace
+   * `NAME` with the index of the employee applied for leave in the employee list
+   * `Title` with the title of the leave
+   * `START_DATE` with the start date of the leave
+   * `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`
+   * `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` to be replaced with the description of the leave.
+   * Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.
+  - For instance, to add a leave of one day on 2023-11-01 to employee indexed 1 with a title of `Sample Leave 1`, type `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01`` to the command box.
+  - For another instance, to add a leave of two days from 2023-11-01 to 2023-11-02 to employee indexed 2 with a title of `Sample Leave 2` and a description of `Sample Description`, type `add-leave 2 title/Sample Leave 2 start/2023-11-01 end/2023-11-02 d/Sample Description` to the command box.
+<box type="info" seamless>
+There is a status field of leave that is `PENDING` by default when a leave is added. Please DO NOT enter any status field of the leave, no recognitions of status field and any other prefix are provided.
+Therefore, to change the status of a leave, please use the <a href= "#approve-leave-record-by-index-approve-leave">approve-leave</a> or <a href= "#reject-leave-record-by-index-reject-leave">reject-leave</a> commands instead to modify the record.
+</box>
+
+3. Press "enter" on your keyboard and you should see the leave information at the end of the overall [leave list](#glossary). Note that if there is no description field added, the description will be `NONE` by default.
+    
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace `NAME` with the index of the employee applied for leave in the employee list, `Title` with the title of the leave, `START_DATE` with the start date of the leave and `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`. `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` representing the description of the leave. Note that duplicated title and concurrent leave (overlapping date duration of leaves) are allowed.|
+| `This leave has already existed for the employee` | The start date and end date are exactly the same as the existing leave | Double check if the dates for the new leave do not have the same dates as the existing ones by checking against the list from [find-leave](#find-leave-records-belonging-to-an-employee-find-leave) or [find-leave-range](#find-leave-records-by-time-period-find-leave-range). You may choose to [edit-leave](#editing-a-leave-record-edit-leave) if the new leave has the exact same start and end dates as the existing leave, in other words, they are the same leave. |
+| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-leave` command. |
+| `Index is not an integer.` | The index specified is not an integer | Check if the index is an integer, then use the correct employee index in the `add-leave` command.
+| `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` | Title input is blank and/or contains illegal characters | Add title and/or remove the illegal characters from the input |
+| `The end date is earlier than the start date!` | The end date input is earlier than the start date input | Double check the date inputs. |
+| `Date should be valid and in a format of `yyyy-MM-dd`` | The start date and end date inputs are not in the correct format | Ensure that the inputs of dates are in the format of `yyyy-MM-dd`, for example, `2023-01-01`. |
+| `Leave descriptions should only contain alphanumeric characters, spaces, dashes, commas, apostrophes and full stops.` | Description input contains illegal characters | Remove the illegal characters from the input.
+
+### Editing the title, start date, end date, description, or status of employees: `edit-leave`
+1. Get the [index](#glossary) of the leave under the [leave list](#glossary).
+> [!NOTE]  
+> If the employee is not found, consider using `find-all-leave` or any `find commands` to locate the leave in the leave list.
+
+2. Type in the following [command](#glossary) in the [command box](#glossary) `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. Note that at least one field to edit must be present and only the fields present will be edited.
+ - For example, to change the title and description of the leave indexed 2 to John's sick leave and MC provided, type in the command `edit-leave 2 title/John's sick leave d/MC provided`. Note that the start date, end date, and status will remain unchanged.
+ - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
+
+> [!IMPORTANT]  
+> To update the status of a leave request, we recommend you to use the `approve-leave` or `reject-leave` commands to approve or reject the leave requests. It is possible to update the status of the leave requests with the `edit-leave` command, but it must be either APPROVED, PENDING or REJECTED (in all capital letters).
+
+3. Press "enter" on your keyboard and you should see the changes applied to the leave.
 * Examples:
 
-| S/N | Command information |
-|-----|------|
-| 1   | **Command:** `edit-leave 1 title/medical leave start/2023-11-01` <br> **Output**: Edits the leave record with index 1 to have the below changes: <ul><li>Title: medical leave</li><li>Start date: 2023 November 1st</li><li>No changes to the other fields</li></ul> |
-| 2   | **Command:** `edit-leave 2 end/2023-11-02 d/not free until 11pm s/APPROVED` <br> **Output**: Edits the leave record with index 2 to have the below changes: <ul><li>End date: 2023 November 2nd</li><li>Description: not free until 11pm</li><li>Status: APPROVED</li></ul> |
-
-* **Acceptable value:**
-  * The specified `INDEX` must match with a leave record shown in the displayed leave list.
-  * At least one leave record's field must be changed (`edit-leave 1` would be invalid as no leave record field are changed)
-  * Only fields specified will be modified; fields not specified in the command will not be modified. A field is specified by including its associated field prefix in the command (i.e. `title/` for title, `start/` for start date etc.)
-  * For title: if this field is included in the command, it cannot be left empty (i.e. `title/` is not allowed)
-  * For start and end: if these fields are included in the command, they must be in the format yyyy-mm-dd (like 2023-11-01 for 2023 November 1st). Additionally, the start date must be before or equals to the end date.
-  * For status: if this field is included in the command, it must be either APPROVED, PENDING or REJECTED
-
-* **Expected output on failure:**
-  * `At least one field to edit must be provided` - if no fields are provided
-  * `The leave index provided is invalid` - if the index provided does not match with any leave record in the displayed leave list
-  * `FIELD must be of format...` - if at least one of the field inputs violates the field's format requirements. Follow the displayed error message to fix the format error.
-  * `end date cannot be before start date` - the end date provided is before the current or provided start date
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. |
+| `FIELD should FORMAT` where `FIELD` is an input like `Leave titles` or `Date` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on-screen message to fix the field in question. For example, `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` means that the input title does not follow the prescribed format. | 
+|`Date should be valid and in a format of yyyy-MM-dd`| The start or end date format does not conform to the program's standard. | Please update the date format to `yyyy-MM-dd` and reenter the command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave in the leave list. Afterwards, use the correct leave index in the `edit-leave` command. |
+| `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there are any input fields in the command inputted. An input like `edit-leave 1` is not accepted as there are no edits to be made. |
+| `The end date is earlier than the start date!` | The end date provided is before the current or provided start date. | Please double-check the inputted dates and make sure the end date is not before the current or provided start date. |
 
 ### Removing a leave record: `delete-leave`
 
-* **What It Does:**
-  * Removes an existing leave record form HRMate, so that the leave's record is no longer available in HRMate.
-* **Format:**
-  * `delete-leave LEAVE_LIST_INDEX`
-* **Examples:**
 
-| S/N | Command information                                                                                                                                                                                                                                                    |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `delete-leave 1` <br><br> **Output:** Deletes the leave record with index 1. For instance, if the leave record titled "medical leave" with employee "David de Gea" is indexed 1, then "medical leave" is removed from HRMate and no longer available.     |
-| 2   | **Command:** `delete-leave 2` <br><br> **Output:** Deletes the leave record with index 2. For instance, if the leave record titled "childcare leave" with employee "Carlos Puyol" is indexed 2, then "childcare leave" is removed from HRMate and no longer available. |
+If you wish to remove a leave record from HRMate, you can use the `delete-leave` command to do so.
 
-* **Acceptable Values:**
-  * The specified `LEAVE_LIST_INDEX` must correspond to an index number shown in the leave book. It must be a valid number, larger than zero, and cannot exceed the number of entries in the leave book.
-* **Expected Output on Success:**
-  * GUI Changes: The leave record of the specified index will no longer appear in the list of leave records.
-  * Message shown to user: "[leave title] deleted"
-* **Expected Output on Failure:**
-  * `Leave list index does not exist` - An invalid index was specified.
-  * `Employee list index not specified` - No index was specified by the user.
+1. Type in the following [command](#glossary) in the [command box](#glossary): `delete-leave LEAVE_LIST_INDEX`, and replace `LEAVE_LIST_INDEX` with the index of the leave record you wish to remove.
+ - For instance, referring to the figure below: if you wanted to remove the leave record titled "medical leave" with employee "Bernice Yu", you would type in `delete-leave 2` in the command box.
+ - Do note that the index of the leave record you wish to remove must be a valid number
+   - The index must be a positive number that is larger than 0
+   - The index cannot exceed the number of entries in the leave book
+2. Press "enter" on your keyboard and you should see the leave record removed from HRMate.
 
-### Closes the application : `exit`
 
-* **What It Does:**
-  * Closes and exits the application.
-* **Format:**
-  * `exit`
-* **Examples:**
+![delete-leave](images/delete-leaveUI.png)
 
-| S/N | Command information                                               |
-|-----|-------------------------------------------------------------------|
-| 1   | **Command:** `exit` <br><br> **Output:** Closes and exits HRMate. |
-* **Acceptable Values:**
-  * This command does not require any parameters.
-* **Expected Value on Success:**
-  * GUI Changes: The application window closes.
-* **Expected Value on Failure:**
-  * N/A (no expected failure)
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                         | Why it happens                                                                                                    | Fix                                                                                                                                                                                                                                                            |
+|---------------------------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `The leave index provided is invalid` | The index specified does not refer to any leave record                                                            | Double check if the index appears in the leave list. Afterwards, use the correct leave index to the left of the leave record in the `delete-leave` command. |
+| `Invalid command format!`             | An index was not specified in the command, or the index specified is not a positive number that is greater than 0 | Make sure that you provide an index when using this command. If you require assistance identifying the index, refer to the box directly above.                                                                                                                 |
+
 
 ### Approve leave record by index: `approve-leave`
 
-* **What It Does:**
-  * Approve a leave record by the given index
-  * **Format:**
-  * `approve-leave INDEX`
-* **Examples:**
+1. Get the [index](#glossary) of the leave under the [leave list](#glossary).
 
-| S/N | Command information                                                                                                                                                                     |
-|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `approve-leave 1` <br><br> **Output:** Approve the leave record of index 1|
+> [!NOTE]
+> If the leave request is not found, consider using `find-all-leave` or any `find commands` to locate the leave request in the leave list.
 
-* **Acceptable Values:**
-  * The index should be a positive number starting from 1 and within the range of the leave list.
-* **Expected Output on Success:**
-  * GUI Changes: The approved leave will be marked as approved with green highlight.
-  * Message shown to user: "Approved Leave:” with the information of the approved leave
-* **Expected Output on Failure:**
-  * `Leave previously approved: `with the information of the previously approved leave - the leave given by the index was previously approved
-  * `The leave index provided is invalid:  - the index is out of bounds
+2. Type in the following [command](#glossary) in the [command box](#glossary) `approve-leave LEAVE_LIST_INDEX`
+3. Press "enter" on your keyboard and the specified leave request is approved.
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `approve-leave LEAVE_LIST_INDEX`.
+| `The leave index provided is invalid` | The index specified does not refer to any leave request | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave request in the leave list. Afterwards, use the correct leave index in the `approve-leave` command. |
+| `Leave previously approved: ` followed by the leave information | The provided leave request is already approved in HRMate | If this is the leave you would like to approve, you don't have to do anything.
 
 ### Reject leave record by index: `reject-leave`
 
-* **What It Does:**
-  * Reject a leave record by the given index
-  * **Format:**
-  * `reject-leave INDEX`
-* **Examples:**
+1. Get the [index](#glossary) of the leave under the [leave list](#glossary).
 
-| S/N | Command information                                                                   |
-|-----|---------------------------------------------------------------------------------------|
-| 1   | **Command:** `reject-leave 1` <br><br> **Output:** Reject the leave record of index 1 |
+> [!NOTE]
+> If the leave request is not found, consider using `find-all-leave` or any `find commands` to locate the leave request in the leave list.
 
-* **Acceptable Values:**
-  * The index should be a positive number starting from 1 and within the range of the leave list.
-* **Expected Output on Success:**
-  * GUI Changes: The rejected leave will be marked as rejected with red highlight.
-  * Message shown to user: "Rejected Leave:” with the information of the rejected leave
-* **Expected Output on Failure:**
-  * `Leave previously Rejected: `with the information of the previously rejected leave - the leave given by the index was previously rejected
-  * `The leave index provided is invalid:`  - the index is out of bounds
+2. Type in the following [command](#glossary) in the [command box](#glossary) `reject-leave LEAVE_LIST_INDEX`
+3. Press "enter" on your keyboard and the specified leave request is approved.
+
+| Error message | Why it happens | Fix |
+|---------------|----------------|-----|
+| `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `approve-leave LEAVE_LIST_INDEX`.
+| `The leave index provided is invalid` | The index specified does not refer to any leave request | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave request in the leave list. Afterwards, use the correct leave index in the `reject-leave` command. |
+| `Leave previously rejected: ` followed by the leave information | The provided leave request is already rejected in HRMate | If this is the leave you would like to reject, you don't have to do anything.
+
 
 ### Find leave records by time period: `find-leave-range`
 
-* **What It Does:**
-  * Finds all leave records in HRMate in a given time period. There are 4 possible scenarios:
-  * 1) The time period has a start date and an end date (inclusive) - all leaves with at least one day that falls within
-      this period will be displayed
-    2) The time period only has a start date (inclusive) - all leaves that either occur on the start date or will occur
-      after the start date will be displayed
-    3) The time period only has an end date (inclusive) - all leaves that either occur on the end date or will finish
-      before the end date will be displayed
-    4) The time period does not have a start date or end date - all leaves will be returned
-* **Format:**
-  * `find-leave-range [start/START_DATE] [end/END_DATE]`
-* **Examples:**
 
-| S/N | Command information                                                                                                                                                                     |
-|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-leave-range start/2023-10-27 end/2023-11-03` <br><br> **Output:** Returns all leaves that have at least one day in the period of 2023-10-27 and 2023-11-03 inclusive |
-| 2   | **Command:** `find-leave-range start/2023-10-27` <br><br> **Output:** Returns all leaves that have at least one day either on or after 2023-10-27                                       |
-| 3   | **Command:** `find-leave-range end/2023-11-03` <br><br> **Output:** Returns all leaves that have at least one day on or before 2023-11-03                                               |
-| 4   | **Command:** `find-leave-range` <br><br> **Output:** Returns all leaves                                                                                                                 |
+If you wish to view the leave records in HRMate that fall within a particular time period,
+you can use the `find-leave-range` command to do so.
 
-* **Acceptable Values:**
-  * The dates provided for START_DATE and END_DATE must be of the format `yyyy-MM-DD`
-  * If both end date and start date are provided, the end date cannot occur before the start date
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications that fall within the queried time period will be returned
-  * Message shown to user: "[number of leaves matched] leaves listed!"
-* **Expected Output on Failure:**
-  * `The end date is earlier than the start date!` - the start date cannot occur after the end date
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-leave-range [start/START_DATE] [end/END_DATE]`, and replace `START_DATE` with the start date of the time period,
+   and `END_DATE` with the end date of the time period, both in the format `yyyy-MM-dd`.
+ - For instance: if you wanted to view all leave records that fall within the time period of 2023-10-27 and 2023-11-03 inclusive,
+   you would type in `find-leave-range start/2023-10-27 end/2023-11-03` in the command box.
+ - Do note that neither the start or end fields are required:
+   - If you wanted to view all leave records that start on or after 2023-10-27, you can type in `find-leave-range start/2023-10-27`.
+   - If you wanted to view all leave records that end on or before 2023-11-03, you can type in `find-leave-range end/2023-11-03`.
+ - If you wanted to view all leave records, you can type in `find-leave-range` or [`find-all-leave`](#view-all-leaves-find-all-leave) instead.
+2. Press `Enter` to execute the command. You should see the leave records that fall within the time period you specified.
+
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                                          | Why it happens                                           | Fix                                                                |
+|--------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------------------|
+| `The end date is earlier than the start date!`         | The end date you provided is earlier than the start date | Make sure that the end date is later than the start date           |
+| `Date should be valid and in a format of "yyyy-MM-dd"` | The date you provided is not in the format `yyyy-MM-dd`  | Make sure that the date you provided is in the format `yyyy-MM-dd` |
+
+Note: `yyyy-MM-dd` refers to the format of the date in the form of year-month-day. For example, 2023-11-01 refers to 1st November 2023.
 
 ### Find leave records by leave status: `find-leave-status`
 
-* **What It Does:**
-  * Finds all leave records in HRMate that have a particular status (either APPROVED/PENDING/REJECTED), so that you can
-  * see which leaves still require approval
-* **Format:**
-  * `find-leave-status STATUS`
-* **Examples:**
 
-| S/N | Command information                                                                                               |
-|-----|-------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-leave-status APPROVED` <br><br> **Output:** Returns all leaves that have already been approved |
-| 2   | **Command:** `find-leave-status PENDING` <br><br> **Output:** Returns all leaves that are still pending approval  |
-| 3   | **Command:** `find-leave-status REJECTED` <br><br> **Output:** Returns all leaves that have been rejected         |
+If you wish to view the leave records in HRMate that have a particular status, you can use the `find-leave-status` command to do so.
 
-* **Acceptable Values:**
-  * Status must be either "APPROVED", "PENDING", or "REJECTED". If the value is not in uppercase, the command will still be
-    accepted, but all other values are rejected.
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications that have the requested status will be returned
-  * Message shown to user: "[number of leaves matched] leaves listed!"
-* **Expected Output on Failure:**
-  * `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` - you provided an invalid status,
-    try either `APPROVED`, `PENDING`, or `REJECTED` instead
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-leave-status STATUS`, and replace `STATUS` with the status of the leave records you wish to view.
+ - For instance: if you wanted to view all leave records that have been approved, you would type in `find-leave-status APPROVED` in the command box.
+ - Do note that the status field is required, and the status must be either `APPROVED`, `PENDING` or `REJECTED`.
+   - The status is case-sensitive. For instance, `approved` is not a valid status. Ensure you use the correct casing, which is `APPROVED`.
+   - You can only specify one status at a time.
+ - If you wish to view all leave records, you can use the [`find-all-leave`](#view-all-leaves-find-all-leave) command instead.
+2. Press `Enter` to execute the command. You should see the leave records that have the status you specified.
+
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                                                                           | Why it happens                       | Fix                                                                                  |
+|-----------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------------------|
+| `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` | The status you provided is not valid | Make sure that the status you provided is either `APPROVED`, `PENDING` or `REJECTED` |
+
+
+
 
 ### View all leaves: `find-all-leave`
 
-* **What It Does:**
-  * Shows all leave records in HRMate
-* **Format:**
-  * `find-all-leave`
-* **Examples:**
 
-| S/N | Command information                                                                      |
-|-----|------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-all-leave` <br><br> **Output:** Returns all leaves in the application |
+If you wish to view all the leave records in HRMate, you can use the `find-all-leave` command to do so.
 
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications will be returned
-  * Message shown to user: "Current # of Leave Request(s): [Number of leave applications]"
-  * If there are no leave applications on the app, the message shown to the user is: "There are currently no leave requests."
-* **Expected Output on Failure:**
-  * None, this command is not expected to fail
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-all-leave`
+2. Press `Enter` to execute the command. You should see all the leave records in HRMate.
+
 
 ### Find leave records belonging to an employee: `find-leave`
 
-* **What It Does:**
-  * Finds all leave records that are associated with an employee, so that you can see the person's leave history and 
-  * upcoming leaves
-* **Format:**
-  * `find-leave INDEX`
-* **Examples:**
 
-| S/N | Command information                                                                                                                                                                                              |
-|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1   | **Command:** `find-leave 1` <br><br> **Output:** Returns all leaves associated with the employee with index 1. For instance, if the employee "John Smith" has employee index 1, John's leaves will be displayed. |
+If you wish to view the leave records in HRMate that belong to a particular employee, you can use the `find-leave` command to do so.
 
-* **Acceptable Values:**
-  * The specified `INDEX` must match with a employee record shown in the displayed employee list.
-* **Expected Output on Success:**
-  * GUI Changes: All leave applications associated with the requested employee will be returned.
-  * Message shown to user: "[number of leaves matched] leaves listed!"
-* **Expected Output on Failure:**
-  * `The person index provided is invalid` - The index you provided does not match with any known employee. To resolve this,
-    make sure that the employee that you are requesting for is currently displayed in the employee list. Use the number to
-    the left of the employee's name as the index
-  * `Invalid command format` - There was no employee index provided, please make sure that you supply a number as the indexh 
+
+1. Type in the following [command](#glossary) in the [command box](#glossary):
+   `find-leave INDEX`, and replace `INDEX` with the index of the employee whose leave records you wish to view.
+ - For instance: if you wanted to view all leave records that belong to the employee with index 1, you would type in `find-leave 1` in the command box.
+ - Do note that the index field is required, and the index must be a valid number.
+   - The index must be a positive number.
+   - The index must be within the range of the number of employees in HRMate.
+ - If you wish to view all leave records, you can use the `find-all-leave` command instead.
+2. Press `Enter` to execute the command. You should see the leave records that belong to the employee with the index you specified.
+
+
+![find-leave](images/find-leaveUI.png)
+
+
+Here are some potential error messages that you may receive and here's how to solve them:
+
+
+| Error message                          | Why it happens                                                                   | Fix                                                                                                                                                                        |
+|----------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `The person index provided is invalid` | The index you provided does not match with any person in the address book        | Make sure that the employee that you are requesting for is currently displayed in the employee list. Then, use the number to the left of the employee's name as the index. |
+| `Invalid command format!`              | No index was provided, or index provided is not a positive number greater than 0 | Make sure that you provide an index when using this command. If you require assistance identifying the index, refer to the box directly above.                             |
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Importing/Exporting employee records
 It's painful having to add in each employee into HRMate manually. That's why HRMate provides import and export commands,
 so you can bring in all your records from Excel with just a single command!
 
-With the import and export commands, HRMate can read and save files in [CSV](#glossary) format, which is supported
+With the import and export commands, HRMate can read and save files in [CSV](#csv) format, which is supported
 by major spreadsheet applications such as Microsoft Excel. 
 
 
 ### Importing employee records : `import`
 
+<box type="warning" seamless>
+Imported employee records will overwrite existing employee records in HRMate. Remember to make a copy of your existing
+employee records if you want to save them! You can do so by <a href="#exporting-employee-records-export">exporting your current records</a>.
+</box>
+
 Here's how you can bring over your records from Excel:
 
 1. Export your Excel save file in CSV format. Ensure that the separator is set to be a semicolon(`;`), and that you have
-the following fields: Name, Phone, Email, Address. You may also include a Tags column if you wish.
+the following fields: Name, Phone, Email, Address, Tags. Note that tags in the Tags field have to be separated by commas.
    * You may skip this step if you already have a CSV file (e.g. you are importing a previously exported CSV file generated by
    HRMate)
-2. In HRMate, type in the following command in the command box: `import`
-3. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
-4. You should see your employee records show up in HRMate, along with the message "Employee records have been imported from [your file name]!"
+
+<box type="warning" seamless>
+If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
+which will cause problems when trying to import employee records. To fix this problem, 
+<a href="#excel-separator-faq">click here</a> to find out how you
+can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users.
+</box>
+
+2. If you are unsure how your file should look like, you may refer to the following images:
+   * Here's how your CSV file should look like if you open it up in Notepad:
+   ![import-employee-notepad](images/import-employee-notepad.png)
+     * It is okay if your CSV file does not contain the first line `sep=;`, as this is a line added to files exported by HRMate
+     to help Excel open the file. Do ensure the next line has to be the following:
+     `Name;Phone;Email;Address;Tags` in order for HRMate to read it. Also note that tags are separated by commas 
+     (see `colleagues, friends` under `Bernice Yu`'s row).
+   * If you open your CSV file in Excel, your file should look like this:
+   <br/>
+   <br/>
+   ![import-employee-excel](images/import-employee-excel.png)
+   <br/>
+   <br/>
+     * Do ensure that the first row contains the following headers: `Name`, `Phone`, `Email`, `Address`, and `Tags`. 
+     Note that tags, if present, should be separated by commas (see cell `E3` for an example).
+
+3. In HRMate, type in the following command in the command box: `import`
+4. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
+5. You should see your employee records show up in HRMate, along with the message "Employee records have been imported from [your file name]!"
 
 Here are some possible error messages you might encounter and here's how you can fix them:
 
-| Error Message                                                       | Why it happens                                                               | Fix                                                                               |
-|---------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| Employee records were not imported                                  | You did not select a file in the file dialog                                 | Retype the command, and make sure to select a CSV file when the file dialog opens |
-| Records in file [file name] could not be imported, import cancelled | Your file likely contains illegal characters or is corrupted                 | Ensure that your data fulfils the following constraints (to be added)             |
-| No valid records found in file [file name], import cancelled        | Your file either is empty or does not contain a single valid employee record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
+| Error Message                                                        | Why it happens                                                               | Fix                                                                               |
+|----------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| Employee records were not imported.                                  | You did not select a file in the file dialog                                 | Retype the command, and make sure to select a CSV file when the file dialog opens |
+| Records in file [file name] could not be imported, import cancelled. | Your file likely contains illegal characters or is corrupted                 | Ensure that your data fulfils the following constraints (to be added)             |
+| No valid records found in file [file name], import cancelled         | Your file either is empty or does not contain a single valid employee record | Ensure that your file is non-empty and fulfils the abovementioned constraints     |                                                     
 
 
 ### Exporting employee records : `export`
@@ -619,7 +569,12 @@ The import and export feature extends to importing and exporting leaves. This al
 applications that can be opened in other major spreadsheet applications such as Microsoft Excel.
 
 
-### Importing employee records : `import-leave`
+### Importing leave records : `import-leave`
+
+<box type="warning" seamless>
+Imported leave records will overwrite existing leave records in HRMate. Remember to make a copy of your existing
+leave records if you want to save them! You can do so by <a href="#exporting-leave-records-export-leave">exporting your current records</a>.
+</box>
 
 Here's how you can bring over your leave records from Excel:
 
@@ -627,9 +582,30 @@ Here's how you can bring over your leave records from Excel:
    the following fields: Title, Employee, Start, End, Description, Status.
   * You may skip this step if you already have a CSV file (e.g. you are importing a previously exported CSV file generated by
     HRMate)
-2. In HRMate, type in the following command in the command box: `import-leave`
-3. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
-4. You should see your leave records show up in HRMate, along with the message "Leave records have been imported from [your file name]!"
+    
+<box type="warning" seamless>
+    If you have saved or edited your CSV file in Excel, please note that Excel will likely change the separator into a comma,
+    which will cause problems when trying to import leave records. To fix this problem,
+    <a href="excel-separator-faq">click here</a> to find out how you
+    can change the separator to semicolons in Excel. Note that this workaround is currently available only for Windows users
+</box>
+
+2. If you are unsure how your file should look like, you may refer to the following images:
+  * Here's how your CSV file should look like if you open it up in Notepad:
+  ![import-leave-notepad](images/import-leave-notepad.png)
+  * It is okay if your CSV file does not contain the first line `sep=;`, as this is a line added to files exported by HRMate
+    to help Excel open the file. Do ensure the next line has to be the following:
+    `Title;Employee;Start;End;Description;Status` in order for HRMate to read it.
+    * If you open your CSV file in Excel, your file should look like this:
+      <br/>
+      <br/>
+      ![import-leave-excel](images/import-leave-excel.png)
+      <br/>
+      <br/>
+    * Do ensure that the first row contains the following headers: `Title`, `Employee`, `Start`, `End`, `Description`, and `Status`.
+3. In HRMate, type in the following command in the command box: `import-leave`
+4. In the file dialog that opens up, go to where you saved your exported CSV file, click on it, and click on the Open button.
+5. You should see your leave records show up in HRMate, along with the message "Leave records have been imported from [your file name]!"
 
 Here are some possible error messages you might encounter and here's how you can fix them:
 
@@ -661,7 +637,41 @@ Here are potential error messages that you may receive and here's how to fix the
 
 | Error Message                     | Why it happens                                   | Fix                                                                                                                                                                                                                   |
 |-----------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |      
+| Leave records could not be saved! | You do not have the permission to write the file | Try renaming your file name when typing out the command, especially if the previous name refers to an existing file. If not, move HRMate to a different folder where you can create files, and run the command again. |
+--------------------------------------------------------------------------------------------------------------------
+
+## Resetting HRMate
+After playing with the different features in HRMate, you might feel that it's time to delete HRMate's sample employee
+contacts and instead use your own. Rather than manually deleting every employee contact and leave record, here's a
+quick and easy way to clear them in the app!
+### Resetting HRMate by clearing all existing records : `clear`
+
+Here's how you can remove every employee contact and leave application from the app:
+
+1. In HRMate, type this command into the [command box](#command-box): `clear` and press Enter.
+2. That's it! You should notice that your [Employee List](#employee-list) and [Leave List](#leave-list) are both empty.
+   You should also notice that the [Command Output Box](#command-output-box) will display the message:
+   `All employee contacts and leave records have been cleared!` Now you have a clean slate and can start adding your
+   own data!
+
+**Warning:**
+<box type="warning" seamless>
+Be careful when using this command - resetting the application is permanent. If you have not already exported your
+<a href="#exporting-employee-records-export">employee records</a> and
+<a href="#exporting-leave-records-export-leave">leave records</a>, you will not be able to get them back!
+</box>
+--------------------------------------------------------------------------------------------------------------------
+
+## Exit HRMate
+Once you've finished your work, you might want to close HRMate. If you love typing over
+clicking, you can close the app via keyboard too!
+
+### Close the application: `exit`
+Here's how you can close HRMate using your keyboard:
+
+1. In HRMate, type this command into the [command box](#command-box): `exit` and press enter.
+2. That's it! HRMate will now close, and you will find your employee records and leave records there the next time you
+reopen HRMate.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -726,6 +736,20 @@ For **mac**, open the terminal app on your mac. For more help, please consult th
 **Q**: How do I download Java 11?<br>
 **A**: Please refer to the official Java installation instructions [here](https://docs.oracle.com/en/java/javase/21/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 
+<a name="excel-separator-faq"></a>
+**Q**: How do I change the separator of my CSV file into semicolons(`;`) in Excel?<br/>
+**A**: Follow these steps to change the separator when exporting:
+* If you are using Windows, follow these steps:
+  1. In Excel, click on File > Options > Advanced.
+  2. Under Editing options, uncheck the `Use system separators` check box.
+  3. Change the Decimal separator to a comma (`,`) and the Thousands separator to a period (`.`).
+  4. Save your file. When saving your file, change the save type (`Save as type`) to `CSV (Coma delimited) (*.csv)`
+  5. After saving your file, remember to reset your Excel separators. Repeat steps 1 and 2, only that this time remember to
+    check the `Use system separators` check box instead.
+  <br/>
+  <br/>
+* Unfortunately, if you are using Mac OS, Excel makes it very difficult to change the separator
+to semicolons. Stay tuned for future releases that will extend support for Mac OS!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -751,7 +775,7 @@ For **mac**, open the terminal app on your mac. For more help, please consult th
 | **Exit**                  | `exit`                                                                                                                                                                |
 | **Export Contacts**       | `export FILE_NAME`                                                                                                                                                    |           
 | **Export Leaves**         | `export-leaves FILE_NAME`                                                                                                                                             |           
-| **Find**                  | `find SEARCH_QUERY...​`<br> e.g., `find James Jake`                                                                                                                   |
+| **Find**                  | `find NAME...​`<br> e.g., `find James Jake`                                                                                                                   |
 | **Find All Tags**         | `find-all-tag [t/TAG]...`<br> e.g.,`find-all-tag t/remote t/full-time`                                                                                                |
 | **Find Some Tags**        | `find-some-tag [t/TAG]...`<br> e.g.,`find-some-tag t/remote t/full-time`                                                                                              |
 | **Find Leaves by Period** | `find-leave-range [start/START_DATE] [end/END_DATE]`                                                                                                                  | 
@@ -774,15 +798,17 @@ For **mac**, open the terminal app on your mac. For more help, please consult th
 
 ## Glossary
 
-| Term | Meaning                                                                                                                         |
-|------|---------------------------------------------------------------------------------------------------------------------------------|
-| CLI | A text based interface where users type in commands instead of interacting with the application's graphics. Also see: GUI |
-| CSV  | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel. |
-| Command | A line of instructions that you input into the command box. Also see: Command box |
-| Command box | A box for you to input commands. Refer to [quick start](#quick-start) for more information. |
-| GUI | A graphical based interface where users interact the the application's graphics like buttons or scrollpanes. Also see: CLI |
-| Employee list | The employee list is the list of employees on the left side of the application. Refer to [quick start](#quick-start) for more information. |
-| Prefix | A letter or phrase before an input. Refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information. |
-| Tag  | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote). |
-| Index | The number labelling each employee in the employee list. Refer to [quick start](#quick-start) for more information. |
-| Web browser | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now! |
+| Term                                                 | Meaning                                                                                                                                                                                                                          |
+|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI                                                  | A text based interface where users type in commands instead of interacting with the application's graphics. Also see: GUI                                                                                                        |
+| CSV <a name="csv"></a>                               | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.                                                                                                  |
+| Command                                              | A line of instructions that you input into the command box. Also see: Command box                                                                                                                                                |
+| Command Box <a name="command-box"></a>                                         | A box for you to input commands. Refer to [quick start](#quick-start) for more information.                                                                                                                                      |
+| Command Output Box <a name="command-output-box"></a> | A box that displays the results of the command you keyed in. It will tell you whether the command you entered has successfully run, or if there is an error in your command that needs to be fixed. Refer to []() for a picture. |
+| Employee List <a name="employee-list"></a>           | The Employee list is the list of employees on the left side of the application. Refer to [quick start](#quick-start) for a picture.                                                                                              |
+| Leave List <a name="leave-list"></a>                 | The Leave list is the list of leaves on the right side of the application. Refer to [quick start](#quick-start) for a picture.                                                                                                   |
+| GUI                                                  | A graphical based interface where users interact the the application's graphics like buttons or scrollpanes. Also see: CLI                                                                                                       |
+| Prefix                                               | A letter or phrase before an input. Refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information.                                                                                         |
+| Tag                                                  | A text phrase used to categorise employees by. A tag can be a position (intern, senior), department (HR, tech) or any category (full-time, remote).                                                                              |
+| Index                                                | The number labelling each employee in the employee list. Refer to [quick start](#quick-start) for more information.                                                                                                              |
+| Web browser                                          | An application to serve the web like Internet Explorer, Google Chrome or Firefox. In fact, you are probably using one to access this guide right now!                                                                            |

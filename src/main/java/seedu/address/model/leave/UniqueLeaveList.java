@@ -39,17 +39,6 @@ public class UniqueLeaveList implements Iterable<Leave> {
     }
 
     /**
-     * Returns true if the list contains a leave that overlaps with the given argument.
-     *
-     * @param leave
-     * @return
-     */
-    public boolean hasConcurrentLeave(Leave leave) {
-        requireNonNull(leave);
-        return internalList.stream().anyMatch(leave::isConcurrent);
-    }
-
-    /**
      * Adds a leave to the list.
      * The leave must not already exist in the list.
      */

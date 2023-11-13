@@ -8,6 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
+    public static final String DESCRIPTION_PLACEHOLDER = "NONE";
     public static final String MESSAGE_CONSTRAINTS = "Leave descriptions should only contain"
                 + " alphanumeric characters, spaces, dashes, commas, apostrophes and full stops.";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum} \\-',.]*$";
@@ -18,8 +19,9 @@ public class Description {
      * Constructs a {@code Description}.
      *
      * @param description A valid description.
+     * @throws IllegalArgumentException if description is not empty and contains illegal characters
      */
-    public Description(String description) {
+    public Description(String description) throws IllegalArgumentException {
         requireNonNull(description);
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
@@ -51,5 +53,13 @@ public class Description {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
                 && description.equals(((Description) other).description)); // state check
+    }
+
+    /**
+     * Returns whether the description is empty.
+     * @return True if empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return description.isEmpty();
     }
 }
