@@ -373,6 +373,9 @@ Fields compulsory to enter for `add-leave` as `String` type include:
 * The rest of the invalid fields exception including illegal arguments and end date before start date will be handled by ParserException in `AddLeaveCommandParser`.
 * Same leave exception will be handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
 
+The activity diagram for adding a leave is as followed:
+<puml src="diagrams/AddLeaveCommandActivityDiagram.puml" alt="AddLeaveCommandActivityDiagram"></puml>
+
   Here is an example usage of the `add-leave` feature:
 1. The user uses the `find` command to filter for employees named Martin.
 2. The user enters the command `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01` with Martin being index 1.
