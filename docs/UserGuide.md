@@ -211,6 +211,8 @@ HRMate offers different [commands](#glossary) for editing employee records. `add
 
 #### Adding tags to employees : `add-tag`
 
+Use the `add-tag` command to add tags to an employee. This command will add the specified tags to an employee specified by their index in the employee list.
+
 1. Find the employee under the [employee list](#glossary).
 
 <box type="info" seamless>
@@ -233,6 +235,8 @@ Here are the potential error messages that you may receive and here's how to fix
 | `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters                            | Remove the illegal characters from the input.                                                                                                                                                                                           |
 #### Removing tags from employees : `delete-tag`
 
+Use the `delete-tag` command to remove tags from an employee. This command will remove the specified tags from an employee specified by their index in the employee list.
+
 1. Get the [index](#glossary) of the employee in the [employee list](#glossary).
 
 <box type="info" seamless>
@@ -254,7 +258,10 @@ Here are the potential error messages you may receive and here's how to fix them
 | `Some of the tags are not found on this employee.` | The employee does not have some of the tags you are trying to delete | Remove the tags not found on the employee from the input command. For example, for an employee without the tag full-time, the command `delete-tag 2 t/full-time t/remote` does not work. Instead try `delete-tag 2 t/remote`.|
 | `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
 
-#### Editing the name, phone number, email address, home address or tags of employees : `edit`
+#### Editing employee information : `edit`
+
+For a more comprehensive editing of an employee's information, use the `edit` command. This command will edit the specified fields of an employee specified by their index in the employee list.
+
 1. Get the [index](#glossary) of the employee under the [employee list](#glossary).
 
 <box type="info" seamless>
