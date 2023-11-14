@@ -23,19 +23,6 @@ Given below are my contributions to the project.
   * Justification: This feature, while not directly functional or command-related, serves as the backbone of a key
     feature of HRMate, which is the ability to keep track of employees' leave applications. This feature is also
     essential for the implementation of the various Leaves commands.
-  * Notable contributions:
-    * Leave class - This class represents a leave application, and contains information such as the employee's name,
-      the start and end dates of the leave, the status of the leave application, and a description and title containing the
-      reason for the leave.
-    * LeavesBook class - This class represents the collection of leave applications, to be displayed to the user. The list enforces a 
-      uniqueness constraint, ensuring that there are no duplicate leave applications in the list. It also provides an API for the
-      addition, deletion and modification of leave applications in the list, which is used by the Leaves commands.
-    * LeavesBookStorage class - This class handles the reading and writing of leave applications into a json file stored in the /data
-      folder. A serializer and deserializer is used to convert the data into a json format, and vice versa. The serializer also checks
-      for invalid data, such as the case whereby an employee's name tied to a leave application cannot be found in the address book.
-      This enforces a level of data integrity, and prevents the addition of invalid data into the json file.
-    * Integrated the Leave functionality into HRMate by extending the StorageManager and ModelManager functionalities to include
-      the LeavesBookStorage and LeavesBook classes.
   * Pull Request: [[PR#62]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/62) [[PR#64]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/64)
 
 * **Code coverage**
@@ -47,12 +34,15 @@ Given below are my contributions to the project.
   * Improved code coverage of following classes: `PersonEntry`, `UserPref`, `Tag`, `AddressBook` [[PR#159]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/159)
 
 * **Documentation**
-  * Add documentation for the following commands in User Guide: `view-tag`, `add-tag` and `delete-tag` [[PR#41]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/41)
-  * Add documentation for the following commands in User Guide: `find-leave-range`, `find-leave-status`, `find-all-leave`
-    `find-leave` and `delete-leave` [[PR#183]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/183)
-  * Reorder User Guide by rearranging commands into feature categories to allow for more intuitive navigation [[PR#194]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/194)
-  * Add About section for HRMate to explain key terms and key features of application [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195)
-  * Add edits such as removal of excessive anchor links, and rewording of certain sections in User Guide, among others [[PR#194]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/194) [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195) [[PR#199]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/199) [[PR#204]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/204)
+  * User Guide:
+    * Add documentation for the following commands in User Guide: `view-tag`, `add-tag` and `delete-tag` [[PR#41]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/41)
+    * Add documentation for the following commands in User Guide: `find-leave-range`, `find-leave-status`, `find-all-leave`
+      `find-leave` and `delete-leave` [[PR#183]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/183)
+    * Reorder User Guide by rearranging commands into feature categories to allow for more intuitive navigation [[PR#194]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/194)
+    * Add About section for HRMate to explain key terms and key features of application [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195)
+    * Add edits such as removal of excessive anchor links, and rewording of certain sections in User Guide, among others [[PR#194]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/194) [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195) [[PR#199]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/199) [[PR#204]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/204)
+  * Developer Guide:
+    * Contributed to the planning and drafting of planned enhancements.
 
 * **Reviewing PRs** 
   * Review import/ export Developer Guide proposed implementation [[PR#43]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/43)
