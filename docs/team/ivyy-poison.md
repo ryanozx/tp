@@ -49,10 +49,10 @@ Given below are my contributions to the project.
 * **Documentation**
   * Add documentation for the following commands in User Guide: `view-tag`, `add-tag` and `delete-tag` [[PR#41]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/41)
   * Add documentation for the following commands in User Guide: `find-leave-range`, `find-leave-status`, `find-all-leave`
-    `find-leave` and `delete-leave` [[PR#166]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/166)
+    `find-leave` and `delete-leave` [[PR#183]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/183)
   * Reorder User Guide by rearranging commands into feature categories to allow for more intuitive navigation [[PR#194]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/194)
   * Add About section for HRMate to explain key terms and key features of application [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195)
-  * Add minor edits such as removal of excessive anchor links, and rewording of certain sections in User Guide [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195) [[PR#196]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/196)
+  * Add edits such as removal of excessive anchor links, and rewording of certain sections in User Guide, among others [[PR#194]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/194) [[PR#195]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/195) [[PR#199]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/199) [[PR#204]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/204)
 
 * **Reviewing PRs** 
   * Review import/ export Developer Guide proposed implementation [[PR#43]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/43)
