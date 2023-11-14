@@ -19,6 +19,7 @@
 * [JavaFX](https://openjfx.io/): The GUI framework used in HRMate
 * [Jackson](https://github.com/FasterXML/jackson): JSON parsing library used to read and write HRMate's JSON data files
 * [MarkBind](https://markbind.org/): Used to generate HRMate's project site
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -142,7 +143,6 @@ The `Model` component,
 
 </box>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -172,6 +172,96 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
+
+### The Person class
+
+ManageHR keeps track of employees within the company with the use of `Person` and `UniquePersonList`. The `UniquePersonList` serves as a container for the `Person` objects,
+while enforcing the constraints that no 2 employees have the same name.
+
+The `Person` class contains the following attributes.
+<puml src="diagrams/PersonObjectDiagram.puml", width="550"></puml>
+
+1. `Name`: The name of the employee.
+2. `Phone`: The phone number of the employee.
+3. `Email`: The email address of the employee.
+4. `Address`: The address of the employee.
+5. `Tags`: The customised tag added by the user.
+
+### Find an Employee by tags
+`FindAllTagCommand` and `FindSomeTagCommand` are implemented similar to `FindCommand`.
+They use `TagsContainAllTagsPredicate` and `TagsContainAllTagsPredicate` respectively as predicate to filter the employee list. And then update the displayed employee list of the model
+
+The following sequence diagram shows how `FindAllTagCommand` executes.
+<puml src="diagrams/FindAllTagCommandDiagram.puml", width="550"></puml>
+
+#### Design considerations:
+`FindAllTagCommand` matches employees with all specified tags while `FindSomeTagCommand` matches employees with any of the specified tags.
+The nuance difference is made to cater to users' needs for efficient searching.
+### Adding tag feature
+
+#### Implementation
+`AddTagCommand` is implemented similar to `EditCommand`.
+A new `Person` is created with the information from the old `Person`.
+The tags are then added before replacing the old `Person` with the new `Person`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/AddTagActivityDiagram.puml", width="550"></puml>
+
+#### Design considerations:
+
+**Aspect: How AddTagCommand executes:**
+* **Alternative 1 (current choice):** Builts a new Person.
+    * Pros: Easy to implement (using `EditCommand` as reference), immutability allows for potential redo and undo commands.
+    * Cons: Memory intensive, costly in terms of time.
+* **Alternative 2:** Add tags to `Person`.
+    * Pros: Memory efficient
+    * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
+
+### The Leave class
+
+ManageHR keeps track of the leaves of employees within the company with the use of `Leave` and `UniqueLeaveList`. The `UniqueLeaveList` serves as a container for the `Leave` objects,
+while enforcing the constraints that no 2 leaves can have same start date and end date for the same employee.
+
+The `Leave` class contains the following attributes.
+<puml src="diagrams/LeaveObjectDiagram.puml", width="550"></puml>>
+
+1. `ComparablePerson`: The employee.
+2. `Title`: The title of the leave.
+3. `Description`: The description of the leave.
+4. `Date start`: The start date of the leave.
+5. `Date end`: The end date of the leave.
+5. `Status`: The status of the leave.
+
+`Date start` must be earlier than or the same as the `Date end`.
+All the attributes except Description and Status are compulsory fields for adding a leave.
+
+### Add A Leave application feature
+
+The add-leave command allows the HR manager to add a leave record for a specific employee. This feature enhances the HRMate system by providing a way to manage and track employee leaves efficiently.
+Fields compulsory to enter for `add-leave` as `String` type include:
+1. `index`: The index of the person for the leave application. It will be parsed as `Index` type to `AddLeaveCommand` object and converted to `Person` type based on the displayed list when a new `Leave` object created.
+2. `title`: The title of the leave, it will be parsed as `Title` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+3. `date start`: The start date of the leave in "yyyy-MM-dd" format. It will be parsed together with `date end` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+4. `date end`: The end date of the leave in "yyyy-MM-dd" format. It will be parsed together with `date start` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+5. `description`: The description of the leave. It is optional and will be parsed as `NONE` if no description field exists. Otherwise it will be parsed as `Description` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+
+* CommandException due to unfounded index in the list will be thrown and handled in `AddLeaveCommand`.
+* InvalidValueExceptions thrown due to illegal arguments, and EndBeforeStartExceptions thrown due to the end date occurring before the start date, will be handled by ParserException in `AddLeaveCommandParser`.
+* CommandException due to duplicated leaves that have exact start and end dates will be thrown and handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
+
+The activity diagram for adding a leave is as followed:
+<puml src="diagrams/AddLeaveCommandActivityDiagram.puml", width="550"></puml>
+
+Here is an example usage of the `add-leave` feature:
+1. The user uses the `find` command to filter for employees named Martin.
+2. The user enters the command `add-leave 1 title/Sample Leave 1 start/2023-11-01 end/2023-11-01` with Martin being index 1.
+3. A record of leave with specified title and dates for Martin is created.
+
+#### Design considerations
+The command follows a structured format to ensure ease of use and to minimize errors. The use of an index ensures that the leave is associated with a specific employee. The format of the command is designed to be clear and straightforward.
 
 ### Import file
 
@@ -308,7 +398,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250"></puml>
+<puml src="diagrams/CommitActivityDiagram.puml" width="550"></puml>
 
 #### Design considerations:
 
@@ -325,27 +415,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Adding tag feature
+### \[Proposed\] Data archiving
 
-#### Implementation
+_{Explain here how the data archiving feature will be implemented}_
 
-`AddTagCommand` is implemented similar to `EditCommand`.
-A new `Person` is created with the information from the old `Person`.
-The tags are then added before replacing the old `Person` with the new `Person`.
 
-The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
-
-#### Design considerations:
-
-**Aspect: How AddTagCommand executes:**
-* **Alternative 1 (current choice):** Builts a new Person.
-  * Pros: Easy to implement (using `EditCommand` as reference), immutability allows for potential redo and undo commands.
-  * Cons: Memory intensive, costly in terms of time.
-* **Alternative 2:** Add tags to `Person`.
-  * Pros: Memory efficient
-  * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,20 +453,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                             | I want to …                         | So that I can …                                                          |
-|----------|------------------------------------|-------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user                           | see usage instructions              | refer to instructions when I forget how to use the App                   |
-| `* * *`  | HR manager                         | add a new employee                  |                                                                          |
-| `* * *`  | HR manager                         | delete an employee                  | remove employees who no longer work here                                 |
-| `* * *`  | HR manager                         | find an employee by name            | locate details of employees without having to go through the entire list |
-| `* * *`  | organised HR manager               | add/delete a tag to an employee     | change the label of an employee                                          |
-| `* * *`  | organised HR manager               | view all my tags                    | filter by them                                                           |
-| `* * *`  | organised HR manager               | find employees by tags              | find specific category of employees for higher level workflows           |
-| `* *`    | HR manager                         | hide private contact details        | minimize chance of someone else seeing them by accident                  |
-| `* *`    | HR manager                         | import/export records in CSV format | open the records in other apps                                           |
-| `*`      | HR manager of a large organisation | sort employees by name              | locate an employee easily                                                |
+| Priority | As a …                             | I want to …                                | So that I can …                                                        |
+|----------|------------------------------------|--------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                           | see usage instructions                     | refer to instructions when I forget how to use the App                 |
+| `* * *`  | HR manager                         | add a new employee                         |                                                                        |
+| `* * *`  | HR manager                         | delete an employee                         | remove employees who no longer work here                               |
+| `* * *`  | HR manager                         | find an employee by name                   | locate details of employees without having to go through the entire list |
+| `* * *`  | organised HR manager               | add/delete a tag to an employee            | change the label of an employee                                        |
+| `* * *`  | organised HR manager               | view all my tags                           | filter by them                                                         |
+| `* * *`  | organised HR manager               | find employees by tags                     | find specific category of employees for higher level workflows         |
+| `* * *`  | organised HR manager               | add a new leave application of an employee | keep track of the leaves applications                                  |
+| `* *`    | HR manager                         | hide private contact details               | minimize chance of someone else seeing them by accident                |
+| `* *`    | HR manager                         | import/export records in CSV format        | open the records in other apps                                         |
+| `*`      | HR manager of a large organisation | sort employees by name                     | locate an employee easily                                              |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -563,7 +638,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-*{More to be added}*
+**Use case: Add a leave application**
+
+**MSS**
+
+1. The HR manager requests to find an employee by name.
+2. HRMate shows a list of employees with the same name.
+3. The HR manager requests to add a leave application for the selected employee 
+4. HRMate adds the leave application to the employee's record based on the provided information.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. The list of employees with the provided name is empty.
+* 
+    * 2a1. HRMate informs the HR manager that no employees with the given name were found. 
+  
+      Use case ends.
+  
+* 3a. The provided employee index is invalid.
+
+    * 3a1. HRMate shows an error message indicating that the employee name is not valid.
+      
+      Use case resumes at step 2.
+
+* 4a. The provided leave application details are invalid. 
+
+    * 4a1. HRMate shows an error message specifying the issue with the provided details (e.g., date format, missing fields).
+
+      Use case resumes at step 3.
+
 
 ### Non-Functional Requirements
 
@@ -573,9 +678,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  HRMate should be capable of handling a growing volume of employee records (up to 1000 persons) without a substantial decrease in performance. It should efficiently manage and store data as the number of employees and records increases over time.
 5.  HRMate should complete operations involving a single records within 500ms, and operations involving listing, searching, and filtering within 2s.
 
-
-*{More to be added}*
-
 ## **Appendix: Effort**
 
 HRMate is built for extensibility. Not much effort is needed to implement new commands that are variations of existing features, but effort is needed to add new entities.
@@ -583,7 +685,6 @@ HRMate is built for extensibility. Not much effort is needed to implement new co
 ### Challenges Faced
 The first challenge given is understanding the code infrastructure. HRMate uses many design patterns like Facade pattern, Command pattern and MVC pattern. Without knowledge of these patterns, HRMate would seem complicated and difficult to understand.
 Overall the understanding that the `Model` is a Facade for `AddressBook` and `LeavesBook`, input commands follow the Command pattern, and that `AddressBook` and `LeavesBook` are the models, JavaFX is used for the view and `ModelManager` functions as the controller greatly help in the understanding of HRMate's infrastructure.
-
 Another significant challenge is the implementation of the leaves module. Given HRMate's immutable design philosophy, some design choices like replacing stale `Leave` with new instances of `Leave` with the updated `Person` are chosen. Care must be taken to update `Leave` everytime a `Person` is replaced like in the `EditCommand`, `AddTagCommand` and `DeleteCommand`. When adding a new potential module like `Report`, we anticipate that care must be taken when the associated `Person` or `Leave` is replaced.
 
 ### Effort Required
@@ -599,7 +700,7 @@ Efforts were also spent on ensuring data validity for `Person` and `Leave` when 
  * Successfully implemented second entity, `Leave` alongside `Person` with information consistency even when `Person` is edited or deleted.
  * Created new way to import data using csv for both `Leave` and `Person`, opening up changing in app data to users who might not understand json.
  * Added 19 more commands while increasing code coverage by 2%.
-
+   
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -629,6 +730,7 @@ testers are expected to do more exploratory testing.</box>
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -656,7 +758,55 @@ testers are expected to do more exploratory testing.</box>
 
     4. Follow up actions: `list`<br>
        Expected: Only the previously deleted person is deleted.
+       
+### Finding all tags matched
+1. Finding Employees with All Tags in a Valid Scenario
+   1. Prerequisites:
+      1. Have a dataset with employees having different tags, specifically `remote`, `full time`, `part time` and `on-site`. 
+      2. List all employees using the list command to identify available tags. 
+   2. Test Case: find-all-tag t/remote t/full time 
+      Expected: GUI Changes: A dedicated interface section displays a list of employees with both tags `remote` and `full time`. Status message indicates the number of matched employees. Verify that employees with additional tags are also displayed.
+   3. Test Case: find-all-tag
+      Expected: Error message indicates an invalid command format.Status bar remains the same.
+   4. Test Case: find-all-tag t/Nonexistent tag
+      Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+   5. Test Case: find-all-tag t/REMOTE
+      Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+   6. Test Case: find-all-tag t/123!
+      Expected: Error message indicates illegal tag names. Status bar remains the same.
+   7. Test Case: find-all-tag t/re
+      Expected:Employees with tag named `re` are displayed. Verify that employees with additional tags are also displayed.
+### Finding some tags matched
+1. Finding Employees with All Tags in a Valid Scenario
+    1. Prerequisites:
+        1. Have a dataset with employees having different tags, specifically `remote`, `full time`, `part time` and `on-site`.
+        2. List all employees using the list command to identify available tags.
+    2. Test Case: find-some-tag t/remote t/full time
+       Expected: GUI Changes: A dedicated interface section displays a list of employees with either tags `remote` and `full time`. Status message indicates the number of matched employees. Verify that employees with additional tags are also displayed.
+    3. Test Case: find-some-tag
+       Expected: Error message indicates an invalid command format.Status bar remains the same.
+    4. Test Case: find-some-tag t/Nonexistent tag
+       Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+    5. Test Case: find-some-tag t/REMOTE
+       Expected: GUI Changes: A dedicated interface section displays no employee. Status message indicates 0 matched employee.
+    6. Test Case: find-some-tag t/123!
+       Expected: Error message indicates illegal tag names. Status bar remains the same.
+    7. Test Case: find-some-tag t/re
+       Expected:Employees with tag named `re` are displayed. Verify that employees with additional tags are also displayed.
 
+### Adding a leave
+1. Adding a leave while all leaves are being shown
+
+   1. Prerequisites: List all leaves using the list-leaves command. Multiple leaves in the list.
+
+   2. Test case: add-leave 1 title/Vacation start/2023-11-15 end/2023-11-20<br>
+   Expected: The leave is added to the list. Details of the added leave shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case: add-leave 0 title/Conference start/2023-12-01 end/2023-12-03 d/Attending conference<br>
+   Expected: No leave is added. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect add-leave commands to try: add-leave, add-leave x, ... (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -690,3 +840,4 @@ testers are expected to do more exploratory testing.</box>
 3. Mergable `import`. Sometimes, HR Managers want to move data from one app to HRMate without removing all current employees. Allow HRMate to merge a csv file, with an option to overwrite current data or overwrite csv data when a same employee is encountered, would help HR Managers achieve this.
 
 4. Filtered `clear`. Allowing HR Managers to select a group of employees to delete would be good. For example, they could use `find-any-tags t/intern`, `clear` to delete all interns. Subsequently, `list` would show all non intern employees.
+

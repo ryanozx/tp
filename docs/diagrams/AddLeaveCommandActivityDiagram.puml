@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes add customer command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([User provided all required parameters])
+: Index, title, start date, end date of the leave are parsed;
+if () then ([description provided])
+:Description of the leave is parsed;
+
+else([else])
+endif
+:New leave is returned;
+stop
+else([User failed to provide required parameters correctly])
+: Throw ParserException, re-enter the command;
+end
+
+@enduml
