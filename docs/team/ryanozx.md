@@ -19,7 +19,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Add documentation for the features `clear`, `exit`, `import`, `export`, `import-leave`, `export-leave`
   * Developer Guide:
-    * Add implementation and user stories for the features `import` and `export`
+    * Add implementation and user stories for the features `import`, `export`, and `find-leave-range`
     * Update UML diagrams and descriptions in Design section
   * Managed conversion of documentation into MarkBind format
 * **Enhancements to existing features**
