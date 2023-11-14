@@ -19,6 +19,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Add implementation and user stories for the commands `add-tag`, `remove-tag` [#27](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/27)
     * Add Effort section [#182](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/182)
+    * Add 4 proposed enhancements [#203](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/182)
 * **Feature Development**:
   * Developed `add-tag` [#49](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/49), `delete-leave` [#77](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/77), `edit-leave`[#155](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/155).
   * Wrote unit tests for the above commands (in same PR).
@@ -29,6 +30,6 @@ Given below are my contributions to the project.
 * **Project Management**:
   * Distributed tasks
 * **Community**:
-  * Reviewed 18 PRs: [reviewed PRs](https://github.com/AY2324S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aong-wei-hong+is%3Aclosed+)
+  * Reviewed 22 PRs: [reviewed PRs](https://github.com/AY2324S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aong-wei-hong+is%3Aclosed+)
   * Reported bugs for other teams during PE-D.
 
