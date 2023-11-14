@@ -1,0 +1,28 @@
+@startuml
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+package LeaveObjectDiagram {
+    Object "<u>:Leave" as Leave {
+    }
+
+    Object "<u>:Person" as Employee {
+    }
+    Object "<u>:Title" as Title {
+    }
+    Object "<u>start:Date" as startDate {
+    }
+    Object "<u>end:Date" as endDate {
+    }
+    Object "<u>:Description" as Description {
+    }
+}
+
+Employee <-- Leave : has <
+Title <-- Leave : has <
+startDate <-- Leave : has <
+endDate <-- Leave : has <
+Description<-- Leave : has <
+
+
+@enduml
