@@ -386,18 +386,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                             | I want to …                         | So that I can …                                                          |
-|----------|------------------------------------|-------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user                           | see usage instructions              | refer to instructions when I forget how to use the App                   |
-| `* * *`  | HR manager                         | add a new employee                  |                                                                          |
-| `* * *`  | HR manager                         | delete an employee                  | remove employees who no longer work here                                 |
-| `* * *`  | HR manager                         | find an employee by name            | locate details of employees without having to go through the entire list |
-| `* * *`  | organised HR manager               | add/delete a tag to an employee     | change the label of an employee                                          |
-| `* * *`  | organised HR manager               | view all my tags                    | filter by them                                                           |
-| `* * *`  | organised HR manager               | find employees by tags              | find specific category of employees for higher level workflows           |
-| `* *`    | HR manager                         | hide private contact details        | minimize chance of someone else seeing them by accident                  |
-| `* *`    | HR manager                         | import/export records in CSV format | open the records in other apps                                           |
-| `*`      | HR manager of a large organisation | sort employees by name              | locate an employee easily                                                |
+| Priority | As a …                             | I want to …                                     | So that I can …                                                          |
+|----------|------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | new user                           | see usage instructions                          | refer to instructions when I forget how to use the App                   |
+| `* * *`  | HR manager                         | add a new employee                              |                                                                          |
+| `* * *`  | HR manager                         | delete an employee                              | remove employees who no longer work here                                 |
+| `* * *`  | HR manager                         | find an employee by name                        | locate details of employees without having to go through the entire list |
+| `* * *`  | organised HR manager               | add/delete a tag to an employee                 | change the label of an employee                                          |
+| `* * *`  | organised HR manager               | view all my tags                                | filter by them                                                           |
+| `* * *`  | organised HR manager               | find employees by tags                          | find specific category of employees for higher level workflows           |
+| `* * *`  | HR manager                         | add employees' leave applications               |                                                                          |
+| `* * *`  | HR manager                         | delete employees' leave applications            | remove leave applications that have been cancelled by employees          |
+| `* * *`  | HR manager of a large organisation | find all leave applications of an employee      | track the amount of leaves taken by an employee                          |
+| `* * * ` | HR manager                         | approve/reject leave applications               | update employees on their leave application status                       |
+| `* *`    | HR manager                         | hide private contact details                    | minimize chance of someone else seeing them by accident                  |
+| `* *`    | HR manager                         | import/export records in CSV format             | open the records in other apps                                           |
+| `* * `   | HR manager of a large organisation | find all leave applications in a given period   | forecast available manpower to avoid manpower shortages                  |
+| `* * `   | HR manager of a large organisation | find all leave applications with a given status | check which applications are still pending                               |
+| `*`      | HR manager of a large organisation | sort employees by name                          | locate an employee easily                                                |
+
 
 *{More to be added}*
 
