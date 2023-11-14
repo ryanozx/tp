@@ -242,15 +242,15 @@ All the attributes except Description and Status are compulsory fields for addin
 
 The add-leave command allows the HR manager to add a leave record for a specific employee. This feature enhances the HRMate system by providing a way to manage and track employee leaves efficiently.
 Fields compulsory to enter for `add-leave` as `String` type include:
-1. `index`: The index of the person for the leave application, it will be parsed as `Index` type to `AddLeaveCommand` object and converted to `Person` type based on the displayed list when a new `Leave` object created.
+1. `index`: The index of the person for the leave application. It will be parsed as `Index` type to `AddLeaveCommand` object and converted to `Person` type based on the displayed list when a new `Leave` object created.
 2. `title`: The title of the leave, it will be parsed as `Title` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-3. `date start`: The start date of the leave in "yyyy-MM-dd" format, it will be parsed together with `date end` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-4. `date end`: The end date of the leave in "yyyy-MM-dd" format, it will be parsed together with `date start` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
-5. `description`: The description of the leave, it is optional, it will be parsed as `NONE` if no description field exists, otherwise it will be parsed as `Description` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+3. `date start`: The start date of the leave in "yyyy-MM-dd" format. It will be parsed together with `date end` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+4. `date end`: The end date of the leave in "yyyy-MM-dd" format. It will be parsed together with `date start` as `Range` type to `AddLeaveCommand` object and to the newly created `Leave` object.
+5. `description`: The description of the leave. It is optional and will be parsed as `NONE` if no description field exists. Otherwise it will be parsed as `Description` type to `AddLeaveCommand` object and to the newly created `Leave` object.
 
-* CommandException will be thrown at `AddLeaveCommand` for unfounded index in the list.
-* The rest of the invalid fields exception including illegal arguments and end date before start date will be handled by ParserException in `AddLeaveCommandParser`.
-* Same leave exception will be handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
+* CommandException due to unfounded index in the list will be thrown and handled in `AddLeaveCommand`.
+* InvalidValueExceptions thrown due to illegal arguments, and EndBeforeStartExceptions thrown due to the end date occurring before the start date, will be handled by ParserException in `AddLeaveCommandParser`.
+* CommandException due to duplicated leaves that have exact start and end dates will be thrown and handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
 
 The activity diagram for adding a leave is as followed:
 <puml src="diagrams/AddLeaveCommandActivityDiagram.puml", width="550"></puml>
