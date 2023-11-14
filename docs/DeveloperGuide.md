@@ -179,7 +179,7 @@ ManageHR keeps track of employees within the company with the use of `Person` an
 while enforcing the constraints that no 2 employees have the same name.
 
 The `Person` class contains the following attributes.
-<puml src="diagrams/PersonObjectDiagram.puml", width="550"></puml>
+<puml src="diagrams/EmployeeObjectDiagram.puml", width="550"></puml>
 
 1. `Name`: The name of the employee.
 2. `Phone`: The phone number of the employee.
@@ -193,7 +193,7 @@ ManageHR keeps track of the leaves of employees within the company with the use 
 while enforcing the constraints that no 2 leaves can have same start date and end date for the same employee.
 
 The `Leave` class contains the following attributes.
-<puml src="diagrams/LeaveObjectDiagram.puml", width="550"></puml>>
+<puml src="diagrams/LeaveObjectDiagram.puml", width="550"></puml>
 
 1. `ComparablePerson`: The employee.
 2. `Title`: The title of the leave.
@@ -250,7 +250,7 @@ The tags are then added before replacing the old `Person` with the new `Person`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/AddTagActivityDiagram.puml", width="550"></puml>
+<puml src="diagrams/AddTagSequenceDiagram.puml", width="550"></puml>
 
 #### Design considerations:
 
@@ -261,6 +261,24 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Add tags to `Person`.
     * Pros: Memory efficient
     * Cons: Mutable `Person` can affect implementation of potential redo and undo commands.
+
+### Find leave by period feature
+
+#### Implementation
+`FindLeaveByPeriodCommand` is implemented similar to `FindCommand`. It uses a `LeaveInPeriodPredicate` as the predicate to filter
+the leaves list. 
+
+The predicate can be in 1 of 4 possible states
+* Return true for all leaves - no start and end date is supplied for the query
+* Return true for all leaves with at least one day in the period [start, end] inclusive - both start and end dates are supplied for the query
+* Return true for all leaves with at least one day occurring on or after the query start date - only the start date is supplied for the query
+* Return true for all leaves with at least one day occurring on or before the query end date - only the end date is supplied for the query
+
+The following sequence diagram shows how `FindLeaveByPeriodCommand` executes.
+<puml src="diagrams/FindLeaveInPeriodSequenceDiagram.puml", width="550"></puml>
+
+A LeaveInPeriodPredicate is constructed from the query supplied by the user, defining both a start (if provided) and end (if provided).
+When the command is executed, the model's FilteredLeaveList is updated to only returns leaves that satisfy the predicate.
 
 ### Import file
 

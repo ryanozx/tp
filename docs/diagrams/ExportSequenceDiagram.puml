@@ -19,17 +19,17 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(export employees)
+[-> LogicManager : execute("export employees")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(export employees)
+LogicManager -> AddressBookParser : parseCommand("export employees")
 activate AddressBookParser
 
 create ExportContactCommandParser
 AddressBookParser -> ExportContactCommandParser
 activate ExportContactCommandParser
 
-ExportContactCommandParser -> ExportContactCommandParser : parseFileName(employees)
+ExportContactCommandParser -> ExportContactCommandParser : parseFileName("employees")
 
 create ExportContactCommand
 ExportContactCommandParser -> ExportContactCommand
