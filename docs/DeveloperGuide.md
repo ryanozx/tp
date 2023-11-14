@@ -175,9 +175,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Import file
 
-The import feature allows users to import employee records in CSV format, increasing portability of
-the user's data. The import feature can provide a means of mass adding employee records, without having to use the `add`
-command repeatedly. 
+The import feature allows users to import employee records and leave applications in CSV format, increasing portability of
+the user's data. The import feature can provide a means of mass adding employee records and leave applications, without having to use 
+the `add` command repeatedly. Since both importing employee records and leave applications involve similar sequences,
+the following will describe the sequence for importing employee records.
 
 Here is an example usage of the import feature:
 1. User executes the `import` command.
@@ -185,38 +186,32 @@ Here is an example usage of the import feature:
 3. User selects the file and clicks on the Open button of the file dialog.
 4. All contacts in the address book will be overwritten by the contents of the imported file
 
+The following activity diagram shows the steps involved in the Import command:
+
+<puml src="diagrams/ImportActivityDiagram.puml" width="550"></puml>
+
 The CSV file is read into a CsvFile object, which is then converted into a CsvSerializableAddressBook object by reading each
 row and the corresponding values for each column. The CsvSerializableAddressBook is then converted into an AddressBook instance,
 which replaces the current AddressBook instance in the app.
 
 #### Design considerations
-The choice of using a file dialog for the user to select the file, as opposed to having the user type the file name in
-the command, is to minimise the likelihood of the user misspelling the file or accidentally typing the wrong path due to
-the inclusion/exclusion of parent directories.
+**Aspect: How the user selects files**
 
-#### Proposed extensions
-1. Implement autosave ability when importing files
-- Due to the overwriting ability of the import command, all contacts that were in HRMate previously would be lost
-after executing the import command. As such, an autosave ability could be added, utilising the already implemented
-export feature, whereby the current contents of the address book is exported just prior to overwriting the address book.
-2. Implement non-overwriting option for importing files
-- This gives user more granular control over their files, since they can combine employee records stored in different files.
-- Flags can be added to the import command to determine import policy
-  - Overwrite existing address book
-  - If there is a record with the same name in the current address book and imported file, replace it with the one in the imported file
-  - If there is a record with the same name in the current address book and imported file, keep the one in the current address book
-3. Enable importing of leaves
-- A flag can be supplied to the import command to determine the type of file to be imported
-  - By default, it assumes that the imported file contains the address book
-  - One flag can be used to indicate that the imported file contains the leaves book
-  - Another flag can be used to indicate that the user would like to import both address book and leaves book. This will trigger
-  two file dialogs. The reason for providing this option is that the order of importation is specific - the leaves book cannot
-  be imported before the address book, as leaves require a valid reference to an existing employee in the address book.
+* **Alternative 1 (current choice)**: Select from graphical file dialog
+  * Pros: More intuitive for the user to navigate and locate the file
+  * Cons: File dialog is harder to navigate with just the keyboard
+* **Alternative 2**: User types in file path in the command
+  * Pros: The user can perform the operation entirely by keyboard
+  * Cons: Users are more likely to type in the wrong file name, and selecting a file in a different folder would require
+  typing out the entire relative file path
+
 
 ### Export feature
 
-The export feature enables users to export employee records into CSV format, which can then be opened in other spreadsheet
-applications. It allows users to select filtered data to export, providing greater granularity in control over file content.
+The export feature enables users to export employee records and leave applications into CSV format, which can then be opened 
+in other spreadsheet applications. It allows users to select filtered data to export, providing greater granularity in
+control over file content. Since both exporting employee records and leave applications involve similar sequences, the
+following will describe the sequence for exporting employee records.
 
 Here is an example usage of the `export` feature:
 1. The user uses the `find-some-tag` command to filter for employees with the `full time` tag
@@ -224,17 +219,30 @@ Here is an example usage of the `export` feature:
 3. A file will be created in `{home folder of HRMate}/exports`, with the name `fulltimers.csv`. This file contains employees
 with the `full time` tag.
 
-The export command works by retrieving the filtered person list in the address book, which contains a list of employee records
+The following sequence diagram shows the steps involved in the Export command:
+
+<puml src="diagrams/ExportSequenceDiagram.puml" width="800"></puml>
+
+ExportContactCommandParser::parseFileName() checks if the file name provided is a valid file name. If the user provided
+a path, it strips the path to retain only the file name. Next, it appends a ".csv" extension to the end of the file name
+if the user did not supply the extension. 
+
+The export command works by retrieving the filtered employee list in the address book, which contains a list of employee records
 that are currently visible in the address book panel. A CsvSerializableAddressBook is constructed from this filtered person list,
-which is then serialized into a CsvFile object. CsvUtil then writes the CsvFile instance into a CSV file.
+which is then serialized into a CsvFile object. CsvUtil then writes the CsvFile instance into a CSV file. This file is
+saved in the "export" folder that is created in the same location as the HRMate application file.
 
 #### Design considerations
-Unlike the import command, the use of a file dialog in saving the file was not adopted as it was deemed unnecessary. Saving all
-records into the same `export` folder provides users with an easy-to-find folder to locate their files.
+**Aspect: Whether to allow the user to select the location to save the file to**
 
-#### Proposed extension
-1. The export command will export both address book and leave book together. The leave book can be saved under the name
-`{address book save name}_leaves.csv` to indicate its association with the address book save file. 
+* Alternative 1 (current choice): Disallow selecting the save location
+  * Pros: File dialog is not required as all files will be saved in the same place, allowing the entire operation to be
+    performed using the keyboard
+  * Cons: Loss of flexibility in choosing the save location, especially if the user wants to save multiple copies with
+    the same file name in different locations
+* Alternative 2: Allow selecting the save location
+  * Pros: Provides flexibility for the user to choose a preferred save location
+  * Cons: File dialogs would require the use of a mouse
 
 ### \[Proposed\] Undo/redo feature
 
@@ -339,7 +347,7 @@ The tags are then added before replacing the old `Person` with the new `Person`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
+<puml src="diagrams/AddTagSequenceDiagram.puml", width="550"></puml>
 
 #### Design considerations:
 
