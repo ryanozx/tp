@@ -171,6 +171,8 @@ When a new employee joins, use the [`add`](#adding-an-employee-add) command to a
 
 Use the `add` command to add an employee to the employee list.
 
+Here's how to add an employee:
+
 1. Type in the following command in the [command box](#glossary): `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replace `NAME` with employee name, `PHONE_NUMBER` with employee phone number `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field with one or more tags, with `TAG` being the name of the tag.
  - For instance, if you have an employee name John Doe with phone number 98765432, email johnd@example.com, home address John Street, block 123 #01-01 and tags full-time and remote, type in the command `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01 t/full-time t/remote`
  - If your employee does not require any tags, using the same information as above, the command would be `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123 #01-01`
@@ -210,6 +212,8 @@ HRMate makes it easy to find an employee and there are multiple ways of doing so
 
 Use the `list` command to view all employees that are currently listed in the employee list.
 
+Here's how to use the `list` command:
+
 1. Type in the following command in the command box: `list`.
 2. Press "enter" on your keyboard and you should see the information of all employees listed in the employee list.
 
@@ -226,6 +230,8 @@ Here are the potential error messages that you may receive and here's how to fix
 #### Finding employees by name: `find`
 
 Use the `find` command to find employees by name. This command will find employees whose names contain the specified words that you enter.
+
+Here's how to find employees by name:
 
   1. Type in the following command in the command box `find NAME....` where `NAME...` are to be replaced with one or more names of the employees for search.
      * The words for search are case insensitive, meaning you do not have to worry about the capitalization of the words entered. 
@@ -246,6 +252,8 @@ Use the `find` command to find employees by name. This command will find employe
 
 To view all tags currently in use within the employee list, use the `view-tag` command. This will be 
 useful if you want to find employees by their associated tags using the [`find-all-tag`](#finding-employees-by-all-specified-tags-find-all-tag) and [`find-some-tag`](#finding-employees-by-at-least-one-specified-tag-find-some-tag) commands.
+
+Here's how to view all currently used tags:
 
 1. Type in the following command in the command box: `view-tag`.
 2. Press "enter" on your keyboard and you should see a list of all tags currently in use within the employee list.
@@ -268,6 +276,8 @@ Here are the potential error messages that you may receive and here's how to fix
 
 To find employees by a set of specified tags, use the `find-all-tag` command. This command will find employees that are currently associated with all the specified tags that you enter.
 
+Here's how to use the `find-all-tag` command:
+
 1. Type in the following command in the command box `find-all-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the tags.
    * At least one tag should be entered for search and more tags can be entered if you want to search for more.
    * The tag names are case sensitive, meaning the capitalization of the words entered matters. 
@@ -286,6 +296,8 @@ To find employees by a set of specified tags, use the `find-all-tag` command. Th
 #### Finding employees by at least one specified tag: `find-some-tag`
 
 To find employees by at least one of the specified tags, use the `find-some-tag` command. This command will find employees that are currently associated with at least one of the specified tags that you enter.
+
+Here's how to use the `find-some-tag` command:
 
 1. Type in the following command in the command box `find-some-tag t/TAG [t/MORE_TAGS]...` where `TAG` is to be replaced with the name of the tags.
    * At least one tag should be entered for search and more tags can be entered if you want to search for more.
@@ -311,6 +323,8 @@ HRMate offers different commands for editing employee records. [`add-tag`](#addi
 
 Use the `add-tag` command to add tags to an employee. This command will add the specified tags to an employee specified by their index in the employee list.
 
+Here's how to use the `add-tag` command:
+
 1. Find the employee under the employee list.
 
 <box type="info" seamless>
@@ -334,6 +348,8 @@ Here are the potential error messages that you may receive and here's how to fix
 #### Removing tags from employees: `delete-tag`
 
 Use the `delete-tag` command to remove tags from an employee. This command will remove the specified tags from an employee specified by their index in the employee list.
+
+Here's how to use the `delete-tag` command:
 
 1. Get the [index](#glossary) of the employee in the employee list.
 
@@ -359,6 +375,8 @@ Here are the potential error messages you may receive and here's how to fix them
 #### Editing employee information : `edit`
 
 For a more comprehensive editing of an employee's information, use the `edit` command. This command will edit the specified fields of an employee specified by their index in the employee list.
+
+Here's how to use the `edit` command to edit an employee's information:
 
 1. Get the [index](#glossary) of the employee under the employee list.
 
@@ -400,6 +418,8 @@ Delete employee records from HRMate using the [`delete`](#deleting-a-record-dele
 #### Deleting a record : `delete`
 
 Use the `delete` command to delete an employee record from HRMate. This command will delete the specified employee from the employee list.
+
+Here's how to delete an employee record:
 
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 <box type="info" seamless>
@@ -523,6 +543,8 @@ When an employee applies for leave, you can use the `add-leave` command to add t
 
 Use the `add-leave` command to add a leave application to HRMate. This command will add the specified leave application to the leave list.
 
+Here's how to add a leave application:
+
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 
 <box type="info" seamless>
@@ -565,6 +587,8 @@ HRMate offers different commands for finding leave applications. [`find-leave-ra
 
 To find leave applications by time period, use the `find-leave-range` command. This command will find leave applications that fall within the specified time period.
 
+Here's how to use the `find-leave-range` command:
+
 1. Type in the following command in the command box:
    `find-leave-range [start/START_DATE] [end/END_DATE]`, and replace `START_DATE` with the start date of the time period,
    and `END_DATE` with the end date of the time period, both in the format `yyyy-MM-dd`.
@@ -591,6 +615,8 @@ Note: `yyyy-MM-dd` refers to the format of the date in the form of year-month-da
 
 To find leave applications by leave status, use the `find-leave-status` command. This command will find leave applications that have the specified status.
 
+Here's how to use the `find-leave-status` command:
+
 1. Type in the following command in the command box:
    `find-leave-status STATUS`, and replace `STATUS` with the status of the leave applications you wish to view.
  - For instance: if you wanted to view all leave applications that have been approved, you would type in `find-leave-status APPROVED` in the command box.
@@ -610,6 +636,8 @@ Here are some potential error messages that you may receive and here's how to so
 #### Find leave applications belonging to an employee: `find-leave`
 
 To find leave applications belonging to an employee, use the `find-leave` command. This command will find leave applications that belong to the employee specified by their index in the employee list.
+
+Here's how to use the `find-leave` command:
 
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 2. Type in the following command in the command box:
@@ -637,6 +665,8 @@ Here are some potential error messages that you may receive and here's how to so
 
 Use the `find-all-leave` command to view all leave applications currently stored in HRMate.
 
+Here's how to view all leave applications in the leave list:
+
 1. Type in the following command in the command box:
    `find-all-leave`
 2. Press `Enter` to execute the command. You should see all the leave applications in HRMate.
@@ -651,6 +681,8 @@ HRMate offers different commands for editing leave applications. [`approve-leave
 #### Approve leave application by index: `approve-leave`
 
 Use the `approve-leave` command to approve a leave application in HRMate. This command will approve the specified leave application.
+
+Here's how to approve a leave application:
 
 1. Get the [index](#glossary) of the leave under the leave list.
 
@@ -671,6 +703,8 @@ If the leave application is not found, consider using `find-all-leave` or any `f
 
 Use the `reject-leave` command to reject a leave application in HRMate. This command will reject the specified leave application.
 
+Here's how to reject a leave application:
+
 1. Get the [index](#glossary) of the leave under the leave list.
 
 <box type='info'>
@@ -690,6 +724,8 @@ If the leave application is not found, consider using `find-all-leave` or any `f
 #### Editing a leave application: `edit-leave`
 
 For a more comprehensive editing of a leave application, use the `edit-leave` command to edit a leave application in HRMate. This command will edit the specified leave application.
+
+Here's how to use the `edit-leave` command to edit a leave application:
 
 1. Get the [index](#glossary) of the leave under the leave list.
 
@@ -728,6 +764,8 @@ To delete a leave application, use the [`delete-leave`](#removing-a-leave-applic
 #### Removing a leave application: `delete-leave`
 
 Use the `delete-leave` command to remove a leave application from HRMate. This command will remove the specified leave application from the leave list.
+
+Here's how to use the `delete-leave` command to remove a leave application:
 
 1. Type in the following command in the command box: `delete-leave LEAVE_LIST_INDEX`, and replace `LEAVE_LIST_INDEX` with the index of the leave application you wish to remove.
  - For instance, referring to the figure below: if you wanted to remove the leave application titled "medical leave" with employee "Bernice Yu", you would type in `delete-leave 2` in the command box.
@@ -842,6 +880,8 @@ Here are potential error messages that you may receive and here's how to fix the
 Should you need any help, you can access this online user guide (this document) with the `help` command.
 
 #### Getting help : `help`
+
+Here's how to use the `help` command:
 
 1. Type in the following command in the command box: `help`. 
 2. Press "Enter" on your keyboard.
