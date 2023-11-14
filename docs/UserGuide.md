@@ -185,6 +185,8 @@ Here's how to add an employee:
  - Please refer to [how to interpret command formats](#how-to-interpret-command-formats) for more information
 2. Press "enter" on your keyboard and you should see the person information at the end of the employee list. 
 
+<div style="page-break-after: always;"></div>
+
 Here are the potential error messages that you may receive and here's how to fix them:
 
 | Error message                                                                                                                                          | Why it happens                                                                                                  | Fix                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -192,7 +194,7 @@ Here are the potential error messages that you may receive and here's how to fix
 | `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [t/TAG]...`, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address, `HOME_ADDRESS` with employee home address. `[t/TAG]...` is optional, with `[t/TAG]` representing one or more tags and `TAG` being the tag name. |
 | `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                            |
 | `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                            |
-
+<div style="page-break-after: always;"></div>
 
 <box type='important'>
 Currently, HRmate's user interface is able to hold 35 to 160 characters on a single line, depending on the letters used. For any inputs longer than the character limit, HRmate will display ... for the remaining characters after the character limit.
@@ -377,6 +379,8 @@ Here are the potential error messages you may receive and here's how to fix them
 | `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete-tag` command. |
 | `Some of the tags are not found on this employee.` | The employee does not have some of the tags you are trying to delete | Remove the tags not found on the employee from the input command. For example, for an employee without the tag full-time, the command `delete-tag 2 t/full-time t/remote` does not work. Instead try `delete-tag 2 t/remote`.|
 | `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
+
+<div style="page-break-after: always;"></div>
 
 #### Editing employee information : `edit`
 
@@ -644,6 +648,8 @@ Here are some potential error messages that you may receive and here's how to so
 |-----------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------------------|
 | `Command should only contain one of the following words: APPROVED / PENDING / REJECTED` | The status you provided is not valid | Make sure that the status you provided is either `APPROVED`, `PENDING` or `REJECTED` |
 
+<div style="page-break-after: always;"></div>
+
 #### Find leave applications belonging to an employee: `find-leave`
 
 To find leave applications belonging to an employee, use the `find-leave` command. This command will find leave applications that belong to the employee specified by their index in the employee list.
@@ -681,8 +687,6 @@ Here's how to view all leave applications in the leave list:
 1. Type in the following command in the command box:
    `find-all-leave`
 2. Press `Enter` to execute the command. You should see all the leave applications in HRMate.
-
-<div style="page-break-after: always;"></div>
 
 
 ### Edit a leave application
