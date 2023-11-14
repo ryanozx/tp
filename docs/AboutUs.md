@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email
  - `mary84060117[at]gmail.com`
- - `Ivan's email`
+ - `tan.yuhao.ivan[at]gmail.com`
  - `weihong.ong[at]u.nus.edu.sg`
  - `nancyqinilm[at]gmail.com`
  - `ryanozx[at]u.nus.edu.sg`
