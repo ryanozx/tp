@@ -333,10 +333,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Adding tag feature
 
 #### Implementation
@@ -590,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Effort**
 
-HRMate is built for extensibility. Not much effort is needed to implement new commands that are variations of existing features (like TODO ex), but effort is needed to add new entities.
+HRMate is built for extensibility. Not much effort is needed to implement new commands that are variations of existing features, but effort is needed to add new entities.
 
 ### Challenges Faced
 The first challenge given is understanding the code infrastructure. HRMate uses many design patterns like Facade pattern, Command pattern and MVC pattern. Without knowledge of these patterns, HRMate would seem complicated and difficult to understand.
@@ -691,3 +687,14 @@ testers are expected to do more exploratory testing.</box>
     1. Add a `Person` using `add` and a `Leave` using `add-leave`. Delete the `Person` with `delete`. <br>
        Expected: The previously created `Leave` is deleted also.
 
+----------------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. `export-all` would export both `Person` and `Leave`. HR Managers usually wants to move both `Person` and `Leave` to another application, so being able to export both in a single csv sheet would help them do so.
+
+2. find-all-tags and find-any-tags searches for tags case insensitive. Since tags are used for categorising, HR Managers might see no difference between Intern and intern. Hence allowing case insensitive search in find-all-tags and find-any-tags would help HR Managers find employees more easily.
+
+3. Mergable `import`. Sometimes, HR Managers want to move data from one app to HRMate without removing all current employees. Allow HRMate to merge a csv file, with an option to overwrite current data or overwrite csv data when a same employee is encountered, would help HR Managers achieve this.
+
+4. Filtered `clear`. Allowing HR Managers to select a group of employees to delete would be good. For example, they could use `find-any-tags t/intern`, `clear` to delete all interns. Subsequently, `list` would show all non intern employees.
