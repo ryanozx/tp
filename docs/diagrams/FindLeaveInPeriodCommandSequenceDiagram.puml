@@ -33,7 +33,7 @@ LeaveInPeriodPredicate -> FindLeaveByPeriodCommandParser
 deactivate LeaveInPeriodPredicate
 
 create FindLeaveByPeriodCommand
-FindLeaveByPeriodCommandParser -> FindLeaveByPeriodCommand : FindLeaveByPeriodCommandCommand(p)
+FindLeaveByPeriodCommandParser -> FindLeaveByPeriodCommand : FindLeaveByPeriodCommand(p)
 activate FindLeaveByPeriodCommand
 
 FindLeaveByPeriodCommand --> FindLeaveByPeriodCommandParser
