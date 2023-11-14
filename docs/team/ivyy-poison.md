@@ -11,6 +11,12 @@ written in Java.
 
 Given below are my contributions to the project.
 
+* **Project Management**
+  * Assessed and reproduced bug reports to provide detailed feedback for further action
+  * Set up and allocated issues to team members
+  * Iterative and incremental development of HRMate
+  * Used forking workflow to contribute to the project
+
 * **New feature**: Added the `delete-tag` command 
   * What it does: Allows HR managers to delete a tag (or a set of tags) from an entry in the address book
   * Justification: This feature improves the user experience by allowing users to delete tags from entries
@@ -26,11 +32,7 @@ Given below are my contributions to the project.
   * Pull Request: [[PR#62]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/62) [[PR#64]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/64)
 
 * **Code coverage**
-  * Created unit tests for the following classes: `Person`, `DeleteTagCommand`, `AddressBookParser`, `DeleteTagCommandParser` [[PR#52]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/52)
-  * Created unit tests for the following classes: `Date`, `Leave`, `Status` [[PR#62]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/62)
-  * Created unit tests for the following classes: `LeavesBook`, `StorageManager`, `ModelManager`, `UniqueLeaveList`, 
-    `JSonLeavesBookStorage` [[PR#64]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/64)
-  * Created unit tests for the following classes: `Description`, `Title`, `JsonAdaptedLeave`, `JsonSerializableLeavesBook` [[PR#86]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/86)
+  * Created unit tests various classes to improve code coverage [[PR#52]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/52) [[PR#62]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/62) [[PR#64]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/64) [[PR#86]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/86)
   * Improved code coverage of following classes: `PersonEntry`, `UserPref`, `Tag`, `AddressBook` [[PR#159]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/159)
 
 * **Documentation**
@@ -44,15 +46,14 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Contributed to the planning and drafting of planned enhancements.
 
-* **Reviewing PRs** 
-  * Review import/ export Developer Guide proposed implementation [[PR#43]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/43)
-  * Review implementation of import / export feature of address book [[PR#53]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/53)
-  * Review implementation of CSV Parser [[PR#58]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/58)
-  * Review implementation of import / export feature of leaves book [[PR#103]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/103)
-  * Review refactoring of exception handling by ParserUtil [[PR#165]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/165)
-  * Review implementation of `find-leave-status` and `find-leave-range` commands [[PR#90]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/90) [[PR#91]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/91)
+* **Community** 
+  * Notable reviews include:
+    * Review implementation of import / export feature [[PR#53]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/53) [[PR#103]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/103)
+    * Review implementation of CSV Parser [[PR#58]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/58)
+    * Review implementation of `find-leave-status` and `find-leave-range` commands [[PR#90]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/90) [[PR#91]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/91)
 
 * **Miscellaneous**
   * Fixed bugs reported during Practical Exam Dry Run [[PR#158]](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/158)
 
-Code contributed: [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ivyy-poison&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+* Code contributed: [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ivyy-poison&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+
