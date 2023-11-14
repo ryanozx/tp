@@ -181,7 +181,7 @@ ManageHR keeps track of employees within the company with the use of `Person` an
 while enforcing the constraints that no 2 employees have the same name.
 
 The `Person` class contains the following attributes.
-<puml src="diagrams/PersonObjectDiagram.puml", width="250"></puml>
+<puml src="diagrams/PersonObjectDiagram.puml", width="550"></puml>
 
 1. `Name`: The name of the employee.
 2. `Phone`: The phone number of the employee.
@@ -194,7 +194,7 @@ The `Person` class contains the following attributes.
 They use `TagsContainAllTagsPredicate` and `TagsContainAllTagsPredicate` respectively as predicate to filter the employee list. And then update the displayed employee list of the model
 
 The following sequence diagram shows how `FindAllTagCommand` executes.
-<puml src="diagrams/FindAllTagCommandDiagram.puml", width="250"></puml>
+<puml src="diagrams/FindAllTagCommandDiagram.puml", width="550"></puml>
 
 #### Design considerations:
 `FindAllTagCommand` matches employees with all specified tags while `FindSomeTagCommand` matches employees with any of the specified tags.
@@ -208,7 +208,7 @@ The tags are then added before replacing the old `Person` with the new `Person`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/AddTagActivityDiagram.puml", width="250"></puml>
+<puml src="diagrams/AddTagActivityDiagram.puml", width="550"></puml>
 
 #### Design considerations:
 
@@ -226,7 +226,7 @@ ManageHR keeps track of the leaves of employees within the company with the use 
 while enforcing the constraints that no 2 leaves can have same start date and end date for the same employee.
 
 The `Leave` class contains the following attributes.
-<puml src="diagrams/LeaveObjectDiagram.puml", width="250"></puml>>
+<puml src="diagrams/LeaveObjectDiagram.puml", width="550"></puml>>
 
 1. `ComparablePerson`: The employee.
 2. `Title`: The title of the leave.
@@ -253,7 +253,7 @@ Fields compulsory to enter for `add-leave` as `String` type include:
 * Same leave exception will be handled at the line `model.addLeave(toAdd)` in `AddLeaveCommand#execute`.
 
 The activity diagram for adding a leave is as followed:
-<puml src="diagrams/AddLeaveCommandActivityDiagram.puml", width="250"></puml>
+<puml src="diagrams/AddLeaveCommandActivityDiagram.puml", width="550"></puml>
 
 Here is an example usage of the `add-leave` feature:
 1. The user uses the `find` command to filter for employees named Martin.
@@ -398,7 +398,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250"></puml>
+<puml src="diagrams/CommitActivityDiagram.puml" width="550"></puml>
 
 #### Design considerations:
 
