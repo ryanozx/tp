@@ -455,7 +455,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | HR manager                         | import/export records in CSV format        | open the records in other apps                                         |
 | `*`      | HR manager of a large organisation | sort employees by name                     | locate an employee easily                                              |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -658,7 +657,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -668,8 +666,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  HRMate should be capable of handling a growing volume of employee records (up to 1000 persons) without a substantial decrease in performance. It should efficiently manage and store data as the number of employees and records increases over time.
 5.  HRMate should complete operations involving a single records within 500ms, and operations involving listing, searching, and filtering within 2s.
 
-
-*{More to be added}*
 
 ### Glossary
 
@@ -700,7 +696,6 @@ testers are expected to do more exploratory testing.</box>
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. { more test cases …​ }_
 
 ### Deleting a person
 
@@ -717,7 +712,6 @@ testers are expected to do more exploratory testing.</box>
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. { more test cases …​ }_
 
 ### Finding all tags matched
 1. Finding Employees with All Tags in a Valid Scenario
