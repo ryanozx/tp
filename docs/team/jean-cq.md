@@ -15,9 +15,12 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `find`,`find-all-tag`, `find-one-tag`, `delete` and `add-leave` [#173](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/173)
-  * Developer Guide:
+  * Developer Guide [#186](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/186):
     * Added use cases of `find-all-tag` and `find-some-tag` [#40](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/40)
-* **Feature Development**:
+    * Added use cases of `add-leave`
+    * Added structure of `Person` class and `Leave` class
+    * Added implementation of `find-all-tag`, `find-one-tag` and `add-leave` with a sequence diagram of `find-all-tag` and activity diagram of `add-leave`.
+* **Enhancements implemented**:
   * Developed the `find-all-tag`, `find-some-tag` [#56](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/56) and `add-leave` [#68](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/68)
   * Wrote unit tests for the above commands [#160](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/160) [#176](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/176)
   * Modified UI for both employee list and leave list to display and made minor changes for better UI [#68](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/68)
