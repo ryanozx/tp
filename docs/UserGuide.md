@@ -76,7 +76,7 @@ HRMate, so you can use HRMate alongside other HR management tools.
 See [How do I move a file?](#q-how-do-i-move-a-file) for help.
 
 2. Open a terminal or your computer.
-<box type="info" seamless>
+<box type="info">
     <ul>
         <li><strong>For Mac users:</strong> open the Terminal app on your Mac</li>
         <li><strong>For Window users:</strong> press the windows key, type `powershell` and press "Enter" on your keyboard</li>
@@ -94,7 +94,7 @@ An app similar to the one below should appear in a few seconds. The app is popul
 We have added some annotations in <span style="color:red">red</span> so that you can understand the app visually.
 ![Ui](images/Ui-annotated.png)
 
-6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. <br>
+6. You can try typing some commands into the command box and pressing "enter" to execute. We have listed down some commands for you to try. 
  - `help`: Opens the help window.
  - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds an employee named `John Doe` to the employee list.
  - `list`: Lists all employees.
@@ -162,7 +162,13 @@ If you are using a PDF version of this document, please be careful when copying 
 
 ## Features
 
+The user guide splits HRMate's features into 3 main categories: [Employee-related operations](#employee-related-operations), [Leave-related operations](#leave-related-operations), and [other operations](#other-operations).
+
 ## Employee-related operations
+
+HRMate allows you to manage your employees' contact details, such as their name, phone number, email address, and home address. 
+
+For instance you can [add](#add-an-employee-record) a new employee, [find](#find-an-employee-record) specific employees, [edit](#edit-an-employee-record) an employee's information, [delete](#delete-an-employee-record) an employee, or [import/export](#import-export-employee-records) employee records in CSV format.
 
 ###  Add an employee record
 When a new employee joins, use the [`add`](#adding-an-employee-add) command to add their information into HRMate.
@@ -328,7 +334,7 @@ Here's how to use the `add-tag` command:
 1. Find the employee under the employee list.
 
 <box type="info" seamless>
-If the employee is not found, consider using <a href="">list</a> or any <a href="">find commands</a> to locate the employee in the employee list.
+If the employee is not found, consider using <a href="#listing-all-employees-list">list</a> or any <a href="#find-an-employee-record">find commands</a> to locate the employee in the employee list.
 </box>
 
 2. Type in the following command in the command box `add-tag INDEX t/TAG...` where `INDEX` is the [index](#glossary) of the employee in the list currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. 
@@ -342,7 +348,7 @@ Here are the potential error messages that you may receive and here's how to fix
 |-----------------------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                             | The command you input does not follow the specfied format             | Ensure the command you entered follows the following format: `add-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be added and `t/TAG...` representing one or more tags. |
 | `At least one tag must be provided`                                   | No tags were provided                                                 | Add tags to the command in the command box. Note that the tags must have a t/ [prefix](#glossary). For example, to add the tag full-time, use `t/full-time`.                                                                            |
-| `The person index provided is invalid`                                | The index specified does not refer to any employee                    | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command.          |
+| `The person index provided is invalid`                                | The index specified does not refer to any employee                    | Double check if the index appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-tag` command.          |
 | `The employee already has some of the tags`                           | The employee already has some of the tags which you are trying to add | Remove the tags the employee has from the input command. For example, for an employee who already has the full-time tag, the command `add-tag 2 t/full-time t/remote` would not work. Instead, try `add-tag 2 t/remote`.                 |
 | `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters                            | Remove the illegal characters from the input.                                                                                                                                                                                           |
 #### Removing tags from employees: `delete-tag`
@@ -354,7 +360,7 @@ Here's how to use the `delete-tag` command:
 1. Get the [index](#glossary) of the employee in the employee list.
 
 <box type="info" seamless>
-If the employee is not found, consider using [list]() or any [find commands]() to locate the employee in the employee list.
+If the employee is not found, consider using [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list.
 </box>
 
 2. Type in the following command in the command box `delete-tag INDEX t/TAG...` where `INDEX` is the index of the employee in the list currently, `TAG` is the name of the tag to be deleted and `t/TAG...` representing one or more tags. 
@@ -368,7 +374,7 @@ Here are the potential error messages you may receive and here's how to fix them
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specfied format | Ensure the command you entered follows the following format: `delete-tag INDEX t/TAG...`, replacing INDEX with the index of the employee currently, `TAG` is the name of the tag to be deleted and `t/TAG...` representing one or more tags. |
 | `At least one tag must be provided` | No tags were provided | Add tags to the command in the command box. Note that the tags must have a t/ [prefix](#glossary). For example, to remove the tag full-time, use `t/full-time` |
-| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete-tag` command. |
+| `The person index provided is invalid` | The index specified does not refer to any employee | Double check if the index appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete-tag` command. |
 | `Some of the tags are not found on this employee.` | The employee does not have some of the tags you are trying to delete | Remove the tags not found on the employee from the input command. For example, for an employee without the tag full-time, the command `delete-tag 2 t/full-time t/remote` does not work. Instead try `delete-tag 2 t/remote`.|
 | `Tags names only allows alphanumeric characters, spaces, and dashes.` | The tags input contains illegal characters | Remove the illegal characters from the input. |
 
@@ -381,7 +387,7 @@ Here's how to use the `edit` command to edit an employee's information:
 1. Get the [index](#glossary) of the employee under the employee list.
 
 <box type="info" seamless>
-If the employee is not found, consider using <a href="">list</a> or any <a href="">find commands</a> to locate the employee in the employee list.
+If the employee is not found, consider using <a href="#listing-all-employees-list">list</a> or any <a href="#find-an-employee-record">find commands</a> to locate the employee in the employee list.
 </box>
 
 2. Type in the following command in the command box `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. Note that at least one field to edit must be present and only the fields present will be edited.
@@ -402,7 +408,7 @@ Therefore, to avoid unintentionally losing any information while editing tags, w
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                                                                                                              | The command you input does not follow the specified format                                                      | Ensure the command you entered follows the following format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [a/HOME_ADDRESS] [t/TAG]...` where `INDEX` is the index of the employee in the list currently, `[n/NAME]`, `[p/PHONE_NUMBER]`, `[e/EMAIL_ADDRESS]`, `[a/HOME_ADDRESS]` are optional fields which require changing, replacing `NAME` with employee name, `PHONE_NUMBER` with employee phone number, `EMAIL_ADDRESS` with employee email address and `HOME_ADDRESS` with employee home address. `[t/TAG]...` is an optional field representing one or more tags where `TAG` is the tag name. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.|
 | `FIELD should FORMAT` where `FIELD` is an input like `Names` or `Phone numbers` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on screen message to fix the field in question. For example, `Phone numbers should only contain numbers, and it should be at least 3 digits long` means that the input phone number does not follow the prescribed format.                                                                                                                                                                                                                                                                                                                                                                           |
-| `The person index provided is invalid`                                                                                                                 | The index specified does not refer to any employee                                                              | Double check if the index appears in the employee list. Alternatively, use [list]() or any [find commands]() to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command.                                                                                                                                                                                                                                                                                                                                                                                     |
+| `The person index provided is invalid`                                                                                                                 | The index specified does not refer to any employee                                                              | Double check if the index appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list. Afterwards, use the correct employee index in the `edit` command.                                                                                                                                                                                                                                                                                                                                                                                     |
 | `At least one field to edit must be provided`                                                                                                          | The command you input does not contain any fields to edit                                                       | Check if there is any input fields in the command inputted. An input like `edit 1` is not accepted as there is no edits to be made.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `This employee already exists in the address book`                                                                                                     | The provided employee name is already found in HRMate                                                           | Use another name for the employee. For example, if trying to add another "John Doe", use the name "John Doe (HR)" to differentiate between the existing John Doe. HRMate does this name checking to prevent unintentional duplicate employee entries.                                                                                                                                                                                                                                                                                                                                                           |
 
@@ -423,7 +429,7 @@ Here's how to delete an employee record:
 
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 <box type="info" seamless>
-If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
+If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#find-an-employee-record">find commands</a> to locate the employee in the employee list.
 </box>
 2. Type in the following command in the command box `delete INDEX` where `INDEX` is to be replaced with the index of the employee in the list currently
  - For instance, to remove the whole record of the employee indexed 1, type `delete 1` to the command box.
@@ -440,7 +446,7 @@ Therefore, to avoid unintentionally losing any information of the employee, if y
 | Error message                          | Why it happens                                                        | Fix                                                                                                                                                                                                                                                                                        |
 |----------------------------------------|-----------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Invalid command format!`              | The command you input does not follow the specified format            | Ensure the command you entered follows the following format: `delete INDEX` where `INDEX` is the index of the employee in the list currently.  Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.                                                                                                                                               |
-| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete` command. |
+| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list. Afterwards, use the correct employee index in the `delete` command. |
 |
 
 <div style="page-break-after: always;"></div>
@@ -536,6 +542,11 @@ Here are potential error messages that you may receive and here's how to fix the
 
 ## Leave-related operations
 
+HRMate allows you to manage your employees' leave applications with ease.
+
+For instance, you can [add](#add-a-leave-application) a leave application, [find](#find-a-leave-application) specific leave applications, [edit](#edit-a-leave-application) leave applications, [delete](#delete-a-leave-application) a leave application, and [import/export](#importing-exporting-leave-applications) leave applications with just a few commands.
+
+
 ### Add a leave application
 When an employee applies for leave, you can use the `add-leave` command to add their leave application into HRMate.
 
@@ -548,7 +559,7 @@ Here's how to add a leave application:
 1. Get the [index](#glossary) of the employee under the employee list. View this image in [quick start](#quick-start) for more information.
 
 <box type="info" seamless>
-If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#finding-employees">find commands</a> to locate the employee in the employee list.
+If the employee is not found, consider using <a href= "#listing-all-employees-list">list</a> or any <a href= "#find-an-employee-record">find commands</a> to locate the employee in the employee list.
 </box>
 
 2. Type in the following command in the command box `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace
@@ -571,7 +582,7 @@ Therefore, to change the status of leave, please use the <a href= "#approve-leav
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `add-leave INDEX title/TITLE start/START_DATE end/END_DATE [d/DESCRIPTION]`, replace `NAME` with the index of the employee applied for leave in the employee list, `Title` with the title of the leave, `START_DATE` with the start date of the leave and `END_DATE` with the end date of the leaves and it must be the same as or later than the start date. Dates are in a format of `yyyy-MM-dd`. `[d/DESCRIPTION]` is an optional field with `DESCRIPTION` representing the description of the leave. Note that duplicated titles and concurrent leave (overlapping date duration of leaves) are allowed. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.|
 | `This leave has already existed for the employee` | The start date and end date are exactly the same as the existing leave | Double check if the dates for the new leave do not have the same dates as the existing ones by checking against the list from [find-leave](#find-leave-application-belonging-to-an-employee-find-leave) or [find-leave-range](#find-leave-applications-by-time-period-find-leave-range). You may choose to [edit-leave](#editing-a-leave-application-edit-leave) if the new leave has the exact same start and end dates as the existing leave, in other words, they are the same leave. |
-| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#finding-employees) to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-leave` command. |
+| `The person index provided is invalid` | The index specified is not positive or does not refer to any employee | Double check if the index is positive and appears in the employee list. Alternatively, use [list](#listing-all-employees-list) or any [find commands](#find-an-employee-record) to locate the employee in the employee list. Afterwards, use the correct employee index in the `add-leave` command. |
 | `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` | Title input is blank and/or contains illegal characters | Add title and/or remove the illegal characters from the input |
 | `The end date is earlier than the start date!` | The end date input is earlier than the start date input | Double check the date inputs. |
 | `Date should be valid and in a format of `yyyy-MM-dd`` | The start date and end date inputs are not in the correct format | Ensure that the inputs of dates are in the format of `yyyy-MM-dd`, for example, `2023-01-01`. |
@@ -696,7 +707,7 @@ If the leave application is not found, consider using `find-all-leave` or any `f
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `approve-leave LEAVE_LIST_INDEX`. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.
-| `The leave index provided is invalid` | The index specified does not refer to any leave application | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave application in the leave list. Afterwards, use the correct leave index in the `approve-leave` command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave application | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave](#view-all-leaves-find-all-leave) or any [find commands](#find-a-leave-application) to locate the leave application in the leave list. Afterwards, use the correct leave index in the `approve-leave` command. |
 | `Leave previously approved: ` followed by the leave information | The provided leave application is already approved in HRMate | If this is the leave you would like to approve, you don't have to do anything.
 
 #### Reject leave application by index: `reject-leave`
@@ -717,7 +728,7 @@ If the leave application is not found, consider using `find-all-leave` or any `f
 | Error message | Why it happens | Fix |
 |---------------|----------------|-----|
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `approve-leave LEAVE_LIST_INDEX`. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.
-| `The leave index provided is invalid` | The index specified does not refer to any leave application | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave application in the leave list. Afterwards, use the correct leave index in the `reject-leave` command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave application | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave](#view-all-leaves-find-all-leave) or any [find commands](#find-a-leave-application) to locate the leave application in the leave list. Afterwards, use the correct leave index in the `reject-leave` command. |
 | `Leave previously rejected: ` followed by the leave information | The provided leave application is already rejected in HRMate | If this is the leave you would like to reject, you don't have to do anything.
 
 
@@ -750,7 +761,7 @@ To update the status of a leave application, we recommend you to use the `approv
 | `Invalid command format!` | The command you input does not follow the specified format | Ensure the command you entered follows the following format: `edit-leave INDEX [title/TITLE] [start/START_DATE] [end/END_DATE] [d/DESCRIPTION] [s/STATUS]` where `INDEX` is the index of the leave in the list currently, `[title/TITLE]`, `[start/START_DATE]`, `[end/END_DATE]`, `[d/DESCRIPTION]`, `[s/STATUS]` are optional fields which require changing, replacing `TITLE` with the title of the leave, `START_DATE` with the leave's start date, `END_DATE` with the leave's end date, `DESCRIPTION` with the title's description and `STATUS` with the leave's status. Also check if the index is a positive integer, having an invalid index such as zero, negative numbers, non-integers, and characters can lead to this error message.|
 | `FIELD should FORMAT` where `FIELD` is an input like `Leave titles` or `Date` and `FORMAT` contains additional information about the field's format. | The input does not follow the format prescribed. For example, the entered phone number might contain alphabets. | Follow the on-screen message to fix the field in question. For example, `Leave titles should only contain alphanumeric characters, spaces, and dashes. It should not be blank` means that the input title does not follow the prescribed format. | 
 |`Date should be valid and in a format of yyyy-MM-dd`| The start or end date format does not conform to the program's standard. | Please update the date format to `yyyy-MM-dd` and reenter the command. |
-| `The leave index provided is invalid` | The index specified does not refer to any leave | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave]() or any [find commands]() to locate the leave in the leave list. Afterwards, use the correct leave index in the `edit-leave` command. |
+| `The leave index provided is invalid` | The index specified does not refer to any leave | Double check if the inputted index is correct as specified in the leave list. Alternatively, use [find-all-leave](#view-all-leaves-find-all-leave) or any [find commands](#find-a-leave-application) to locate the leave in the leave list. Afterwards, use the correct leave index in the `edit-leave` command. |
 | `At least one field to edit must be provided` | The command you input does not contain any fields to edit | Check if there are any input fields in the command inputted. An input like `edit-leave 1` is not accepted as there are no edits to be made. |
 | `The end date is earlier than the start date!` | The end date provided is before the current or provided start date. | Please double-check the inputted dates and make sure the end date is not before the current or provided start date. |
 
@@ -875,6 +886,10 @@ Here are potential error messages that you may receive and here's how to fix the
 <div style="page-break-after: always;"></div>
 
 ## Other operations
+
+This section covers other operations that you can perform in HRMate.
+
+For information on how to get [help](#getting-help), [reset HRMate](#reset-hrmate), and [exit HRMate](#exit-hrmate), please refer to the respective sections below.
 
 ### Getting help
 Should you need any help, you can access this online user guide (this document) with the `help` command.
