@@ -7,19 +7,20 @@
 
 HRMate is a desktop address book application that aims to streamline HR processes, by offering an intuitive, CLI-based
 contact management system with specialised functionalities for HR tasks. It has a GUI created with JavaFX, and is
-written in Java with about 10 kLoC.
+written in Java.
 
 Given below are my contributions to the project.
 
 * **Code contributions:** [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ryanozx&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 * **Community**
-  * Reviewed PRs [#56](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/56), [#62](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/62)
+  * Reviewed PRs: [GitHub link](https://github.com/AY2324S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aryanozx)
+  * Reported bugs for other teams during PE-D
 * **Documentation**
   * User Guide:
-    * Add documentation for the features `find`, `delete`, `clear`, `exit`, `import`, `export`, `import-leave`, `export-leave`,
-      `find-leave-range` and `find-leave-status`
+    * Add documentation for the features `clear`, `exit`, `import`, `export`, `import-leave`, `export-leave`
   * Developer Guide:
     * Add implementation and user stories for the features `import` and `export`
+    * Update UML diagrams and descriptions in Design section
   * Managed conversion of documentation into MarkBind format
 * **Enhancements to existing features**
   * Add method in FileUtil to support writing a stream of lines into a file ([#58](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/58))
@@ -38,6 +39,11 @@ Given below are my contributions to the project.
   * Highlights:
     * Created Range class to guarantee that the start dates will not occur after the end dates, and provided the option
       of whether to enforce non-null start and end dates
+* **Bug Fixes**:
+  * Fix bug where changing an employee's name does not update the name in the leave application ([#178](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/178))
+* Refactor various parts of the codebase to improve code readability and promote code reuse ([#165](https://github.com/AY2324S1-CS2103T-W11-1/tp/pull/165) and others)
 * **Project Management**
   * Set up Issues tracker in the repo
   * Set up milestones v1.1 - v1.4 and assigned issues to rest of the team
+  * Managed release of v1.3.2 and v1.4
+  * Helped triage bug reports to determine further action for milestone v1.4
