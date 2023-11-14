@@ -1,0 +1,94 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExportContactCommandParser" as ExportContactCommandParser LOGIC_COLOR
+participant "e:ExportContactCommand" as ExportContactCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "ab:ReadOnlyFilteredAddressBook" as ReadOnlyFilteredAddressBook STORAGE_COLOR
+participant "abStorage:CsvAddressBookStorage" as CsvAddressBookStorage STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("export employees")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("export employees")
+activate AddressBookParser
+
+create ExportContactCommandParser
+AddressBookParser -> ExportContactCommandParser
+activate ExportContactCommandParser
+
+ExportContactCommandParser -> ExportContactCommandParser : parseFileName("employees")
+
+create ExportContactCommand
+ExportContactCommandParser -> ExportContactCommand
+activate ExportContactCommand
+
+ExportContactCommand --> ExportContactCommandParser
+deactivate ExportContactCommand
+
+ExportContactCommandParser --> AddressBookParser : e
+deactivate ExportContactCommandParser
+destroy ExportContactCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> ExportContactCommand : execute()
+activate ExportContactCommand
+
+create ReadOnlyFilteredAddressBook
+ExportContactCommand -> ReadOnlyFilteredAddressBook
+activate ReadOnlyFilteredAddressBook
+
+ReadOnlyFilteredAddressBook -> Model : getFilteredPersonList()
+activate Model
+
+Model -> ReadOnlyFilteredAddressBook
+deactivate Model
+
+ReadOnlyFilteredAddressBook -> ExportContactCommand : ab
+deactivate ReadOnlyFilteredAddressBook
+
+create CsvAddressBookStorage
+ExportContactCommand -> CsvAddressBookStorage
+activate CsvAddressBookStorage
+
+CsvAddressBookStorage -> ExportContactCommand
+deactivate CsvAddressBookStorage
+
+ExportContactCommand -> CsvAddressBookStorage : saveAddressBook(ab)
+activate CsvAddressBookStorage
+
+CsvAddressBookStorage -> ExportContactCommand
+deactivate CsvAddressBookStorage
+
+create CommandResult
+ExportContactCommand --> CommandResult
+activate CommandResult
+
+CommandResult --> ExportContactCommand : r
+deactivate CommandResult
+
+ExportContactCommand --> LogicManager : r
+deactivate ExportContactCommand
+ExportContactCommand -[hidden]-> LogicManager : r
+destroy ExportContactCommand
+destroy ReadOnlyFilteredAddressBook
+destroy CsvAddressBookStorage
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

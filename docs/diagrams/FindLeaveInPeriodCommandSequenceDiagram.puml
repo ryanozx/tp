@@ -1,0 +1,78 @@
+@startuml
+
+!include style.puml
+skinparam ArrowFontStyle plain
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindLeaveByPeriodCommandParser" as FindLeaveByPeriodCommandParser LOGIC_COLOR
+participant "p:LeaveInPeriodPredicate" as LeaveInPeriodPredicate LOGIC_COLOR
+participant "c:FindLeaveByPeriodCommand" as FindLeaveByPeriodCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find-leave-range")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-leave-range")
+activate AddressBookParser
+
+create FindLeaveByPeriodCommandParser
+AddressBookParser -> FindLeaveByPeriodCommandParser
+activate FindLeaveByPeriodCommandParser
+
+create LeaveInPeriodPredicate
+FindLeaveByPeriodCommandParser -> LeaveInPeriodPredicate
+activate LeaveInPeriodPredicate
+
+LeaveInPeriodPredicate -> FindLeaveByPeriodCommandParser
+deactivate LeaveInPeriodPredicate
+
+create FindLeaveByPeriodCommand
+FindLeaveByPeriodCommandParser -> FindLeaveByPeriodCommand : FindLeaveByPeriodCommand(p)
+activate FindLeaveByPeriodCommand
+
+FindLeaveByPeriodCommand --> FindLeaveByPeriodCommandParser
+deactivate FindLeaveByPeriodCommand
+
+FindLeaveByPeriodCommandParser --> AddressBookParser : c
+deactivate FindLeaveByPeriodCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindLeaveByPeriodCommandParser -[hidden]-> AddressBookParser
+destroy FindLeaveByPeriodCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> FindLeaveByPeriodCommand : execute()
+activate FindLeaveByPeriodCommand
+
+FindLeaveByPeriodCommand -> Model :  updateFilteredLeaveList(p)
+activate Model
+
+Model --> FindLeaveByPeriodCommand
+deactivate Model
+
+create CommandResult
+FindLeaveByPeriodCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindLeaveByPeriodCommand
+deactivate CommandResult
+
+FindLeaveByPeriodCommand --> LogicManager : r
+deactivate FindLeaveByPeriodCommand
+
+FindLeaveByPeriodCommand -[hidden]-> LogicManager
+destroy LeaveInPeriodPredicate
+destroy FindLeaveByPeriodCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

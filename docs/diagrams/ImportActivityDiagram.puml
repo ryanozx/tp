@@ -1,0 +1,25 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes Import Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user selects CSV file])
+    :Parse CSV data;
+    if () then ([CSV file contains valid values])
+        :Create ReadOnlyAddressBook;
+        :Set Model's AddressBook to the new ReadOnlyAddressBook;
+    else ([else])
+        :Return error message indicating file cannot be imported;
+
+    endif
+    stop
+else ([else])
+    :Return message indicating no file selected;
+    stop
+endif
+@enduml
